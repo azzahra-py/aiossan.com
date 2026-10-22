@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="100%" height="100%">
+  <defs>
+    <pattern id="swiss-grid-book-3-ch-6" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E4E2DD" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="800" height="380" rx="16" fill="#FBF9F5" stroke="#111113" stroke-width="2"/>
+  <rect x="16" y="48" width="768" height="276" fill="url(#swiss-grid-book-3-ch-6)" stroke="#E4E2DD" stroke-width="1"/>
+
+  <!-- Top Swiss Editorial Header Bar -->
+  <line x1="0" y1="48" x2="800" y2="48" stroke="#111113" stroke-width="1.5"/>
+  <rect x="18" y="12" width="110" height="24" rx="4" fill="#0F766E"/>
+  <text x="73" y="28" font-family="monospace" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FIG. 03.06</text>
+  <text x="144" y="28" font-family="monospace" font-size="11" font-weight="bold" fill="#52525B">BOOK 3 // ARCHITECTURAL SCHEMATIC</text>
+  <text x="780" y="28" font-family="monospace" font-size="11" fill="#71717A" text-anchor="end">AIOSSAN PRESS</text>
+
+  <!-- Left & Right Technical Reference Annotations -->
+  <g opacity="0.88">
+    <rect x="44" y="140" width="160" height="96" rx="8" fill="#FFFFFF" stroke="#111113" stroke-width="1.5"/>
+    <rect x="56" y="154" width="48" height="8" rx="2" fill="#0F766E"/>
+    <rect x="56" y="172" width="120" height="6" rx="2" fill="#E4E2DD"/>
+    <rect x="56" y="186" width="96" height="6" rx="2" fill="#E4E2DD"/>
+    <rect x="56" y="208" width="72" height="12" rx="3" fill="#F3F0E8"/>
+    <line x1="204" y1="190" x2="285" y2="190" stroke="#111113" stroke-width="1.5" stroke-dasharray="4 4"/>
+  </g>
+
+  <g opacity="0.88">
+    <rect x="596" y="140" width="160" height="96" rx="8" fill="#FFFFFF" stroke="#111113" stroke-width="1.5"/>
+    <rect x="608" y="154" width="56" height="8" rx="2" fill="#111113"/>
+    <rect x="608" y="172" width="124" height="6" rx="2" fill="#E4E2DD"/>
+    <rect x="608" y="186" width="104" height="6" rx="2" fill="#E4E2DD"/>
+    <rect x="608" y="208" width="84" height="12" rx="3" fill="#0F766E" fill-opacity="0.2"/>
+    <line x1="515" y1="190" x2="596" y2="190" stroke="#111113" stroke-width="1.5" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- Center Schematic Vector Motif -->
+  
+        <rect x="285" y="125" width="230" height="140" rx="12" fill="#FFFFFF" stroke="#111113" stroke-width="2.5"/>
+        <circle cx="400" cy="195" r="46" fill="#0F766E" fill-opacity="0.14" stroke="#0F766E" stroke-width="2.5"/>
+        <circle cx="400" cy="195" r="18" fill="#0F766E" stroke="#111113" stroke-width="2"/>
+        <line x1="250" y1="195" x2="335" y2="195" stroke="#111113" stroke-width="2"/>
+        <line x1="465" y1="195" x2="550" y2="195" stroke="#111113" stroke-width="2"/>
+      
+
+  <!-- Bottom Caption Strip -->
+  <line x1="0" y1="324" x2="800" y2="324" stroke="#111113" stroke-width="1.5"/>
+  <text x="400" y="356" font-family="Georgia, serif" font-style="italic" font-size="14" fill="#111113" text-anchor="middle">Mengelola ke atas dan ke samping (Managing Up &amp; Across): mengamankan dukungan sumber daya linta...</text>
+</svg>

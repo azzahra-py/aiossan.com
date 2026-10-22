@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light only;
+  --bg-canvas: #FBF9F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3F0E8;
+  --ink-primary: #111113;
+  --ink-secondary: #52525B;
+  --ink-muted: #71717A;
+  --border-subtle: #E4E2DD;
+  --border-strong: #18181B;
+  --accent-orange: #EA580C;
+  --accent-cobalt: #1D4ED8;
+  --accent-emerald: #0F766E;
+}
+
+[data-reader-theme="paper"] {
+  --reader-bg: #FBF9F5;
+  --reader-surface: #FFFFFF;
+  --reader-subtle: #F3F0E8;
+  --reader-ink: #111113;
+  --reader-muted: #52525B;
+  --reader-border: #E4E2DD;
+}
+
+[data-reader-theme="sepia"] {
+  --reader-bg: #F1ECE1;
+  --reader-surface: #FAF6ED;
+  --reader-subtle: #E6DFD1;
+  --reader-ink: #26221E;
+  --reader-muted: #5C554C;
+  --reader-border: #D5CBB8;
+}
+
+[data-reader-theme="night"] {
+  --reader-bg: #090D16;
+  --reader-surface: #111827;
+  --reader-subtle: #1E293B;
+  --reader-ink: #F3F4F6;
+  --reader-muted: #9CA3AF;
+  --reader-border: #1F2937;
+}
+
+html,
+body {
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  color-scheme: light only;
+}
+
+/* Subtle Swiss architectural grid background */
+.swiss-grid-bg {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(24, 24, 27, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 24, 27, 0.04) 1px, transparent 1px);
+}
+
+/* Editorial Highlighter Marker */
+mark {
+  background: linear-gradient(180deg, transparent 55%, #FDE68A 55%);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+}
