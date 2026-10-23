@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Patrick_Hand, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { AnimatedPaperBackground } from '@/components/doodle/AnimatedPaperBackground';
+import { CopyGuard } from '@/components/CopyGuard';
 
 // Same three families and CSS variables as design B's local woff2 setup,
 // loaded via Google Fonts so the repo snapshot stays text-only.
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="relative min-h-screen bg-[#FAF7F2] text-[#18181B] antialiased selection:bg-[#FFE66D]">
         <AnimatedPaperBackground />
+        <CopyGuard />
         {children}
       </body>
     </html>

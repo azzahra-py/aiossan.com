@@ -343,7 +343,7 @@ export default function LandingPage() {
                       return (
                         <div
                           key={bookId}
-                          className="min-w-full flex flex-col items-center gap-3"
+                          className="min-w-full flex flex-col items-center gap-6"
                           role="group"
                           aria-roledescription="slide"
                           aria-label={`${idx + 1} / ${CAROUSEL_BOOKS.length}: ${book.titles[lang]}`}

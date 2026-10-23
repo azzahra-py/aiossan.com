@@ -14,7 +14,6 @@ import {
   BookOpen,
   Lock,
   CheckCircle2,
-  Printer,
   Menu,
   X,
   PartyPopper,
@@ -274,22 +273,11 @@ export function InteractiveReaderClient({
             <span>{lang === 'en' ? 'Topic Search' : 'SOS Topik'}</span>
           </button>
 
-          {hasAccess && (
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="hidden md:inline-flex items-center gap-1 rounded-lg border-2 border-[#18181B] bg-white px-2.5 py-1 text-xs font-bold text-[#18181B] hover:bg-[#FAF7F2]"
-              title={lang === 'en' ? 'Print / Save Chapter as PDF' : 'Cetak / Simpan Bab ke PDF'}
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>PDF</span>
-            </button>
-          )}
         </div>
       </div>
 
       <div
-        className={`doodle-box p-6 sm:p-10 transition-colors duration-200 ${paperClasses} ${fontScaleClasses}`}
+        className={`reader-protected doodle-box p-6 sm:p-10 transition-colors duration-200 ${paperClasses} ${fontScaleClasses}`}
       >
         <MarkdownRenderer
           content={displayContent}

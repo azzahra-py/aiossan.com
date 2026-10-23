@@ -25,6 +25,24 @@ body {
   color-scheme: light only;
 }
 
+/* Content copy protection: site text is not selectable, images not
+   draggable. Form fields keep normal text behaviour. The JS layer that
+   blocks context menu, copy/cut and shortcuts lives in CopyGuard. */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+input,
+textarea,
+select,
+[contenteditable='true'] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+img {
+  -webkit-user-drag: none;
+}
+
 /* Subtle Living Dot-Grid Texture */
 .ambient-grid {
   background-image: radial-gradient(#CEC6B6 1.15px, transparent 1.15px);
@@ -484,6 +502,11 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
     color: #18181B !important;
   }
   .no-print {
+    display: none !important;
+  }
+  /* Reader chapter content must never leave via browser print; the
+     official PDFs are downloads served from R2 instead. */
+  .reader-protected {
     display: none !important;
   }
   details {
