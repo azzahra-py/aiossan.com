@@ -13,10 +13,10 @@ interface NavbarDoodleProps {
 export function NavbarDoodle({ userEmail, langMenu, lang = 'id-kasual' }: NavbarDoodleProps) {
   const isEn = lang === 'en';
   return (
-    <header className="no-print sticky top-0 z-40 border-b-2 border-[#18181B] bg-[#FAF7F2]/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <header className="no-print sticky top-0 z-40 border-b border-[#E7E2D9] bg-[#FAF7F2]/95 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12 py-3">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B] transition-transform group-hover:-rotate-6">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border-[1.5px] border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B] transition-transform group-hover:-rotate-6">
             <WoodlandMascotSvg character="capybara" className="h-8 w-8" />
           </div>
           <div>

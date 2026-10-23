@@ -163,7 +163,7 @@ export function PricingGridDoodle({
               key={tier.id}
               className={`doodle-box relative flex flex-col justify-between p-6 transition-transform duration-200 hover:-translate-y-1 ${
                 isBestSeller
-                  ? 'bg-gradient-to-b from-[#FEF9C3] via-white to-[#EFF6FF] ring-4 ring-[#2563EB] md:scale-[1.03]'
+                  ? 'bg-[#FFFBEB] ring-2 ring-[#2563EB] md:scale-[1.03]'
                   : isTwoBookBundle
                   ? 'bg-[#FFFDF5]'
                   : 'bg-white'
@@ -171,7 +171,7 @@ export function PricingGridDoodle({
             >
               {badgeText && (
                 <div
-                  className={`-mt-9 mb-3 self-start rounded-full border-2 border-[#18181B] px-3.5 py-1 font-mono text-xs font-extrabold shadow-[2px_2px_0px_#18181B] flex items-center gap-1.5 ${
+                  className={`-mt-9 mb-3 self-start rounded-full border-[1.5px] border-[#18181B] px-3.5 py-1 font-mono text-xs font-extrabold shadow-none flex items-center gap-1.5 ${
                     isBestSeller
                       ? 'bg-[#2563EB] text-white'
                       : 'bg-[#FFE66D] text-[#18181B]'
@@ -203,7 +203,7 @@ export function PricingGridDoodle({
                   {desc}
                 </p>
 
-                <div className="my-4 rounded-xl border-2 border-[#18181B] bg-[#FAF7F2] p-3.5">
+                <div className="my-4 rounded-xl border border-[#E7E2D9] bg-[#FAF7F2] p-3.5">
                   {tier.strikePriceIdr && (
                     <div className="flex flex-wrap items-center gap-2 mb-0.5">
                       <span className="font-mono text-xs text-[#E11D48] line-through font-bold">

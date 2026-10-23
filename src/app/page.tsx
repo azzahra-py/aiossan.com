@@ -171,6 +171,12 @@ function PricingCompareTable({ lang }: { lang: BookLang }) {
   );
 }
 
+const BOOK_TINTS: Record<BookId, string> = {
+  'book-1': 'bg-[#FEF9C3]/80',
+  'book-2': 'bg-[#CCFBF1]/70',
+  'book-3': 'bg-[#DBEAFE]/80',
+};
+
 const SAMPLE_SCRIPTS: Record<
   BookLang,
   { context: string; script: (name: string) => string }
@@ -321,12 +327,12 @@ export default function LandingPage() {
         langMenu={<LandingLanguageMenu lang={lang} onSelect={handleSelectLang} />}
       />
 
-      <section className="mx-auto max-w-6xl px-4 pt-10 pb-14">
+      <section className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 pt-10 pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-[#18181B] bg-white px-3.5 py-1 shadow-[2px_2px_0px_#18181B]">
+            <div className="inline-flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-[#0D9488]" />
-              <span className="font-mono text-xs font-extrabold uppercase tracking-wider text-[#18181B]">
+              <span className="font-mono text-xs font-extrabold uppercase tracking-widest text-[#71717A]">
                 {lang === 'en'
                   ? 'Interactive Web Playbook + Mobile PDF • Indonesian & English'
                   : 'Playbook Web Interaktif + PDF Ramah HP • Bahasa Indonesia & English'}
@@ -426,7 +432,7 @@ export default function LandingPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="doodle-box relative bg-gradient-to-br from-[#FEF9C3] via-white to-[#DBEAFE] p-6">
+            <div className="doodle-box relative bg-[#FFFBEB] p-6 sm:p-8">
               <div className="mb-4 flex items-center justify-between">
                 <span className="rounded-lg border border-[#18181B] bg-white px-2.5 py-0.5 font-mono text-[11px] font-extrabold text-[#1E3A8A]">
                   TRILOGI PLAYBOOK KAPI & KRU
@@ -531,7 +537,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-xl border-2 border-[#18181B] bg-white p-3.5 shadow-[2px_2px_0px_#18181B] flex items-center gap-3">
+              <div className="mt-4 rounded-xl border border-[#E7E2D9] bg-white p-3.5 shadow-sm flex items-center gap-3">
                 <WoodlandMascotSvg character="capybara" className="w-12 h-12 shrink-0" />
                 <p className="font-hand text-sm text-[#18181B] leading-snug">
                   {lang === 'en'
@@ -544,17 +550,19 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-8">
-        <LeadershipQuizDoodle lang={lang} />
+      <section className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 py-12 lg:py-16">
+        <div className="mx-auto max-w-4xl">
+          <LeadershipQuizDoodle lang={lang} />
+        </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12">
+      <section className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 lg:py-20">
         <div className="text-center max-w-3xl mx-auto mb-10">
           <p className="flex items-center justify-center gap-1.5 font-mono text-xs font-extrabold uppercase tracking-widest text-[#2563EB] mb-3">
             <Layers className="w-3.5 h-3.5" />
             KURIKULUM TANGGA KARIER LEADER
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B]">
+          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-[#18181B] leading-tight">
             {lang === 'en'
               ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
               : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'}
@@ -566,14 +574,13 @@ export default function LandingPage() {
             const highlights = BOOK_HIGHLIGHTS[book.id][lang];
             const levelTag = LEVEL_TAGS[book.id][lang];
             return (
-              <div
-                key={book.id}
-                className="doodle-box flex h-full flex-col justify-between bg-white p-6"
-              >
-                <div>
-                  <div className="mb-5 flex justify-center">
-                    <BookCoverMockup bookId={book.id} lang={lang} size="md" />
-                  </div>
+              <div key={book.id} className="flex h-full flex-col">
+                <div
+                  className={`flex justify-center rounded-3xl px-6 py-8 ${BOOK_TINTS[book.id]}`}
+                >
+                  <BookCoverMockup bookId={book.id} lang={lang} size="md" />
+                </div>
+                <div className="flex flex-1 flex-col px-1 pt-5">
 
                   <div className="mb-2 flex items-center justify-between">
                     <span className="font-mono text-xs font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
@@ -599,9 +606,8 @@ export default function LandingPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
 
-                <div className="flex items-center gap-2 pt-2">
+                <div className="mt-auto flex items-center gap-2 pt-2">
                   <Link
                     href={`/read/${book.id}/${lang}/ch-0`}
                     className="doodle-button flex-1 bg-[#FAF7F2] hover:bg-[#FFE66D] py-2.5 px-3 text-xs font-extrabold text-center inline-flex items-center justify-center gap-1.5"
@@ -618,6 +624,7 @@ export default function LandingPage() {
                     <span>Beli</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
+                </div>
                 </div>
               </div>
             );
@@ -644,8 +651,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <div className="doodle-box bg-gradient-to-r from-[#EFF6FF] via-white to-[#FEF9C3] p-6 sm:p-8">
+      <section className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16">
+        <div className="doodle-box bg-[#EFF6FF]/70 p-6 sm:p-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
               <p className="flex items-center gap-1.5 font-mono text-xs font-extrabold uppercase tracking-widest text-[#2563EB] mb-2">
@@ -673,7 +680,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border-2 border-[#18181B] bg-white p-5 shadow-[4px_4px_0px_#18181B]">
+          <div className="rounded-2xl border border-[#E7E2D9] bg-white p-5 shadow-sm">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-dashed border-[#E4E4E7] pb-2.5">
               <span className="font-mono text-xs font-bold text-[#1E3A8A]">
                 {SAMPLE_SCRIPTS[lang].context}
@@ -737,13 +744,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="pricing" className="mx-auto max-w-6xl px-4 py-14">
+      <section id="pricing" className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 py-16 lg:py-20">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#FFE66D] px-4 py-1 font-mono text-xs font-extrabold text-[#18181B] mb-3 shadow-[2px_2px_0px_#18181B]">
-            <Sparkles className="w-3.5 h-3.5" />
+          <p className="flex items-center justify-center gap-1.5 font-mono text-xs font-extrabold uppercase tracking-widest text-[#71717A] mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
             INVESTASI SEKALI BAYAR • AKSES SEUMUR HIDUP
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B] mb-3">
+          </p>
+          <h2 className="text-2xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-[#18181B] leading-tight mb-3">
             {lang === 'en'
               ? 'Choose Your Playbook Package (Instant Web + PDF Access)'
               : 'Pilih Paket Playbook Sesuai Kebutuhan Lo'}
@@ -781,7 +788,7 @@ export default function LandingPage() {
         <PricingCompareTable lang={lang} />
       </section>
 
-      <section className="mx-auto max-w-4xl px-4 py-10">
+      <section className="mx-auto max-w-4xl px-5 py-16">
         <div className="doodle-panel-flat p-6 sm:p-8">
           <div className="flex items-center gap-2 mb-6">
             <HelpCircle className="w-5 h-5 text-[#2563EB]" />
@@ -820,8 +827,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="mt-auto border-t-2 border-[#18181B] bg-white py-8 px-4">
-        <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
+      <footer className="mt-auto border-t border-[#E7E2D9] bg-white py-8 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto w-full max-w-[1440px] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
           <div className="flex items-center gap-2">
             <WoodlandMascotSvg character="capybara" className="w-8 h-8" />
             <span className="font-extrabold text-[#18181B]">

@@ -28,9 +28,9 @@ export function PaywallModal({
     'Playbook';
 
   return (
-    <section className="my-10 rounded-3xl border-2 border-[#18181B] bg-gradient-to-b from-[#FEF9C3] via-[#FAF7F2] to-white p-6 sm:p-8 shadow-[6px_6px_0px_#18181B]">
+    <section className="my-10 rounded-3xl border border-[#E7E2D9] bg-[#FFFBEB] p-6 sm:p-8 shadow-md">
       <div className="mx-auto max-w-3xl text-center mb-8">
-        <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-[#18181B] bg-white shadow-[3px_3px_0px_#18181B]">
+        <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-2xl border border-[#E7E2D9] bg-white shadow-sm">
           <WoodlandMascotSvg character="capybara" className="h-16 w-16" />
         </div>
 

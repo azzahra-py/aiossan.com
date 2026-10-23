@@ -92,10 +92,10 @@ export default async function ReaderPage({ params }: PageProps) {
         }
       />
 
-      <div className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <aside className="hidden lg:block lg:col-span-4 order-2 lg:order-1">
+      <div className="mx-auto w-full max-w-[1440px] flex-1 px-5 lg:px-10 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <aside className="hidden lg:block lg:col-span-3 order-2">
           <div className="doodle-box p-4 sticky top-24 max-h-[82vh] overflow-y-auto">
-            <div className="mb-3 pb-2 border-b-2 border-[#18181B]">
+            <div className="mb-3 pb-2 border-b border-[#E7E2D9]">
               <span className="font-mono text-xs font-extrabold uppercase px-2 py-0.5 bg-[#FFE66D] border border-[#18181B] rounded">
                 Vol. 0{bookMeta.number}
               </span>
@@ -114,7 +114,7 @@ export default async function ReaderPage({ params }: PageProps) {
                     href={`/read/${bookId}/${lang}/${ch.slug}`}
                     className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-colors border ${
                       isCurrent
-                        ? 'bg-[#FFE66D] border-[#18181B] text-[#18181B] shadow-[2px_2px_0px_#18181B]'
+                        ? 'bg-[#FEF9C3] border-transparent text-[#18181B] shadow-[inset_4px_0_0_0_#2563EB]'
                         : 'border-transparent hover:bg-[#FAF7F2] text-[#52525B]'
                     }`}
                   >
@@ -131,7 +131,7 @@ export default async function ReaderPage({ params }: PageProps) {
           </div>
         </aside>
 
-        <main className="lg:col-span-8 order-1 lg:order-2">
+        <main className="lg:col-span-9 order-1">
           <div className="mb-4 flex items-center gap-2">
             <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-md border border-[#18181B] bg-white">
               {lang === 'en'
@@ -174,7 +174,7 @@ export default async function ReaderPage({ params }: PageProps) {
           )}
 
           {hasAccess && (
-            <div className="no-print mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl border-2 border-[#18181B] bg-white shadow-[3px_3px_0px_#18181B]">
+            <div className="no-print mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl border border-[#E7E2D9] bg-white shadow-sm">
               {prevChapter ? (
                 <Link
                   href={`/read/${bookId}/${lang}/${prevChapter.slug}`}

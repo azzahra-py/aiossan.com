@@ -177,7 +177,7 @@ export function InteractiveReaderClient({
           className={`fixed top-20 right-4 z-50 flex items-center gap-3 px-4 py-3 ${
             isPro
               ? 'rounded-xl border border-[#D4D4D8] bg-white shadow-lg'
-              : 'rounded-2xl border-2 border-[#18181B] bg-[#FFE66D] shadow-[4px_4px_0px_#18181B] animate-bounce'
+              : 'rounded-2xl border border-[#E7E2D9] bg-[#FFE66D] shadow-lg animate-bounce'
           }`}
         >
           {isPro ? (
@@ -198,7 +198,7 @@ export function InteractiveReaderClient({
         </div>
       )}
 
-      <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border-2 border-[#18181B] bg-white p-2.5 sm:px-4 shadow-[3px_3px_0px_#18181B]">
+      <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-[#E7E2D9] bg-white p-2.5 sm:px-4 shadow-sm">
         <div className="flex items-center gap-1.5">
           <span className="hidden sm:inline font-mono text-[11px] font-bold text-[#52525B] mr-1">
             {lang === 'en' ? 'Display:' : 'Tampilan:'}
@@ -208,7 +208,7 @@ export function InteractiveReaderClient({
             onClick={() => handleThemeChange('cream')}
             className={`rounded-lg border px-2.5 py-1 text-xs font-bold flex items-center gap-1 ${
               paperTheme === 'cream'
-                ? 'border-[#18181B] bg-[#FAF7F2] shadow-[2px_2px_0px_#18181B]'
+                ? 'border-[#18181B] bg-[#FAF7F2] shadow-sm'
                 : 'border-transparent text-[#52525B]'
             }`}
           >
@@ -220,7 +220,7 @@ export function InteractiveReaderClient({
             onClick={() => handleThemeChange('sepia')}
             className={`rounded-lg border px-2.5 py-1 text-xs font-bold ${
               paperTheme === 'sepia'
-                ? 'border-[#18181B] bg-[#F4ECD8] shadow-[2px_2px_0px_#18181B]'
+                ? 'border-[#18181B] bg-[#F4ECD8] shadow-sm'
                 : 'border-transparent text-[#52525B]'
             }`}
           >
@@ -246,7 +246,7 @@ export function InteractiveReaderClient({
             onClick={() => handleModeChange('santai')}
             className={`rounded-lg border px-2.5 py-1 text-xs font-bold flex items-center gap-1 ${
               !isPro
-                ? 'border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B]'
+                ? 'border-[#18181B] bg-[#FFE66D] shadow-sm'
                 : 'border-transparent text-[#52525B]'
             }`}
           >
@@ -258,7 +258,7 @@ export function InteractiveReaderClient({
             onClick={() => handleModeChange('pro')}
             className={`rounded-lg border px-2.5 py-1 text-xs font-bold flex items-center gap-1 ${
               isPro
-                ? 'border-[#18181B] bg-[#EFF6FF] text-[#1E3A8A] shadow-[2px_2px_0px_#18181B]'
+                ? 'border-[#18181B] bg-[#EFF6FF] text-[#1E3A8A] shadow-sm'
                 : 'border-transparent text-[#52525B]'
             }`}
           >
@@ -391,7 +391,7 @@ export function InteractiveReaderClient({
                     onClick={() => setMobileDrawerOpen(false)}
                     className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2.5 text-xs font-bold ${
                       isCurrent
-                        ? 'border-[#18181B] bg-[#FFE66D] text-[#18181B]'
+                        ? 'border-[#E7E2D9] bg-[#FEF9C3] text-[#18181B]'
                         : 'border-[#E4E4E7] bg-white text-[#52525B]'
                     }`}
                   >
@@ -411,7 +411,7 @@ export function InteractiveReaderClient({
 
       {sosOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-4 pt-20 backdrop-blur-xs">
-          <div className="w-full max-w-lg rounded-2xl border-2 border-[#18181B] bg-[#FAF7F2] p-5 shadow-[6px_6px_0px_#18181B]">
+          <div className="w-full max-w-lg rounded-2xl border border-[#E7E2D9] bg-[#FAF7F2] p-5 shadow-xl">
             <div className="mb-3 flex items-center justify-between">
               <span className="font-mono text-xs font-extrabold uppercase text-[#92400E]">
                 {lang === 'en' ? '🚨 SOS Quick Chapter & Script Search' : '🚨 SOS Pencarian Cepat Bab & Skrip Leader'}

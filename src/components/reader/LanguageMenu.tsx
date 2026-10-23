@@ -71,7 +71,7 @@ export function LanguageMenu({ bookId, currentLang, chapterSlug }: LanguageMenuP
             className="fixed inset-0 z-40 cursor-default"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border-2 border-[#18181B] bg-white p-1.5 shadow-[4px_4px_0px_#18181B]">
+          <div className="absolute right-0 top-full z-50 mt-2 w-60 rounded-2xl border border-[#E7E2D9] bg-white p-1.5 shadow-xl">
             {REGISTERS.map((reg) => {
               const isActive = currentLang === reg.lang;
               return (

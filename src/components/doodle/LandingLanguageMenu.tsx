@@ -77,7 +77,7 @@ export function LandingLanguageMenu({ lang, onSelect }: LandingLanguageMenuProps
           />
           <div
             role="menu"
-            className="absolute right-0 top-full z-50 mt-2 w-72 rounded-2xl border-2 border-[#18181B] bg-white p-1.5 shadow-[4px_4px_0px_#18181B]"
+            className="absolute right-0 top-full z-50 mt-2 w-72 rounded-2xl border border-[#E7E2D9] bg-white p-1.5 shadow-xl"
           >
             {OPTIONS.map((opt) => {
               const isActive = lang === opt.lang;

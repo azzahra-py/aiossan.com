@@ -138,19 +138,21 @@ img {
   font-family: var(--font-mono), monospace;
 }
 
-/* Distortion-free Editorial Notebook Card */
+/* Light surface system (design v2): the sketch style lives in the
+   artwork (covers, mascots, diagrams), the UI chrome stays light.
+   Thin warm-gray border, generous radius, soft shadow only. */
 .doodle-box {
   background: var(--bg-paper-card);
-  border: 2px solid var(--ink-primary);
-  border-radius: 16px;
-  box-shadow: 4px 4px 0px var(--ink-primary);
+  border: 1px solid #E7E2D9;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(24, 24, 27, 0.05);
 }
 
-/* Tactile Press Button */
+/* Tactile Press Button, lightened: thinner border, smaller offset. */
 .doodle-button {
-  border: 2px solid var(--ink-primary);
+  border: 1.5px solid var(--ink-primary);
   border-radius: 12px;
-  box-shadow: 3px 3px 0px var(--ink-primary);
+  box-shadow: 2px 2px 0px var(--ink-primary);
   font-family: var(--font-body), sans-serif;
   font-weight: 700;
   transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1),
@@ -158,12 +160,12 @@ img {
 }
 
 .doodle-button:hover:not(:disabled) {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px var(--ink-primary);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--ink-primary);
 }
 
 .doodle-button:active:not(:disabled) {
-  transform: translate(2px, 2px);
+  transform: translate(1px, 1px);
   box-shadow: 1px 1px 0px var(--ink-primary);
 }
 

@@ -86,7 +86,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
       <NavbarDoodle />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 sm:py-12">
+      <main className="flex-1 max-w-[1440px] mx-auto w-full px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         {/* User Profile Bar */}
         <div className="doodle-box bg-white p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">

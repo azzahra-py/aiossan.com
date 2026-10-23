@@ -33,7 +33,7 @@ export function ShareQuoteModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-2xl border-2 border-[#18181B] bg-[#FAF7F2] p-5 shadow-[6px_6px_0px_#18181B]">
+      <div className="relative w-full max-w-md rounded-2xl border border-[#E7E2D9] bg-[#FAF7F2] p-5 shadow-xl">
         <button
           type="button"
           onClick={onClose}
@@ -49,7 +49,7 @@ export function ShareQuoteModal({
           </span>
         </div>
 
-        <div className="rounded-2xl border-2 border-[#18181B] bg-gradient-to-br from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-6 shadow-[4px_4px_0px_#18181B]">
+        <div className="rounded-2xl border-2 border-[#18181B] bg-gradient-to-br from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-6 shadow-md">
           <div className="mb-4 flex items-center justify-between">
             <span className="rounded-md border border-[#18181B] bg-[#FFE66D] px-2.5 py-0.5 font-mono text-[10px] font-extrabold text-[#18181B]">
               AIOSSAN LEADERSHIP PLAYBOOK

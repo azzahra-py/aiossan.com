@@ -219,9 +219,9 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
   const result = DIAGNOSIS_MAP[winner];
 
   return (
-    <div id="quiz" className="doodle-box relative overflow-hidden bg-gradient-to-br from-[#FFFDF9] via-white to-[#FEFCE8] p-6 sm:p-8">
+    <div id="quiz" className="doodle-box relative overflow-hidden bg-[#FFFBEB] p-6 sm:p-8">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#FFE66D] px-3 py-1 font-mono text-xs font-extrabold text-[#18181B] shadow-[2px_2px_0px_#18181B]">
+        <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-[#18181B] bg-[#FFE66D] px-3 py-1 font-mono text-xs font-extrabold text-[#18181B]">
           <Sparkles className="h-3.5 w-3.5" />
           {lang === 'en'
             ? '45-Second Interactive Leadership Diagnostic'
@@ -266,7 +266,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
         </div>
       ) : (
         <div
-          className={`rounded-2xl border-2 border-[#18181B] bg-gradient-to-br ${result.color} p-5 sm:p-6 shadow-[4px_4px_0px_#18181B]`}
+          className={`rounded-2xl border border-[#E7E2D9] bg-gradient-to-br ${result.color} p-5 sm:p-6 shadow-sm`}
         >
           <div className="flex flex-col sm:flex-row items-center gap-5">
             <WoodlandMascotSvg
