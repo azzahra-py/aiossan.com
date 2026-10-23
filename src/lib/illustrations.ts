@@ -1,32 +1,32 @@
 import { BookId } from '@/types/books';
 
-export type SchematicMotif =
+export type DoodleIconType =
   | 'compass'
   | 'gears'
-  | 'matrix'
-  | 'waveform'
+  | 'blueprint'
+  | 'listen'
   | 'key'
-  | 'lens'
+  | 'magnifier'
   | 'battery'
   | 'target'
   | 'spotlight'
-  | 'trajectory'
+  | 'map'
   | 'telescope'
-  | 'podium'
-  | 'calibration'
-  | 'cadence'
+  | 'trophy'
+  | 'bicycle'
+  | 'journal'
   | 'toolbox'
   | 'shield'
   | 'fire'
-  | 'balance'
+  | 'scale'
   | 'switch'
   | 'calendar'
-  | 'relay'
-  | 'gateway'
-  | 'blueprint'
-  | 'equilibrium'
-  | 'gauge'
-  | 'pacemaker'
+  | 'torch'
+  | 'gate'
+  | 'easel'
+  | 'tea'
+  | 'thermometer'
+  | 'marathon'
   | 'lighthouse'
   | 'bridge';
 
@@ -34,333 +34,425 @@ export interface ChapterIllustrationMeta {
   bookId: BookId;
   chapterIndex: number;
   slug: string;
-  figCode: string;
-  svgPath: string;
-  webpPath: string;
-  motif: SchematicMotif;
+  imagePath: string;
   captionId: string;
   captionEn: string;
-  aiPrompt: string;
-}
-
-const STYLE_PREFIX =
-  'Swiss editorial technical illustration in the style of Monocle Magazine and Stripe Press, clean architectural vector lines, isometric diagramming, warm alabaster paper background (#FBF9F5), deep carbon ink (#111113) linework, minimal geometric focal subject, no clutter, no random text: ';
-
-function makeChapters(
-  bookId: BookId,
-  volNum: number,
-  accentName: string,
-  items: {
-    motif: SchematicMotif;
-    captionId: string;
-    captionEn: string;
-    scenePrompt: string;
-  }[]
-): Record<string, ChapterIllustrationMeta> {
-  const out: Record<string, ChapterIllustrationMeta> = {};
-  items.forEach((item, idx) => {
-    const slug = `ch-${idx}`;
-    const figCode = `FIG. 0${volNum}.${idx < 10 ? `0${idx}` : idx}`;
-    out[`${bookId}:${slug}`] = {
-      bookId,
-      chapterIndex: idx,
-      slug,
-      figCode,
-      svgPath: `/illustrations/${bookId}/${slug}.svg`,
-      webpPath: `/illustrations/${bookId}/${slug}.webp`,
-      motif: item.motif,
-      captionId: item.captionId,
-      captionEn: item.captionEn,
-      aiPrompt: `${STYLE_PREFIX} ${item.scenePrompt}. Accent color: ${accentName}.`,
-    };
-  });
-  return out;
+  iconType: DoodleIconType;
 }
 
 export const CHAPTER_ILLUSTRATIONS: Record<string, ChapterIllustrationMeta> = {
-  ...makeChapters('book-1', 1, 'Editorial Cobalt Blue (#1D4ED8)', [
-    {
-      motif: 'compass',
-      captionId: 'Kompas kepemimpinan pertama: beralih dari keraguan menuju arah yang terukur dan penuh empati.',
-      captionEn: 'The first leadership compass: moving from early hesitation to calibrated, empathetic direction.',
-      scenePrompt: 'A precision brass-and-cobalt architectural compass resting on an isometric grid desk next to a star badge',
-    },
-    {
-      motif: 'gears',
-      captionId: 'Beralih dari memutar semua roda gigi sendirian menjadi konduktor yang menjaga sinkronisasi sistem tim.',
-      captionEn: 'Transitioning from frantic solo gear-turning to orchestrating a synchronized multi-gear system.',
-      scenePrompt: 'An isometric mechanical diagram showing one master gear smoothly driving four synchronized smaller gears',
-    },
-    {
-      motif: 'matrix',
-      captionId: 'Cetak biru Kerangka Kerja 4x4: empat momen percakapan inti berpadu dengan empat keterampilan komunikasi.',
-      captionEn: 'The 4x4 Framework Blueprint: four core conversation cadences intersecting with four communication skills.',
-      scenePrompt: 'A clean 4x4 architectural matrix grid with glowing cobalt intersection nodes and technical callout lines',
-    },
-    {
-      motif: 'waveform',
-      captionId: 'Menyimak aktif: menyaring kebisingan asumsi menjadi gelombang masalah yang jernih dan utuh.',
-      captionEn: 'Active listening: filtering noisy assumptions into a clear, focused signal wave.',
-      scenePrompt: 'Tangled chaotic lines entering a precision acoustic lens and emerging as a clean harmonic sine wave',
-    },
-    {
-      motif: 'key',
-      captionId: 'Pertanyaan pemantik solusi: menyerahkan kunci agar anggota tim membuka pintu pemecahan masalahnya sendiri.',
-      captionEn: 'Solution-focused questions: handing over the architectural key so teammates unlock their own solutions.',
-      scenePrompt: 'A geometric minimal key shaped like a question mark unlocking an isometric structural mechanism',
-    },
-    {
-      motif: 'lens',
-      captionId: 'Kaca pembesar objektif: membedah fakta dan dampak pekerjaan di atas meja tanpa menyerang pribadi.',
-      captionEn: 'The objective lens: examining workflow facts and impact on the table without personal blame.',
-      scenePrompt: 'An optical precision loupe magnifying a data chart on a blueprint grid, crisp geometric shadows',
-    },
-    {
-      motif: 'battery',
-      captionId: 'Menanamkan keyakinan terukur agar anggota tim berani mengambil keputusan mandiri di level berikutnya.',
-      captionEn: 'Instilling calibrated confidence so teammates step up to autonomous decision-making.',
-      scenePrompt: 'Four ascending architectural steps with an energy core charging the top platform',
-    },
-    {
-      motif: 'target',
-      captionId: 'Rumus Delegasi 3K: menyamakan bidikan pada wujud hasil yang Kongkret, Kriteria selesai, dan Kapan waktunya.',
-      captionEn: 'The 3C Delegation Brief: aligning three concentric rings—Concrete outcome, Clear criteria, and Clock.',
-      scenePrompt: 'Three concentric alignment rings locking into a single crisp bullseye vector on an engineering drafting table',
-    },
-    {
-      motif: 'spotlight',
-      captionId: 'Apresiasi tepat sasaran: menyalakan sorot pengakuan spesifik saat kontribusi tim masih hangat.',
-      captionEn: 'Timely recognition: casting a focused beam on the exact puzzle piece completed with excellence.',
-      scenePrompt: 'An architectural desk lamp casting a sharp geometric spotlight onto a newly fitted keystone block',
-    },
-    {
-      motif: 'trajectory',
-      captionId: 'Koreksi empat mata: meluruskan lintasan kerja yang melenceng secara privat, tenang, dan bermartabat.',
-      captionEn: 'Private course correction: recalibrating an off-track trajectory behind closed doors with zero drama.',
-      scenePrompt: 'A flight trajectory diagram showing a dotted deviation line smoothly guided back onto the main vector',
-    },
-    {
-      motif: 'telescope',
-      captionId: 'Evaluasi tanpa kejutan: 30% meninjau cermin spion masa lalu, 70% meneropong pertumbuhan ke depan.',
-      captionEn: 'No-surprise reviews: 30% rearview reflection paired with 70% forward-looking growth.',
-      scenePrompt: 'Split-ratio 30/70 horizon diagram with a precision telescope pointing toward an ascending grid',
-    },
-    {
-      motif: 'podium',
-      captionId: 'Simulasi 4 pekan: peta latihan bertahap dari minggu pertama hingga ritme kepemimpinan terbentuk otomatis.',
-      captionEn: 'The 4-week simulation track: week-by-week tactical milestones from orientation to team flow.',
-      scenePrompt: 'Four sequential milestone checkpoints connected by a crisp isometric track on a drafting board',
-    },
-    {
-      motif: 'calibration',
-      captionId: 'Kalibrasi L1–L4 ke G1–G4: menyesuaikan porsi arahan dan otonomi sesuai kesiapan spesifik tiap tugas.',
-      captionEn: 'Situational calibration (L1–L4 to G1–G4): matching leadership support to task-specific readiness.',
-      scenePrompt: 'A four-quadrant dial and slider instrument calibrating guidance vs autonomy levels',
-    },
-    {
-      motif: 'cadence',
-      captionId: 'Ritme kebiasaan 30 hari: membangun konsistensi pemimpin lewat langkah kecil yang terukur setiap pekan.',
-      captionEn: 'The 30-day habit cadence: building leadership consistency through small, repeatable weekly rituals.',
-      scenePrompt: 'A modular 30-day perforated habit grid card beside a fountain pen and espresso cup',
-    },
-    {
-      motif: 'toolbox',
-      captionId: 'Kotak perkakas meja kerja: kumpulan skrip komunikasi, lembar persiapan 1-on-1, dan rujukan riset primer.',
-      captionEn: 'The Desk Reference Toolbox: conversation scripts, 1-on-1 prep sheets, and primary research citations.',
-      scenePrompt: 'An open multi-compartment Swiss modular organizer case holding neatly indexed reference cards',
-    },
-  ]),
+  // BUKU 1
+  'book-1:ch-0': {
+    bookId: 'book-1',
+    chapterIndex: 0,
+    slug: 'ch-0',
+    imagePath: '/illustrations/book-1/ch-0.webp',
+    captionId: 'Kapi si Kapibara baru saja menerima lencana bintang pertama—masih sedikit canggung, tapi siap belajar memimpin dengan empati.',
+    captionEn: 'Kapi the Capybara receiving their first team lead star badge—a little awkward at first, but ready to lead with empathy.',
+    iconType: 'compass',
+  },
+  'book-1:ch-1': {
+    bookId: 'book-1',
+    chapterIndex: 1,
+    slug: 'ch-1',
+    imagePath: '/illustrations/book-1/ch-1.webp',
+    captionId: 'Beralih dari juggling semua gir sendirian menjadi konduktor orkestra yang menjaga ritme tim tetap harmonis.',
+    captionEn: 'Transitioning from frantic solo gear-juggling to conducting an orchestra where everyone turns gears in harmony.',
+    iconType: 'gears',
+  },
+  'book-1:ch-2': {
+    bookId: 'book-1',
+    chapterIndex: 2,
+    slug: 'ch-2',
+    imagePath: '/illustrations/book-1/ch-2.webp',
+    captionId: 'Cetak biru 4 Obrolan Inti dan 4 Skill Komunikasi di atas meja kerja sketsa.',
+    captionEn: 'The 4x4 Framework: Blueprint of 4 Core Conversations paired with 4 Communication Skills.',
+    iconType: 'blueprint',
+  },
+  'book-1:ch-3': {
+    bookId: 'book-1',
+    chapterIndex: 3,
+    slug: 'ch-3',
+    imagePath: '/illustrations/book-1/ch-3.webp',
+    captionId: 'Menutup laptop setengah dan menaruh ponsel terbalik: menyimak sampai memahami benang kusut yang diceritakan.',
+    captionEn: 'Laptops half-closed, phones face down: listening attentively until the tangled thread unspools into clarity.',
+    iconType: 'listen',
+  },
+  'book-1:ch-4': {
+    bookId: 'book-1',
+    chapterIndex: 4,
+    slug: 'ch-4',
+    imagePath: '/illustrations/book-1/ch-4.webp',
+    captionId: 'Memberikan kunci tanda tanya agar anggota tim membuka pintu solusinya sendiri.',
+    captionEn: 'Handing over the question-mark key that unlocks self-discovered solutions.',
+    iconType: 'key',
+  },
+  'book-1:ch-5': {
+    bookId: 'book-1',
+    chapterIndex: 5,
+    slug: 'ch-5',
+    imagePath: '/illustrations/book-1/ch-5.webp',
+    captionId: 'Meneliti grafik bersama lewat kaca pembesar objektif, bukan saling tunjuk telunjuk.',
+    captionEn: 'Examining the problem together through an objective lens instead of pointing fingers.',
+    iconType: 'magnifier',
+  },
+  'book-1:ch-6': {
+    bookId: 'book-1',
+    chapterIndex: 6,
+    slug: 'ch-6',
+    imagePath: '/illustrations/book-1/ch-6.webp',
+    captionId: 'Memasang baterai keyakinan mandiri agar tim berani melangkah naik ke tangga berikutnya.',
+    captionEn: 'Slotting in the battery of quiet confidence so teammates take the next step boldly.',
+    iconType: 'battery',
+  },
+  'book-1:ch-7': {
+    bookId: 'book-1',
+    chapterIndex: 7,
+    slug: 'ch-7',
+    imagePath: '/illustrations/book-1/ch-7.webp',
+    captionId: 'Membidik papan sasaran dengan rumus 3K: Kongkret, Kriteria selesai, dan Kapan batas waktunya.',
+    captionEn: 'Aligning focus toward clear targets: Concrete outcomes, Clear criteria, and Confirmed timelines.',
+    iconType: 'target',
+  },
+  'book-1:ch-8': {
+    bookId: 'book-1',
+    chapterIndex: 8,
+    slug: 'ch-8',
+    imagePath: '/illustrations/book-1/ch-8.webp',
+    captionId: 'Menyalakan lampu sorot spontan tepat pada kepingan puzzle kontribusi yang baru dipasang.',
+    captionEn: 'Shining a timely spotlight on the specific puzzle piece just completed with excellence.',
+    iconType: 'spotlight',
+  },
+  'book-1:ch-9': {
+    bookId: 'book-1',
+    chapterIndex: 9,
+    slug: 'ch-9',
+    imagePath: '/illustrations/book-1/ch-9.webp',
+    captionId: 'Memandu putar balik secara ramah dan empat mata saat kerjaan sempat melenceng dari peta.',
+    captionEn: 'Gently guiding course corrections behind closed doors without embarrassment or drama.',
+    iconType: 'map',
+  },
+  'book-1:ch-10': {
+    bookId: 'book-1',
+    chapterIndex: 10,
+    slug: 'ch-10',
+    imagePath: '/illustrations/book-1/ch-10.webp',
+    captionId: 'Teropong masa depan 70% vs spion kecil 30%: evaluasi berkala yang tidak pernah memunculkan kejutan buruk.',
+    captionEn: '70% forward telescope vs 30% rearview mirror: reviews that never spring unpleasant surprises.',
+    iconType: 'telescope',
+  },
+  'book-1:ch-11': {
+    bookId: 'book-1',
+    chapterIndex: 11,
+    slug: 'ch-11',
+    imagePath: '/illustrations/book-1/ch-11.webp',
+    captionId: 'Papan simulasi 4 pekan: latihan pendampingan bertahap dari minggu pertama hingga tim meluncur mandiri.',
+    captionEn: 'A 4-week simulation path: practicing week-by-week coaching until independence is unlocked.',
+    iconType: 'trophy',
+  },
+  'book-1:ch-12': {
+    bookId: 'book-1',
+    chapterIndex: 12,
+    slug: 'ch-12',
+    imagePath: '/illustrations/book-1/ch-12.webp',
+    captionId: 'Dari sepeda beroda bantu sampai melaju kencang sendirian: kalibrasi gaya pendampingan L1–L4 ke G1–G4.',
+    captionEn: 'From training wheels to solo riding: adapting leadership styles (S1–S4) to readiness levels (D1–D4).',
+    iconType: 'bicycle',
+  },
+  'book-1:ch-13': {
+    bookId: 'book-1',
+    chapterIndex: 13,
+    slug: 'ch-13',
+    imagePath: '/illustrations/book-1/ch-13.webp',
+    captionId: 'Mencentang jurnal spiral 30 hari ditemani secangkir teh hangat di meja kerja kantor.',
+    captionEn: 'Logging 30 days of daily leadership habits in a spiral notebook over warm desk tea.',
+    iconType: 'journal',
+  },
+  'book-1:ch-14': {
+    bookId: 'book-1',
+    chapterIndex: 14,
+    slug: 'ch-14',
+    imagePath: '/illustrations/book-1/ch-14.webp',
+    captionId: 'Kotak perkakas taktis meja kerja: contekan skrip komunikasi, template rapat, dan rujukan riset primer.',
+    captionEn: 'The Desk Reference Toolbox: conversation scripts, meeting templates, and primary research citations.',
+    iconType: 'toolbox',
+  },
 
-  ...makeChapters('book-2', 2, 'International Terracotta Orange (#EA580C)', [
-    {
-      motif: 'fire',
-      captionId: 'Titik balik kejenuhan: berhenti menjadi pemadam kebakaran harian dan mulai menata ulang arsitektur kerja.',
-      captionEn: 'The burnout inflection point: retiring the daily firehose to rebuild sustainable workflow architecture.',
-      scenePrompt: 'An overloaded stack of folders transforming into a clean, self-running isometric conveyor system',
-    },
-    {
-      motif: 'blueprint',
-      captionId: 'Dari penyelamat darurat menjadi perancang sistem: membangun alur yang tetap berjalan tenang tanpa intervensi konstan.',
-      captionEn: 'From emergency rescuer to system architect: designing workflows that run smoothly without constant intervention.',
-      scenePrompt: 'Architectural blueprint comparing a chaotic tangled knot with a clean parallel pipeline',
-    },
-    {
-      motif: 'shield',
-      captionId: '4 Penataan Struktural & 4 Keterampilan Energi: perisai ganda untuk menjaga stamina kepemimpinan jangka panjang.',
-      captionEn: '4 Structural Resets & 4 Energy Skills: a dual shield protecting long-term leadership stamina.',
-      scenePrompt: 'Four interlocking structural rings surrounding a protected central core on a technical grid',
-    },
-    {
-      motif: 'lens',
-      captionId: 'Memisahkan masalah kerja dari beban emosi: menyaring badai kepanikan menjadi tiga fakta objektif yang bisa dieksekusi.',
-      captionEn: 'Separating work problems from emotional load: filtering storm clouds into three actionable objective blocks.',
-      scenePrompt: 'A geometric prism splitting a turbulent dark wave into three neat, structured cubes',
-    },
-    {
-      motif: 'key',
-      captionId: 'Anti-Monkey Management: menahan refleks mengambil alih tugas agar tanggung jawab tetap berada di tangan pemiliknya.',
-      captionEn: 'Anti-Monkey Management: resisting the rescue reflex so problem ownership stays with the teammate.',
-      scenePrompt: 'A directional vector barrier deflecting incoming task arrows back into organized team lanes',
-    },
-    {
-      motif: 'balance',
-      captionId: 'Negosiasi kapasitas berbasis data: menyajikan matriks beban kerja dan opsi trade-off secara tenang kepada atasan.',
-      captionEn: 'Data-backed capacity negotiation: presenting objective workload trade-offs calmly to stakeholders.',
-      scenePrompt: 'A precision architectural balance scale weighing project blocks with a clear capacity threshold line',
-    },
-    {
-      motif: 'switch',
-      captionId: 'Protokol Detachment jam 6 sore: mematikan saklar pikiran kerja agar pemulihan mental berlangsung utuh.',
-      captionEn: 'The 6 PM Detachment Protocol: flipping the mental breaker switch for complete after-hours recovery.',
-      scenePrompt: 'A minimalist Braun-inspired mechanical toggle switch set to OFF at 18:00 with calm horizon lines',
-    },
-    {
-      motif: 'calendar',
-      captionId: 'Audit Kalender 3P (Pangkas, Padatkan, Pindahkan): merebut kembali blok waktu fokus strategis dari rapat yang mubazir.',
-      captionEn: 'The 3R Calendar Audit: reclaiming deep-focus blocks from fragmented, low-value status meetings.',
-      scenePrompt: 'A weekly schedule grid where cluttered small blocks are consolidated into bold protected focus zones',
-    },
-    {
-      motif: 'relay',
-      captionId: 'Mencetak tangan kanan (Second-in-Command): menyiapkan pelapis tepercaya agar tim tidak lumpuh saat kamu cuti.',
-      captionEn: 'Building bench strength: grooming a capable second-in-command so operations never bottleneck on you.',
-      scenePrompt: 'Two synchronized parallel tracks passing a glowing relay baton seamlessly across checkpoints',
-    },
-    {
-      motif: 'gateway',
-      captionId: 'Menata ulang batas ekspektasi: mengubah interupsi dadakan menjadi antrean kerja yang tertib dan terukur.',
-      captionEn: 'Resetting boundary expectations: channeling chaotic ad-hoc interruptions into an orderly intake gate.',
-      scenePrompt: 'An architectural funnel and sluice gate organizing scattered arrows into a single disciplined stream',
-    },
-    {
-      motif: 'blueprint',
-      captionId: 'Job Crafting 30/70: mendelegasikan 70% rutinitas operasional demi membuka 30% ruang pertumbuhan strategis.',
-      captionEn: '30/70 Job Crafting: delegating routine maintenance to unlock a 30% strategic growth portfolio.',
-      scenePrompt: 'A precision architectural proportion block divided into a 70% automated base and 30% elevated tower',
-    },
-    {
-      motif: 'equilibrium',
-      captionId: 'Simulasi 4 pekan pemulihan sistem: langkah bertahap keluar dari kemelut lembur menuju ritme kerja berkelanjutan.',
-      captionEn: '4-week system recovery simulation: step-by-step progression from chronic overtime to sustainable flow.',
-      scenePrompt: 'Four progressive stages showing a tilted structure returning to perfect horizontal equilibrium',
-    },
-    {
-      motif: 'gauge',
-      captionId: 'Barometer kelelahan L1–L4: mendeteksi dini gejala letih sesaat, jenuh rutinitas, hingga kelelahan sistemik.',
-      captionEn: 'The L1–L4 Fatigue Barometer: early detection from post-sprint tiredness to systemic overload.',
-      scenePrompt: 'An analog precision dial gauge with four distinct zones and calibration markers',
-    },
-    {
-      motif: 'pacemaker',
-      captionId: 'Ritme kepemimpinan maraton: menjaga konsistensi napas panjang tanpa mengorbankan kesehatan dan keluarga.',
-      captionEn: 'Marathon leadership pacing: maintaining high-output longevity without sacrificing health or life.',
-      scenePrompt: 'A steady rhythmic pulse wave running across a long-distance architectural elevation chart',
-    },
-    {
-      motif: 'toolbox',
-      captionId: 'Kotak P3K ketahanan kerja: template negosiasi prioritas, ceklis tutup kantor, dan rujukan riset psikologi kerja.',
-      captionEn: 'Resilience First-Aid Kit: priority trade-off scripts, shutdown checklists, and occupational research citations.',
-      scenePrompt: 'A structured emergency field kit with neatly labeled modular cards and brass latches',
-    },
-  ]),
+  // BUKU 2
+  'book-2:ch-0': {
+    bookId: 'book-2',
+    chapterIndex: 0,
+    slug: 'ch-0',
+    imagePath: '/illustrations/book-2/ch-0.webp',
+    captionId: 'Kelelahan menopang tumpukan map yang goyah—saatnya beralih dari memadamkan api ke membangun sistem kerja otomatis.',
+    captionEn: 'Carrying a precarious stack of folders on low battery—time to transition from burnout firefighting to system architecture.',
+    iconType: 'fire',
+  },
+  'book-2:ch-1': {
+    bookId: 'book-2',
+    chapterIndex: 1,
+    slug: 'ch-1',
+    imagePath: '/illustrations/book-2/ch-1.webp',
+    captionId: 'Meninggalkan semprotan pemadam kebakaran darurat untuk merancang ban berjalan otomatis yang mandiri.',
+    captionEn: 'Retiring the emergency firehose to design a self-running conveyor belt system.',
+    iconType: 'blueprint',
+  },
+  'book-2:ch-2': {
+    bookId: 'book-2',
+    chapterIndex: 2,
+    slug: 'ch-2',
+    imagePath: '/illustrations/book-2/ch-2.webp',
+    captionId: 'Perisai energi perlindungan diri di tengah putaran 4 roda gigi ketahanan jangka panjang.',
+    captionEn: 'The Protective Shield: guarding mental stamina amidst the 4 gears of organizational resilience.',
+    iconType: 'shield',
+  },
+  'book-2:ch-3': {
+    bookId: 'book-2',
+    chapterIndex: 3,
+    slug: 'ch-3',
+    imagePath: '/illustrations/book-2/ch-3.webp',
+    captionId: 'Kaca pelindung transparan yang menyaring awan badai emosional menjadi tiga kubus masalah objektif.',
+    captionEn: 'The Clear Shield: transforming dark emotional storm clouds into three workable objective cubes.',
+    iconType: 'shield',
+  },
+  'book-2:ch-4': {
+    bookId: 'book-2',
+    chapterIndex: 4,
+    slug: 'ch-4',
+    imagePath: '/illustrations/book-2/ch-4.webp',
+    captionId: 'Menolak monyet tugas melompat ke punggung leader: arahkan tim merawat tugas mereka sendiri.',
+    captionEn: 'Stopping task monkeys from leaping onto the leader’s back: empower the owner to hold the leash.',
+    iconType: 'key',
+  },
+  'book-2:ch-5': {
+    bookId: 'book-2',
+    chapterIndex: 5,
+    slug: 'ch-5',
+    imagePath: '/illustrations/book-2/ch-5.webp',
+    captionId: 'Menjaga neraca kapasitas tetap seimbang dengan data dan opsi trade-off yang transparan.',
+    captionEn: 'Balancing the capacity scale with transparent data and calm trade-off proposals.',
+    iconType: 'scale',
+  },
+  'book-2:ch-6': {
+    bookId: 'book-2',
+    chapterIndex: 6,
+    slug: 'ch-6',
+    imagePath: '/illustrations/book-2/ch-6.webp',
+    captionId: 'Mematikan saklar pikiran jam kerja jam 6 sore: laptop ditutup, malam adalah waktu pemulihan sejati.',
+    captionEn: 'Flipping the mental power switch off at 6 PM: closed laptops and protected evening recovery.',
+    iconType: 'switch',
+  },
+  'book-2:ch-7': {
+    bookId: 'book-2',
+    chapterIndex: 7,
+    slug: 'ch-7',
+    imagePath: '/illustrations/book-2/ch-7.webp',
+    captionId: 'Menggunting tali balon rapat yang mubazir untuk menyisakan blok fokus kuning yang terlindungi.',
+    captionEn: 'Snipping strings of cluttered meeting balloons to protect high-impact focus blocks.',
+    iconType: 'calendar',
+  },
+  'book-2:ch-8': {
+    bookId: 'book-2',
+    chapterIndex: 8,
+    slug: 'ch-8',
+    imagePath: '/illustrations/book-2/ch-8.webp',
+    captionId: 'Estafet obor ke andalan tim: mencetak tangan kanan yang siap mengambil alih kendali harian.',
+    captionEn: 'Passing the torch: grooming capable deputies ready to run daily operations smoothly.',
+    iconType: 'torch',
+  },
+  'book-2:ch-9': {
+    bookId: 'book-2',
+    chapterIndex: 9,
+    slug: 'ch-9',
+    imagePath: '/illustrations/book-2/ch-9.webp',
+    captionId: 'Menjaga pintu gerbang kerja agar antrean permintaan masuk secara teratur dan bermartabat.',
+    captionEn: 'Guarding the workflow gateway: channeling inbound requests into an orderly single-file queue.',
+    iconType: 'gate',
+  },
+  'book-2:ch-10': {
+    bookId: 'book-2',
+    chapterIndex: 10,
+    slug: 'ch-10',
+    imagePath: '/illustrations/book-2/ch-10.webp',
+    captionId: 'Otomatisasi 70% kerjaan berulang sambil melukis roket inovasi di 30% ruang yang tersisa.',
+    captionEn: 'Job crafting 30/70: automating 70% of routine grind to innovate in the remaining 30%.',
+    iconType: 'easel',
+  },
+  'book-2:ch-11': {
+    bookId: 'book-2',
+    chapterIndex: 11,
+    slug: 'ch-11',
+    imagePath: '/illustrations/book-2/ch-11.webp',
+    captionId: 'Menikmati teh hangat dengan tenang karena sistem dan kader tim bekerja dengan otonom.',
+    captionEn: 'Savoring desk tea in peace because systems run and trusted deputies lead smoothly.',
+    iconType: 'tea',
+  },
+  'book-2:ch-12': {
+    bookId: 'book-2',
+    chapterIndex: 12,
+    slug: 'ch-12',
+    imagePath: '/illustrations/book-2/ch-12.webp',
+    captionId: 'Termometer energi 4 tingkat dan stasiun pemulihan bersama kura-kura bijak.',
+    captionEn: 'Four-stage energy gauge and recovery stations alongside the steady tortoise.',
+    iconType: 'thermometer',
+  },
+  'book-2:ch-13': {
+    bookId: 'book-2',
+    chapterIndex: 13,
+    slug: 'ch-13',
+    imagePath: '/illustrations/book-2/ch-13.webp',
+    captionId: 'Berlari maraton dengan ritme napas yang tenang dan stabil, bukan sprint yang mematikan.',
+    captionEn: 'A steady marathon pace built on sustainable stamina, leaving burnout behind.',
+    iconType: 'marathon',
+  },
+  'book-2:ch-14': {
+    bookId: 'book-2',
+    chapterIndex: 14,
+    slug: 'ch-14',
+    imagePath: '/illustrations/book-2/ch-14.webp',
+    captionId: 'Kotak P3K ketahanan kerja: protokol darurat saat beban kerja mulai melampaui batas wajar.',
+    captionEn: 'Workplace Resilience First-Aid Kit: fast protocols for whenever capacity redlines.',
+    iconType: 'toolbox',
+  },
 
-  ...makeChapters('book-3', 3, 'Deep Alpine Emerald (#0F766E)', [
-    {
-      motif: 'lighthouse',
-      captionId: 'Naik kelas menjadi pemimpin para leader: berhenti menyetir satu perahu, mulai memandu seluruh armada divisi.',
-      captionEn: 'Stepping up to manager of managers: stop steering one boat and start guiding the entire fleet.',
-      scenePrompt: 'An architectural lighthouse projecting alignment vectors toward three synchronized vessels on a grid sea',
-    },
-    {
-      motif: 'compass',
-      captionId: 'Pergeseran ukuran sukses: bukan lagi seberapa cepat kamu turun tangan, melainkan seberapa mandiri para team lead-mu.',
-      captionEn: 'The new success metric: measured not by your solo rescues, but by the autonomy of your team leads.',
-      scenePrompt: 'A central command table surrounded by three autonomous sub-nodes operating in harmony',
-    },
-    {
-      motif: 'bridge',
-      captionId: '4 Forum Penyelarasan & 4 Keterampilan Pembinaan Leader: jembatan kokoh penghubung strategi dan eksekusi lintas tim.',
-      captionEn: '4 Alignment Forums & 4 Leader-Coaching Skills: the structural bridge connecting strategy and multi-team execution.',
-      scenePrompt: 'An isometric suspension bridge connecting three distinct architectural towers on a blueprint',
-    },
-    {
-      motif: 'key',
-      captionId: 'Coaching the Coach: melatih para team lead menyelesaikan masalah anggota timnya sendiri tanpa kamu ambil alih.',
-      captionEn: 'Coaching the Coach: equipping team leads to solve their own people challenges without your takeover.',
-      scenePrompt: 'A cascading two-tier coaching diagram showing knowledge transfer from node A to node B to node C',
-    },
-    {
-      motif: 'shield',
-      captionId: 'Aturan Anti-Skip-Level: menjaga wibawa dan rantai komando para leader di hadapan anggota tim mereka.',
-      captionEn: 'Anti-Skip-Level Guardrails: protecting your team leads authority and chain of command.',
-      scenePrompt: 'An architectural hierarchy shield reinforcing the structural link between a team lead and their team',
-    },
-    {
-      motif: 'telescope',
-      captionId: 'Penerjemah strategi eksekutif: mengubah target abstrak ruang direksi menjadi sasaran kuartalan yang konkret.',
-      captionEn: 'Executive strategy translator: converting high-level boardroom goals into concrete quarterly team missions.',
-      scenePrompt: 'An optical prism translating a single high-altitude beam into three clear actionable project tracks',
-    },
-    {
-      motif: 'balance',
-      captionId: 'Mengelola ke atas dan ke samping (Managing Up & Across): mengamankan dukungan sumber daya lintas departemen.',
-      captionEn: 'Managing Up & Across: securing executive buy-in and frictionless peer-department partnerships.',
-      scenePrompt: 'A multi-axis organizational compass aligning vertical and horizontal vectors in equilibrium',
-    },
-    {
-      motif: 'matrix',
-      captionId: 'Piagam Penyelarasan 3S (Sasaran Bersama, Syarat Serah-Terima, Sinyal Eskalasi): mengakhiri konflik abu-abu antar-tim.',
-      captionEn: 'The 3S Alignment Charter:Shared Outcome, Seam SLA, and Escalation Signal across sub-teams.',
-      scenePrompt: 'Three interlocking hexagonal modules forming a unified structural seal on an engineering sheet',
-    },
-    {
-      motif: 'lens',
-      captionId: 'Bedah 1-on-1 Level Manajer (Kerangka 4P): membedah Progres sistem, People, Proses lintas tim, dan Pertumbuhan leader.',
-      captionEn: 'Manager-to-Leader 1-on-1s (The 4P Audit): inspecting Progress, People, Cross-Team Process, and Personal Growth.',
-      scenePrompt: 'A four-panel diagnostic dashboard inspecting structural health indicators',
-    },
-    {
-      motif: 'bridge',
-      captionId: 'Mediasi gesekan silo 15 menit: menghentikan aksi saling tunjuk dan mengunci perbaikan titik serah-terima.',
-      captionEn: '15-Minute Silo Seam Mediation: stopping finger-pointing and locking in concrete handoff upgrades.',
-      scenePrompt: 'Two separated structural plates being joined cleanly by a precision interlocking dovetail joint',
-    },
-    {
-      motif: 'gauge',
-      captionId: 'Skip-Level & Kalibrasi Budaya: menangkap denyut jujur lapangan tanpa merusak kepercayaan para team lead.',
-      captionEn: 'Skip-Level & Culture Calibration: reading the ground-truth pulse while honoring team lead trust.',
-      scenePrompt: 'A multi-layer acoustic sonar diagram reading deep organizational signals cleanly',
-    },
-    {
-      motif: 'podium',
-      captionId: 'Simulasi 4 pekan penataan divisi: mengubah tiga tim yang berjalan sendiri-sendiri menjadi satu kesatuan yang solid.',
-      captionEn: '4-week divisional alignment simulation: turning fragmented sub-teams into a cohesive department.',
-      scenePrompt: 'Three diverging arrows progressively aligning into a single powerful forward formation over four stages',
-    },
-    {
-      motif: 'calibration',
-      captionId: 'Kalibrasi kematangan para leader (L1–L4): dari leader baru promosi hingga pemimpin strategis pengganda dampak.',
-      captionEn: 'Calibrating leader maturity (L1–L4): from newly promoted leads to autonomous multiplier leaders.',
-      scenePrompt: 'Four ascending architectural columns showing increasing structural span and autonomy',
-    },
-    {
-      motif: 'cadence',
-      captionId: 'Cetak Biru 90 Hari Kepala Divisi: peta jalan 30-60-90 hari dari observasi sistem hingga akselerasi strategis.',
-      captionEn: 'The 90-Day Divisional Blueprint: a structured 30-60-90 day roadmap from diagnosis to strategic velocity.',
-      scenePrompt: 'A three-phase architectural master timeline (Day 30 / Day 60 / Day 90) with milestone flags',
-    },
-    {
-      motif: 'toolbox',
-      captionId: 'Playbook Eksekutif Divisi: piagam 3S siap pakai, ceklis audit 4P, panduan skip-level, dan rujukan riset organisasi.',
-      captionEn: 'The Divisional Executive Toolbox: 3S charter templates, 4P audit sheets, skip-level guides, and research citations.',
-      scenePrompt: 'An executive architectural portfolio binder open to precision templates and structural charts',
-    },
-  ]),
+  // BUKU 3
+  'book-3:ch-0': {
+    bookId: 'book-3',
+    chapterIndex: 0,
+    slug: 'ch-0',
+    imagePath: '/illustrations/book-3/ch-0.webp',
+    captionId: 'Mercusuar di tengah perairan: memandu formasi tiga kapal yang dikemudikan para kapten binatang.',
+    captionEn: 'The central lighthouse: coordinating a fleet of ships steered by capable animal captains.',
+    iconType: 'lighthouse',
+  },
+  'book-3:ch-1': {
+    bookId: 'book-3',
+    chapterIndex: 1,
+    slug: 'ch-1',
+    imagePath: '/illustrations/book-3/ch-1.webp',
+    captionId: 'Berhenti menarik 15 benang boneka sendirian; saatnya memandu para kapten di meja peta strategi.',
+    captionEn: 'No longer pulling strings on fifteen marionettes; coaching team leads around the strategy table.',
+    iconType: 'compass',
+  },
+  'book-3:ch-2': {
+    bookId: 'book-3',
+    chapterIndex: 2,
+    slug: 'ch-2',
+    imagePath: '/illustrations/book-3/ch-2.webp',
+    captionId: 'Jembatan kokoh yang menghubungkan tiga menara divisi agar tidak ada sekat silo.',
+    captionEn: 'The Golden Bridge: connecting independent division towers without organizational silos.',
+    iconType: 'bridge',
+  },
+  'book-3:ch-3': {
+    bookId: 'book-3',
+    chapterIndex: 3,
+    slug: 'ch-3',
+    imagePath: '/illustrations/book-3/ch-3.webp',
+    captionId: 'Menjaga otonomi para leader: membiarkan kapten mengemudi tanpa merebut kemudi kapal mereka.',
+    captionEn: 'Protecting leader autonomy: trusting captains to steer their vessels without grabbing the wheel.',
+    iconType: 'compass',
+  },
+  'book-3:ch-4': {
+    bookId: 'book-3',
+    chapterIndex: 4,
+    slug: 'ch-4',
+    imagePath: '/illustrations/book-3/ch-4.webp',
+    captionId: 'Melerai konflik antar-tim dan menyatukan energi ke satu muara kesuksesan bersama.',
+    captionEn: 'De-escalating inter-team friction and channeling divided energies toward one shared port.',
+    iconType: 'target',
+  },
+  'book-3:ch-5': {
+    bookId: 'book-3',
+    chapterIndex: 5,
+    slug: 'ch-5',
+    imagePath: '/illustrations/book-3/ch-5.webp',
+    captionId: 'Menerjemahkan visi ruang rapat direksi menjadi langkah praktis yang menggerakkan para leader di lapangan.',
+    captionEn: 'Translating boardroom strategy into clear, executable mission maps for front-line leaders.',
+    iconType: 'telescope',
+  },
+  'book-3:ch-6': {
+    bookId: 'book-3',
+    chapterIndex: 6,
+    slug: 'ch-6',
+    imagePath: '/illustrations/book-3/ch-6.webp',
+    captionId: 'Mencetak kader pemimpin baru: tolok ukur kesuksesan manajer divisi adalah seberapa banyak leader baru yang mekar.',
+    captionEn: 'Multiplying leadership: the true metric of senior managers is how many new leaders flourish.',
+    iconType: 'battery',
+  },
+  'book-3:ch-7': {
+    bookId: 'book-3',
+    chapterIndex: 7,
+    slug: 'ch-7',
+    imagePath: '/illustrations/book-3/ch-7.webp',
+    captionId: 'Rapat koordinasi lintas divisi: menyelaraskan kompas tanpa rapat bertele-tele.',
+    captionEn: 'Cross-divisional alignment: syncing compasses without dragging out endless sync meetings.',
+    iconType: 'calendar',
+  },
+  'book-3:ch-8': {
+    bookId: 'book-3',
+    chapterIndex: 8,
+    slug: 'ch-8',
+    imagePath: '/illustrations/book-3/ch-8.webp',
+    captionId: 'Membimbing leader yang sempat underperform dengan empati dan metrik yang terukur jelas.',
+    captionEn: 'Coaching underperforming leaders back to peak competence with structured recovery plans.',
+    iconType: 'map',
+  },
+  'book-3:ch-9': {
+    bookId: 'book-3',
+    chapterIndex: 9,
+    slug: 'ch-9',
+    imagePath: '/illustrations/book-3/ch-9.webp',
+    captionId: 'Membangun kohesi budaya divisi: pilar nilai bersama yang menjaga tim tetap kokoh saat badai menerpa.',
+    captionEn: 'Fostering divisional culture: shared core values that keep departments grounded during turbulence.',
+    iconType: 'shield',
+  },
+  'book-3:ch-10': {
+    bookId: 'book-3',
+    chapterIndex: 10,
+    slug: 'ch-10',
+    imagePath: '/illustrations/book-3/ch-10.webp',
+    captionId: 'Menavigasi portofolio inisiatif divisi: alokasi sumber daya yang cerdas di perairan kompetitif.',
+    captionEn: 'Navigating initiative portfolios: smart resource balancing across multiple operational waters.',
+    iconType: 'scale',
+  },
+  'book-3:ch-11': {
+    bookId: 'book-3',
+    chapterIndex: 11,
+    slug: 'ch-11',
+    imagePath: '/illustrations/book-3/ch-11.webp',
+    captionId: 'Pusat komando terpadu krisis: ketenangan sang manajer divisi menjadi jangkar kepastian seluruh tim.',
+    captionEn: 'Crisis command center: senior leader composure serves as the reassuring anchor for all teams.',
+    iconType: 'lighthouse',
+  },
+  'book-3:ch-12': {
+    bookId: 'book-3',
+    chapterIndex: 12,
+    slug: 'ch-12',
+    imagePath: '/illustrations/book-3/ch-12.webp',
+    captionId: 'Mengalibrasi tingkat kedewasaan para leader: membedakan siapa yang butuh bimbingan strategis vs otonomi total.',
+    captionEn: 'Calibrating leader maturity: distinguishing who needs strategic sparring vs total autonomy.',
+    iconType: 'bicycle',
+  },
+  'book-3:ch-13': {
+    bookId: 'book-3',
+    chapterIndex: 13,
+    slug: 'ch-13',
+    imagePath: '/illustrations/book-3/ch-13.webp',
+    captionId: 'Cetak biru 90 hari divisi: transisi bertahap dari pemegang komando taktis ke penggerak arah jangka panjang.',
+    captionEn: '90-Day Divisional Blueprint: methodical transition from tactical oversight to strategic acceleration.',
+    iconType: 'journal',
+  },
+  'book-3:ch-14': {
+    bookId: 'book-3',
+    chapterIndex: 14,
+    slug: 'ch-14',
+    imagePath: '/illustrations/book-3/ch-14.webp',
+    captionId: 'Playbook Eksekutif: kumpulan lembar audit divisi, panduan suksesi, dan kompas kepemimpinan tingkat lanjut.',
+    captionEn: 'The Executive Playbook: divisional audit sheets, succession trackers, and advanced leadership compasses.',
+    iconType: 'toolbox',
+  },
 };
 
-export function getChapterIllustration(
-  bookId: BookId,
-  chapterSlug: string
-): ChapterIllustrationMeta | undefined {
+export function getChapterIllustration(bookId: BookId, chapterSlug: string): ChapterIllustrationMeta | undefined {
   return CHAPTER_ILLUSTRATIONS[`${bookId}:${chapterSlug}`];
 }

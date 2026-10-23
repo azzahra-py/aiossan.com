@@ -497,7 +497,7 @@ Habis target disepakatin di awal (Bab 7), anggota tim mulai kerja. Di tahap ini,
 
 Biasain sebaliknya: **peka ngelihat anggota tim yang lagi kerja bener, terus langsung kasih apresiasi.**
 
-Riset global **Gallup Workplace** nunjukin kalau **cuma 1 dari 3 pekerja (sekitar 33%)** yang ngerasa dapet pengakuan atau apresiasi atas kerjaan bagus dalam tujuh hari terakhir[^4]. Padahal, meta-analisis Gallup terhadap **3,3 juta pekerja di lebih dari 100.000 tim** ngebuktiin kalau tim yang rutin dapet apresiasi jelas punya **angka keluar-masuk karyawan (*turnover*) 21% sampai 51% lebih rendah**, **produktivitas 14% sampai 18% lebih tinggi**, dan **profitabilitas 23% lebih tinggi**[^4].
+Riset **Gallup Workplace** di Amerika Serikat nunjukin kalau **cuma 1 dari 3 pekerja (sekitar 33%)** yang ngerasa dapet pengakuan atau apresiasi atas kerjaan bagus dalam tujuh hari terakhir[^4]. Padahal, meta-analisis global Gallup terhadap **3,3 juta pekerja di lebih dari 100.000 tim** ngebuktiin kalau tim yang skor apresiasi dan *engagement*-nya masuk kuartil atas punya **angka keluar-masuk karyawan (*turnover*) 21% sampai 51% lebih rendah**, **produktivitas 14% sampai 18% lebih tinggi**, dan **profitabilitas 23% lebih tinggi** dibanding tim di kuartil bawah[^4].
 
 ### Kenapa Pujian Sambil Lalu Nggak Mempan?
 

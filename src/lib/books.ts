@@ -111,3 +111,22 @@ export function getChapter(
   const chapters = getBookChapters(bookId, lang);
   return chapters.find((ch) => ch.slug === slug);
 }
+
+// Design-B reader pages call this getSingleChapter and expect the chapter
+// bundled with the full chapter list (content stripped).
+export function getSingleChapter(
+  bookId: BookId,
+  lang: BookLang,
+  chapterSlug: string
+): {
+  chapter: ChapterData;
+  allChapters: Omit<ChapterData, 'content'>[];
+} | null {
+  const chapters = getBookChapters(bookId, lang);
+  const found = chapters.find((c) => c.slug === chapterSlug);
+  if (!found) return null;
+  return {
+    chapter: found,
+    allChapters: chapters.map(({ content: _, ...rest }) => rest),
+  };
+}

@@ -9,24 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        editorial: {
-          bg: '#FBF9F5',
-          surface: '#FFFFFF',
-          subtle: '#F3F0E8',
-          ink: '#111113',
-          slate: '#52525B',
-          muted: '#71717A',
-          border: '#E4E2DD',
-          strong: '#18181B',
-          orange: '#EA580C',
-          cobalt: '#1D4ED8',
-          emerald: '#0F766E',
-          amber: '#FDE68A',
+        paper: {
+          DEFAULT: '#FAF7F2',
+          card: '#FFFFFF',
+        },
+        ink: {
+          DEFAULT: '#1E1E1E',
+          muted: '#5C5A54',
+        },
+        accent: {
+          highlighter: '#FFE66D',
+          'pen-blue': '#2B59C3',
+          'marker-green': '#2A9D8F',
+          'red-pen': '#E63946',
         },
       },
       fontFamily: {
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        hand: ['var(--font-hand)', 'cursive'],
         mono: ['var(--font-mono)', 'monospace'],
       },
     },

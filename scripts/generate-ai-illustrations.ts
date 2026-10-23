@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CHAPTER_ILLUSTRATIONS } from '../src/lib/illustrations';
+import { CHAPTER_ILLUSTRATIONS } from '../src/lib/illustrations-editorial';
 
 async function main() {
   const entries = Object.values(CHAPTER_ILLUSTRATIONS);

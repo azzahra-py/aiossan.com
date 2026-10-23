@@ -499,7 +499,7 @@ Once your teammate has a clear 3D Brief (Chapter 7), execution begins. This is w
 
 Flip that habit around: **keep your eyes open for teammates doing things right, and recognize them on the spot.**
 
-Global research from **Gallup Workplace** reveals that **only 1 in 3 workers (roughly 33%)** strongly agree that they received recognition or praise for doing good work in the past seven days[^4]. Yet Gallup's meta-analysis of **3.3 million employees across more than 100,000 teams** shows that teams scoring in the top quartile for recognition and engagement experience **21% to 51% lower employee turnover**, **14% to 18% higher productivity**, and **23% higher profitability** than bottom-quartile teams[^4].
+Research from **Gallup Workplace** in the United States reveals that **only 1 in 3 workers (roughly 33%)** strongly agree that they received recognition or praise for doing good work in the past seven days[^4]. Yet Gallup's global meta-analysis of **3.3 million employees across more than 100,000 teams** shows that teams scoring in the top quartile for recognition and engagement experience **21% to 51% lower employee turnover**, **14% to 18% higher productivity**, and **23% higher profitability** than bottom-quartile teams[^4].
 
 ### Why Drive-By Praise Falls Flat
 

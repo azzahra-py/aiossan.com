@@ -3,71 +3,82 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { EditorialHeader } from '@/components/ui/EditorialHeader';
-import { EditorialCard } from '@/components/ui/EditorialCard';
-import { TacticalButton } from '@/components/ui/TacticalButton';
-import { CheckCircle2, BookOpen, ArrowRight, User } from 'lucide-react';
+import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
+import { SketchCard } from '@/components/doodle/SketchCard';
+import { SketchButton } from '@/components/doodle/SketchButton';
+import { CheckCircle2, BookOpen, ArrowRight, Sparkles, User } from 'lucide-react';
 
-function SuccessContent() {
+function CheckoutSuccessContent() {
   const searchParams = useSearchParams();
-  const orderNumber = searchParams.get('order') || 'ORD-COMPLETED';
+  const orderNumber = searchParams.get('order') || 'ORD-SELESAI';
 
   return (
-    <EditorialCard
-      variant="featured"
-      indexLabel="AIOSSAN // ORDER CONFIRMATION"
-      badgeText="PAYMENT VERIFIED"
-      accentColor="emerald"
-      className="w-full max-w-lg text-center"
-    >
-      <div className="w-14 h-14 rounded-2xl bg-[#F0FDFA] border border-[#99F6E4] text-[#0F766E] flex items-center justify-center mx-auto mb-4">
-        <CheckCircle2 className="w-8 h-8" />
+    <SketchCard variant="yellow" badgeText="Pembayaran Diterima" className="w-full max-w-lg text-center">
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2A9D8F] text-white border-2 border-[#1E1E1E] rounded-full shadow-[3px_3px_0px_#1E1E1E] mb-4">
+        <CheckCircle2 className="w-9 h-9" />
       </div>
 
-      <h1 className="font-serif text-3xl font-bold text-[#111113] mb-2">
-        Akses Playbook Telah Aktif
+      <h1 className="font-hand text-3xl sm:text-4xl font-bold text-[#1E1E1E] mb-2">
+        Selamat Datang di <mark>Klub Pembaca!</mark>
       </h1>
-      <p className="text-sm text-[#52525B] leading-relaxed mb-6">
-        Terima kasih atas pembelian kamu. Seluruh bab digital, template skrip 1-on-1, dan tautan unduh Master PDF A5 telah dibuka untuk email kamu.
+
+      <p className="text-sm text-[#5C5A54] leading-relaxed mb-6 font-body">
+        Pembayaran kamu telah kami terima. Akses seluruh bab, template skrip komunikasi,
+        dan master PDF kini telah resmi terbuka di akun kamu.
       </p>
 
-      <div className="rounded-xl bg-[#FBF9F5] border border-[#E4E2DD] p-4 mb-6 text-left font-mono text-xs space-y-2">
-        <div className="flex justify-between">
-          <span className="text-[#71717A]">NOMOR PESANAN:</span>
-          <span className="font-bold text-[#111113]">{orderNumber}</span>
+      <div className="doodle-box bg-white p-4 mb-6 text-left">
+        <div className="flex items-center justify-between text-xs font-mono mb-2 pb-2 border-b border-[#E2DDD3]">
+          <span className="text-[#5C5A54]">Nomor Pesanan:</span>
+          <span className="font-bold text-[#1E1E1E]">{orderNumber}</span>
         </div>
-        <div className="flex justify-between">
-          <span className="text-[#71717A]">STATUS LISENSI:</span>
-          <span className="font-bold text-[#0F766E]">AKTIF SELAMANYA (LUNAS)</span>
+        <div className="flex items-center justify-between text-xs font-mono">
+          <span className="text-[#5C5A54]">Status Akses:</span>
+          <span className="font-bold text-[#2A9D8F] flex items-center gap-1">
+            <Sparkles className="w-3.5 h-3.5" />
+            AKTIF (Lunas)
+          </span>
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link href="/read/book-1/id-kasual/ch-0">
-          <TacticalButton variant="primary" size="md" className="w-full sm:w-auto">
-            <BookOpen className="w-4 h-4" />
-            <span>Mulai Baca Volume 01</span>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <Link href="/read/book-1/id-kasual/ch-0" className="w-full sm:w-auto">
+          <SketchButton variant="primary" size="lg" className="w-full sm:w-auto">
+            <BookOpen className="w-5 h-5 text-[#1E1E1E]" />
+            <span>Mulai Baca Buku 1</span>
             <ArrowRight className="w-4 h-4" />
-          </TacticalButton>
+          </SketchButton>
         </Link>
-        <Link href="/dashboard">
-          <TacticalButton variant="secondary" size="md" className="w-full sm:w-auto">
-            <User className="w-4 h-4" />
-            <span>Buka Perpustakaan & PDF</span>
-          </TacticalButton>
+
+        <Link href="/dashboard" className="w-full sm:w-auto">
+          <SketchButton variant="secondary" size="lg" className="w-full sm:w-auto">
+            <User className="w-4 h-4 text-[#2B59C3]" />
+            <span>Buka Dashboard</span>
+          </SketchButton>
         </Link>
       </div>
-    </EditorialCard>
+
+      <p className="mt-6 text-xs text-[#5C5A54] font-body">
+        Butuh bantuan transaksi? Hubungi kami langsung melalui catatan dukungan di dashboard.
+      </p>
+    </SketchCard>
   );
 }
 
 export default function CheckoutSuccessPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] swiss-grid-bg">
-      <EditorialHeader />
-      <main className="flex-1 flex items-center justify-center p-4 py-16">
-        <Suspense fallback={<div className="font-mono text-xs">Loading receipt...</div>}>
-          <SuccessContent />
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+      <NavbarDoodle />
+
+      <main className="flex-1 flex items-center justify-center p-4 py-12">
+        <Suspense
+          fallback={
+            <div className="doodle-box p-8 bg-white text-center font-hand text-xl">
+              Memuat detail pesanan...
+            </div>
+          }
+        >
+          <CheckoutSuccessContent />
         </Suspense>
       </main>
     </div>

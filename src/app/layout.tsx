@@ -1,33 +1,35 @@
 import type { Metadata } from 'next';
-import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, Patrick_Hand, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import { AnimatedPaperBackground } from '@/components/doodle/AnimatedPaperBackground';
 
-const fontSerif = Newsreader({
+// Same three families and CSS variables as design B's local woff2 setup,
+// loaded via Google Fonts so the repo snapshot stays text-only.
+const fontBody = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-serif',
+  weight: ['400', '700'],
+  variable: '--font-body',
   display: 'swap',
 });
 
-const fontSans = Plus_Jakarta_Sans({
+const fontHand = Patrick_Hand({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-sans',
+  weight: '400',
+  variable: '--font-hand',
   display: 'swap',
 });
 
 const fontMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: '400',
   variable: '--font-mono',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'aiossan.com — Tactical Leadership Playbook Trilogy (Interactive Web & A5 PDF)',
+  title: 'aiossan.com — Interactive Leadership Field Playbook (Web & PDF)',
   description:
-    'Field-tested leadership playbooks for first-time team leads, overwhelmed managers, and department heads. Available in Casual Indonesian, Formal Indonesian, and Global English.',
+    'Trilogi panduan taktis memimpin tim dengan gaya catatan sketsa meja kerja, simulasi interaktif, dan skrip 1-on-1 siap pakai dalam 3 register bahasa (Gue/Lo, Saya/Kamu, English).',
   other: {
     'color-scheme': 'light only',
     'darkreader-lock': 'true',
@@ -39,13 +41,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="id"
       style={{ colorScheme: 'light' }}
-      className={`${fontSerif.variable} ${fontSans.variable} ${fontMono.variable}`}
+      className={`${fontBody.variable} ${fontHand.variable} ${fontMono.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light only" />
         <meta name="darkreader-lock" />
       </head>
-      <body className="min-h-screen bg-[#FBF9F5] text-[#111113] antialiased selection:bg-[#FDE68A] selection:text-[#111113]">
+      <body className="relative min-h-screen bg-[#FAF7F2] text-[#18181B] antialiased selection:bg-[#FFE66D]">
+        <AnimatedPaperBackground />
         {children}
       </body>
     </html>

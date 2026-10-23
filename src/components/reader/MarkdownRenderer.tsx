@@ -1,472 +1,689 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { EditorialDiagram } from './EditorialDiagram';
-import { TacticalChecklist } from './TacticalChecklist';
+import { HandDrawnMermaid } from '@/components/doodle/HandDrawnMermaid';
+import { DoodleCheckbox } from '@/components/doodle/DoodleCheckbox';
+import { BookLang } from '@/types/books';
 import {
-  Check,
-  Copy,
   Info,
-  AlertTriangle,
   Lightbulb,
-  AlertCircle,
+  Flame,
+  AlertTriangle,
   ShieldAlert,
-  ChevronDown,
-  ListChecks,
-  RotateCcw,
+  CheckCircle2,
+  Copy,
+  Check,
+  UserPen,
+  Sparkles,
+  MessageSquareQuote,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 interface MarkdownRendererProps {
   content: string;
+  bookId?: string;
+  chapterSlug?: string;
   storagePrefix?: string;
+  lang?: BookLang;
+  onSelectQuote?: (quoteText: string) => void;
 }
 
-export function MarkdownRenderer({ content, storagePrefix }: MarkdownRendererProps) {
-  const totalTasks = React.useMemo(() => {
-    const matches = content.match(/^\s*[-*]\s+\[[ xX]\]\s+/gm);
-    return matches ? matches.length : 0;
-  }, [content]);
-
-  return (
-    <div className="max-w-none font-sans text-[var(--reader-ink,#111113)]">
-      {totalTasks > 0 && storagePrefix && (
-        <ChecklistProgressBanner storagePrefix={storagePrefix} totalTasks={totalTasks} />
-      )}
-
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          code({ className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '');
-            const lang = match ? match[1] : '';
-            const codeString = String(children).replace(/\n$/, '');
-
-            if (lang === 'mermaid') {
-              return <EditorialDiagram chart={codeString} />;
-            }
-
-            const isInline = !className;
-            if (isInline) {
-              return (
-                <code
-                  className="bg-[#F3F0E8] text-[#111113] border border-[#E4E2DD] px-1.5 py-0.5 rounded font-mono text-[0.84em] font-medium"
-                  {...props}
-                >
-                  {children}
-                </code>
-              );
-            }
-
-            return (
-              <CodeBlockWithCopy codeString={codeString} lang={lang}>
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              </CodeBlockWithCopy>
-            );
-          },
-
-          blockquote({ children }) {
-            return <CalloutBlockquote>{children}</CalloutBlockquote>;
-          },
-
-          table({ children }) {
-            return (
-              <div className="my-7 overflow-x-auto rounded-xl border border-[#E4E2DD] bg-white shadow-xs">
-                <table className="w-full text-left border-collapse text-[#111113]">
-                  {children}
-                </table>
-              </div>
-            );
-          },
-          thead({ children }) {
-            return (
-              <thead className="border-b border-[#111113] bg-[#F3F0E8]/80">{children}</thead>
-            );
-          },
-          th({ children }) {
-            return (
-              <th className="py-3 px-4 font-mono text-xs font-bold uppercase tracking-wider text-[#111113] border-r border-[#E4E2DD] last:border-r-0">
-                {children}
-              </th>
-            );
-          },
-          td({ children }) {
-            return (
-              <td className="py-3 px-4 text-sm leading-relaxed border-b border-r border-[#E4E2DD] last:border-r-0 text-[#27272A] align-top">
-                {children}
-              </td>
-            );
-          },
-
-          details({ children, ...props }) {
-            return (
-              <details
-                className="my-5 rounded-xl border border-[#E4E2DD] bg-[#FBF9F5] p-4 sm:p-5 group open:bg-white open:shadow-xs transition-all text-[#111113]"
-                {...props}
-              >
-                {children}
-              </details>
-            );
-          },
-          summary({ children, ...props }) {
-            return (
-              <summary
-                className="font-sans text-sm sm:text-base font-bold text-[#111113] cursor-pointer hover:text-[#EA580C] select-none list-none flex items-center justify-between gap-3"
-                {...props}
-              >
-                <span>{children}</span>
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#D4D0C8] px-2.5 py-1 bg-white rounded-md shrink-0">
-                  <span>Script / Scenario</span>
-                  <ChevronDown className="w-3.5 h-3.5 transition-transform group-open:rotate-180" />
-                </span>
-              </summary>
-            );
-          },
-
-          h1({ children }) {
-            return (
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight mt-10 mb-4 border-b border-[#E4E2DD] pb-3">
-                {children}
-              </h1>
-            );
-          },
-          h2({ children }) {
-            return (
-              <h2 className="font-serif text-xl sm:text-2xl font-bold tracking-tight mt-10 mb-3.5 flex items-center gap-2.5">
-                <span className="w-1.5 h-5 bg-[#EA580C] rounded-xs shrink-0" />
-                <span>{children}</span>
-              </h2>
-            );
-          },
-          h3({ children }) {
-            return (
-              <h3 className="font-sans text-base sm:text-lg font-bold tracking-tight mt-7 mb-2.5">
-                {children}
-              </h3>
-            );
-          },
-
-          p({ children }) {
-            return (
-              <p className="mb-4 leading-[1.82] text-[15.5px] sm:text-[16.5px] opacity-95">
-                {children}
-              </p>
-            );
-          },
-
-          ul({ children }) {
-            return <ul className="list-disc pl-6 mb-5 space-y-2">{children}</ul>;
-          },
-          ol({ children }) {
-            return <ol className="list-decimal pl-6 mb-5 space-y-2">{children}</ol>;
-          },
-          li({ className, children, ...props }) {
-            const isTaskItem =
-              className?.includes('task-list-item') ||
-              typeof (props as any).checked === 'boolean';
-
-            if (isTaskItem) {
-              const textContent = extractText(children);
-              const key = storagePrefix
-                ? `${storagePrefix}:${encodeURIComponent(textContent.slice(0, 40))}`
-                : `checklist:${encodeURIComponent(textContent.slice(0, 40))}`;
-
-              const cleanChildren = React.Children.toArray(children).filter((child) => {
-                if (React.isValidElement(child) && (child.props as any)?.type === 'checkbox') {
-                  return false;
-                }
-                return true;
-              });
-
-              return (
-                <li className="list-none my-1.5 -ml-6">
-                  <TacticalChecklist storageKey={key}>
-                    <div className="flex-1">{cleanChildren}</div>
-                  </TacticalChecklist>
-                </li>
-              );
-            }
-
-            return <li className="leading-[1.78] text-[15.5px] sm:text-[16.5px]">{children}</li>;
-          },
-
-          hr() {
-            return <hr className="my-8 border-t border-[#E4E2DD]" />;
-          },
-
-          section({ className, children, ...props }) {
-            if (className?.includes('footnotes')) {
-              return (
-                <section
-                  className="mt-12 rounded-xl border border-[#E4E2DD] bg-[#F3F0E8]/60 p-5 text-xs text-[#52525B]"
-                  {...props}
-                >
-                  <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#111113] mb-2 pb-1.5 border-b border-[#D4D0C8]">
-                    PRIMARY RESEARCH CITATIONS & FOOTNOTES
-                  </div>
-                  {children}
-                </section>
-              );
-            }
-            return (
-              <section className={className} {...props}>
-                {children}
-              </section>
-            );
-          },
-        }}
-      >
-        {content}
-      </ReactMarkdown>
-    </div>
-  );
+function extractText(node: React.ReactNode): string {
+  if (typeof node === 'string' || typeof node === 'number') {
+    return String(node);
+  }
+  if (Array.isArray(node)) {
+    return node.map(extractText).join('');
+  }
+  if (React.isValidElement(node) && node.props) {
+    return extractText((node.props as any).children);
+  }
+  return '';
 }
 
-function ChecklistProgressBanner({
-  storagePrefix,
-  totalTasks,
-}: {
-  storagePrefix: string;
-  totalTasks: number;
-}) {
-  const [completed, setCompleted] = useState(0);
+const CALLOUT_STYLES: Record<
+  'note' | 'tip' | 'important' | 'warning' | 'caution',
+  {
+    bg: string;
+    border: string;
+    badgeBg: string;
+    textColor: string;
+    defaultTitle: { id: string; en: string };
+    icon: React.ReactNode;
+  }
+> = {
+  note: {
+    bg: 'bg-[#EFF6FF]',
+    border: 'border-[#2563EB]',
+    badgeBg: 'bg-[#DBEAFE] text-[#1E3A8A] border-[#2563EB]',
+    textColor: 'text-[#1E3A8A]',
+    defaultTitle: { id: 'Catatan Taktis', en: 'Tactical Note' },
+    icon: <Info className="w-4 h-4 text-[#2563EB]" />,
+  },
+  tip: {
+    bg: 'bg-[#ECFDF5]',
+    border: 'border-[#059669]',
+    badgeBg: 'bg-[#D1FAE5] text-[#065F46] border-[#059669]',
+    textColor: 'text-[#065F46]',
+    defaultTitle: { id: 'Tips Praktis Lapangan', en: 'Field Tip' },
+    icon: <Lightbulb className="w-4 h-4 text-[#059669]" />,
+  },
+  important: {
+    bg: 'bg-[#F5F3FF]',
+    border: 'border-[#7C3AED]',
+    badgeBg: 'bg-[#EDE9FE] text-[#4C1D95] border-[#7C3AED]',
+    textColor: 'text-[#4C1D95]',
+    defaultTitle: { id: 'Prinsip Kunci Leader', en: 'Core Leader Principle' },
+    icon: <Flame className="w-4 h-4 text-[#7C3AED]" />,
+  },
+  warning: {
+    bg: 'bg-[#FFFBEB]',
+    border: 'border-[#D97706]',
+    badgeBg: 'bg-[#FEF3C7] text-[#92400E] border-[#D97706]',
+    textColor: 'text-[#92400E]',
+    defaultTitle: { id: 'Perhatian & Rambu', en: 'Heads-Up & Signpost' },
+    icon: <AlertTriangle className="w-4 h-4 text-[#D97706]" />,
+  },
+  caution: {
+    bg: 'bg-[#FFF1F2]',
+    border: 'border-[#E11D48]',
+    badgeBg: 'bg-[#FFE4E6] text-[#881337] border-[#E11D48]',
+    textColor: 'text-[#881337]',
+    defaultTitle: { id: 'Jangan Lakukan Ini!', en: "Don't Do This!" },
+    icon: <ShieldAlert className="w-4 h-4 text-[#E11D48]" />,
+  },
+};
 
-  const recount = React.useCallback(() => {
-    try {
-      let count = 0;
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && k.startsWith(`${storagePrefix}:`) && localStorage.getItem(k) === 'true') {
-          count++;
-        }
-      }
-      setCompleted(Math.min(count, totalTasks));
-    } catch {
-      // Ignore
-    }
-  }, [storagePrefix, totalTasks]);
-
-  useEffect(() => {
-    recount();
-    window.addEventListener('aiossan-checklist-change', recount);
-    return () => window.removeEventListener('aiossan-checklist-change', recount);
-  }, [recount]);
-
-  const resetChecklist = () => {
-    try {
-      const keys: string[] = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && k.startsWith(`${storagePrefix}:`)) keys.push(k);
-      }
-      keys.forEach((k) => localStorage.removeItem(k));
-      recount();
-      window.location.reload();
-    } catch {
-      // Ignore
-    }
-  };
-
-  const pct = totalTasks > 0 ? Math.round((completed / totalTasks) * 100) : 0;
-
-  return (
-    <div className="mb-6 rounded-xl border border-[#E4E2DD] bg-[#FBF9F5] p-4 text-[#111113]">
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-        <div className="flex items-center gap-2">
-          <ListChecks className="w-4 h-4 text-[#0F766E]" />
-          <span className="font-mono text-xs font-bold uppercase tracking-wider">
-            TACTICAL CHECKLIST PROGRESS: {completed} / {totalTasks} ({pct}%)
-          </span>
-        </div>
-        {completed > 0 && (
-          <button
-            type="button"
-            onClick={resetChecklist}
-            className="inline-flex items-center gap-1 text-xs font-mono text-[#71717A] hover:text-[#EA580C]"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>Reset</span>
-          </button>
-        )}
-      </div>
-      <div className="w-full h-1.5 bg-[#E4E2DD] rounded-full overflow-hidden">
-        <div
-          className="h-full bg-[#0F766E] transition-all duration-300"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
-function CodeBlockWithCopy({
-  codeString,
-  lang,
+function CalloutBlockquote({
   children,
+  onSelectQuote,
+  lang = 'id-kasual',
 }: {
-  codeString: string;
-  lang: string;
   children: React.ReactNode;
+  onSelectQuote?: (q: string) => void;
+  lang?: BookLang;
 }) {
+  const validElements = React.Children.toArray(children).filter(
+    React.isValidElement
+  );
+  const firstParagraph = validElements[0] as React.ReactElement | undefined;
+
+  let calloutType: 'note' | 'tip' | 'important' | 'warning' | 'caution' | null =
+    null;
+  let titleText = '';
+  let cleanedBodyChildren: React.ReactNode = children;
+
+  if (firstParagraph && (firstParagraph.props as any)?.children) {
+    const rawText = extractText((firstParagraph.props as any).children).trim();
+    const match = rawText.match(
+      /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*([^\n]*)(?:\n([\s\S]*))?$/i
+    );
+    if (match) {
+      calloutType = match[1].toLowerCase() as any;
+      titleText = match[2]?.trim() || '';
+
+      const pChildren = React.Children.toArray(
+        (firstParagraph.props as any).children
+      );
+      if (typeof pChildren[0] === 'string') {
+        const strippedFirst = pChildren[0].replace(
+          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*[^\n]*\n?/i,
+          ''
+        );
+        const newPChildren = [strippedFirst, ...pChildren.slice(1)];
+        const clonedFirstP = React.cloneElement(firstParagraph, {
+          ...(firstParagraph.props as any),
+          children: newPChildren,
+        });
+        cleanedBodyChildren = [clonedFirstP, ...validElements.slice(1)];
+      }
+    }
+  }
+
+  if (calloutType) {
+    const style = CALLOUT_STYLES[calloutType];
+    return (
+      <div
+        className={`callout-box my-6 rounded-2xl border-2 border-[#18181B] ${style.bg} p-5 shadow-[4px_4px_0px_#18181B]`}
+      >
+        <div className="mb-2.5 flex items-center justify-between gap-2">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 font-mono text-xs font-extrabold uppercase tracking-wide ${style.badgeBg}`}
+          >
+            {style.icon}
+            {titleText || (lang === 'en' ? style.defaultTitle.en : style.defaultTitle.id)}
+          </span>
+          {onSelectQuote && (
+            <button
+              type="button"
+              onClick={() => onSelectQuote(extractText(cleanedBodyChildren).trim())}
+              className="no-print inline-flex items-center gap-1 rounded-md border border-[#18181B] bg-white px-2 py-0.5 font-mono text-[10px] font-bold text-[#18181B] hover:bg-[#FFE66D]"
+              title={lang === 'en' ? 'Make a Quote Card' : 'Jadikan Kartu Kutipan Story'}
+            >
+              <Sparkles className="w-3 h-3" />
+              {lang === 'en' ? 'Share Quote' : 'Bagikan Kutipan'}
+            </button>
+          )}
+        </div>
+        <div className="callout-body text-sm sm:text-base leading-relaxed text-[#18181B] space-y-2">
+          {cleanedBodyChildren}
+        </div>
+      </div>
+    );
+  }
+
+  const quoteRaw = extractText(children).trim();
+  return (
+    <blockquote className="quote-box group relative my-5 rounded-r-2xl border-l-4 border-y-2 border-r-2 border-l-[#2563EB] border-y-[#18181B] border-r-[#18181B] bg-gradient-to-r from-[#EFF6FF] to-[#FFFDF9] p-4 sm:p-5 shadow-[3px_3px_0px_#18181B]">
+      <div className="flex items-start gap-3">
+        <MessageSquareQuote className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
+        <div className="flex-1 text-sm sm:text-base italic text-[#18181B] leading-relaxed">
+          {children}
+        </div>
+      </div>
+      {onSelectQuote && quoteRaw.length > 20 && (
+        <button
+          type="button"
+          onClick={() => onSelectQuote(quoteRaw)}
+          className="no-print mt-2 inline-flex items-center gap-1 rounded-md border border-[#18181B] bg-white px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#2563EB] hover:bg-[#FFE66D]"
+        >
+          📸 {lang === 'en' ? 'Make Story Image' : 'Jadikan Gambar Story'}
+        </button>
+      )}
+    </blockquote>
+  );
+}
+
+function CopyableScriptDetails({ children, lang = 'id-kasual' }: { children: React.ReactNode; lang?: BookLang }) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(codeString);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Ignore
-    }
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!detailsRef.current) return;
+    const clone = detailsRef.current.cloneNode(true) as HTMLElement;
+    const summaryEl = clone.querySelector('summary');
+    if (summaryEl) summaryEl.remove();
+    const buttonEls = clone.querySelectorAll('button');
+    buttonEls.forEach((b) => b.remove());
+    const textToCopy = clone.innerText.trim();
+    navigator.clipboard.writeText(textToCopy);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <div className="my-6 overflow-hidden rounded-xl border border-[#27272A] bg-[#111113] text-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-[#27272A] bg-[#18181B] px-4 py-2">
-        <span className="font-mono text-[11px] text-[#A1A1AA] uppercase tracking-wider">
-          {lang || 'TACTICAL SCRIPT'}
+    <details
+      ref={detailsRef}
+      className="group my-6 rounded-2xl border-2 border-[#18181B] bg-[#FFFDF5] open:bg-white shadow-[4px_4px_0px_#18181B] transition-all overflow-hidden"
+    >
+      {children}
+      <div className="no-print flex items-center justify-between border-t-2 border-dashed border-[#E4E4E7] bg-[#FEFCE8] px-4 py-2.5">
+        <span className="font-hand text-sm text-[#52525B]">
+          {lang === 'en'
+            ? '🐾 Ready-to-use script — copy straight to WhatsApp / Slack / 1-on-1 doc'
+            : '🐾 Skrip siap pakai — langsung salin ke WhatsApp / Slack / 1-on-1 doc'}
         </span>
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 rounded-md bg-[#27272A] hover:bg-[#3F3F46] text-white px-2.5 py-1 text-xs font-mono transition-colors cursor-pointer"
+          className="doodle-button inline-flex items-center gap-1.5 bg-[#FFE66D] px-3 py-1 text-xs font-extrabold text-[#18181B]"
         >
           {copied ? (
-            <Check className="w-3.5 h-3.5 text-[#10B981]" />
+            <>
+              <Check className="w-3.5 h-3.5 text-[#065F46]" />
+              <span>{lang === 'en' ? 'Copied! Ready to Paste' : 'Tersalin! Siap Paste'}</span>
+            </>
           ) : (
-            <Copy className="w-3.5 h-3.5" />
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>{lang === 'en' ? 'Copy Script' : 'Salin Skrip'}</span>
+            </>
           )}
-          <span>{copied ? 'Copied' : 'Copy Script'}</span>
         </button>
       </div>
-      <pre className="p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed text-[#F4F4F5]">
-        {children}
-      </pre>
-    </div>
+    </details>
   );
 }
 
-function CalloutBlockquote({ children }: { children: React.ReactNode }) {
-  const validElements = React.Children.toArray(children).filter(React.isValidElement);
-  const firstParagraph = validElements[0] as React.ReactElement | undefined;
+export function MarkdownRenderer({
+  content,
+  bookId = 'book-1',
+  chapterSlug = 'ch-0',
+  storagePrefix,
+  lang = 'id-kasual',
+  onSelectQuote,
+}: MarkdownRendererProps) {
+  const [teammateName, setTeammateName] = useState<string>('');
+  const [checklistStats, setChecklistStats] = useState({ done: 0, total: 0 });
 
-  let calloutType: 'note' | 'tip' | 'important' | 'warning' | 'caution' | null = null;
-  let titleText = '';
-  let cleanedChildren: React.ReactNode = children;
-
-  if (firstParagraph && (firstParagraph.props as any)?.children) {
-    const pChildren = React.Children.toArray((firstParagraph.props as any).children);
-    const firstNode = pChildren[0];
-
-    if (typeof firstNode === 'string') {
-      const match = firstNode.match(
-        /^\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*([^\n]*)(?:\n([\s\S]*))?$/i
-      );
-      if (match) {
-        calloutType = match[1].toLowerCase() as any;
-        titleText = match[2]?.trim() || '';
-        const remainingFirstString = match[3] ?? '';
-
-        const updatedPChildren = remainingFirstString
-          ? [remainingFirstString, ...pChildren.slice(1)]
-          : pChildren.slice(1);
-
-        if (typeof updatedPChildren[0] === 'string') {
-          updatedPChildren[0] = updatedPChildren[0].replace(/^\n+/, '');
-        }
-
-        const clonedFirstP =
-          updatedPChildren.length > 0
-            ? React.cloneElement(firstParagraph, {
-                ...(firstParagraph.props as any),
-                children: updatedPChildren,
-              })
-            : null;
-
-        cleanedChildren = [clonedFirstP, ...validElements.slice(1)].filter(Boolean);
-      }
+  useEffect(() => {
+    try {
+      const savedName = localStorage.getItem('aiossan:teammate-name');
+      if (savedName) setTeammateName(savedName);
+    } catch {
+      // Ignore
     }
-  }
+  }, []);
 
-  if (!calloutType) {
-    return (
-      <blockquote className="my-6 border-l-2 border-[#EA580C] bg-[#FBF9F5] py-3 px-5 font-serif italic text-[#3F3F46] rounded-r-lg">
-        {children}
-      </blockquote>
+  const handleNameChange = (val: string) => {
+    setTeammateName(val);
+    try {
+      localStorage.setItem('aiossan:teammate-name', val);
+    } catch {
+      // Ignore
+    }
+  };
+
+  const personalizedContent = useMemo(() => {
+    const clean = teammateName.trim();
+    if (!clean) return content;
+    return content.replace(
+      /\[(Nama|Nama Staf|Nama Anggota Tim|Nama Bawahan|Nama Rekan|Name|Teammate Name)\]/gi,
+      clean
     );
-  }
+  }, [content, teammateName]);
 
-  const calloutStyles = {
-    note: {
-      border: 'border-l-4 border-l-[#1D4ED8] border-[#E4E2DD]',
-      bg: 'bg-[#EFF6FF]/60',
-      badge: 'text-[#1D4ED8]',
-      icon: <Info className="w-4 h-4 text-[#1D4ED8] shrink-0" />,
-      defaultTitle: 'Editorial Note',
-    },
-    tip: {
-      border: 'border-l-4 border-l-[#0F766E] border-[#E4E2DD]',
-      bg: 'bg-[#F0FDFA]/60',
-      badge: 'text-[#0F766E]',
-      icon: <Lightbulb className="w-4 h-4 text-[#0F766E] shrink-0" />,
-      defaultTitle: 'Tactical Field Tip',
-    },
-    important: {
-      border: 'border-l-4 border-l-[#111113] border-[#E4E2DD]',
-      bg: 'bg-[#F3F0E8]/80',
-      badge: 'text-[#111113]',
-      icon: <AlertCircle className="w-4 h-4 text-[#111113] shrink-0" />,
-      defaultTitle: 'Foundational Principle',
-    },
-    warning: {
-      border: 'border-l-4 border-l-[#EA580C] border-[#E4E2DD]',
-      bg: 'bg-[#FFF7ED]/80',
-      badge: 'text-[#C2410C]',
-      icon: <AlertTriangle className="w-4 h-4 text-[#EA580C] shrink-0" />,
-      defaultTitle: 'Operational Warning',
-    },
-    caution: {
-      border: 'border-l-4 border-l-[#E11D48] border-[#E4E2DD]',
-      bg: 'bg-[#FFF1F2]/80',
-      badge: 'text-[#BE123C]',
-      icon: <ShieldAlert className="w-4 h-4 text-[#E11D48] shrink-0" />,
-      defaultTitle: 'Strict Guardrail',
-    },
-  }[calloutType];
+  const totalCheckboxes = useMemo(() => {
+    const matches = content.match(/^(\s*)-\s+\[([ xX])\]/gm);
+    return matches ? matches.length : 0;
+  }, [content]);
+
+  const effectivePrefix = storagePrefix || `chk:${bookId}:${chapterSlug}`;
+
+  useEffect(() => {
+    const computeProgress = () => {
+      if (totalCheckboxes === 0) return;
+      let completed = 0;
+      for (let i = 0; i < totalCheckboxes; i++) {
+        const key = `${effectivePrefix}:${i}`;
+        if (localStorage.getItem(key) === 'true') completed++;
+      }
+      setChecklistStats({ done: completed, total: totalCheckboxes });
+      if (completed === totalCheckboxes && totalCheckboxes > 0) {
+        window.dispatchEvent(
+          new CustomEvent('aiossan:chapter-completed', {
+            detail: { bookId, chapterSlug },
+          })
+        );
+      }
+    };
+
+    computeProgress();
+    window.addEventListener('aiossan:checklist-updated', computeProgress);
+    return () =>
+      window.removeEventListener('aiossan:checklist-updated', computeProgress);
+  }, [effectivePrefix, bookId, chapterSlug, totalCheckboxes]);
+
+  const hasScripts = content.includes('<details');
+  let checkboxCounter = 0;
 
   return (
-    <div
-      className={cn(
-        'my-6 rounded-r-xl border p-4 sm:p-5 text-[#111113]',
-        calloutStyles.border,
-        calloutStyles.bg
+    <div className="space-y-4">
+      {hasScripts && (
+        <div className="no-print mb-6 rounded-2xl border-2 border-[#18181B] bg-gradient-to-r from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-3.5 sm:p-4 shadow-[3px_3px_0px_#18181B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B]">
+              <UserPen className="h-4 w-4 text-[#18181B]" />
+            </div>
+            <div>
+              <p className="text-xs sm:text-sm font-extrabold text-[#18181B]">
+                {lang === 'en' ? 'Auto-Personalize Chat Scripts' : 'Personalisasi Skrip Obrolan Otomatis'}
+              </p>
+              <p className="font-hand text-xs sm:text-sm text-[#52525B]">
+                {lang === 'en'
+                  ? "Type your teammate's name so every script in this chapter is instantly ready to send:"
+                  : 'Ketik nama anggota tim lo supaya seluruh skrip di bab ini langsung siap dikirim:'}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <input
+              type="text"
+              value={teammateName}
+              onChange={(e) => handleNameChange(e.target.value)}
+              placeholder={lang === 'en' ? 'e.g. Dani / Siska...' : 'Misal: Dani / Siska...'}
+              className="w-full sm:w-44 rounded-xl border-2 border-[#18181B] bg-white px-3 py-1.5 text-xs sm:text-sm font-bold text-[#18181B] placeholder:font-normal placeholder:text-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+            />
+            {teammateName && (
+              <button
+                type="button"
+                onClick={() => handleNameChange('')}
+                className="rounded-lg border border-[#18181B] bg-white px-2 py-1 font-mono text-[10px] font-bold text-[#52525B] hover:bg-[#FEE2E2]"
+              >
+                Reset
+              </button>
+            )}
+          </div>
+        </div>
       )}
-    >
-      <div
-        className={cn(
-          'flex items-center gap-2 mb-2 font-mono text-xs font-bold uppercase tracking-wider',
-          calloutStyles.badge
-        )}
-      >
-        {calloutStyles.icon}
-        <span>{titleText || calloutStyles.defaultTitle}</span>
+
+      <div className="prose prose-zinc max-w-none text-[#18181B] leading-relaxed break-words [overflow-wrap:anywhere]">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            section: ({ children, className, ...props }) => {
+              const isFootnotes =
+                Boolean((props as any)['data-footnotes']) ||
+                Boolean(className?.includes('footnotes'));
+              if (isFootnotes) {
+                return (
+                  <section
+                    className="mt-12 pt-6 border-t-2 border-dashed border-[#CBD5E1]"
+                    {...props}
+                  >
+                    <div className="mb-4 flex items-center gap-2">
+                      <span className="font-mono text-xs font-black uppercase tracking-wider text-[#1E3A8A] bg-[#EFF6FF] px-2.5 py-1 rounded border border-[#BFDBFE]">
+                        {lang === 'en' ? '📚 Footnotes & Research References' : '📚 Catatan Kaki & Rujukan Riset'}
+                      </span>
+                    </div>
+                    <div className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                      {children}
+                    </div>
+                  </section>
+                );
+              }
+              return (
+                <section className={className} {...props}>
+                  {children}
+                </section>
+              );
+            },
+            a: ({ href, children, className, ...props }) => {
+              const isFootnoteRef =
+                'data-footnote-ref' in props ||
+                Boolean(className?.includes('data-footnote-ref'));
+              const isFootnoteBackref =
+                'data-footnote-backref' in props ||
+                Boolean(className?.includes('data-footnote-backref'));
+
+              if (isFootnoteRef) {
+                return (
+                  <a
+                    href={href}
+                    className="inline-flex items-center justify-center font-mono text-[11px] font-extrabold text-[#2563EB] bg-[#DBEAFE] hover:bg-[#FFE66D] hover:text-[#18181B] px-1.5 py-0 rounded border border-[#2563EB]/40 no-underline align-super mx-0.5 transition-colors shadow-2xs"
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
+              }
+
+              if (isFootnoteBackref) {
+                let refNum = '';
+                if (Array.isArray(children)) {
+                  const supChild = children.find(
+                    (c) => React.isValidElement(c) && c.type === 'sup'
+                  );
+                  if (supChild && React.isValidElement(supChild)) {
+                    refNum = ` #${(supChild.props as any).children}`;
+                  }
+                }
+                return (
+                  <a
+                    href={href}
+                    className="inline-flex items-center gap-1 font-mono text-[10px] font-bold text-[#1E3A8A] hover:text-[#18181B] bg-[#EFF6FF] hover:bg-[#FFE66D] px-2 py-0.5 rounded-md border border-[#93C5FD] no-underline transition-colors shadow-2xs ml-1.5 align-middle"
+                    aria-label={`${lang === 'en' ? 'Back to citation' : 'Kembali ke kutipan'}${refNum}`}
+                    title={`${lang === 'en' ? 'Back to citation' : 'Kembali ke kutipan'}${refNum}`}
+                    {...props}
+                  >
+                    <span>{lang === 'en' ? 'Back' : 'Kembali'}{refNum} ↑</span>
+                  </a>
+                );
+              }
+
+              const isExternal = href?.startsWith('http') || href?.startsWith('//');
+
+              return (
+                <a
+                  href={href}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                  className="inline text-[#2563EB] hover:text-[#1D4ED8] underline underline-offset-4 decoration-[#2563EB]/40 hover:decoration-[#2563EB] font-medium [overflow-wrap:anywhere] [word-break:break-word]"
+                  {...props}
+                >
+                  {children}
+                </a>
+              );
+            },
+            h2: ({ children, className, ...props }) => {
+              if (className?.includes('sr-only') || (props as any)?.id === 'footnote-label') {
+                return (
+                  <h2 className="sr-only" {...props}>
+                    {children}
+                  </h2>
+                );
+              }
+              return (
+                <div className="mt-10 mb-5">
+                  <h2
+                    className="inline-block text-xl sm:text-2xl font-extrabold tracking-tight text-[#18181B] bg-gradient-to-r from-[#FFE66D]/60 via-[#DBEAFE]/50 to-transparent px-3 py-1.5 rounded-xl border-l-4 border-[#18181B]"
+                    {...props}
+                  >
+                    {children}
+                  </h2>
+                </div>
+              );
+            },
+            h3: ({ children }) => (
+              <h3 className="mt-8 mb-3 flex items-center gap-2 text-lg sm:text-xl font-extrabold text-[#1E3A8A] border-l-4 border-[#2563EB] bg-[#EFF6FF]/70 pl-3 py-1 rounded-r-lg">
+                <span>{children}</span>
+              </h3>
+            ),
+            h4: ({ children }) => (
+              <h4 className="mt-6 mb-2 text-base sm:text-lg font-extrabold text-[#9A3412] underline decoration-[#FFE66D] decoration-4 underline-offset-4">
+                {children}
+              </h4>
+            ),
+            p: ({ children }) => (
+              <p className="my-4 text-[16px] sm:text-[17px] leading-[1.8] text-[#18181B]">
+                {children}
+              </p>
+            ),
+            strong: ({ children }) => {
+              const txt = extractText(children).trim();
+              if (/^(Rumus 3K|3K|Rumus 3P|3P|Rumus 3S|3S|Agenda 4P|4P)$/i.test(txt)) {
+                return <span className="editorial-pill-blue">{children}</span>;
+              }
+              if (/^(L1|L2|L3|L4|Level 1|Level 2|Level 3|Level 4)$/i.test(txt)) {
+                return <span className="editorial-pill-amber">{children}</span>;
+              }
+              if (/^(G1|G2|G3|G4|Gaya 1|Gaya 2|Gaya 3|Gaya 4|30\/70|70\/30)$/i.test(txt)) {
+                return <span className="editorial-pill-teal">{children}</span>;
+              }
+              if (/^(Skill 1|Skill 2|Skill 3|Skill 4)$/i.test(txt)) {
+                return <span className="editorial-pill-violet">{children}</span>;
+              }
+              return (
+                <strong className="font-extrabold text-[#1E3A8A] decoration-[#FFE66D] decoration-2 underline-offset-2">
+                  {children}
+                </strong>
+              );
+            },
+            em: ({ children }) => (
+              <em className="font-semibold italic text-[#0F766E]">
+                {children}
+              </em>
+            ),
+            blockquote: ({ children }) => (
+              <CalloutBlockquote onSelectQuote={onSelectQuote} lang={lang}>
+                {children}
+              </CalloutBlockquote>
+            ),
+            details: ({ children }) => (
+              <CopyableScriptDetails lang={lang}>{children}</CopyableScriptDetails>
+            ),
+            summary: ({ children }) => (
+              <summary className="cursor-pointer select-none list-none bg-[#FFE66D]/75 hover:bg-[#FFE66D] px-4 py-3 font-extrabold text-sm sm:text-base text-[#18181B] flex items-center justify-between border-b-2 border-[#18181B]">
+                <span className="flex items-center gap-2">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-[#18181B] bg-white font-mono text-xs font-black">
+                    💬
+                  </span>
+                  <span>{children}</span>
+                </span>
+                <span className="font-mono text-xs font-bold text-[#1E3A8A] bg-white px-2.5 py-0.5 rounded-md border border-[#18181B]">
+                  {lang === 'en' ? 'Click to Open / Close ▾' : 'Klik Buka / Tutup ▾'}
+                </span>
+              </summary>
+            ),
+            code: ({ className, children, ...props }) => {
+              const match = /language-(\w+)/.exec(className || '');
+              const rawCode = String(children).replace(/\n$/, '');
+              if (match && match[1] === 'mermaid') {
+                return <HandDrawnMermaid chart={rawCode} lang={lang} />;
+              }
+              if (className && className.includes('language-')) {
+                return (
+                  <pre className="my-5 overflow-x-auto rounded-2xl border-2 border-[#18181B] bg-[#18181B] p-4 font-mono text-xs sm:text-sm text-[#FAF7F2] shadow-[4px_4px_0px_#2563EB]">
+                    <code>{rawCode}</code>
+                  </pre>
+                );
+              }
+              return (
+                <code
+                  className="rounded-md border border-[#CBD5E1] bg-[#EFF6FF] px-1.5 py-0.5 font-mono text-[0.88em] font-bold text-[#1E3A8A]"
+                  {...props}
+                >
+                  {children}
+                </code>
+              );
+            },
+            table: ({ children }) => (
+              <div className="my-6 overflow-x-auto rounded-2xl border-2 border-[#18181B] bg-white shadow-[4px_4px_0px_#18181B]">
+                <table className="w-full border-collapse text-left text-sm">
+                  {children}
+                </table>
+              </div>
+            ),
+            thead: ({ children }) => (
+              <thead className="bg-[#1E3A8A] text-white border-b-2 border-[#18181B]">
+                {children}
+              </thead>
+            ),
+            th: ({ children }) => (
+              <th className="px-4 py-3 font-extrabold text-xs sm:text-sm uppercase tracking-wider border-r border-[#3B82F6]/40 last:border-r-0">
+                {children}
+              </th>
+            ),
+            tr: ({ children }) => (
+              <tr className="border-b border-[#E4E4E7] even:bg-[#FFFDF5] hover:bg-[#FEF9C3]/40 transition-colors">
+                {children}
+              </tr>
+            ),
+            td: ({ children }) => (
+              <td className="px-4 py-3 align-top text-xs sm:text-sm text-[#18181B] border-r border-[#E4E4E7] last:border-r-0">
+                {children}
+              </td>
+            ),
+            ul: ({ children, className, ...props }) => (
+              <ul
+                className={`my-4 space-y-1.5 pl-6 list-disc marker:text-[#2563EB] marker:font-bold ${className || ''}`}
+                {...props}
+              >
+                {children}
+              </ul>
+            ),
+            ol: ({ children, className, ...props }) => (
+              <ol
+                className={`my-4 space-y-1.5 pl-6 list-decimal marker:text-[#1E3A8A] marker:font-bold ${className || ''}`}
+                {...props}
+              >
+                {children}
+              </ol>
+            ),
+            li: ({ children, className, ...props }) => {
+              const childArray = React.Children.toArray(children);
+              const firstChild = childArray[0];
+              const isTaskItem =
+                (className && className.includes('task-list-item')) ||
+                (React.isValidElement(firstChild) &&
+                  (firstChild.props as any)?.type === 'checkbox');
+
+              if (isTaskItem) {
+                const idx = checkboxCounter++;
+                const storageKey = `${effectivePrefix}:${idx}`;
+                const filteredChildren = childArray.filter(
+                  (c) =>
+                    !(
+                      React.isValidElement(c) &&
+                      (c.props as any)?.type === 'checkbox'
+                    )
+                );
+                return (
+                  <DoodleCheckbox storageKey={storageKey} lang={lang}>
+                    {filteredChildren}
+                  </DoodleCheckbox>
+                );
+              }
+
+              const isFootnoteItem = Boolean(
+                (props as any)?.id?.startsWith('user-content-fn-')
+              );
+              if (isFootnoteItem) {
+                return (
+                  <li
+                    className="my-3 pb-3 border-b border-[#E4E4E7] last:border-b-0 text-xs sm:text-sm text-[#3F3F46] leading-relaxed break-words [overflow-wrap:anywhere]"
+                    {...props}
+                  >
+                    {children}
+                  </li>
+                );
+              }
+
+              return (
+                <li
+                  className="my-1 text-[15.5px] sm:text-[16.5px] leading-relaxed text-[#18181B]"
+                  {...props}
+                >
+                  {children}
+                </li>
+              );
+            },
+          }}
+        >
+          {personalizedContent}
+        </ReactMarkdown>
       </div>
-      <div className="text-sm sm:text-[15px] leading-relaxed [&>p:last-child]:mb-0">
-        {cleanedChildren}
-      </div>
+
+      {checklistStats.total > 0 && (
+        <div className="no-print mt-8 rounded-2xl border-2 border-[#18181B] bg-[#ECFDF5] p-4 shadow-[4px_4px_0px_#18181B] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#FFE66D]">
+              <CheckCircle2 className="h-5 w-5 text-[#18181B]" />
+            </div>
+            <div>
+              <p className="text-sm font-extrabold text-[#18181B]">
+                {lang === 'en' ? 'Chapter Exercise Checklist Progress: ' : 'Progres Checklist Latihan Bab Ini: '}
+                {checklistStats.done} /{' '}
+                {checklistStats.total} {lang === 'en' ? 'Done' : 'Selesai'}
+              </p>
+              <p className="font-hand text-sm text-[#065F46]">
+                {checklistStats.done === checklistStats.total
+                  ? lang === 'en'
+                    ? '🎉 Amazing! Kapi the Capybara is proud of your practice commitment in this chapter!'
+                    : '🎉 Luar biasa! Kapi si Kapibara bangga sama komitmen praktik lo di bab ini!'
+                  : lang === 'en'
+                  ? 'Check the exercise boxes above each time you finish practicing at work.'
+                  : 'Klik kotak latihan di atas setiap kali lo selesai mempraktikkannya di kantor.'}
+              </p>
+            </div>
+          </div>
+          <div className="w-full sm:w-44 h-3 rounded-full border-2 border-[#18181B] bg-white overflow-hidden">
+            <div
+              className="h-full bg-[#0D9488] transition-all duration-300"
+              style={{
+                width: `${Math.round(
+                  (checklistStats.done / checklistStats.total) * 100
+                )}%`,
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
-}
-
-function extractText(node: any): string {
-  if (typeof node === 'string') return node;
-  if (Array.isArray(node)) return node.map(extractText).join('');
-  if (node?.props?.children) return extractText(node.props.children);
-  return '';
 }

@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
-import { EditorialHeader } from '@/components/ui/EditorialHeader';
-import { EditorialCard } from '@/components/ui/EditorialCard';
-import { TacticalButton } from '@/components/ui/TacticalButton';
+import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
+import { SketchCard } from '@/components/doodle/SketchCard';
+import { SketchButton } from '@/components/doodle/SketchButton';
 import { Mail, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
@@ -27,7 +27,7 @@ export default function LoginPage() {
     try {
       const origin = window.location.origin;
       const { error } = await supabase.auth.signInWithOtp({
-        email: email.trim(),
+        email,
         options: {
           emailRedirectTo: `${origin}/auth/callback`,
         },
@@ -39,7 +39,7 @@ export default function LoginPage() {
         setSentMessage(true);
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'Gagal mengirim tautan Magic Link.');
+      setErrorMessage(err.message || 'Terjadi kesalahan saat mengirim Magic Link.');
     } finally {
       setLoading(false);
     }
@@ -61,85 +61,94 @@ export default function LoginPage() {
         setLoading(false);
       }
     } catch (err: any) {
-      setErrorMessage(err.message || 'Gagal masuk dengan Google.');
+      setErrorMessage(err.message || 'Gagal login dengan Google.');
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] swiss-grid-bg">
-      <EditorialHeader />
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+      <NavbarDoodle />
 
-      <main className="flex-1 flex items-center justify-center p-4 py-16">
-        <EditorialCard
-          variant="featured"
-          indexLabel="AIOSSAN // READER AUTHENTICATION"
-          badgeText="PASSWORDLESS ACCESS"
-          accentColor="orange"
-          className="w-full max-w-md"
-        >
-          <div className="mb-6">
-            <h1 className="font-serif text-3xl font-bold text-[#111113] mb-2">
-              Masuk ke Perpustakaan Pembaca
+      <main className="flex-1 flex items-center justify-center p-4 py-12">
+        <SketchCard variant="yellow" badgeText="Akses Pembaca" className="w-full max-w-md">
+          <div className="text-center mb-6">
+            <h1 className="font-hand text-3xl font-bold text-[#1E1E1E] mb-2">
+              Masuk ke <mark>aiossan.com</mark>
             </h1>
-            <p className="text-sm text-[#52525B] font-sans leading-relaxed">
-              Gunakan alamat email saat pembelian untuk mengakses seluruh bab playbook dan mengunduh Master PDF A5.
+            <p className="text-sm text-[#5C5A54] font-body">
+              Akses buku digital, unduh PDF resmi, dan simpan progres checklist latihan kamu.
             </p>
           </div>
 
           {errorMessage && (
-            <div className="rounded-lg bg-[#FFF1F2] border border-[#FECDD3] p-3 mb-4 flex items-start gap-2 text-xs text-[#BE123C]">
+            <div className="doodle-box bg-[#FFF5F5] border-[#E63946] p-3 mb-4 flex items-start gap-2 text-sm text-[#E63946]">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {sentMessage ? (
-            <div className="rounded-xl bg-[#F0FDFA] border border-[#99F6E4] p-5 text-center my-4">
-              <CheckCircle2 className="w-8 h-8 text-[#0F766E] mx-auto mb-2" />
-              <h2 className="font-serif text-xl font-bold text-[#111113] mb-1">
-                Tautan Masuk Terkirim
+            <div className="doodle-box bg-[#F0FAF8] border-[#2A9D8F] p-4 text-center my-4">
+              <CheckCircle2 className="w-8 h-8 text-[#2A9D8F] mx-auto mb-2" />
+              <h2 className="font-hand text-xl font-bold text-[#1E1E1E] mb-1">
+                Tautan Masuk Terkirim!
               </h2>
-              <p className="text-xs text-[#52525B] leading-relaxed mb-4">
-                Kami telah mengirimkan tautan masuk instan (*Magic Link*) ke{' '}
-                <strong>{email}</strong>. Klik tautan di kotak masuk email kamu untuk langsung masuk.
+              <p className="text-xs text-[#5C5A54] leading-relaxed mb-4">
+                Kami telah mengirimkan tautan masuk rahasia (*Magic Link*) ke <strong>{email}</strong>.
+                Buka kotak masuk email kamu dan klik tautan tersebut untuk langsung masuk.
               </p>
               <button
                 type="button"
                 onClick={() => setSentMessage(false)}
-                className="text-xs font-mono font-bold text-[#1D4ED8] underline cursor-pointer"
+                className="text-xs font-hand font-bold text-[#2B59C3] underline"
               >
-                Gunakan alamat email lain
+                Gunakan email lain
               </button>
             </div>
           ) : (
             <div className="space-y-4">
-              <TacticalButton
+              {/* Google OAuth Button */}
+              <button
                 type="button"
-                variant="secondary"
-                size="md"
                 onClick={handleGoogleLogin}
                 disabled={loading}
-                className="w-full"
+                className="doodle-button w-full bg-white text-[#1E1E1E] py-2.5 px-4 text-base font-bold flex items-center justify-center gap-3 cursor-pointer hover:bg-[#FAF7F2]"
               >
-                <span>Lanjutkan dengan Google</span>
-              </TacticalButton>
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                  />
+                </svg>
+                <span>Lanjut dengan Google</span>
+              </button>
 
               <div className="flex items-center my-4">
-                <hr className="flex-1 border-t border-[#E4E2DD]" />
-                <span className="px-3 text-[10px] font-mono uppercase tracking-wider text-[#71717A]">
-                  atau magic link email
+                <hr className="flex-1 border-t border-[#1E1E1E]/20" />
+                <span className="px-3 text-xs font-mono uppercase text-[#5C5A54] bg-[#FFFDF0]">
+                  atau kirim tautan email
                 </span>
-                <hr className="flex-1 border-t border-[#E4E2DD]" />
+                <hr className="flex-1 border-t border-[#1E1E1E]/20" />
               </div>
 
-              <form onSubmit={handleMagicLink} className="space-y-3.5">
+              {/* Magic Link Form */}
+              <form onSubmit={handleMagicLink} className="space-y-3">
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-xs font-mono font-bold uppercase text-[#111113] mb-1.5"
-                  >
-                    Alamat Email Pembelian
+                  <label htmlFor="email" className="block text-xs font-bold font-hand text-[#1E1E1E] mb-1">
+                    Alamat Email Kamu
                   </label>
                   <div className="relative">
                     <input
@@ -149,35 +158,35 @@ export default function LoginPage() {
                       placeholder="nama@perusahaan.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-[#FBF9F5] border border-[#D4D0C8] rounded-lg px-3.5 py-2.5 text-sm text-[#111113] font-mono placeholder:text-[#A1A1AA] focus:outline-none focus:border-[#111113]"
+                      className="w-full bg-white border-2 border-[#1E1E1E] rounded-md px-3 py-2 text-sm text-[#1E1E1E] placeholder:text-[#AAA] focus:outline-none focus:ring-2 focus:ring-[#FFE66D]"
                     />
-                    <Mail className="w-4 h-4 text-[#71717A] absolute right-3.5 top-3" />
+                    <Mail className="w-4 h-4 text-[#AAA] absolute right-3 top-2.5" />
                   </div>
                 </div>
 
-                <TacticalButton
+                <SketchButton
                   type="submit"
                   variant="primary"
                   size="md"
                   disabled={loading}
                   className="w-full"
                 >
-                  <span>{loading ? 'Mengirim Tautan...' : 'Kirim Magic Link ke Email'}</span>
+                  <span>{loading ? 'Mengirim...' : 'Kirim Tautan Magic Link'}</span>
                   <ArrowRight className="w-4 h-4" />
-                </TacticalButton>
+                </SketchButton>
               </form>
             </div>
           )}
 
-          <div className="mt-6 pt-4 border-t border-[#E4E2DD] text-center">
-            <p className="text-xs text-[#52525B]">
-              Belum memiliki akses?{' '}
-              <Link href="/#pricing" className="font-semibold text-[#EA580C] hover:underline">
-                Lihat Paket Trilogy Box Set
+          <div className="mt-6 pt-4 border-t border-[#1E1E1E]/10 text-center">
+            <p className="text-xs text-[#5C5A54]">
+              Belum punya akses buku?{' '}
+              <Link href="/#pricing" className="font-bold text-[#2B59C3] hover:underline">
+                Lihat 6 Paket Harga Resmi
               </Link>
             </p>
           </div>
-        </EditorialCard>
+        </SketchCard>
       </main>
     </div>
   );

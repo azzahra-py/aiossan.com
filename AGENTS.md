@@ -39,15 +39,13 @@ You are operating as a coding agent executing a Kiro Spec-Driven Development pla
 5. **Strict Package Lock Discipline:**
    - Install **ONLY** the packages listed in `.kiro/steering/tech.md` and Spec `01`.
    - Do NOT install unrequested UI component libraries (no `@radix-ui/*`, no `shadcn`, no `framer-motion`, no `mui`, no `chakra-ui`). All UI primitives are self-contained Tailwind CSS + Lucide React components defined in `design.md`.
+   - **Update (Harry, 23 Oct 2026):** `roughjs` and `puppeteer-core` are approved additions, required by the design-B merge (see Rule 7 update).
 
 6. **Mayar Payment Integration Rule:**
    - In backend API routes (`src/app/api/checkout/route.ts`), ALWAYS use native `fetch()` to `https://api.mayar.id/hl/v2/invoice/create`.
    - NEVER spawn `npx mayar` child processes inside Next.js runtime code.
 
-7. **Swiss Editorial + Tactical SaaS Visual Rule:**
-   - **FORBIDDEN:** Do NOT use comic/handwritten fonts (`Patrick Hand`, `Comic Sans`), do NOT use `roughjs`, and do NOT use asymmetrical warped border-radius (`255px 15px...`).
-   - **REQUIRED:** Use the **Swiss Editorial + Tactical SaaS** design system defined in `.kiro/steering/swiss-editorial-design-system.md`:
-     - Display Serif: `Newsreader` (`--font-serif`) for editorial book/chapter titles and high-impact statements.
-     - UI & Body Sans: `Plus Jakarta Sans` (`--font-sans`) for SaaS controls, navigation, and crisp body copy.
-     - Technical Mono: `JetBrains Mono` (`--font-mono`) for chapter indices (`01 / 15`), metadata tags, pricing numerals, and script headers.
-     - Reader Themes: Native support for **Paper (Warm Alabaster `#FBF9F5`)**, **Sepia (`#F4EFE6`)**, and **Night Slate (`#0B0F17`)** inside the interactive Web Reader.
+7. **Visual Rule (SUPERSEDED by Harry's decision, 23 Oct 2026):**
+   - Harry compared this Swiss Editorial build (design A) against a second implementation built by his local LLM (design B, repo mharryrosyan/aiossan) and chose design B's look. All of B's advantages, including its UI/UX, were merged into this project on 23 Oct 2026. The old FORBIDDEN list below no longer applies.
+   - **Current design system:** hand-drawn doodle (roughjs) components in `src/components/doodle/`, Patrick Hand display font + Plus Jakarta Sans + JetBrains Mono (local woff2 in `public/fonts/`), B's `tailwind.config.ts` and `globals.css`. Reader uses B's InteractiveReaderClient with HandDrawnMermaid, LeadershipQuizDoodle (also on landing), ShareQuoteModal, and PaywallModal.
+   - The Swiss Editorial components under `src/components/ui/` and the editorial illustration pipeline (`src/lib/illustrations-editorial.ts` + `scripts/generate-illustrations.ts`) are kept as legacy assets; do not delete them without Harry's word.

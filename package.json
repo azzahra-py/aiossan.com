@@ -18,12 +18,13 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
     "mermaid": "^11.4.1",
-    "next": "14.2.24",
+    "next": "^14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.3",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
+    "roughjs": "^4.6.6",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
@@ -32,6 +33,7 @@
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.2",
+    "puppeteer-core": "^25.16.0",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"

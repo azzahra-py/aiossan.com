@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { BookId, BookLang } from '@/types/books';
-import { getChapterIllustration } from '@/lib/illustrations';
+import { getChapterIllustration } from '@/lib/illustrations-editorial';
 
 interface ChapterBlueprintCardProps {
   bookId: BookId;

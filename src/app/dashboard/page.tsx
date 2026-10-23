@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { createClient } from '@/utils/supabase/server';
 import { BOOK_CATALOG } from '@/lib/books';
+import { BookId } from '@/types/books';
 import { syncAndGetUserEntitlements } from '@/lib/entitlements';
-import { EditorialHeader } from '@/components/ui/EditorialHeader';
-import { EditorialCard } from '@/components/ui/EditorialCard';
-import { TacticalButton } from '@/components/ui/TacticalButton';
-import { BookCover3D } from '@/components/ui/BookCover3D';
+import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
+import { SketchCard } from '@/components/doodle/SketchCard';
+import { SketchButton } from '@/components/doodle/SketchButton';
 import { LogoutButton } from '@/components/auth/LogoutButton';
 import {
   BookOpen,
@@ -15,7 +15,9 @@ import {
   Lock,
   CheckCircle2,
   User,
+  Sparkles,
   ArrowRight,
+  ShieldCheck,
   Receipt,
 } from 'lucide-react';
 
@@ -29,202 +31,272 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // If unauthenticated, show login prompt card
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#FBF9F5] swiss-grid-bg">
-        <EditorialHeader />
+      <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+        <NavbarDoodle />
+
         <main className="flex-1 flex items-center justify-center p-4 py-16">
-          <EditorialCard
-            variant="featured"
-            indexLabel="AIOSSAN // READER LIBRARY"
-            badgeText="AUTH REQUIRED"
-            accentColor="orange"
-            className="w-full max-w-md text-center"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#111113] text-white flex items-center justify-center mx-auto mb-4">
-              <User className="w-6 h-6" />
+          <SketchCard variant="yellow" badgeText="Akses Pembaca" className="w-full max-w-md text-center">
+            <div className="w-14 h-14 bg-[#FFE66D] border-2 border-[#1E1E1E] rounded-full mx-auto flex items-center justify-center shadow-[3px_3px_0px_#1E1E1E] mb-4">
+              <User className="w-7 h-7 text-[#1E1E1E]" />
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#111113] mb-2">
-              Perpustakaan Pembaca
+
+            <h1 className="font-hand text-3xl font-bold text-[#1E1E1E] mb-2">
+              Dashboard <mark>Pembaca</mark>
             </h1>
-            <p className="text-xs sm:text-sm text-[#52525B] mb-6 leading-relaxed">
-              Masuk dengan email pembelian kamu untuk membaca seluruh bab dan mengunduh Master PDF A5.
+
+            <p className="font-body text-xs sm:text-sm text-[#5C5A54] leading-relaxed mb-6">
+              Silakan masuk dengan email akun kamu untuk mengakses buku yang sudah kamu miliki,
+              membaca bab lengkap, dan mengunduh Master PDF resmi.
             </p>
-            <div className="space-y-2.5">
-              <Link href="/auth/login" className="block">
-                <TacticalButton variant="primary" size="lg" className="w-full">
-                  <span>Masuk ke Akun</span>
+
+            <div className="flex flex-col gap-3">
+              <Link href="/auth/login?redirect=/dashboard" className="w-full">
+                <SketchButton variant="primary" size="lg" className="w-full justify-center">
+                  <span>Masuk ke Akun Kamu</span>
                   <ArrowRight className="w-4 h-4" />
-                </TacticalButton>
+                </SketchButton>
               </Link>
-              <Link href="/" className="block">
-                <TacticalButton variant="secondary" size="md" className="w-full">
+
+              <Link href="/" className="w-full">
+                <SketchButton variant="secondary" size="md" className="w-full justify-center">
                   <span>Kembali ke Beranda</span>
-                </TacticalButton>
+                </SketchButton>
               </Link>
             </div>
-          </EditorialCard>
+          </SketchCard>
         </main>
       </div>
     );
   }
 
-  const activeBookIds = await syncAndGetUserEntitlements(user.id, user.email);
+  // 1. Fetch entitlements with guest auto-claim
+  const activeBookIds: BookId[] = await syncAndGetUserEntitlements(user.id, user.email);
 
+  // 2. Fetch orders
   const { data: orders } = await supabase
     .from('orders')
     .select('*')
-    .or(`user_id.eq.${user.id},customer_email.ilike.${user.email}`)
+    .or(`user_id.eq.${user.id},customer_email.eq.${user.email}`)
     .order('created_at', { ascending: false });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5]">
-      <EditorialHeader />
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+      <NavbarDoodle />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-10">
-        {/* Account Header Bar */}
-        <div className="rounded-xl border border-[#E4E2DD] bg-white p-6 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#0F766E] block mb-1">
-              VERIFIED READER ACCOUNT // {activeBookIds.length} OF 3 VOLUMES UNLOCKED
-            </span>
-            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#111113]">
-              {user.email}
-            </h1>
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 sm:py-12">
+        {/* User Profile Bar */}
+        <div className="doodle-box bg-white p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-[#2A9D8F] text-white border-2 border-[#1E1E1E] rounded-full flex items-center justify-center font-hand font-bold text-xl shadow-[2px_2px_0px_#1E1E1E]">
+              {user.email ? user.email.slice(0, 2).toUpperCase() : 'ME'}
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="font-hand font-bold text-2xl text-[#1E1E1E]">
+                  Halo, {user.email?.split('@')[0]}!
+                </h1>
+                <span className="font-mono text-[10px] px-2 py-0.5 bg-[#FAF7F2] border border-[#1E1E1E] rounded text-[#2A9D8F] font-bold">
+                  Akun Terverifikasi
+                </span>
+              </div>
+              <p className="font-mono text-xs text-[#5C5A54]">{user.email}</p>
+            </div>
           </div>
-          <div className="flex items-center gap-2.5">
+
+          <div className="flex items-center gap-2 self-end sm:self-auto">
             <Link href="/#pricing">
-              <TacticalButton variant="accent" size="sm">
-                <span>Upgrade / Complete Trilogy</span>
-              </TacticalButton>
+              <SketchButton variant="primary" size="sm">
+                <Sparkles className="w-3.5 h-3.5 text-[#1E1E1E]" />
+                <span>Beli Bundel Tambahan</span>
+              </SketchButton>
             </Link>
             <LogoutButton />
           </div>
         </div>
 
-        {/* 3 Volumes Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-7 mb-12">
-          {BOOK_CATALOG.map((book) => {
-            const hasAccess = activeBookIds.includes(book.id);
-            return (
-              <EditorialCard
-                key={book.id}
-                variant={hasAccess ? 'featured' : 'surface'}
-                indexLabel={`${book.volumeCode} // 15 CHAPTERS`}
-                badgeText={hasAccess ? 'UNLOCKED' : 'SAMPLE ONLY'}
-                accentColor={hasAccess ? 'emerald' : 'neutral'}
-              >
-                <div className="flex flex-col justify-between h-full">
+        {/* Book Collection */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6 pb-2 border-b-2 border-[#1E1E1E]">
+            <h2 className="font-hand font-bold text-2xl sm:text-3xl text-[#1E1E1E] flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-[#2B59C3]" />
+              Koleksi Trilogi Buku ({activeBookIds.length}/3 Terbuka)
+            </h2>
+            <span className="text-xs font-mono text-[#5C5A54] hidden sm:inline">
+              Akses Web Interaktif + Master PDF
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {BOOK_CATALOG.map((book) => {
+              const hasAccess = activeBookIds.includes(book.id);
+
+              return (
+                <SketchCard
+                  key={book.id}
+                  variant={hasAccess ? 'yellow' : 'white'}
+                  badgeText={hasAccess ? 'Akses Aktif' : 'Terkunci'}
+                  className={`flex flex-col justify-between ${
+                    hasAccess ? 'border-2 border-[#1E1E1E]' : 'opacity-85'
+                  }`}
+                >
                   <div>
-                    <div className="py-4 mb-5 border-b border-[#E4E2DD]">
-                      <BookCover3D bookId={book.id} lang="id-kasual" size="sm" />
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-xs uppercase px-2 py-0.5 bg-white border border-[#1E1E1E] rounded">
+                        {book.id.toUpperCase()} • 15 BAB
+                      </span>
+                      {hasAccess ? (
+                        <span className="flex items-center gap-1 font-mono text-xs font-bold text-[#2A9D8F]">
+                          <CheckCircle2 className="w-4 h-4" />
+                          Lunas
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1 font-mono text-xs font-bold text-[#E63946]">
+                          <Lock className="w-3.5 h-3.5" />
+                          Terkunci
+                        </span>
+                      )}
                     </div>
-                    <h2 className="font-serif text-2xl font-bold text-[#111113] mb-1">
+
+                    <h3 className="font-hand text-2xl font-bold text-[#1E1E1E] mb-2 leading-snug">
                       {book.titles['id-kasual']}
-                    </h2>
-                    <p className="font-mono text-xs text-[#71717A] mb-3">
+                    </h3>
+
+                    <p className="font-mono text-xs text-[#5C5A54] italic mb-4">
                       EN: {book.titles['en']}
                     </p>
-                    <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed mb-6">
-                      {book.subtitles['id-kasual']}
+
+                    <p className="font-body text-xs text-[#5C5A54] leading-relaxed mb-6">
+                      {book.id === 'book-1' &&
+                        'Panduan 4 Obrolan Inti, Rumus Delegasi 3K, dan simulasi 4 pekan untuk first-time leader.'}
+                      {book.id === 'book-2' &&
+                        'Strategi detachment jam 6 sore, monkey management, dan mencetak kader tangan kanan.'}
+                      {book.id === 'book-3' &&
+                        'Memimpin para team lead, menyatukan silo lintas divisi, dan playbook transisi 90 hari.'}
                     </p>
                   </div>
 
-                  {hasAccess ? (
-                    <div className="space-y-3 pt-4 border-t border-[#E4E2DD]">
-                      <Link href={`/read/${book.id}/id-kasual/ch-0`} className="block">
-                        <TacticalButton variant="primary" size="md" className="w-full">
-                          <BookOpen className="w-4 h-4" />
-                          <span>Buka Interactive Web Reader</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </TacticalButton>
-                      </Link>
-                      <div className="rounded-lg bg-[#FBF9F5] border border-[#E4E2DD] p-3">
-                        <span className="font-mono text-[10px] font-bold uppercase text-[#52525B] block mb-2">
-                          Download Official A5 Master PDF:
-                        </span>
-                        <div className="grid grid-cols-3 gap-1.5">
-                          {(['id-kasual', 'id-standar', 'en'] as const).map((l) => (
+                  <div>
+                    {hasAccess ? (
+                      <div className="space-y-3 pt-3 border-t border-[#1E1E1E]/20">
+                        <Link href={`/read/${book.id}/id-kasual/ch-0`} className="w-full block">
+                          <SketchButton variant="primary" size="md" className="w-full justify-center">
+                            <BookOpen className="w-4 h-4" />
+                            <span>Buka Pembaca Web</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </SketchButton>
+                        </Link>
+
+                        <div className="bg-white p-3 rounded border border-[#1E1E1E] space-y-1.5">
+                          <span className="font-mono text-[11px] font-bold text-[#1E1E1E] block">
+                            Unduh Master PDF Resmi (A5):
+                          </span>
+                          <div className="grid grid-cols-3 gap-1">
                             <a
-                              key={l}
-                              href={`/api/download?book=${book.id}&lang=${l}`}
-                              className="px-2 py-1.5 rounded border border-[#D4D0C8] bg-white hover:bg-[#111113] hover:text-white font-mono text-[10px] font-bold text-center flex items-center justify-center gap-1 transition-colors"
+                              href={`/api/download?book=${book.id}&lang=id-kasual`}
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
                             >
                               <Download className="w-3 h-3" />
-                              <span>{l.replace('id-', '').toUpperCase()}</span>
+                              <span>Kasual</span>
                             </a>
-                          ))}
+                            <a
+                              href={`/api/download?book=${book.id}&lang=id-standar`}
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
+                            >
+                              <Download className="w-3 h-3" />
+                              <span>Standar</span>
+                            </a>
+                            <a
+                              href={`/api/download?book=${book.id}&lang=en`}
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
+                            >
+                              <Download className="w-3 h-3" />
+                              <span>English</span>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-2 pt-4 border-t border-[#E4E2DD]">
-                      <Link href={`/read/${book.id}/id-kasual/ch-0`} className="block">
-                        <TacticalButton variant="secondary" size="sm" className="w-full">
-                          <span>Baca Bab 0 & 1 Gratis</span>
-                        </TacticalButton>
-                      </Link>
-                      <Link href="/#pricing" className="block">
-                        <TacticalButton variant="accent" size="sm" className="w-full">
-                          <span>Buka Akses Volume Ini</span>
-                        </TacticalButton>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </EditorialCard>
-            );
-          })}
+                    ) : (
+                      <div className="space-y-2 pt-3 border-t border-[#1E1E1E]/20">
+                        <Link href={`/read/${book.id}/id-kasual/ch-0`} className="w-full block">
+                          <SketchButton variant="secondary" size="sm" className="w-full justify-center">
+                            <BookOpen className="w-3.5 h-3.5" />
+                            <span>Baca Bab 0 & 1 Gratis</span>
+                          </SketchButton>
+                        </Link>
+
+                        <Link href="/#pricing" className="w-full block">
+                          <SketchButton variant="primary" size="sm" className="w-full justify-center">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>Beli Akses Buku Ini</span>
+                          </SketchButton>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </SketchCard>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Order History Ledger */}
+        {/* Transaction History Section */}
         {orders && orders.length > 0 && (
-          <EditorialCard
-            variant="surface"
-            indexLabel="AIOSSAN // TRANSACTION LEDGER"
-            badgeText={`${orders.length} ORDERS`}
-          >
+          <div className="doodle-box bg-white p-6">
+            <h2 className="font-hand font-bold text-xl sm:text-2xl text-[#1E1E1E] mb-4 flex items-center gap-2">
+              <Receipt className="w-5 h-5 text-[#2B59C3]" />
+              Riwayat Pembelian Mayar
+            </h2>
+
             <div className="overflow-x-auto">
-              <table className="w-full text-left font-mono text-xs">
+              <table className="w-full text-left text-xs font-mono">
                 <thead>
-                  <tr className="border-b border-[#111113] text-[#71717A] uppercase">
-                    <th className="py-2.5 px-3">Order Number</th>
-                    <th className="py-2.5 px-3">Edition / Tier</th>
-                    <th className="py-2.5 px-3">Amount</th>
-                    <th className="py-2.5 px-3">Status</th>
-                    <th className="py-2.5 px-3">Date</th>
+                  <tr className="border-b-2 border-[#1E1E1E] text-[#5C5A54]">
+                    <th className="py-2 px-3">Nomor Pesanan</th>
+                    <th className="py-2 px-3">Paket</th>
+                    <th className="py-2 px-3">Total (IDR)</th>
+                    <th className="py-2 px-3">Status</th>
+                    <th className="py-2 px-3">Tanggal</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E4E2DD]">
+                <tbody className="divide-y divide-[#E2DDD3]">
                   {orders.map((o) => (
-                    <tr key={o.id}>
-                      <td className="py-2.5 px-3 font-bold text-[#111113]">
+                    <tr key={o.id} className="hover:bg-[#FAF7F2]">
+                      <td className="py-2.5 px-3 font-bold text-[#1E1E1E]">
                         {o.order_number}
                       </td>
-                      <td className="py-2.5 px-3 uppercase">{o.pricing_tier_id}</td>
+                      <td className="py-2.5 px-3 uppercase text-[#2B59C3]">
+                        {o.pricing_tier_id}
+                      </td>
                       <td className="py-2.5 px-3">
                         Rp {Number(o.amount_idr).toLocaleString('id-ID')}
                       </td>
                       <td className="py-2.5 px-3">
-                        <span
-                          className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                            o.payment_status === 'PAID'
-                              ? 'bg-[#F0FDFA] text-[#0F766E] border border-[#99F6E4]'
-                              : 'bg-[#FFF7ED] text-[#EA580C]'
-                          }`}
-                        >
-                          {o.payment_status}
-                        </span>
+                        {o.payment_status === 'PAID' ? (
+                          <span className="px-2 py-0.5 bg-[#F0FAF8] text-[#2A9D8F] border border-[#1E1E1E] rounded font-bold">
+                            LUNAS
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 bg-[#FFF5F5] text-[#E63946] border border-[#1E1E1E] rounded">
+                            {o.payment_status}
+                          </span>
+                        )}
                       </td>
-                      <td className="py-2.5 px-3 text-[#71717A]">
-                        {new Date(o.created_at).toLocaleDateString('id-ID')}
+                      <td className="py-2.5 px-3 text-[#5C5A54]">
+                        {new Date(o.created_at).toLocaleDateString('id-ID', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric',
+                        })}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </EditorialCard>
+          </div>
         )}
       </main>
     </div>

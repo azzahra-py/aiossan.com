@@ -1,34 +1,132 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { EditorialHeader } from '@/components/ui/EditorialHeader';
-import { EditorialCard } from '@/components/ui/EditorialCard';
-import { TacticalButton } from '@/components/ui/TacticalButton';
-import { BookCover3D } from '@/components/ui/BookCover3D';
-import { PricingMatrix } from '@/components/ui/PricingMatrix';
-import { BookLang, BOOK_CATALOG } from '@/types/books';
+import { BOOK_CATALOG, BookId, BookLang } from '@/types/books';
+import { formatIDR } from '@/lib/utils';
+import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
+import { BookCoverMockup } from '@/components/doodle/BookCoverMockup';
+import { WoodlandMascotSvg } from '@/components/doodle/WoodlandMascotSvg';
+import { RoughHighlight } from '@/components/doodle/RoughHighlight';
+import { LeadershipQuizDoodle } from '@/components/doodle/LeadershipQuizDoodle';
+import { PricingGridDoodle } from '@/components/doodle/PricingGridDoodle';
 import {
   BookOpen,
-  ArrowRight,
-  Check,
+  Sparkles,
+  CheckCircle2,
   Copy,
-  Terminal,
-  Globe,
+  Check,
+  ArrowRight,
   Layers,
   ShieldCheck,
-  FileText,
-  Sparkles,
+  MessageSquareText,
+  HelpCircle,
 } from 'lucide-react';
 
-export default function HomePage() {
+const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
+  'book-1': {
+    'id-kasual': 'VOL. 01 • LEADER BARU',
+    'id-standar': 'VOL. 01 • PEMIMPIN TIM BARU',
+    en: 'VOL. 01 • FIRST-TIME LEAD',
+  },
+  'book-2': {
+    'id-kasual': 'VOL. 02 • ANTI-BURNOUT',
+    'id-standar': 'VOL. 02 • KETAHANAN DIRI',
+    en: 'VOL. 02 • BEAT BURNOUT',
+  },
+  'book-3': {
+    'id-kasual': 'VOL. 03 • LEVEL MANAJER',
+    'id-standar': 'VOL. 03 • MANAJER DIVISI',
+    en: 'VOL. 03 • DIVISION LEAD',
+  },
+};
+
+const SAMPLE_SCRIPTS: Record<
+  BookLang,
+  { context: string; script: (name: string) => string }
+> = {
+  'id-kasual': {
+    context: 'Skenario Bab 9: Menegur anggota tim yang hasil kerjanya meleset dari kesepakatan (Tanpa Bikin Baper)',
+    script: (name) =>
+      `"Eh ${name}, makasih ya udah kirim draf laporannya tadi pagi. Gw perhatiin di bagian kesimpulan, datanya baru mencakup bulan ini, padahal kemarin di Rumus 3K kita sepakat masukin perbandingan 3 bulan terakhir supaya direksi bisa lihat trennya. Menurut lo, bagian mana yang perlu kita rapiin dulu biar jam 4 sore nanti siap dikirim?"`,
+  },
+  'id-standar': {
+    context: 'Skenario Bab 9: Mengoreksi hasil kerja anggota tim secara empat mata (Fokus Fakta, Bukan Menyerang Pribadi)',
+    script: (name) =>
+      `"Halo ${name}, terima kasih sudah mengirimkan draf laporannya pagi ini. Saya mencermati pada bagian kesimpulan, data yang tercantum baru mencakup bulan berjalan, sedangkan kesepakatan 3K kita kemarin adalah menyertakan perbandingan 3 bulan terakhir. Menurut kamu, langkah apa yang paling efektif untuk melengkapinya sebelum pukul 16.00 nanti?"`,
+  },
+  en: {
+    context: 'Chapter 9 Scenario: Private Course Correction When a Deliverable Misses the 3C Target',
+    script: (name) =>
+      `"Hey ${name}, thanks for sending over the draft report this morning. Looking at the summary section, I noticed it only covers this month's numbers, whereas our 3C agreement yesterday was to include a 3-month comparison trend. What do you think is the fastest way for us to plug that gap before the 4 PM review?"`,
+  },
+};
+
+const BOOK_HIGHLIGHTS: Record<
+  'book-1' | 'book-2' | 'book-3',
+  Record<BookLang, string[]>
+> = {
+  'book-1': {
+    'id-kasual': [
+      '4 Skill Inti & 4 Obrolan Wajib (Rumus Target 3K, Apresiasi, Koreksi 4 Mata, Evaluasi)',
+      'Kalibrasi Gaya Pendampingan L1–L4 ke G1–G4 + Simulasi Skor Bab 12',
+      'Puluhan Skrip WA/Slack & 1-on-1 Siap Copy-Paste',
+    ],
+    'id-standar': [
+      '4 Keterampilan Inti & 4 Percakapan Kunci (Rumus 3K, Apresiasi, Koreksi, Evaluasi)',
+      'Kalibrasi Tingkat Kesiapan Tim L1–L4 ke Gaya G1–G4 + Simulasi Bab 12',
+      'Puluhan Skrip Dialog Profesional Siap Salin',
+    ],
+    en: [
+      '4 Core Skills & 4 Essential Conversations (3C Targets, Praise, Redirection, Review)',
+      'Task Readiness Calibration (L1–L4 to G1–G4) + Chapter 12 Interactive Simulator',
+      'Dozens of Copy-Paste 1-on-1 & Slack Scripts',
+    ],
+  },
+  'book-2': {
+    'id-kasual': [
+      'Teknik Glass Shield (Memilah Fakta Masalah vs Curhatan Emosi Anak Buah)',
+      'Anti-Monkey Delegation & Negosiasi Kapasitas ke Bos Pakai Data Neraca',
+      'Audit Kalender Rumus 3P & Ritual Matikan Pikiran Kerja Jam 6 Sore',
+    ],
+    'id-standar': [
+      'Teknik Perisai Kaca (Memisahkan Fakta Kerja dari Beban Emosi Tim)',
+      'Pencegahan Ambil Alih Tugas & Negosiasi Kapasitas Berbasis Data',
+      'Audit Kalender Rumus 3P & Ritual Pemulihan Energi Pasca-Kerja',
+    ],
+    en: [
+      'The Glass Shield Technique (Filtering Actionable Facts from Emotional Venting)',
+      'Anti-Monkey Delegation & Data-Driven Capacity Negotiation with Executives',
+      '3P Calendar Audit & 6 PM Psychological Detachment Rituals',
+    ],
+  },
+  'book-3': {
+    'id-kasual': [
+      'Coaching the Coach (Melatih Team Leader Tanpa Merampas Mikrofon Mereka)',
+      'Protokol Anti-Skip-Level & Mediasi Konflik Silo Antar-Tim (Rumus 3S)',
+      'Menerjemahkan Visi Abstrak Direksi Jadi Langkah Konkret Divisi',
+    ],
+    'id-standar': [
+      'Melatih Para Leader (Coaching the Coach) Tanpa Mengambil Alih Wewenang',
+      'Protokol Anti-Skip-Level & Penyelarasan Lintas Tim (Rumus 3S)',
+      'Penerjemahan Strategi Eksekutif ke Eksekusi Departemen',
+    ],
+    en: [
+      'Coaching the Coach (Developing Team Leads Without Stealing Their Microphone)',
+      'Anti-Skip-Level Protocol & Cross-Team Silo Mediation (3S Formula)',
+      'Translating Executive Vision into Departmental Execution',
+    ],
+  },
+};
+
+export default function LandingPage() {
   const [lang, setLang] = useState<BookLang>('id-kasual');
-  const [activeScenario, setActiveScenario] = useState(0);
-  const [copied, setCopied] = useState(false);
+  const [demoName, setDemoName] = useState<string>('Budi');
+  const [copiedDemo, setCopiedDemo] = useState(false);
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('aiossan:lang') as BookLang | null;
+      const saved = localStorage.getItem('aiossan:lang') as BookLang;
       if (saved && ['id-kasual', 'id-standar', 'en'].includes(saved)) {
         setLang(saved);
       }
@@ -37,7 +135,7 @@ export default function HomePage() {
     }
   }, []);
 
-  const handleLangChange = (next: BookLang) => {
+  const handleSelectLang = (next: BookLang) => {
     setLang(next);
     try {
       localStorage.setItem('aiossan:lang', next);
@@ -46,597 +144,439 @@ export default function HomePage() {
     }
   };
 
-  const isEn = lang === 'en';
-  const isStandar = lang === 'id-standar';
-
-  const scenarios = [
-    {
-      code: 'SCRIPT // 01 • PRIVATE COURSE CORRECTION',
-      title: isEn
-        ? 'Correcting Mistakes Without Crushing Morale'
-        : isStandar
-        ? 'Menegur Kekeliruan Tanpa Merusak Semangat Tim'
-        : 'Negur Kerjaan Salah Tanpa Bikin Anak Tim Baper',
-      situation: isEn
-        ? '1-on-1 behind closed doors when a deliverable misses agreed criteria'
-        : isStandar
-        ? 'Empat mata saat draf laporan melenceng dari kriteria selesai 3K'
-        : 'Empat mata pas draf kerjaan melenceng dari kesepakatan 3K',
-      lines:
-        lang === 'id-kasual'
-          ? [
-              {
-                role: 'LO (TEAM LEAD)',
-                text: 'Budi, gue lihat ada dua bagian di draf ini yang belum sesuai kesepakatan 3K kita kemarin. Menurut lo, bagian mana yang paling bikin mentok waktu ngerjain ini?',
-              },
-              {
-                role: 'BUDI (ANGGOTA TIM)',
-                text: 'Iya Mas, kemarin saya ragu di bagian skema datanya karena contoh referensinya ada dua versi.',
-              },
-              {
-                role: 'LO (TEAM LEAD)',
-                text: 'Masuk akal. Yuk kita kunci format bakunya sekarang 5 menit, terus lo sesuaikan sampai jam 3 sore nanti ya. Gue percaya lo bisa beresin ini dengan tajam.',
-              },
-            ]
-          : lang === 'id-standar'
-          ? [
-              {
-                role: 'ANDA (PEMIMPIN TIM)',
-                text: 'Budi, saya mencermati ada dua bagian pada dokumen ini yang belum sesuai kriteria selesai kita kemarin. Menurut kamu, apa kendala utama saat menyusun bagian tersebut?',
-              },
-              {
-                role: 'BUDI (ANGGOTA TIM)',
-                text: 'Baik Pak/Bu, kemarin saya sempat ragu pada format datanya karena acuan referensinya belum tunggal.',
-              },
-              {
-                role: 'ANDA (PEMIMPIN TIM)',
-                text: 'Dapat dipahami. Mari kita sepakati acuan bakunya sekarang, lalu kamu selesaikan revisinya sebelum pukul 15.00.',
-              },
-            ]
-          : [
-              {
-                role: 'YOU (TEAM LEAD)',
-                text: 'Alex, I noticed two sections in this draft differ from our 3C brief yesterday. What felt most ambiguous as you put this together?',
-              },
-              {
-                role: 'ALEX (TEAMMATE)',
-                text: 'Honestly, I wasn’t sure which data schema to follow since the spec had two conflicting examples.',
-              },
-              {
-                role: 'YOU (TEAM LEAD)',
-                text: 'Totally fair. Let’s lock the exact schema right now in 5 minutes so you can wrap up the revision cleanly by 3 PM.',
-              },
-            ],
-    },
-    {
-      code: 'SCRIPT // 02 • ANTI-MONKEY MANAGEMENT',
-      title: isEn
-        ? 'Deflecting Task Monkeys Back to Their Owner'
-        : isStandar
-        ? 'Mengembalikan Masalah ke Pemilik Tugas'
-        : 'Nolak Monyet Tugas yang Mau Lompat ke Meja Lo',
-      situation: isEn
-        ? 'When a teammate tries to dump an unanalyzed problem onto your desk'
-        : isStandar
-        ? 'Ketika anggota tim menyerahkan masalah mentah agar diputuskan oleh Anda'
-        : 'Waktu anak tim nanya "Enaknya gimana?" biar lo yang mikirin solusinya',
-      lines:
-        lang === 'id-kasual'
-          ? [
-              {
-                role: 'ANGGOTA TIM',
-                text: 'Mas/Mbak, bingung nih milih opsi vendor A atau B buat fitur ini. Enaknya kita pakai yang mana ya?',
-              },
-              {
-                role: 'LO (TEAM LEAD)',
-                text: 'Pertanyaan bagus. Sebelum gue jawab, kalau dari bedah data lo sendiri, plus-minus terbesar opsi A vs B apa?',
-              },
-              {
-                role: 'ANGGOTA TIM',
-                text: 'Opsi A lebih cepat 3 hari tapi biaya naik 10%, kalau opsi B hemat tapi rilisnya mundur sedikit.',
-              },
-              {
-                role: 'LO (TEAM LEAD)',
-                text: 'Pemetaan lo udah tajam. Pilih opsi yang paling ngamanin target rilis kuartal ini, jalanin, terus kabari gue hasilnya sore nanti.',
-              },
-            ]
-          : lang === 'id-standar'
-          ? [
-              {
-                role: 'ANGGOTA TIM',
-                text: 'Pak/Bu, saya bingung menentukan opsi vendor A atau B untuk proyek ini. Menurut Bapak/Ibu sebaiknya bagaimana?',
-              },
-              {
-                role: 'ANDA (PEMIMPIN TIM)',
-                text: 'Pertanyaan yang baik. Berdasarkan analisis kamu sejauh ini, apa kelebihan dan risiko utama dari masing-masing opsi?',
-              },
-              {
-                role: 'ANGGOTA TIM',
-                text: 'Opsi A lebih cepat tiga hari namun biaya naik 10%, sedangkan opsi B sesuai anggaran tetapi butuh tambahan waktu.',
-              },
-              {
-                role: 'ANDA (PEMIMPIN TIM)',
-                text: 'Analisis kamu sudah lengkap. Saya percayakan keputusannya kepada kamu—ambil opsi yang paling mengamankan target kuartal kita.',
-              },
-            ]
-          : [
-              {
-                role: 'TEAMMATE',
-                text: 'Hey, I’m torn between Vendor A and Vendor B for this sprint. Which one should we go with?',
-              },
-              {
-                role: 'YOU (TEAM LEAD)',
-                text: 'Good question. Walk me through the trade-offs you see between Option A and Option B first.',
-              },
-              {
-                role: 'TEAMMATE',
-                text: 'Option A ships three days faster at a 10% premium; Option B stays on budget but slips the timeline.',
-              },
-              {
-                role: 'YOU (TEAM LEAD)',
-                text: 'You’ve done the analysis. Make the call that best protects our quarterly milestone and update me once it’s rolling.',
-              },
-            ],
-    },
-    {
-      code: 'SCRIPT // 03 • CROSS-TEAM SILO MEDIATION',
-      title: isEn
-        ? 'Ending Cross-Team Finger-Pointing in 15 Minutes'
-        : isStandar
-        ? 'Meredakan Konflik Silo Antar-Tim dalam 15 Menit'
-        : 'Melerai 2 Leader Tim yang Saling Lempar Salah',
-      situation: isEn
-        ? 'When two sub-team leads blame each other over a delayed release'
-        : isStandar
-        ? 'Saat dua pemimpin tim berdebat mengenai keterlambatan serah-terima kerja'
-        : 'Pas 2 team lead di bawah lo saling tuduh gara-gara integrasi molor',
-      lines:
-        lang === 'id-kasual'
-          ? [
-              {
-                role: 'LO (MANAJER DIVISI)',
-                text: 'Kita rem dulu debat soal siapa yang telat. Pelanggan di luar nggak peduli tim mana yang salah, mereka peduli fiturnya jalan.',
-              },
-              {
-                role: 'LEADER FRONTEND',
-                text: 'Tapi tim gue nggak bisa jalanin pengujian kalau kontrak API mereka berubah terus.',
-              },
-              {
-                role: 'LO (MANAJER DIVISI)',
-                text: 'Paham. Sekarang kita kunci Piagam 3S: Backend kunci mock payload jam 1 siang, Frontend jalanin tes integrasi jam 2. Sepakat berdua?',
-              },
-            ]
-          : lang === 'id-standar'
-          ? [
-              {
-                role: 'ANDA (MANAJER DIVISI)',
-                text: 'Mari kita hentikan perdebatan mengenai siapa yang terlambat. Fokus bersama kita adalah memastikan layanan berjalan bagi pengguna.',
-              },
-              {
-                role: 'LEADER FRONTEND',
-                text: 'Namun tim kami memerlukan kontrak API yang stabil untuk menuntaskan pengujian.',
-              },
-              {
-                role: 'ANDA (MANAJER DIVISI)',
-                text: 'Dapat dipahami. Mari kita kunci kesepakatan 3S hari ini: Backend membekukan mock data pukul 13.00, dan Frontend memulai integrasi pukul 14.00.',
-              },
-            ]
-          : [
-              {
-                role: 'YOU (DEPT MANAGER)',
-                text: 'Let’s pause pointing fingers over whose API was late. Customers only care that the release works seamlessly.',
-              },
-              {
-                role: 'FRONTEND LEAD',
-                text: 'We couldn’t run end-to-end tests without a frozen payload schema.',
-              },
-              {
-                role: 'YOU (DEPT MANAGER)',
-                text: 'Understood. Let’s lock our 3S seam rule right now: Backend freezes mock payloads by 1 PM, Frontend runs integration at 2 PM. Agreed?',
-              },
-            ],
-    },
-  ];
-
-  const copyActiveScenario = async () => {
-    const active = scenarios[activeScenario];
-    const text = active.lines.map((l) => `${l.role}: "${l.text}"`).join('\n\n');
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Ignore
-    }
+  const handleCopyDemo = () => {
+    const text = SAMPLE_SCRIPTS[lang].script(demoName.trim() || 'Budi');
+    navigator.clipboard.writeText(text);
+    setCopiedDemo(true);
+    setTimeout(() => setCopiedDemo(false), 2000);
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] swiss-grid-bg">
-      <EditorialHeader lang={lang} onLangChange={handleLangChange} />
+    <div className="min-h-screen flex flex-col">
+      <NavbarDoodle lang={lang} />
 
-      {/* 1. SWISS EDITORIAL HERO SECTION */}
-      <section className="py-16 sm:py-24 px-4 max-w-7xl mx-auto border-b border-[#E4E2DD]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left 7 Cols: Editorial Statement */}
-          <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E4E2DD] font-mono text-[11px] uppercase tracking-wider text-[#111113] mb-6 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#EA580C]" />
-              <span>
-                {isEn
-                  ? 'AIOSSAN PRESS // TACTICAL LEADERSHIP TRILOGY'
-                  : 'AIOSSAN PRESS // TRILOGI PLAYBOOK KEPEMIMPINAN TAKTIS'}
+      <div className="bg-[#FFFDF5]/90 border-b-2 border-[#18181B] py-2 px-4 sticky top-[65px] z-30 backdrop-blur-xs">
+        <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-2">
+          <span className="font-hand text-sm sm:text-base font-bold text-[#18181B] flex items-center gap-1.5">
+            <span>🎨</span>
+            <span>
+              {lang === 'en'
+                ? 'Choose Your Reading Style (All 3 Included in Every Purchase!):'
+                : 'Pilih Gaya Bahasa Bacaan Lo (Beli 1 Otomatis Dapat Ketiganya!):'}
+            </span>
+          </span>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => handleSelectLang('id-kasual')}
+              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
+                lang === 'id-kasual'
+                  ? 'bg-[#FFE66D] border-[#18181B] text-[#18181B] shadow-[2px_2px_0px_#18181B]'
+                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
+              }`}
+            >
+              🇮🇩 Kasual (Gue / Lo)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectLang('id-standar')}
+              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
+                lang === 'id-standar'
+                  ? 'bg-[#DBEAFE] border-[#18181B] text-[#1E3A8A] shadow-[2px_2px_0px_#18181B]'
+                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
+              }`}
+            >
+              🇮🇩 Standar (Saya / Kamu)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectLang('en')}
+              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
+                lang === 'en'
+                  ? 'bg-[#CCFBF1] border-[#18181B] text-[#065F46] shadow-[2px_2px_0px_#18181B]'
+                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
+              }`}
+            >
+              🌐 Global English
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <section className="mx-auto max-w-6xl px-4 pt-10 pb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="inline-flex items-center gap-2 rounded-full border-2 border-[#18181B] bg-white px-3.5 py-1 shadow-[2px_2px_0px_#18181B]">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#0D9488]" />
+              <span className="font-mono text-xs font-extrabold uppercase tracking-wider text-[#18181B]">
+                {lang === 'en'
+                  ? 'Interactive Web Playbook + Mobile PDF • 3 Editions'
+                  : 'Playbook Web Interaktif + PDF Ramah HP • 3 Edisi Bahasa'}
               </span>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-6xl font-bold text-[#111113] tracking-tight leading-[1.08] mb-6">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#18181B] leading-[1.15]">
               {lang === 'id-kasual' && (
                 <>
-                  Baru Diangkat Jadi Leader, Tapi Malah{' '}
-                  <mark>Lembur Benerin Kerjaan Tim Sendirian?</mark>
+                  Baru Jadi Leader atau Mulai{' '}
+                  <RoughHighlight type="highlight" color="yellow">
+                    Kewalahan
+                  </RoughHighlight>{' '}
+                  Ngurusin Tim? Ini{' '}
+                  <RoughHighlight type="underline" color="blue">
+                    Contekan Meja Kerja
+                  </RoughHighlight>{' '}
+                  Lo.
                 </>
               )}
               {lang === 'id-standar' && (
                 <>
-                  Transisi Menjadi Pemimpin Tim Tanpa{' '}
-                  <mark>Lembur Memperbaiki Pekerjaan Tim.</mark>
+                  Panduan Taktis{' '}
+                  <RoughHighlight type="highlight" color="yellow">
+                    Memimpin Tim
+                  </RoughHighlight>{' '}
+                  & Menjaga{' '}
+                  <RoughHighlight type="underline" color="teal">
+                    Ketahanan Diri
+                  </RoughHighlight>{' '}
+                  Tanpa Teori Bertele-tele.
                 </>
               )}
               {lang === 'en' && (
                 <>
-                  Promoted to Team Lead, Yet Secretly{' '}
-                  <mark>Fixing Everyone’s Drafts at 10 PM?</mark>
+                  Promoted to Lead or Feeling{' '}
+                  <RoughHighlight type="highlight" color="yellow">
+                    Burned Out?
+                  </RoughHighlight>{' '}
+                  Here Is Your{' '}
+                  <RoughHighlight type="underline" color="blue">
+                    Tactical Field Playbook
+                  </RoughHighlight>
+                  .
                 </>
               )}
             </h1>
 
-            <p className="font-sans text-base sm:text-lg text-[#52525B] leading-relaxed mb-8 max-w-2xl">
+            <p className="text-base sm:text-lg text-[#52525B] leading-relaxed">
               {lang === 'id-kasual' &&
-                'Bukan buku teori manajemen yang abstrak. Ini sistem operasi meja kerja berisi 45 bab taktis: skrip 1-on-1 siap salin, Rumus Delegasi 3K, protokol anti-burnout jam 6 sore, hingga cara memimpin para manajer.'}
+                'Nggak usah nunggu baper atau lembur sendirian tiap malam. Dapatkan 3 buku playbook bergaya buku sketsa bersama Kapi si Kapibara, lengkap dengan skrip 1-on-1 siap copy-paste ke WA/Slack, diagram alur taktis, dan simulasi kepemimpinan.'}
               {lang === 'id-standar' &&
-                'Bukan sekadar teori akademik. Trilogi panduan meja kerja ini merangkum 45 bab taktis: skrip percakapan 1-on-1, Rumus Delegasi 3K, protokol ketahanan energi, hingga strategi penyelarasan lintas divisi.'}
+                'Dirancang untuk pemimpin tim baru hingga manajer divisi. Berisi kerangka kerja teruji, puluhan skrip percakapan empat mata siap salin, bagan alur visual, serta latihan 30 hari yang langsung bisa dipraktikkan.'}
               {lang === 'en' &&
-                'Zero abstract fluff. A 45-chapter field manual featuring copy-paste 1-on-1 scripts, the 3C delegation brief, 6 PM detachment rituals, and divisional alignment playbooks.'}
+                'Skip the 300-page academic fluff. Get 3 illustrated field playbooks featuring Kapi the Capybara, packed with copy-paste 1-on-1 scripts, hand-drawn Mermaid flowcharts, and interactive leadership simulators.'}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">
-              <Link href={`/read/book-1/${lang}/ch-0`}>
-                <TacticalButton variant="primary" size="lg" className="w-full sm:w-auto">
-                  <BookOpen className="w-4 h-4" />
-                  <span>
-                    {isEn ? 'Read Free Sample (Ch. 0 & 1)' : 'Baca Sampel Gratis (Bab 0 & 1)'}
-                  </span>
-                  <ArrowRight className="w-4 h-4" />
-                </TacticalButton>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                href={`/read/book-1/${lang}/ch-0`}
+                className="doodle-button bg-[#FFE66D] px-6 py-3.5 text-sm sm:text-base font-extrabold text-[#18181B] inline-flex items-center gap-2"
+              >
+                <BookOpen className="w-5 h-5" />
+                <span>
+                  {lang === 'en'
+                    ? 'Read Free Sample (Ch 0 & 1)'
+                    : 'Baca Gratis Bab 1 Sekarang'}
+                </span>
               </Link>
-              <a href="#pricing">
-                <TacticalButton variant="secondary" size="lg" className="w-full sm:w-auto">
-                  <span>
-                    {isEn
-                      ? 'Acquire Complete Trilogy (Rp 149k)'
-                      : 'Lihat Paket Trilogi (Mulai Rp 49rb)'}
-                  </span>
-                </TacticalButton>
+              <a
+                href="#pricing"
+                className="doodle-button bg-[#2563EB] text-white px-6 py-3.5 text-sm sm:text-base font-extrabold inline-flex items-center gap-2"
+              >
+                <Sparkles className="w-5 h-5 text-[#FFE66D]" />
+                <span>
+                  {lang === 'en'
+                    ? 'See 6 Pricing Packages (From Rp 49k)'
+                    : 'Lihat Paket Harga (Mulai Rp 49rb)'}
+                </span>
               </a>
             </div>
 
-            {/* Technical Specs Strip */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#E4E2DD] font-mono text-xs">
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-[#111113]">3 VOLUMES</div>
-                <div className="text-[11px] text-[#71717A]">45 Tactical Chapters</div>
+            <div className="grid grid-cols-3 gap-3 pt-3 border-t-2 border-dashed border-[#D4D4D8] text-xs font-bold text-[#18181B]">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+                <span>3 Register Bahasa</span>
               </div>
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-[#111113]">3 REGISTERS</div>
-                <div className="text-[11px] text-[#71717A]">Casual, Formal & EN</div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+                <span>Web Reader + PDF</span>
               </div>
-              <div>
-                <div className="text-lg sm:text-xl font-bold text-[#111113]">WEB + PDF</div>
-                <div className="text-[11px] text-[#71717A]">Interactive + A5 Master</div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+                <span>Sekali Bayar Selamanya</span>
               </div>
             </div>
           </div>
 
-          {/* Right 5 Cols: 3D Hardcover Trilogy Showcase */}
           <div className="lg:col-span-5">
-            <EditorialCard
-              variant="featured"
-              indexLabel="TRILOGY COLLECTION // VOL. 01—03"
-              badgeText="STRIPE-PRESS EDITION"
-              accentColor="orange"
-            >
-              <div className="grid grid-cols-3 gap-3 py-4 items-end">
-                <Link
-                  href={`/read/book-1/${lang}/ch-0`}
-                  className="hover:-translate-y-1.5 transition-transform"
-                >
-                  <BookCover3D
-                    bookId="book-1"
-                    lang={lang}
-                    size="sm"
-                    className="!w-full !h-52 sm:!h-60"
-                  />
-                </Link>
-                <Link
-                  href={`/read/book-2/${lang}/ch-0`}
-                  className="-translate-y-2 hover:-translate-y-3.5 transition-transform z-10"
-                >
-                  <BookCover3D
-                    bookId="book-2"
-                    lang={lang}
-                    size="sm"
-                    className="!w-full !h-52 sm:!h-60"
-                  />
-                </Link>
-                <Link
-                  href={`/read/book-3/${lang}/ch-0`}
-                  className="hover:-translate-y-1.5 transition-transform"
-                >
-                  <BookCover3D
-                    bookId="book-3"
-                    lang={lang}
-                    size="sm"
-                    className="!w-full !h-52 sm:!h-60"
-                  />
-                </Link>
+            <div className="doodle-box relative bg-gradient-to-br from-[#FEF9C3] via-white to-[#DBEAFE] p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <span className="rounded-lg border border-[#18181B] bg-white px-2.5 py-0.5 font-mono text-[11px] font-extrabold text-[#1E3A8A]">
+                  TRILOGI PLAYBOOK KAPI & KRU
+                </span>
+                <span className="font-hand text-sm font-bold text-[#9A3412]">
+                  ★ 45 Bab Taktis + 9 File PDF
+                </span>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-[#E4E2DD] flex items-center justify-between text-xs font-mono text-[#52525B]">
-                <span>RESEARCH BACKED: CCL • HARVARD • GALLUP</span>
-                <span className="font-bold text-[#111113]">CLICK COVER TO PREVIEW</span>
+              <div className="flex items-center justify-center gap-3 py-3 overflow-x-auto">
+                <div className="-rotate-6 scale-90 hidden sm:block">
+                  <BookCoverMockup bookId="book-2" lang={lang} size="sm" />
+                </div>
+                <div className="z-10">
+                  <BookCoverMockup bookId="book-1" lang={lang} size="sm" />
+                </div>
+                <div className="rotate-6 scale-90 hidden sm:block">
+                  <BookCoverMockup bookId="book-3" lang={lang} size="sm" />
+                </div>
               </div>
-            </EditorialCard>
-          </div>
-        </div>
-      </section>
 
-      {/* 2. TACTICAL BENTO FEATURE GRID */}
-      <section className="py-16 px-4 max-w-7xl mx-auto border-b border-[#E4E2DD]">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-          <EditorialCard
-            variant="surface"
-            indexLabel="01 // REGISTER ENGINE"
-            badgeText="3 EDITIONS"
-            accentColor="cobalt"
-            className="md:col-span-2"
-          >
-            <div className="flex items-start gap-3.5">
-              <Globe className="w-6 h-6 text-[#1D4ED8] shrink-0 mt-1" />
-              <div>
-                <h3 className="font-serif text-xl font-bold text-[#111113] mb-1.5">
-                  {isEn
-                    ? 'Instant 3-Register Language Switching'
-                    : 'Satu Pembelian, Langsung Dapat 3 Edisi Gaya Bahasa'}
-                </h3>
-                <p className="text-sm text-[#52525B] leading-relaxed">
-                  {isEn
-                    ? 'Switch seamlessly between Casual Indonesian (Gue/Lo), Formal Corporate Indonesian (Saya/Kamu), and Global English across all 45 chapters.'
-                    : 'Bebas berpindah antara gaya Kasual akrab (Gue/Lo), Standar korporasi (Saya/Kamu), dan Global English kapan saja dengan satu klik.'}
+              <div className="mt-4 rounded-xl border-2 border-[#18181B] bg-white p-3.5 shadow-[2px_2px_0px_#18181B] flex items-center gap-3">
+                <WoodlandMascotSvg character="capybara" className="w-12 h-12 shrink-0" />
+                <p className="font-hand text-sm text-[#18181B] leading-snug">
+                  {lang === 'en'
+                    ? '“Every book uses 100% gender-neutral woodland animal doodles and real-world scripts you can copy-paste in 5 seconds!”'
+                    : '“Semua bab ditemani ilustrasi Kapi si Kapibara dan kru binatang lucu, plus skrip yang bisa langsung lo salin ke chat kantor!”'}
                 </p>
               </div>
             </div>
-          </EditorialCard>
-
-          <EditorialCard
-            variant="surface"
-            indexLabel="02 // READER MODES"
-            badgeText="3 THEMES"
-            accentColor="orange"
-          >
-            <Layers className="w-5 h-5 text-[#EA580C] mb-2" />
-            <h3 className="font-serif text-lg font-bold text-[#111113] mb-1">
-              {isEn ? 'Paper, Sepia & Night Modes' : 'Mode Baca Paper, Sepia & Night'}
-            </h3>
-            <p className="text-xs text-[#52525B] leading-relaxed">
-              {isEn
-                ? 'Read comfortably on desktop or mobile with persistent checklists and interactive diagrams.'
-                : 'Dilengkapi progress checklist otomatis dan 3 mode pencahayaan ramah mata.'}
-            </p>
-          </EditorialCard>
-
-          <EditorialCard
-            variant="surface"
-            indexLabel="03 // CLOUDFLARE R2"
-            badgeText="A5 PDF"
-            accentColor="emerald"
-          >
-            <FileText className="w-5 h-5 text-[#0F766E] mb-2" />
-            <h3 className="font-serif text-lg font-bold text-[#111113] mb-1">
-              {isEn ? 'Official A5 Master PDFs' : 'Termasuk Master PDF Ukuran A5'}
-            </h3>
-            <p className="text-xs text-[#52525B] leading-relaxed">
-              {isEn
-                ? 'Download high-resolution A5 PDFs formatted specifically for smartphones and tablets.'
-                : 'Unduh berkas PDF resmi ukuran A5 yang dirancang khusus agar nyaman dibaca di layar HP.'}
-            </p>
-          </EditorialCard>
+          </div>
         </div>
       </section>
 
-      {/* 3. THE 3 VOLUMES CATALOG */}
-      <section id="books" className="py-20 px-4 max-w-7xl mx-auto border-b border-[#E4E2DD]">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="font-mono text-[11px] uppercase tracking-widest px-3 py-1 rounded-full bg-white border border-[#E4E2DD] text-[#111113] font-semibold">
-            {isEn ? 'ARCHITECTURAL CURRICULUM // 45 CHAPTERS' : 'KURIKULUM KEPEMIMPINAN // TOTAL 45 BAB'}
-          </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-[#111113] mt-4 mb-3">
-            {isEn
-              ? 'Three Volumes Built for Every Stage of Your Leadership'
-              : 'Tiga Volume Sesuai Tangga Tanggung Jawab Kamu'}
-          </h2>
-        </div>
+      <section className="mx-auto max-w-6xl px-4 py-10">
+        <div className="doodle-box bg-gradient-to-r from-[#EFF6FF] via-white to-[#FEF9C3] p-6 sm:p-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-[#18181B] bg-[#FFE66D] px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#18181B] mb-2">
+                <MessageSquareText className="w-3.5 h-3.5" />
+                DEMO FITUR UNGGULAN WEB READER
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18181B]">
+                {lang === 'en'
+                  ? 'Try the Live Script Personalizer & Language Switcher'
+                  : 'Coba Sendiri: Ganti Nama Anak Buah & Gaya Bahasa Secara Live!'}
+              </h2>
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {BOOK_CATALOG.map((book, idx) => (
-            <EditorialCard
-              key={book.id}
-              variant={idx === 1 ? 'featured' : 'surface'}
-              indexLabel={`${book.volumeCode} // 15 CHAPTERS`}
-              badgeText={`Rp ${book.priceIdr.toLocaleString('id-ID')}`}
-              accentColor={idx === 0 ? 'cobalt' : idx === 1 ? 'orange' : 'emerald'}
-            >
-              <div className="flex flex-col justify-between h-full">
-                <div>
-                  <div className="py-4 mb-6 border-b border-[#E4E2DD]">
-                    <BookCover3D bookId={book.id} lang={lang} size="md" />
-                  </div>
+            <div className="flex items-center gap-2">
+              <label className="font-mono text-xs font-extrabold text-[#18181B]">
+                {lang === 'en' ? 'Teammate Name:' : 'Ketik Nama Staf:'}
+              </label>
+              <input
+                type="text"
+                value={demoName}
+                onChange={(e) => setDemoName(e.target.value)}
+                placeholder="Budi / Siska"
+                className="w-36 rounded-xl border-2 border-[#18181B] bg-white px-3 py-1.5 text-sm font-extrabold text-[#2563EB]"
+              />
+            </div>
+          </div>
 
-                  <div className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#EA580C] mb-1">
-                    {book.targetRole[lang]}
-                  </div>
-                  <h3 className="font-serif text-2xl font-bold text-[#111113] mb-2">
-                    {book.titles[lang]}
-                  </h3>
-                  <p className="text-sm text-[#52525B] leading-relaxed mb-5">
-                    {book.subtitles[lang]}
-                  </p>
-
-                  <div className="space-y-2 mb-6">
-                    {book.keyFrameworks[lang].map((fw, fIdx) => (
-                      <div
-                        key={fIdx}
-                        className="p-2.5 rounded-lg bg-[#FBF9F5] border border-[#E4E2DD] text-xs font-mono text-[#111113] flex items-start gap-2"
-                      >
-                        <Check className="w-3.5 h-3.5 text-[#0F766E] shrink-0 mt-0.5" />
-                        <span>{fw}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Link href={`/read/${book.id}/${lang}/ch-0`} className="block">
-                  <TacticalButton
-                    variant={idx === 1 ? 'accent' : 'secondary'}
-                    size="md"
-                    className="w-full"
+          <div className="rounded-2xl border-2 border-[#18181B] bg-white p-5 shadow-[4px_4px_0px_#18181B]">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-dashed border-[#E4E4E7] pb-2.5">
+              <span className="font-mono text-xs font-bold text-[#1E3A8A]">
+                {SAMPLE_SCRIPTS[lang].context}
+              </span>
+              <div className="flex items-center gap-1">
+                {(['id-kasual', 'id-standar', 'en'] as BookLang[]).map((l) => (
+                  <button
+                    key={l}
+                    type="button"
+                    onClick={() => handleSelectLang(l)}
+                    className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-bold ${
+                      lang === l
+                        ? 'border-[#18181B] bg-[#FFE66D] text-[#18181B]'
+                        : 'border-transparent text-[#52525B]'
+                    }`}
                   >
-                    <BookOpen className="w-4 h-4" />
-                    <span>
-                      {isEn ? 'Read Free Chapters (Ch. 0 & 1)' : 'Baca Bab 0 & 1 Gratis'}
-                    </span>
-                  </TacticalButton>
-                </Link>
+                    {l.toUpperCase()}
+                  </button>
+                ))}
               </div>
-            </EditorialCard>
-          ))}
-        </div>
-      </section>
+            </div>
 
-      {/* 4. INTERACTIVE 1-ON-1 SCRIPT SIMULATOR */}
-      <section id="scripts" className="py-20 px-4 bg-[#F3F0E8]/60 border-b border-[#E4E2DD]">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="font-mono text-[11px] uppercase tracking-widest px-3 py-1 rounded-full bg-white border border-[#E4E2DD] text-[#111113] font-semibold">
-              {isEn ? 'INTERACTIVE SCRIPT ENGINE' : 'SIMULATOR SKRIP PERCAKAPAN 1-ON-1'}
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#111113] mt-4 mb-2">
-              {isEn
-                ? 'Word-for-Word Workplace Scripts Ready to Copy'
-                : 'Bukan Teori: Contekan Kalimat Siap Salin untuk Rapat & 1-on-1'}
-            </h2>
-          </div>
+            <p className="font-mono text-sm sm:text-base leading-relaxed text-[#18181B] bg-[#FFFDF5] p-4 rounded-xl border border-[#E4E4E7]">
+              {SAMPLE_SCRIPTS[lang].script(demoName.trim() || 'Budi')}
+            </p>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
-            {scenarios.map((sc, i) => (
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <span className="font-hand text-sm text-[#52525B]">
+                ✨ Di dalam buku ada <strong>40+ skrip</strong> seperti ini untuk berbagai situasi sulit!
+              </span>
               <button
-                key={i}
                 type="button"
-                onClick={() => setActiveScenario(i)}
-                className={`px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer border ${
-                  activeScenario === i
-                    ? 'bg-[#111113] text-white border-[#111113]'
-                    : 'bg-white text-[#52525B] border-[#E4E2DD] hover:text-[#111113]'
-                }`}
+                onClick={handleCopyDemo}
+                className="doodle-button bg-[#FFE66D] px-4 py-2 text-xs font-extrabold inline-flex items-center gap-1.5"
               >
-                {sc.title}
-              </button>
-            ))}
-          </div>
-
-          <EditorialCard
-            variant="featured"
-            indexLabel={scenarios[activeScenario].code}
-            badgeText={lang.toUpperCase()}
-            accentColor="orange"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-[#E4E2DD]">
-              <div>
-                <h3 className="font-serif text-xl font-bold text-[#111113]">
-                  {scenarios[activeScenario].title}
-                </h3>
-                <p className="font-mono text-xs text-[#71717A] mt-0.5">
-                  {scenarios[activeScenario].situation}
-                </p>
-              </div>
-              <TacticalButton
-                type="button"
-                variant="secondary"
-                size="sm"
-                onClick={copyActiveScenario}
-              >
-                {copied ? (
+                {copiedDemo ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-[#0F766E]" />
-                    <span>{isEn ? 'Copied!' : 'Tersalin!'}</span>
+                    <Check className="w-4 h-4 text-[#065F46]" />
+                    <span>Tersalin ke Clipboard!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>{isEn ? 'Copy Script' : 'Salin Skrip'}</span>
+                    <Copy className="w-4 h-4" />
+                    <span>Salin Contoh Skrip Ini</span>
                   </>
                 )}
-              </TacticalButton>
+              </button>
             </div>
-
-            <div className="space-y-3">
-              {scenarios[activeScenario].lines.map((line, idx) => (
-                <div
-                  key={idx}
-                  className={`p-4 rounded-xl border ${
-                    idx % 2 === 0
-                      ? 'bg-[#FBF9F5] border-[#111113]/20'
-                      : 'bg-white border-[#E4E2DD]'
-                  }`}
-                >
-                  <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#EA580C] mb-1">
-                    {line.role}
-                  </div>
-                  <p className="font-sans text-sm sm:text-base text-[#111113] leading-relaxed">
-                    &ldquo;{line.text}&rdquo;
-                  </p>
-                </div>
-              ))}
-            </div>
-          </EditorialCard>
+          </div>
         </div>
       </section>
 
-      {/* 5. PRICING MATRIX */}
-      <PricingMatrix lang={lang} />
+      <section className="mx-auto max-w-6xl px-4 py-12">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#DBEAFE] px-3.5 py-1 font-mono text-xs font-extrabold text-[#1E3A8A] mb-3">
+            <Layers className="w-3.5 h-3.5" />
+            KURIKULUM TANGGA KARIER LEADER
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B]">
+            {lang === 'en'
+              ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
+              : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'}
+          </h2>
+        </div>
 
-      {/* 6. COLOPHON FOOTER */}
-      <footer className="border-t border-[#111113] bg-[#111113] text-white py-12 px-4 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <span className="font-serif text-2xl font-bold tracking-tight">
-              aiossan<span className="text-[#EA580C]">.com</span>
-            </span>
-            <p className="text-xs text-[#A1A1AA] font-mono mt-1">
-              SWISS EDITORIAL LEADERSHIP PLAYBOOK PRESS • INTERACTIVE WEB & A5 PDF
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {BOOK_CATALOG.map((book) => {
+            const highlights = BOOK_HIGHLIGHTS[book.id][lang];
+            const levelTag = LEVEL_TAGS[book.id][lang];
+            return (
+              <div
+                key={book.id}
+                className="doodle-box flex flex-col justify-between bg-white p-6"
+              >
+                <div>
+                  <div className="mb-5 flex justify-center">
+                    <BookCoverMockup bookId={book.id} lang={lang} size="md" />
+                  </div>
+
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="font-mono text-xs font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
+                      {levelTag}
+                    </span>
+                    <span className="font-extrabold text-base text-[#2563EB]">
+                      {formatIDR(book.priceIdr)}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-extrabold text-[#18181B] mb-2">
+                    {book.titles[lang]}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed">
+                    {book.subtitles[lang]}
+                  </p>
+
+                  <ul className="space-y-2 mb-6 border-t border-dashed border-[#E4E4E7] pt-4 text-xs sm:text-sm text-[#18181B]">
+                    {highlights.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex items-center gap-2 pt-2">
+                  <Link
+                    href={`/read/${book.id}/${lang}/ch-0`}
+                    className="doodle-button flex-1 bg-[#FAF7F2] hover:bg-[#FFE66D] py-2.5 px-3 text-xs font-extrabold text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>
+                      {lang === 'en' ? 'Read Free Ch 0 & 1' : 'Baca Gratis Bab 1'}
+                    </span>
+                  </Link>
+                  <a
+                    href="#pricing"
+                    className="doodle-button bg-[#18181B] text-[#FFE66D] py-2.5 px-3 text-xs font-extrabold inline-flex items-center gap-1"
+                  >
+                    <span>Beli</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-8">
+        <LeadershipQuizDoodle lang={lang} />
+      </section>
+
+      <section id="pricing" className="mx-auto max-w-6xl px-4 py-14">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#FFE66D] px-4 py-1 font-mono text-xs font-extrabold text-[#18181B] mb-3 shadow-[2px_2px_0px_#18181B]">
+            <Sparkles className="w-3.5 h-3.5" />
+            INVESTASI SEKALI BAYAR • AKSES SEUMUR HIDUP
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B] mb-3">
+            {lang === 'en'
+              ? 'Choose Your Playbook Package (Instant Web + PDF Access)'
+              : 'Pilih Paket Playbook Sesuai Kebutuhan Lo'}
+          </h2>
+          <p className="text-sm sm:text-base text-[#52525B]">
+            {lang === 'en'
+              ? 'Every purchase unlocks all 3 language editions (Casual ID, Standard ID, and Global English) plus mobile-friendly PDF downloads.'
+              : 'Setiap pembelian langsung membuka ke-3 edisi bahasa sekaligus (Kasual Gue/Lo, Standar Saya/Kamu, dan English) beserta unduhan PDF ramah HP.'}
+          </p>
+        </div>
+
+        <PricingGridDoodle lang={lang} />
+      </section>
+
+      <section className="mx-auto max-w-4xl px-4 py-10">
+        <div className="doodle-box bg-white p-6 sm:p-8">
+          <div className="flex items-center gap-2 mb-6">
+            <HelpCircle className="w-5 h-5 text-[#2563EB]" />
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B]">
+              {lang === 'en'
+                ? 'Frequently Asked Questions'
+                : 'Pertanyaan yang Sering Ditanyakan (FAQ)'}
+            </h3>
           </div>
-          <div className="flex flex-wrap gap-6 text-xs font-mono text-[#D4D4D8]">
-            <Link href="#books" className="hover:text-white">
-              VOLUMES 01—03
-            </Link>
-            <Link href="#scripts" className="hover:text-white">
-              1-ON-1 SCRIPTS
-            </Link>
-            <Link href="#pricing" className="hover:text-white">
-              PRICING
-            </Link>
-            <Link href="/dashboard" className="hover:text-white">
-              READER LIBRARY
-            </Link>
+          <div className="space-y-4 text-sm">
+            <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">
+              <p className="font-extrabold text-[#18181B] mb-1">
+                {lang === 'en'
+                  ? '1. Do I get all 3 language registers with a single purchase?'
+                  : '1. Kalau gw beli 1 buku atau bundel, apakah dapet ke-3 gaya bahasa sekaligus?'}
+              </p>
+              <p className="text-[#52525B]">
+                {lang === 'en'
+                  ? 'Yes! You can switch live between Casual Indonesian (Gue/Lo), Standard Indonesian (Saya/Kamu), and Global English anytime in the Web Reader and download all PDF versions.'
+                  : 'Betul banget! Sekali beli, lo bebas gonta-ganti antara Bahasa Indonesia Kasual (Gue/Lo), Bahasa Indonesia Standar (Saya/Kamu), dan Bahasa Inggris kapan aja di Web Reader maupun download PDF-nya.'}
+              </p>
+            </div>
+            <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">
+              <p className="font-extrabold text-[#18181B] mb-1">
+                {lang === 'en'
+                  ? '2. Is this a monthly subscription or a one-time payment?'
+                  : '2. Apakah ini biaya langganan bulanan atau sekali bayar?'}
+              </p>
+              <p className="text-[#52525B]">
+                {lang === 'en'
+                  ? '100% one-time payment for lifetime access. No recurring monthly fees.'
+                  : '100% sekali bayar untuk akses selamanya (lifetime access). Tidak ada tagihan bulanan.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="mt-auto border-t-2 border-[#18181B] bg-white py-8 px-4">
+        <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
+          <div className="flex items-center gap-2">
+            <WoodlandMascotSvg character="capybara" className="w-8 h-8" />
+            <span className="font-extrabold text-[#18181B]">
+              aiossan.com (Tactical Leadership Playbook Trilogy)
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#0D9488]" />
+            <span>Instant Checkout Powered by Mayar.id • 100% Original Framework</span>
           </div>
         </div>
       </footer>

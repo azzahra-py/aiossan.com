@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CHAPTER_ILLUSTRATIONS, SchematicMotif } from '../src/lib/illustrations';
+import { CHAPTER_ILLUSTRATIONS, SchematicMotif } from '../src/lib/illustrations-editorial';
 import { BOOK_CATALOG, BookLang } from '../src/types/books';
 
 const PUBLIC_DIR = path.join(process.cwd(), 'public');

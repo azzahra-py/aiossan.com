@@ -503,7 +503,7 @@ Setelah target disepakati di awal (Bab 7), anggota tim mulai bekerja. Pada tahap
 
 Biasakan sebaliknya, ya: **peka melihat anggota tim yang sedang bekerja dengan baik, lalu sampaikan apresiasi saat itu juga.**
 
-Riset global **Gallup Workplace** mengungkapkan bahwa **hanya 1 dari 3 pekerja (sekitar 33%)** yang merasa menerima pengakuan atau apresiasi atas pekerjaan yang baik dalam tujuh hari terakhir[^4]. Padahal, meta-analisis Gallup terhadap **3,3 juta pekerja di lebih dari 100.000 tim** membuktikan bahwa tim yang rutin mendapatkan apresiasi jelas mencatatkan **tingkat perpindahan karyawan (*turnover*) 21% hingga 51% lebih rendah**, **produktivitas 14% hingga 18% lebih tinggi**, serta **profitabilitas 23% lebih tinggi**[^4].
+Riset **Gallup Workplace** di Amerika Serikat mengungkapkan bahwa **hanya 1 dari 3 pekerja (sekitar 33%)** yang merasa menerima pengakuan atau apresiasi atas pekerjaan yang baik dalam tujuh hari terakhir[^4]. Padahal, meta-analisis global Gallup terhadap **3,3 juta pekerja di lebih dari 100.000 tim** membuktikan bahwa tim yang skor apresiasi dan keterikatannya (*engagement*) masuk kuartil atas mencatatkan **tingkat perpindahan karyawan (*turnover*) 21% hingga 51% lebih rendah**, **produktivitas 14% hingga 18% lebih tinggi**, serta **profitabilitas 23% lebih tinggi** dibandingkan tim di kuartil bawah[^4].
 
 ### Mengapa Pujian Sambil Lalu Kurang Berdampak?
 
