@@ -60,7 +60,7 @@ export function HandDrawnMermaid({ chart, lang = 'id-kasual' }: { chart: string;
 
   if (hasError) {
     return (
-      <div className="my-6 rounded-2xl border-2 border-[#18181B] bg-[#FFFBEB] p-4 shadow-[3px_3px_0px_#18181B]">
+      <div className="my-6 rounded-2xl border border-amber-200/90 bg-[#FFFBEB] p-4 shadow-sm">
         <div className="mb-2 flex items-center gap-2 font-mono text-xs font-bold text-[#92400E]">
           <GitBranch className="h-4 w-4" />
           <span>{lang === 'en' ? 'Tactical Framework Flow' : 'Alur Kerangka Taktis'}</span>
@@ -74,14 +74,14 @@ export function HandDrawnMermaid({ chart, lang = 'id-kasual' }: { chart: string;
 
   if (!svg) {
     return (
-      <div className="my-6 rounded-2xl border-2 border-[#18181B] bg-white p-6 text-center font-mono text-xs text-[#52525B] shadow-[4px_4px_0px_#18181B]">
+      <div className="my-6 rounded-2xl border border-zinc-200 bg-white p-6 text-center font-mono text-xs text-[#52525B] shadow-sm">
         {lang === 'en' ? 'Drawing the workflow diagram...' : 'Menggambar sketsa bagan alur kerja...'}
       </div>
     );
   }
 
   return (
-    <div className="my-7 rounded-2xl border-2 border-[#18181B] bg-white p-4 sm:p-6 shadow-[4px_4px_0px_#18181B] overflow-hidden">
+    <div className="my-7 rounded-2xl border border-zinc-200/90 bg-white p-4 sm:p-6 shadow-sm overflow-hidden">
       <div className="mb-3 flex items-center justify-between border-b border-dashed border-[#E4E4E7] pb-2">
         <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-extrabold uppercase tracking-wider text-[#2563EB]">
           <GitBranch className="h-3.5 w-3.5" />

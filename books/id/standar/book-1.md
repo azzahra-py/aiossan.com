@@ -4,8 +4,7 @@
 **Ragam Bahasa:** Standar Luwes (`Saya/Kamu` • Baku Tak Kaku)</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **Cara Menggunakan Panduan Ini**
+> [!NOTE] Cara Menggunakan Panduan Ini
 > Seluruh bab di dalam dokumen ini disusun dengan bahasa Indonesia standar yang mengalir seperti diskusi bersama mentor di kantor. Kamu bisa membacanya secara berurutan dari Pendahuluan hingga Bab 13, membuka bagian lipat (*collapsible sections*) untuk melihat templat skrip dan simulasi kasus, atau langsung menuju **Lampiran** saat membutuhkan ringkasan cepat sebelum memulai rapat.
 
 ## Daftar Isi
@@ -49,8 +48,7 @@ Panduan ini saya tulis sebagai pegangan praktis yang bisa langsung kamu terapkan
 2. **4 Keterampilan Komunikasi:** Cara menyimak sampai paham, bertanya untuk memancing solusi, menegur berdasarkan fakta tanpa menjatuhkan mental, dan menguatkan rasa percaya diri tim.
 3. **Menyesuaikan Gaya Pendampingan (L1 sampai L4):** Cara membaca tingkat penguasaan dan kemandirian tiap anggota tim pada satu tugas spesifik, supaya kamu tahu kapan perlu membimbing secara rinci dan kapan perlu memberikan otonomi penuh.
 
-> [!IMPORTANT]
-> **Landasan Riset Panduan Ini**
+> [!IMPORTANT] Landasan Riset Panduan Ini
 > Seluruh langkah praktis di dalam buku ini dirangkum dari riset perilaku organisasi selama puluhan tahun: studi peralihan peran manajer baru dari *Center for Creative Leadership* (CCL)[^1], teori penetapan tujuan (*Goal-Setting Theory*) Edwin Locke dan Gary Latham[^2], riset rasa aman psikologis (*Psychological Safety*) Amy Edmondson di Harvard[^3], serta studi global *Gallup Workplace* mengenai apresiasi kerja[^4]. Semuanya saya rangkum ulang ke dalam bahasa kerja sehari-hari yang lugas dan mudah dipraktikkan.
 
 Mari kita mulai dari perubahan peran yang sedang kamu jalani di **Bab 1**, ya.
@@ -150,8 +148,7 @@ Cara kerjanya sederhana: **kamu menggunakan 4 Keterampilan Komunikasi sebagai fo
 - **3. Evaluasi Berkala Tanpa Kejutan (*No-Surprise Review*)**
   Obrolan penutup periode (bulanan atau kuartalan) untuk meninjau pola keberhasilan, merangkum pelajaran penting, dan menyusun target periode berikutnya.
 
-> [!TIP]
-> **Kunci Agar Evaluasi Akhir Tidak Menegangkan**
+> [!TIP] Kunci Agar Evaluasi Akhir Tidak Menegangkan
 > Kalau kamu rutin menjalankan Obrolan 1 (*Menyepakati Target*), 2A (*Apresiasi Langsung*), dan 2B (*Koreksi Empat Mata*) sepanjang bulan, maka Obrolan 3 (*Evaluasi Berkala*) akan berjalan tenang dan terukur, ya. Tidak akan ada lagi cerita anggota tim terkejut karena baru ditegur di akhir kuartal.
 
 ### Empat Keterampilan Komunikasi Dasar
@@ -247,8 +244,7 @@ Namun perlu hati-hati: salah memilih kata tanya bisa langsung menjatuhkan mental
 
 Ketika seseorang diberondong kata **"Kenapa"** dalam situasi bermasalah, reaksi alaminya adalah membela diri, mencari alasan, atau justru terdiam karena takut salah berbicara lagi.
 
-> [!WARNING]
-> **Efek Kata "Kenapa" Saat Terjadi Masalah**
+> [!WARNING] Efek Kata "Kenapa" Saat Terjadi Masalah
 > Dalam situasi kerja yang sedang bermasalah, pertanyaan *"Kenapa"* hampir selalu terdengar seperti interogasi dan tuduhan. Kata *"Kenapa"* menyeret fokus diskusi ke masa lalu yang sudah tidak bisa diubah dan memicu pencarian kambing hitam.
 
 ### Ganti "Kenapa" dengan "Apa" dan "Bagaimana"
@@ -312,8 +308,7 @@ Karena merasa sungkan atau khawatir merusak suasana kerja, banyak atasan memilih
 
 Agar kamu bisa menyampaikan koreksi secara lugas tanpa melukai harga diri orang lain, pegang satu prinsip dasar ini:
 
-> [!IMPORTANT]
-> **Prinsip Dasar Koreksi Objektif**
+> [!IMPORTANT] Prinsip Dasar Koreksi Objektif
 > Pisahkan **letak kesalahan kerjanya** (perilaku atau hasil kerja) dari **orangnya** (karakter atau harga diri). Yang sedang kamu luruskan adalah tindakan atau datanya yang keliru, bukan menghakimi sifat pribadi manusianya.
 
 Perhatikan perbedaan jelas antara kalimat yang menyerang pribadi dan kalimat yang menunjuk fakta pekerjaan:
@@ -463,8 +458,7 @@ Setelah berdiskusi, tuliskan kesepakatannya secara singkat untuk menjawab tiga k
 2. **Kriteria Sukses:** Seperti apa wujud nyata pekerjaan yang dianggap tuntas dengan baik? (Angka, metrik, atau standar kualitas).
 3. **Kalender (Tenggat / *Deadline*):** Kapan batas waktu pengumpulannya (hari dan jam)?
 
-> [!IMPORTANT]
-> **Batasi 3 sampai 5 Target Utama per Periode**
+> [!IMPORTANT] Batasi 3 sampai 5 Target Utama per Periode
 > Jangan menumpuk 15 target sekaligus pada satu orang. Kalau seseorang memiliki 15 prioritas utama sekaligus, pada praktiknya ia tidak memiliki prioritas sama sekali.
 
 #### 3. Simpan di Dokumen Bersama agar Mudah Ditinjau
@@ -523,8 +517,7 @@ Gunakan 5 langkah sederhana ini supaya apresiasimu terasa tulus dan jelas:
 4. **Berikan jeda singkat (2 sampai 3 detik):** Berhentilah berbicara sejenak supaya mereka merasakan apresiasi itu dengan utuh. Jangan langsung menyambungnya dengan tugas baru di kalimat yang sama (*"Bagus ya, nah sekarang tolong kerjakan yang ini..."* karena itu langsung merusak momen apresiasinya).
 5. **Tutup dengan kalimat penguat:** Akhiri obrolan singkat itu dengan dorongan semangat: *"Pertahankan cara kerja rapi seperti ini, ya. Terima kasih banyak atas inisiatifmu."*
 
-> [!TIP]
-> **Apresiasi Kemajuannya, Jangan Menunggu Sempurna 100%**
+> [!TIP] Apresiasi Kemajuannya, Jangan Menunggu Sempurna 100%
 > Kalau kamu menunggu proyek besar selesai 100% baru memberi apresiasi, timmu bisa kehabisan tenaga di tengah jalan. Terutama bagi anggota tim yang sedang mempelajari tugas baru, berikan pengakuan setiap kali mereka menunjukkan progres awal yang benar, kok.
 
 <details>
@@ -578,8 +571,7 @@ sequenceDiagram
 1. **Target dan standarnya memang sudah disepakati sebelumnya:** Pastikan kekeliruan tersebut memang melenceng dari standar yang sudah pernah disepakati di awal (kalau kamu belum pernah menjelaskan standarnya, berarti instruksi awalmu yang perlu diperbaiki lebih dulu di Bab 7).
 2. **Lakukan segera dan empat mata (privat):** Jangan pernah menegur anggota tim di grup percakapan umum atau di depan rekan kerja lainnya.
 
-> [!CAUTION]
-> **Aturan Privasi Mutlak: Jangan Menegur di Depan Umum**
+> [!CAUTION] Aturan Privasi Mutlak: Jangan Menegur di Depan Umum
 > Menegur kesalahan individu di grup WhatsApp kantor atau di depan rekan kerja lain membuat orang tersebut merasa dipermalukan di depan umum (*public shaming*). Riset membuktikan hal ini langsung merusak rasa aman psikologis[^3] dan memicu sikap defensif. Selalu panggil berbicara empat mata, ya.
 
 ### Alur 2 Babak Koreksi Empat Mata
@@ -646,8 +638,7 @@ Akibatnya, anggota tim terkejut karena baru diberi tahu kesalahannya setelah ber
 
 Kalau kamu sudah rutin menyepakati target (Bab 7), memberi apresiasi langsung (Bab 8), dan melakukan koreksi empat mata (Bab 9) dari minggu ke minggu, maka sesi evaluasi akhir tinggal merangkum obrolan-obrolan yang memang sudah pernah kalian bahas sebelumnya, kok.
 
-> [!IMPORTANT]
-> **Jangan Menabung Teguran untuk Evaluasi Akhir**
+> [!IMPORTANT] Jangan Menabung Teguran untuk Evaluasi Akhir
 > Jangan pernah memunculkan teguran atas kesalahan lama yang belum pernah kamu bahas pada sesi *Koreksi Empat Mata* harian. Evaluasi akhir adalah tempat melihat pola perkembangan kerja dan menyusun target periode berikutnya.
 
 ### Empat Langkah Menjalankan Evaluasi Berkala
@@ -838,8 +829,7 @@ Berikut ciri-ciri setiap level kemandirian tugas di lapangan:
 - **L4: Mahir dan Mandiri (Penguasaan Teknis Tinggi, Otonomi Penuh)**
   Sudah ahli secara teknis sekaligus matang dalam mengambil keputusan. Ia proaktif mengantisipasi risiko, mampu memecahkan masalah sendiri dari hulu ke hilir, bahkan sudah bisa ikut membimbing rekan kerja lainnya.
 
-> [!WARNING]
-> **Ukur per Tugas Spesifik, Jangan Dijadikan Label Permanen bagi Orangnya**
+> [!WARNING] Ukur per Tugas Spesifik, Jangan Dijadikan Label Permanen bagi Orangnya
 > Level L1 sampai L4 ini **melekat spesifik pada tugas yang sedang dikerjakan**, bukan label permanen untuk orangnya, ya. Misalnya, Budi sudah berada di level **L4 (Mahir dan Mandiri)** saat membuat desain konten harian, tetapi otomatis kembali ke **L1 (Baru Mengenal Tugas)** saat kamu menugaskannya menegosiasikan kontrak vendor untuk pertama kalinya.
 
 ### 2. Empat Gaya Pendampingan yang Sesuai (G1 sampai G4)
@@ -984,6 +974,5 @@ Simpan bagian ini sebagai pengingat cepat sebelum kamu memulai rapat atau sesi *
 [^3]: **Edmondson, A. C. (1999).** *Psychological Safety and Learning Behavior in Work Teams*. Administrative Science Quarterly, 44(2), 350-383. Riset empiris yang membuktikan bahwa rasa aman psikologis mendorong keterbukaan pelaporan masalah dan pembelajaran tim. Tersedia di: https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Edmondson%20Psychological%20safety.pdf
 [^4]: **Gallup Workplace Analytics.** *The Importance of Employee Recognition: Low Cost, High Impact* & *Gallup Global Workplace Engagement Meta-Analysis* (studi atas 3,3 juta pekerja di lebih dari 100.000 tim). Tersedia di: https://www.gallup.com/workplace/236441/employee-recognition-low-cost-high-impact.aspx
 
-> [!NOTE]
-> **Catatan Hak Cipta & Penafian Merek Dagang**
+> [!NOTE] Catatan Hak Cipta & Penafian Merek Dagang
 > Seluruh kerangka kerja, skrip dialog, dan ilustrasi kasus di dalam buku ini disusun secara orisinal untuk tujuan edukasi praktis kepemimpinan di tempat kerja. Penyebutan nama perangkat lunak atau layanan pihak ketiga (seperti WhatsApp, Slack, Zoom, Google Meet, Trello, Notion, Google Docs, Microsoft Excel, Instagram, dan TikTok) di dalam contoh skenario semata-mata bersifat ilustratif sebagai bagian dari keseharian kerja dan bukan merupakan bentuk afiliasi, lisensi, maupun dukungan resmi dari masing-masing pemilik merek dagang tersebut.

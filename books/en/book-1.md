@@ -4,8 +4,7 @@
 **Tone & Register:** Conversational-Professional Global English</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **How to Use This Playbook**
+> [!NOTE] How to Use This Playbook
 > This guide is built for working managers, team leads, and project coordinators across remote, hybrid, and in-office teams. Read it straight through from the Introduction to Chapter 13, expand the collapsible blocks (`<details>`) to copy ready-to-use conversation scripts and test yourself on the 4-week simulation, or jump straight to the **Appendix** when you need a quick desk reference before a 1-on-1.
 
 ## Table of Contents
@@ -49,8 +48,7 @@ This book is a field manual you can put to work tomorrow morning. We skip abstra
 2. **4 Communication Skills:** How to listen without jumping in too early, ask questions that build ownership, point out mistakes objectively, and keep your team's confidence intact.
 3. **Calibrating Your Guidance (L1 to L4):** How to read a teammate's workflow mastery and decision autonomy on a specific task so you know when to give step-by-step guidance and when to get out of their way.
 
-> [!IMPORTANT]
-> **Evidence-Based Foundations**
+> [!IMPORTANT] Evidence-Based Foundations
 > Every practice in this guide is grounded in decades of organizational behavior research: leadership transition studies from the *Center for Creative Leadership* (CCL)[^1], Edwin Locke and Gary Latham's *Goal-Setting Theory*[^2], Harvard professor Amy Edmondson's field studies on *Psychological Safety*[^3], and Gallup's global workplace recognition analytics[^4]. All of it has been distilled into plain, direct language for modern workplaces.
 
 Let's start with the role shift you are navigating right now in **Chapter 1**.
@@ -147,8 +145,7 @@ The logic is straightforward: **you use the 4 Communication Skills to run the 4 
 - **3. The No-Surprise Review (The 30/70 Wrap-Up)**
   A monthly, quarterly, or post-project review that summarizes patterns you have already discussed, extracts lessons learned, and sets the next cycle's targets.
 
-> [!TIP]
-> **Why Reviews Stop Feeling Stressful**
+> [!TIP] Why Reviews Stop Feeling Stressful
 > When you consistently run Conversation 1 (*Goal Alignment*), 2A (*Direct Recognition*), and 2B (*Private Course Correction*) week after week, Conversation 3 (*The No-Surprise Review*) becomes calm and predictable. Nobody walks into a review blindsided by complaints you secretly saved up for three months.
 
 ### The Four Communication Skills
@@ -243,8 +240,7 @@ Word choice matters more than most new managers realize. Think about how often y
 
 When someone is put on the spot with the word **"Why"** during a problem, the human brain reads it as an accusation. People immediately shift into self-defense: they make excuses, blame another department, or shut down completely so they do not say the wrong thing.
 
-> [!WARNING]
-> **The Problem with "Why" Questions Under Pressure**
+> [!WARNING] The Problem with "Why" Questions Under Pressure
 > When something has gone wrong at work, starting a question with *"Why"* almost always sounds like an interrogation. It drags the conversation backward into blame instead of moving it forward toward a fix.
 
 ### Swap "Why" for "What" and "How"
@@ -308,8 +304,7 @@ Because nobody enjoys awkward confrontation, many managers avoid the conversatio
 
 To deliver clear, honest corrections without demeaning anyone, anchor yourself to one core rule:
 
-> [!IMPORTANT]
-> **The Golden Rule of Objective Feedback**
+> [!IMPORTANT] The Golden Rule of Objective Feedback
 > Separate **the work issue** (the specific action, data error, or missed behavior) from **the person** (their character, intelligence, or worth). You are correcting a flawed output, not putting a human being on trial.
 
 Look at the difference between attacking a person and pointing to verifiable facts:
@@ -459,8 +454,7 @@ Summarize your agreement in writing using the **3D Brief**:
 2. **Definition of Done (*Quality Bar*):** What measurable criteria prove the work is complete and up to standard? (Metrics, page length, accuracy checks, or format).
 3. **Deadline (*When*):** What is the exact date, time, and time zone for delivery or check-in?
 
-> [!IMPORTANT]
-> **Cap Active Priorities at 3 to 5 Goals per Cycle**
+> [!IMPORTANT] Cap Active Priorities at 3 to 5 Goals per Cycle
 > Never load a teammate with 15 "top priorities" at once. When everything is urgent, nothing gets done well. Keep each person focused on 3 to 5 clear goals per cycle.
 
 #### 3. Store It in a Shared Workspace
@@ -519,8 +513,7 @@ Use this five-step structure to make your recognition specific, memorable, and m
 4. **Pause for 2 to 3 Seconds:** Let the compliment sit for a moment so they can actually take it in. Do not ruin the moment by immediately piling on a new chore in the same breath (*"Great job on this, now can you also take over..."*).
 5. **Close with Encouragement:** Wrap up warmly: *"Keep bringing that level of preparation to our reviews. I really appreciate the initiative."*
 
-> [!TIP]
-> **Praise Progress Early, Not Just the Final Launch**
+> [!TIP] Praise Progress Early, Not Just the Final Launch
 > If you wait until a six-month initiative is 100% finished before saying a word of praise, your team will run out of steam halfway through. Especially when someone is learning a new responsibility (L1 or L2), recognize them whenever they get the early building blocks right.
 
 <details>
@@ -574,8 +567,7 @@ sequenceDiagram
 1. **The expectation was clearly set beforehand:** Make sure the error actually violates a standard you agreed on in a 3D Brief. If you never defined the standard upfront, own your part of the miscommunication and go back to Chapter 7.
 2. **Hold the conversation promptly and privately (1-on-1):** Never correct an individual's mistake in a public Slack channel or in front of the rest of the team.
 
-> [!CAUTION]
-> **Strict Privacy Rule: Praise in Public, Correct in Private**
+> [!CAUTION] Strict Privacy Rule: Praise in Public, Correct in Private
 > Calling out an individual's mistake in a group channel or open meeting triggers public embarrassment. Research shows that public shaming destroys psychological safety[^3] and makes the entire team defensive and secretive. Always move corrective conversations to a private 1-on-1.
 
 ### The Two-Part Structure of Private Course Correction
@@ -642,8 +634,7 @@ Then review day arrives, and the manager dumps four months of saved-up complaint
 
 When you practice *Goal Alignment* (Chapter 7), *Direct Recognition* (Chapter 8), and *Private Course Correction* (Chapter 9) throughout the month, your formal review becomes a calm, reflective wrap-up of conversations you and your teammate have already had.
 
-> [!IMPORTANT]
-> **Never Hoard Corrections for Review Day**
+> [!IMPORTANT] Never Hoard Corrections for Review Day
 > Never ambush a teammate in a monthly or quarterly review with an old mistake you failed to bring up when it happened. A review is a summary of established patterns and a launchpad for the next cycle's goals.
 
 ### Four Steps to Running a No-Surprise Review (The 30/70 Rule)
@@ -835,8 +826,7 @@ Here is how to spot each task level in day-to-day work:
 - **L4: Full-Autonomy Stage (Complete Workflow Mastery, Ready for End-to-End Ownership)**
   Both technically fluent and decisive on this task. They anticipate edge cases, resolve roadblocks independently, and can mentor others on the workflow.
 
-> [!WARNING]
-> **Diagnose Per Task, Never Label the Person Permanently**
+> [!WARNING] Diagnose Per Task, Never Label the Person Permanently
 > Task levels L1 through L4 are **task-specific**, not permanent personality labels. A senior designer might operate at **L4 (Full-Autonomy Stage)** when leading a product UI sprint, and simultaneously sit at **L1 (Orientation Stage)** the first time you ask them to negotiate an annual software vendor contract.
 
 ### 2. Matching Your Guidance Mode: G1 to G4
@@ -981,6 +971,5 @@ Keep these three summary tables handy as a quick refresher before stepping into 
 [^3]: **Edmondson, A. C. (1999).** *Psychological Safety and Learning Behavior in Work Teams*. Administrative Science Quarterly, 44(2), 350-383. Empirical field research establishing that psychological safety enables candid error reporting and team learning. Available at: https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Group_Performance/Edmondson%20Psychological%20safety.pdf
 [^4]: **Gallup Workplace Analytics.** *The Importance of Employee Recognition: Low Cost, High Impact* & *Gallup Global Workplace Engagement Meta-Analysis* (study covering 3.3 million employees across 100,000+ teams). Available at: https://www.gallup.com/workplace/236441/employee-recognition-low-cost-high-impact.aspx
 
-> [!NOTE]
-> **Copyright & Trademark Notice**
+> [!NOTE] Copyright & Trademark Notice
 > All leadership frameworks, conversation scripts, and case simulations in this playbook are original educational material created for practical workplace application. References to third-party software products or platforms (such as Slack, Zoom, Google Meet, Microsoft Teams, Notion, Jira, Asana, Linear, Google Docs, Microsoft Excel, LinkedIn, Meta, and Google Ads) appear solely as illustrative examples of modern workplace workflows and do not imply affiliation, sponsorship, or endorsement by their respective trademark owners.

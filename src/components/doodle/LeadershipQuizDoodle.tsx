@@ -17,31 +17,39 @@ interface QuizQuestion {
 const QUESTIONS: QuizQuestion[] = [
   {
     q: {
-      'id-kasual': '1. Apa kejadian yang paling sering bikin kepala lo cenat-cenut minggu ini?',
-      'id-standar': '1. Situasi apa yang paling sering menguras pikiran kamu minggu ini?',
+      'id-kasual':
+        '1. Apa kejadian yang paling sering bikin kepala lo cenat-cenut minggu ini?',
+      'id-standar':
+        '1. Situasi apa yang paling sering menguras pikiran kamu minggu ini?',
       en: '1. Which workplace situation drained your energy the most this week?',
     },
     options: [
       {
         label: {
-          'id-kasual': 'Sungkan negur anak buah yang kerjanya meleset, akhirnya gw kerjain sendiri.',
-          'id-standar': 'Sungkan menegur staf yang hasilnya meleset, sehingga saya kerjakan sendiri.',
+          'id-kasual':
+            'Sungkan negur anak buah yang kerjanya meleset, akhirnya gw kerjain sendiri.',
+          'id-standar':
+            'Sungkan menegur staf yang hasilnya meleset, sehingga saya kerjakan sendiri.',
           en: 'Hesitating to correct a teammate’s missed work and redoing it myself.',
         },
         targetBook: 'book-1',
       },
       {
         label: {
-          'id-kasual': 'Kalender penuh rapat & chat malem, rasanya kayak pemadam kebakaran tiap hari.',
-          'id-standar': 'Kalender penuh rapat & pesan malam hari, terasa seperti pemadam kebakaran.',
+          'id-kasual':
+            'Kalender penuh rapat & chat malem, rasanya kayak pemadam kebakaran tiap hari.',
+          'id-standar':
+            'Kalender penuh rapat & pesan malam hari, terasa seperti pemadam kebakaran.',
           en: 'Back-to-back meetings and late-night pings—constantly firefighting.',
         },
         targetBook: 'book-2',
       },
       {
         label: {
-          'id-kasual': 'Para Team Leader di bawah gw jalan sendiri-sendiri & sering saling lempar salah.',
-          'id-standar': 'Para Team Leader di bawah saya kurang selaras dan terjebak ego antar-tim.',
+          'id-kasual':
+            'Para Team Leader di bawah gw jalan sendiri-sendiri & sering saling lempar salah.',
+          'id-standar':
+            'Para Team Leader di bawah saya kurang selaras dan terjebak ego antar-tim.',
           en: 'Team leads under me operate in silos and escalate every small conflict.',
         },
         targetBook: 'book-3',
@@ -50,31 +58,38 @@ const QUESTIONS: QuizQuestion[] = [
   },
   {
     q: {
-      'id-kasual': '2. Saat anggota tim nanya "Kak, ini bagusnya gimana ya?", apa respons otomatis lo?',
-      'id-standar': '2. Saat anggota tim bertanya "Sebaiknya ini bagaimana ya?", apa respons kamu?',
+      'id-kasual':
+        '2. Saat anggota tim nanya "Kak, ini bagusnya gimana ya?", apa respons otomatis lo?',
+      'id-standar':
+        '2. Saat anggota tim bertanya "Sebaiknya ini bagaimana ya?", apa respons kamu?',
       en: '2. When a teammate asks "How should I do this?", what is your default move?',
     },
     options: [
       {
         label: {
           'id-kasual': 'Langsung gw kasih tahu jawabannya biar cepet beres.',
-          'id-standar': 'Langsung memberikan solusinya agar pekerjaan cepat selesai.',
+          'id-standar':
+            'Langsung memberikan solusinya agar pekerjaan cepat selesai.',
           en: 'Give them the exact answer right away so it gets done fast.',
         },
         targetBook: 'book-1',
       },
       {
         label: {
-          'id-kasual': 'Gw bilang "Sini gw cek dulu", eh malah numpuk di meja gw sampai lembur.',
-          'id-standar': 'Mengambil alih untuk diperiksa, namun akhirnya menumpuk di meja saya.',
+          'id-kasual':
+            'Gw bilang "Sini gw cek dulu", eh malah numpuk di meja gw sampai lembur.',
+          'id-standar':
+            'Mengambil alih untuk diperiksa, namun akhirnya menumpuk di meja saya.',
           en: 'Take the monkey onto my own back and review it late at night.',
         },
         targetBook: 'book-2',
       },
       {
         label: {
-          'id-kasual': 'Staf level bawah lompat langsung nanya ke gw, melewati Team Leader mereka.',
-          'id-standar': 'Staf melompati Team Leader mereka dan bertanya langsung kepada saya.',
+          'id-kasual':
+            'Staf level bawah lompat langsung nanya ke gw, melewati Team Leader mereka.',
+          'id-standar':
+            'Staf melompati Team Leader mereka dan bertanya langsung kepada saya.',
           en: 'Frontline staff bypass their own team lead and come straight to me.',
         },
         targetBook: 'book-3',
@@ -83,31 +98,39 @@ const QUESTIONS: QuizQuestion[] = [
   },
   {
     q: {
-      'id-kasual': '3. Apa target terbesar yang pengen lo capai dalam 30 hari ke depan?',
-      'id-standar': '3. Apa sasaran utama yang ingin kamu capai dalam 30 hari ke depan?',
+      'id-kasual':
+        '3. Apa target terbesar yang pengen lo capai dalam 30 hari ke depan?',
+      'id-standar':
+        '3. Apa sasaran utama yang ingin kamu capai dalam 30 hari ke depan?',
       en: '3. What is your #1 leadership goal for the next 30 days?',
     },
     options: [
       {
         label: {
-          'id-kasual': 'Punya skrip 1-on-1 yang tegas tapi manusiawi buat ngarahin & negur tim.',
-          'id-standar': 'Memiliki skrip 1-on-1 yang tegas dan terstruktur untuk membimbing tim.',
+          'id-kasual':
+            'Punya skrip 1-on-1 yang tegas tapi manusiawi buat ngarahin & negur tim.',
+          'id-standar':
+            'Memiliki skrip 1-on-1 yang tegas dan terstruktur untuk membimbing tim.',
           en: 'Have plug-and-play 1-on-1 scripts to set clear targets and give feedback.',
         },
         targetBook: 'book-1',
       },
       {
         label: {
-          'id-kasual': 'Bisa pulang tenggo jam 6 sore dengan tenang karena sistem tim jalan otomatis.',
-          'id-standar': 'Memiliki batas kerja sehat dan kader tangan kanan agar tidak burnout.',
+          'id-kasual':
+            'Bisa pulang tenggo jam 6 sore dengan tenang karena sistem tim jalan otomatis.',
+          'id-standar':
+            'Memiliki batas kerja sehat dan kader tangan kanan agar tidak burnout.',
           en: 'Unplug at 6 PM guilt-free with a self-running team and strong second-in-command.',
         },
         targetBook: 'book-2',
       },
       {
         label: {
-          'id-kasual': 'Bikin para Team Leader di divisi gw mandiri dan kompak tanpa drama silo.',
-          'id-standar': 'Membangun kemandirian dan keselarasan antar-Team Leader di divisi saya.',
+          'id-kasual':
+            'Bikin para Team Leader di divisi gw mandiri dan kompak tanpa drama silo.',
+          'id-standar':
+            'Membangun kemandirian dan keselarasan antar-Team Leader di divisi saya.',
           en: 'Coach my team leads to solve cross-team bottlenecks without my micromanagement.',
         },
         targetBook: 'book-3',
@@ -134,8 +157,10 @@ const DIAGNOSIS_MAP: Record<
       en: 'Your Profile: Kapi the First-Time Captain',
     },
     title: {
-      'id-kasual': 'Lo Butuh Fondasi Obrolan 1-on-1 & Delegasi Tanpa Rasa Sungkan!',
-      'id-standar': 'Kamu Membutuhkan Kerangka Komunikasi 1-on-1 & Delegasi Terukur!',
+      'id-kasual':
+        'Lo Butuh Fondasi Obrolan 1-on-1 & Delegasi Tanpa Rasa Sungkan!',
+      'id-standar':
+        'Kamu Membutuhkan Kerangka Komunikasi 1-on-1 & Delegasi Terukur!',
       en: 'You Need Tactical 1-on-1 Scripts & Delegation Without Awkwardness!',
     },
     desc: {
@@ -143,7 +168,7 @@ const DIAGNOSIS_MAP: Record<
         'Mulai dari Buku 1 (Mahir Memimpin Tim) untuk menguasai Rumus Target 3K dan skrip koreksi 4 mata, lalu lanjutkan ke Buku 2 agar ritme kerja lo tetap awet.',
       'id-standar':
         'Mulailah dari Buku 1 (Mahir Memimpin Tim) untuk menguasai Rumus Target 3K dan koreksi empat mata, lalu kombinasikan dengan Buku 2.',
-      en: 'Start with Book 1 (Tactical Team Leadership) for the 3C Goal Formula and private course-correction scripts.',
+      en: 'Start with Book 1 (Practical Team Leadership) for the 3C Goal Formula and private course-correction scripts.',
     },
     color: 'from-[#DBEAFE] via-[#FFFDF9] to-[#FEF9C3]',
   },
@@ -155,8 +180,10 @@ const DIAGNOSIS_MAP: Record<
       en: 'Your Profile: The Overloaded Firefighter Ready to Architect Systems',
     },
     title: {
-      'id-kasual': 'Waktunya Berhenti Jadi Pemadam Kebakaran & Mulai Bangun Sistem!',
-      'id-standar': 'Saatnya Beralih dari Pemadam Masalah ke Arsitek Sistem Kerja!',
+      'id-kasual':
+        'Waktunya Berhenti Jadi Pemadam Kebakaran & Mulai Bangun Sistem!',
+      'id-standar':
+        'Saatnya Beralih dari Pemadam Masalah ke Arsitek Sistem Kerja!',
       en: 'Stop Carrying Every Monkey—Build Your Anti-Burnout Team System!',
     },
     desc: {
@@ -164,7 +191,7 @@ const DIAGNOSIS_MAP: Record<
         'Buku 2 (Napas Panjang Memimpin Tim) dirancang khusus buat lo: cara menolak lemparan "monyet" tugas anak buah, negosiasi beban kerja pakai data ke bos, dan matikan pikiran kerja jam 6 sore.',
       'id-standar':
         'Buku 2 (Napas Panjang Memimpin Tim) akan membantu kamu membangun perisai emosi, mendelegasikan wewenang ke kader tangan kanan, dan mencegah burnout.',
-      en: 'Book 2 (Sustaining Your Leadership Stamina) gives you the Glass Shield framework, capacity negotiation scripts, and 6 PM detachment rituals.',
+      en: 'Book 2 (Sustaining Your Leadership) gives you the Glass Shield framework, capacity negotiation scripts, and 6 PM detachment rituals.',
     },
     color: 'from-[#CCFBF1] via-[#FFFDF9] to-[#FFEDD5]',
   },
@@ -176,8 +203,10 @@ const DIAGNOSIS_MAP: Record<
       en: 'Your Profile: Bubu & Kapi the Division Navigator',
     },
     title: {
-      'id-kasual': 'Level Lo Udah Di Atas Team Lead: Saatnya Melatih Para Kapten!',
-      'id-standar': 'Kamu Berada di Level Manajer Divisi: Saatnya Melatih Para Leader!',
+      'id-kasual':
+        'Level Lo Udah Di Atas Team Lead: Saatnya Melatih Para Kapten!',
+      'id-standar':
+        'Kamu Berada di Level Manajer Divisi: Saatnya Melatih Para Leader!',
       en: 'You Are Leading Other Leaders: Master Coaching the Coach & Anti-Silo!',
     },
     desc: {
@@ -217,25 +246,40 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
   const finished = step >= QUESTIONS.length;
   const winner = finished ? getWinner() : 'book-1';
   const result = DIAGNOSIS_MAP[winner];
+  const progressPct = finished
+    ? 100
+    : Math.round(((step + 1) / QUESTIONS.length) * 100);
 
   return (
-    <div id="quiz" className="doodle-box relative overflow-hidden bg-[#FFFBEB] p-6 sm:p-8">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-[#18181B] bg-[#FFE66D] px-3 py-1 font-mono text-xs font-extrabold text-[#18181B]">
+    <div
+      id="quiz"
+      className="doodle-box relative overflow-hidden bg-gradient-to-br from-[#FFFBEB] via-[#FFFFFF] to-[#EFF6FF]/60 p-6 sm:p-8"
+    >
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-[#FFE66D] px-3.5 py-1 font-mono text-xs font-extrabold text-[#18181B] shadow-2xs">
           <Sparkles className="h-3.5 w-3.5" />
           {lang === 'en'
             ? '45-Second Interactive Leadership Diagnostic'
             : 'Kuis Interaktif 45 Detik • Diagnosis Gaya & Beban Kerja Leader'}
         </span>
-        <span className="font-hand text-sm font-bold text-[#2563EB]">
-          {finished
-            ? lang === 'en'
-              ? '✨ Diagnosis Complete!'
-              : '✨ Hasil Diagnosis Siap!'
-            : `${lang === 'en' ? 'Question' : 'Pertanyaan'} ${step + 1} / ${
-                QUESTIONS.length
-              }`}
-        </span>
+
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs font-extrabold text-[#2563EB]">
+            {finished
+              ? lang === 'en'
+                ? '✓ Diagnosis Complete!'
+                : '✓ Hasil Diagnosis Siap!'
+              : `${lang === 'en' ? 'Step' : 'Langkah'} ${step + 1} / ${
+                  QUESTIONS.length
+                }`}
+          </span>
+          <div className="h-2.5 w-24 overflow-hidden rounded-full border border-zinc-200 bg-white">
+            <div
+              className="h-full bg-[#2563EB] transition-all duration-300"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+        </div>
       </div>
 
       {!finished ? (
@@ -252,7 +296,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
                 className="doodle-button group flex items-center justify-between gap-3 bg-white hover:bg-[#FEF9C3] p-4 text-left"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 border-[#18181B] bg-[#DBEAFE] font-mono text-xs font-black text-[#1E3A8A] group-hover:bg-[#FFE66D]">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-blue-200 bg-[#DBEAFE] font-mono text-xs font-black text-[#1E3A8A] group-hover:bg-[#FFE66D] shadow-2xs">
                     {String.fromCharCode(65 + idx)}
                   </span>
                   <span className="text-sm sm:text-base font-bold text-[#18181B]">
@@ -266,15 +310,17 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
         </div>
       ) : (
         <div
-          className={`rounded-2xl border border-[#E7E2D9] bg-gradient-to-br ${result.color} p-5 sm:p-6 shadow-sm`}
+          className={`rounded-2xl border border-zinc-200/80 bg-gradient-to-br ${result.color} p-5 sm:p-6 shadow-md`}
         >
           <div className="flex flex-col sm:flex-row items-center gap-5">
-            <WoodlandMascotSvg
-              character={result.mascot}
-              className="w-24 h-24 sm:w-28 sm:h-28 shrink-0"
-            />
+            <div className="rounded-2xl border border-zinc-200 bg-white p-2 shadow-xs">
+              <WoodlandMascotSvg
+                character={result.mascot}
+                className="w-24 h-24 sm:w-28 sm:h-28 shrink-0"
+              />
+            </div>
             <div className="flex-1 text-center sm:text-left">
-              <span className="inline-block rounded-md border border-[#18181B] bg-white px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#2563EB] mb-2">
+              <span className="inline-block rounded-md border border-zinc-200 bg-white px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#2563EB] shadow-2xs mb-2">
                 {result.badge[lang]}
               </span>
               <h4 className="text-xl sm:text-2xl font-extrabold text-[#18181B] mb-2">

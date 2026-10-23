@@ -4,8 +4,7 @@
 **Ragam Bahasa:** Kasual / Akrab (`Gue/Lo`)</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **Cara Pakai Panduan Ini**
+> [!NOTE] Cara Pakai Panduan Ini
 > Buku kedua ini ditulis khusus buat lo yang udah ngelewatin masa adaptasi awal sebagai *team leader*, supervisor, atau manajer, tapi belakangan mulai ngerasa kehabisan bensin, jenuh sama rutinitas kantor, atau kejebak jadi "pemadam kebakaran" tiap hari. Lo bisa baca berurutan dari Pendahuluan sampai Bab 13, buka bagian lipat (*collapsible sections*) buat nyalin skrip negosiasi beban kerja dan simulasi kasus, atau langsung lompat ke **Lampiran** pas butuh contekan cepat buat nata ulang ritme kerja lo minggu ini.
 
 ## Daftar Isi
@@ -52,8 +51,7 @@ Buku ini gue susun sebagai panduan taktis yang langsung bisa lo praktikin buat k
 2. **4 *Skill* Jaga Energi (*Energy Management Skills*):** Empat keterampilan buat ngelindungi kapasitas mental lo, yaitu memilah masalah kerjaan dari beban emosi pribadi, nahan diri biar nggak ngambil alih masalah tim, negosiasi kapasitas ke atas pakai data, dan mutus pikiran kerja habis jam kantor.
 3. **Kalibrasi Mode Pemulihan (Level L1 sampai L4 ke Mode G1 sampai G4):** Cara ngedeteksi sinyal kejenuhan diri lo sendiri (maupun anggota tim senior lo) sejak dini, biar lo tahu kapan cukup istirahat akhir pekan dan kapan harus ngerombak total beban kerja.
 
-> [!IMPORTANT]
-> **Dasar Riset Panduan Ini**
+> [!IMPORTANT] Dasar Riset Panduan Ini
 > Seluruh strategi di buku ini berpijak pada riset ilmiah psikologi kerja dan perilaku organisasi: model enam area kehidupan kerja dan kelelahan kronis (*Burnout & Six Areas of Worklife*) dari Profesor Christina Maslach[^1], teori perancangan ulang pekerjaan (*Job Crafting Theory*) dari Amy Wrzesniewski dan Jane Dutton[^2], studi pelepasan psikologis (*Psychological Detachment*) dari Profesor Sabine Sonnentag[^3], serta riset ketahanan pemimpin menengah dan kaderisasi dari *Center for Creative Leadership* (CCL)[^4]. Semuanya diterjemahin ke dalam bahasa praktis sehari-hari di kantor.
 
 Yuk, kita bedah akar masalah kenapa banyak *leader* yang rajin dan peduli justru paling gampang kehabisan bensin di **Bab 1**.
@@ -158,8 +156,7 @@ Cara kerjanya saling ngunci: **lo pakai 4 *Skill* Jaga Energi setiap hari supaya
 - **3. Merancang Ulang Peran Biar Semangat Balik Lagi (*Job Crafting* 30/70)**
   Langkah evaluasi berkala buat diri lo sendiri: membatasi urusan pemeliharaan rutin cukup di 70% kapasitas, dan mengalokasikan 30% energi terbaik lo buat proyek strategis, inovasi, atau pengembangan diri yang bikin lo kembali bersemangat.
 
-> [!TIP]
-> **Urutan Ini Jangan Dibalik**
+> [!TIP] Urutan Ini Jangan Dibalik
 > Banyak *leader* yang lagi jenuh langsung pengen nyoba hal baru atau ambil proyek keren (Langkah 3), padahal kalendernya masih penuh sesak dan belum punya tangan kanan di tim. Akibatnya malah makin *burnout*. Bersihin dulu kalender lo (Langkah 1), bangun kader dan batas kerja (Langkah 2A & 2B), baru isi ruang kosongnya sama hal yang bermakna (Langkah 3).
 
 ### Empat *Skill* Jaga Energi Sehari-hari
@@ -250,8 +247,7 @@ Perhatiin apa yang baru aja kejadian dalam waktu 30 detik itu:
 
 Kalau lo punya 6 anggota tim, dan tiap hari masing-masing dari mereka nitipin 2 masalah ke meja lo dengan cara kayak gitu, di hari Jumat lo bakal ngurusin 60 masalah orang lain sambil lembur sendirian, sementara anggota tim lo pulang tepat waktu jam lima sore!
 
-> [!WARNING]
-> **Bahaya Refleks "Penyelamat" (*The Rescuer Trap*)**
+> [!WARNING] Bahaya Refleks "Penyelamat" (*The Rescuer Trap*)
 > Setiap kali lo ngambil alih tugas atau masalah yang sebenernya bagian dari tanggung jawab anggota tim lo, lo lagi ngajarin dua hal buruk sekaligus: (1) kalau ada tugas susah, cukup ngeluh ke *leader* maka tugasnya bakal diambil alih, dan (2) kapasitas waktu lo sendiri boleh dikorbankan kapan aja.
 
 ### Tiga Kalimat Jebakan yang Sering Bikin Tugas Tim Pindah ke Meja Lo
@@ -534,8 +530,7 @@ Gunakan 5 langkah terstruktur ini buat nyiapin 1 atau 2 anggota tim andalan lo j
 4. **Umumkan mandatnya secara terbuka di depan tim:** Supaya rekan-rekan satu tim nggak bingung atau ngerasa dilangkahi, umumkan di rapat tim bahwa untuk urusan X, lo udah memberi mandat resmi ke orang tersebut sebagai titik koordinasi pertama.
 5. **Dampingi lewat sesi *Coaching* singkat 15 menit tiap minggu:** Jangan langsung dilepas buta. Sediakan waktu 15 menit tiap minggu khusus buat ngebahas pengalaman dia mengoordinasi teman-temannya, bantu urai kesulitannya, dan kasih pengakuan terbuka di depan atasan lo atas kontribusi kepemimpinannya.
 
-> [!TIP]
-> **Bagi Peran Kalau Tim Lo Punya Lebih dari Satu Staf Senior**
+> [!TIP] Bagi Peran Kalau Tim Lo Punya Lebih dari Satu Staf Senior
 > Lo nggak harus numpuk semua peran tangan kanan ke satu orang doang. Misalnya, Siska lo percaya pegang kendali mutu teknis (*Quality Lead*), sementara Budi lo percaya pegang koordinasi jadwal lintas divisi (*Project Coordinator*). Beban terbagi rata, dan keduanya sama-sama tumbuh!
 
 <details>
@@ -614,8 +609,7 @@ Misalnya rekan kepala divisi sebelah atau atasan lo terus-menerus ngirim permint
 - **Babak 2 (Kunci Jalur Masuk & Sodorkan Opsi Pertukaran):**
   *"Supaya kualitas kerja tim tetap terjaga dan nggak ada target utama yang dikorbankan diam-diam, mulai minggu ini setiap tambahan tugas di tengah minggu perlu kita pilih pertukarannya (*trade-off*) di papan prioritas kita setiap pagi jam sembilan. Untuk permintaan kampanye Y ini, apakah kita masukkan ke antrean minggu depan, atau kita geser jadwal tugas Z yang sedang dikerjakan tim hari ini?"*
 
-> [!CAUTION]
-> **Konsistensi Adalah Kunci: Jangan Bocor di Hari Jumat**
+> [!CAUTION] Konsistensi Adalah Kunci: Jangan Bocor di Hari Jumat
 > Batas kerja itu persis kayak pagar rumah. Kalau sembilan kali lo jaga pagarnya, tapi di kali kesepuluh lo biarin orang nerobos pagarnya karena lo "lagi malas debat", maka besok-besok semua orang bakal terus nerobos pagar itu. Sekali lo tetapkan jalur koordinasi baru, jaga secara konsisten dengan nada yang ramah dan tenang.
 
 <details>
@@ -677,8 +671,7 @@ Supaya komposisi kerja bulanan lo seimbang antara stabilitas operasional dan gai
   - Mempelajari keterampilan baru yang relevan untuk langkah karier lo berikutnya (misalnya analisis bisnis tingkat lanjut, pemanfaatan otomasi AI untuk alur kerja tim, atau manajemen anggaran tingkat departemen).
   - Membangun jejaring strategis (*networking*) dengan pemimpin di level atas atau divisi lain.
 
-> [!IMPORTANT]
-> **Jangan Biarkan Ruang Kosong Hasil Delegasi Kembali Diisi Sampah Operasional**
+> [!IMPORTANT] Jangan Biarkan Ruang Kosong Hasil Delegasi Kembali Diisi Sampah Operasional
 > Ingat hukum ruang hampa di kantor: kalau lo berhasil menghemat 5 jam seminggu dari pendelegasian ke tangan kanan lo, tapi lo nggak sengaja mengisinya dengan proyek strategis 30% pilihan lo sendiri, maka 5 jam itu pasti bakal kesedot lagi buat ngurusin keributan-keributan kecil yang nggak penting.
 
 ### Empat Langkah Menjalankan *Job Crafting* Tiap Kuartal
@@ -871,8 +864,7 @@ Berikut cara mengenali ciri-ciri tiap level di keseharian kantor:
 - **L4: Kuras Habis Kronis (*Severe Role Exhaustion*)**
   Ini lampu merah. Kelelahan di level L3 yang dibiarin berbulan-bulan tanpa penataan batas akhirnya meledak jadi kelelahan kronis. Lo ngerasa sinis dan mati rasa terhadap tim maupun kantor, konsentrasi hancur, sering sakit fisik (kepala tegang, asam lambung, insomnia), dan ngerasa apa pun yang lo kerjain nggak ada gunanya lagi.
 
-> [!WARNING]
-> **Jangan Mengobati Masalah Level L3 atau L4 Hanya dengan Resep Level L1**
+> [!WARNING] Jangan Mengobati Masalah Level L3 atau L4 Hanya dengan Resep Level L1
 > Kesalahan paling fatal banyak manajer adalah mencoba menyembuhkan **L3 (Banjir Beban Sistemik)** hanya dengan ambil cuti sehari (resep L1) tanpa merombak kalender dan batas kerjanya. Akibatnya, selama cuti malah tambah stres karena kerjaan numpuk di meja, dan hari Senin langsung tumbang lagi!
 
 ### 2. Empat Mode Pemulihan dan Penataan yang Tepat (G1 sampai G4)
@@ -1019,6 +1011,5 @@ Simpan halaman ringkasan ini sebagai pengingat cepat setiap kali jadwal kerja lo
 [^3]: **Sonnentag, S., & Fritz, C. (2015).** *Recovery from job stress: The stressor-detachment model as an integrative framework*. Journal of Organizational Behavior, 36, 72-103. Studi komprehensif yang membuktikan bahwa pelepasan psikologis (*psychological detachment*) dari pekerjaan di luar jam kerja merupakan syarat mutlak pemulihan stres dan pencegahan kelelahan kronis. Tersedia di: https://onlinelibrary.wiley.com/doi/10.1002/job.1924
 [^4]: **Center for Creative Leadership (CCL).** *Beat Burnout: 5 Ways to Sustain Your Energy & Build Bench Strength in Middle Management*. Membahas posisi terjepit pemimpin lini menengah (*sandwich pressure*), pendelegasian sistemik, serta pembentukan kader pelapis kepemimpinan. Tersedia di: https://www.ccl.org/articles/leading-effectively-articles/burnout-in-leadership/
 
-> [!NOTE]
-> **Catatan Hak Cipta & Penafian Merek Dagang**
+> [!NOTE] Catatan Hak Cipta & Penafian Merek Dagang
 > Seluruh kerangka kerja, skrip dialog, dan ilustrasi kasus di dalam buku ini disusun secara orisinal untuk tujuan edukasi praktis kepemimpinan dan ketahanan kerja. Penyebutan nama perangkat lunak atau layanan pihak ketiga (seperti WhatsApp, Slack, Zoom, Google Meet, Trello, Notion, Google Docs, dan Microsoft Excel) di dalam contoh skenario semata-mata bersifat ilustratif sebagai bagian dari keseharian kerja dan bukan merupakan bentuk afiliasi, lisensi, maupun dukungan resmi dari masing-masing pemilik merek dagang tersebut.

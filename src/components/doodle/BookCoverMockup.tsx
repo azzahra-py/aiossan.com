@@ -79,11 +79,11 @@ export function BookCoverMockup({
       className={`relative select-none group ${dimensions} ${className}`}
       style={{ perspective: '900px' }}
     >
-      <div className="absolute inset-0 translate-x-2.5 translate-y-2.5 rounded-r-2xl rounded-l-md bg-[#FAF7F2] border-2 border-[#18181B] shadow-[4px_4px_0px_#18181B]" />
+      <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-r-2xl rounded-l-md bg-[#FAF7F2] border border-[#DFD9CE] shadow-md" />
 
-      <div className="relative h-full w-full rounded-r-2xl rounded-l-md bg-white border-2 border-[#18181B] flex overflow-hidden transition-transform duration-200 group-hover:-translate-y-1.5">
+      <div className="relative h-full w-full rounded-r-2xl rounded-l-md bg-white border border-zinc-200 flex overflow-hidden shadow-lg transition-transform duration-200 group-hover:-translate-y-1.5">
         <div
-          className={`w-5 h-full ${theme.spineBg} border-r-2 border-[#18181B] flex flex-col items-center justify-between py-3 shrink-0`}
+          className={`w-5 h-full ${theme.spineBg} border-r border-black/10 flex flex-col items-center justify-between py-3 shrink-0`}
         >
           <span
             className="font-mono text-[9px] font-bold text-white tracking-widest rotate-180"
@@ -91,13 +91,13 @@ export function BookCoverMockup({
           >
             AIOSSAN PLAYBOOK
           </span>
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FFE66D] border border-[#18181B]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FFE66D] border border-black/10" />
         </div>
 
         <div className="flex-1 p-4 flex flex-col justify-between bg-[#FFFDF9] relative">
           <div className="flex items-center justify-between border-b border-[#E4E4E7] pb-2">
             <span
-              className={`font-mono text-[10px] font-extrabold px-2 py-0.5 ${theme.badgeBg} border border-[#18181B] rounded shadow-[1px_1px_0px_#18181B]`}
+              className={`font-mono text-[10px] font-extrabold px-2 py-0.5 ${theme.badgeBg} border border-black/10 rounded shadow-2xs`}
             >
               {theme.vol}
             </span>
@@ -107,10 +107,10 @@ export function BookCoverMockup({
           </div>
 
           <div
-            className={`my-2 min-h-[7.25rem] rounded-xl border-2 border-[#18181B] ${theme.accentBg} p-2.5 flex flex-col items-center justify-center shadow-[2px_2px_0px_#18181B]`}
+            className={`my-2 min-h-[7.25rem] rounded-xl border border-black/10 ${theme.accentBg} p-2.5 flex flex-col items-center justify-center shadow-xs`}
           >
             <WoodlandMascotSvg character={theme.mascot} className="w-16 h-16 mb-1" />
-            <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider text-[#18181B] bg-white/90 px-2 py-0.5 rounded border border-[#18181B]">
+            <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider text-[#18181B] bg-white/90 px-2 py-0.5 rounded border border-black/10 shadow-2xs">
               {theme.tagText[lang]}
             </span>
           </div>

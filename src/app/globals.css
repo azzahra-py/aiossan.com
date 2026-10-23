@@ -9,12 +9,18 @@
   --bg-paper-card: #FFFFFF;
   --ink-primary: #18181B;
   --ink-muted: #52525B;
+  --border-warm: #DFD9CE;
   --accent-highlighter: #FFE66D;
   --accent-pen-blue: #2563EB;
   --accent-marker-green: #0D9488;
   --accent-coral: #EA580C;
   --accent-red-pen: #E11D48;
   --accent-violet: #7C3AED;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light only;
 }
 
 html,
@@ -25,9 +31,7 @@ body {
   color-scheme: light only;
 }
 
-/* Content copy protection: site text is not selectable, images not
-   draggable. Form fields keep normal text behaviour. The JS layer that
-   blocks context menu, copy/cut and shortcuts lives in CopyGuard. */
+/* Content copy protection */
 body {
   -webkit-user-select: none;
   user-select: none;
@@ -45,9 +49,9 @@ img {
 
 /* Subtle Living Dot-Grid Texture */
 .ambient-grid {
-  background-image: radial-gradient(#CEC6B6 1.15px, transparent 1.15px);
+  background-image: radial-gradient(#D4CDBE 1.1px, transparent 1.1px);
   background-size: 24px 24px;
-  animation: gridPan 60s linear infinite;
+  animation: gridPan 75s linear infinite;
 }
 
 @keyframes gridPan {
@@ -65,7 +69,7 @@ img {
     transform: translate3d(0px, 0px, 0) scale(1);
   }
   50% {
-    transform: translate3d(45px, 30px, 0) scale(1.08);
+    transform: translate3d(36px, 24px, 0) scale(1.06);
   }
 }
 
@@ -75,17 +79,17 @@ img {
     transform: translate3d(0px, 0px, 0) scale(1);
   }
   50% {
-    transform: translate3d(-40px, 35px, 0) scale(1.06);
+    transform: translate3d(-32px, 28px, 0) scale(1.05);
   }
 }
 
 @keyframes doodleDrift {
   0%,
   100% {
-    transform: translateY(0px) rotate(-3deg);
+    transform: translateY(0px) rotate(-2deg);
   }
   50% {
-    transform: translateY(-12px) rotate(4deg);
+    transform: translateY(-10px) rotate(3deg);
   }
 }
 
@@ -99,16 +103,16 @@ img {
 }
 
 .ambient-blob-1 {
-  animation: ambientFloat1 24s ease-in-out infinite;
+  animation: ambientFloat1 26s ease-in-out infinite;
 }
 .ambient-blob-2 {
-  animation: ambientFloat2 28s ease-in-out infinite;
+  animation: ambientFloat2 30s ease-in-out infinite;
 }
 .ambient-blob-3 {
-  animation: ambientFloat1 32s ease-in-out infinite reverse;
+  animation: ambientFloat1 34s ease-in-out infinite reverse;
 }
 .ambient-blob-4 {
-  animation: ambientFloat2 26s ease-in-out infinite reverse;
+  animation: ambientFloat2 28s ease-in-out infinite reverse;
 }
 
 .doodle-float-slow {
@@ -138,45 +142,65 @@ img {
   font-family: var(--font-mono), monospace;
 }
 
-/* Light surface system (design v2): the sketch style lives in the
-   artwork (covers, mascots, diagrams), the UI chrome stays light.
-   Thin warm-gray border, generous radius, soft shadow only. */
-.doodle-box {
+/* ==========================================================
+   PLAYFUL-ELEGANT EDITORIAL SURFACE SYSTEM (REVAMP v3)
+   Combines crisp architectural structure with warm tactile charm
+   ========================================================== */
+
+/* Tier 1: Primary Interactive & Feature Cards (Soft Modern Editorial) */
+.doodle-box,
+.editorial-card {
   background: var(--bg-paper-card);
-  border: 1px solid #E7E2D9;
+  border: 1px solid #E5E1D8;
   border-radius: 20px;
-  box-shadow: 0 1px 3px rgba(24, 24, 27, 0.05);
+  box-shadow: 0 10px 25px -4px rgba(24, 24, 27, 0.05), 0 4px 10px -2px rgba(24, 24, 27, 0.03);
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Tactile Press Button, lightened: thinner border, smaller offset. */
+.doodle-box:hover,
+.editorial-card:hover {
+  box-shadow: 0 14px 30px -4px rgba(24, 24, 27, 0.08), 0 6px 12px -2px rgba(24, 24, 27, 0.04);
+}
+
+/* Tier 2: Calm Structural Panels (Tables, FAQ, Sidebars, Ribbons) */
+.doodle-panel-flat,
+.editorial-panel {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E1D8;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.04), 0 2px 6px -1px rgba(24, 24, 27, 0.02);
+}
+
+/* Tactile Press Button: Crisp subtle border with elegant soft shadow */
 .doodle-button {
-  border: 1.5px solid var(--ink-primary);
+  border: 1px solid rgba(24, 24, 27, 0.08);
   border-radius: 12px;
-  box-shadow: 2px 2px 0px var(--ink-primary);
+  box-shadow: 0 2px 6px -1px rgba(24, 24, 27, 0.08), 0 1px 3px 0 rgba(24, 24, 27, 0.04);
   font-family: var(--font-body), sans-serif;
   font-weight: 700;
-  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s ease;
+  transition: transform 0.15s ease,
+    box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 .doodle-button:hover:not(:disabled) {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--ink-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px -2px rgba(24, 24, 27, 0.12), 0 2px 5px -1px rgba(24, 24, 27, 0.06);
 }
 
 .doodle-button:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px var(--ink-primary);
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px 0 rgba(24, 24, 27, 0.08);
 }
 
-/* Multi-Tone Editorial Markers for Strategic Text Positions */
+/* Multi-Tone Editorial Markers */
 mark,
 .mark-yellow {
   background: linear-gradient(
     104deg,
     rgba(255, 230, 109, 0) 0.9%,
     rgba(255, 230, 109, 0.95) 2.4%,
-    rgba(255, 230, 109, 0.75) 5.8%,
+    rgba(255, 230, 109, 0.78) 5.8%,
     rgba(255, 230, 109, 0.92) 93%,
     rgba(255, 230, 109, 0) 98%
   );
@@ -233,12 +257,12 @@ mark,
   padding: 0.05rem 0.5rem;
   margin: 0 0.1rem;
   border-radius: 6px;
-  border: 1.5px solid #1E3A8A;
+  border: 1px solid #BFDBFE;
   background-color: #DBEAFE;
   color: #1E3A8A;
   font-weight: 800;
   font-size: 0.92em;
-  box-shadow: 1px 1px 0px #1E3A8A;
+  box-shadow: 0 1px 2px rgba(30, 58, 138, 0.08);
 }
 
 .editorial-pill-amber {
@@ -247,12 +271,12 @@ mark,
   padding: 0.05rem 0.5rem;
   margin: 0 0.1rem;
   border-radius: 6px;
-  border: 1.5px solid #92400E;
+  border: 1px solid #FDE68A;
   background-color: #FEF3C7;
   color: #92400E;
   font-weight: 800;
   font-size: 0.92em;
-  box-shadow: 1px 1px 0px #92400E;
+  box-shadow: 0 1px 2px rgba(146, 64, 14, 0.08);
 }
 
 .editorial-pill-teal {
@@ -261,12 +285,12 @@ mark,
   padding: 0.05rem 0.5rem;
   margin: 0 0.1rem;
   border-radius: 6px;
-  border: 1.5px solid #065F46;
+  border: 1px solid #99F6E4;
   background-color: #CCFBF1;
   color: #065F46;
   font-weight: 800;
   font-size: 0.92em;
-  box-shadow: 1px 1px 0px #065F46;
+  box-shadow: 0 1px 2px rgba(6, 95, 70, 0.08);
 }
 
 .editorial-pill-violet {
@@ -275,12 +299,12 @@ mark,
   padding: 0.05rem 0.5rem;
   margin: 0 0.1rem;
   border-radius: 6px;
-  border: 1.5px solid #4C1D95;
+  border: 1px solid #DDD6FE;
   background-color: #EDE9FE;
   color: #4C1D95;
   font-weight: 800;
   font-size: 0.92em;
-  box-shadow: 1px 1px 0px #4C1D95;
+  box-shadow: 0 1px 2px rgba(76, 29, 149, 0.08);
 }
 
 /* Footnotes & Link Word-Break Containment */
@@ -342,21 +366,21 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
 
 /* ==========================================================
    READER PAPER THEMES (Cream, Sepia, Malam)
-   Guaranteed background & typography contrast
    ========================================================== */
 .reader-paper-cream {
   background-color: #FFFDF9 !important;
   background-image: none !important;
   color: #18181B !important;
-  border-color: #18181B !important;
+  border-color: #E5E1D8 !important;
+  box-shadow: 0 10px 25px -4px rgba(24, 24, 27, 0.05) !important;
 }
 
 .reader-paper-sepia {
   background-color: #F4ECD8 !important;
   background-image: none !important;
   color: #382513 !important;
-  border-color: #5C3A21 !important;
-  box-shadow: 4px 4px 0px #5C3A21 !important;
+  border-color: #E2D3B8 !important;
+  box-shadow: 0 10px 25px -4px rgba(69, 26, 3, 0.06) !important;
 }
 .reader-paper-sepia p,
 .reader-paper-sepia li,
@@ -386,7 +410,7 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
   background-image: none !important;
   color: #F4F4F5 !important;
   border-color: #3F3F46 !important;
-  box-shadow: 4px 4px 0px #27272A !important;
+  box-shadow: 0 4px 0px #27272A !important;
 }
 .reader-paper-midnight p,
 .reader-paper-midnight li,
@@ -436,7 +460,7 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
   background-color: #27272A !important;
   background-image: none !important;
   border-color: #52525B !important;
-  box-shadow: 4px 4px 0px #27272A !important;
+  box-shadow: 0 4px 0px #27272A !important;
 }
 .reader-paper-midnight .callout-body,
 .reader-paper-midnight .callout-body p,
@@ -497,9 +521,7 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
   color: #60A5FA !important;
 }
 
-/* Mobile-First Print / PDF Export Optimization */
-/* Reader Professional Mode: editorial serif reading surface.
-   Applied on the article container when the reader picks Pro mode. */
+/* Reader Professional Mode */
 .reader-pro {
   font-family: var(--font-serif-display), Georgia, 'Times New Roman', serif;
 }
@@ -517,15 +539,7 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
   font-family: var(--font-body), sans-serif;
 }
 
-/* Flat panel for static content sections: thin border, no offset shadow.
-   Doodle boxes stay reserved for interactive and product surfaces. */
-.doodle-panel-flat {
-  background-color: #FFFFFF;
-  border: 1px solid #E4E4E7;
-  border-radius: 1.25rem;
-}
-
-/* Keyboard focus must stay visible on every interactive element. */
+/* Keyboard focus visibility */
 :focus-visible {
   outline: 3px solid #2563EB;
   outline-offset: 2px;
@@ -539,8 +553,6 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
   .no-print {
     display: none !important;
   }
-  /* Reader chapter content must never leave via browser print; the
-     official PDFs are downloads served from R2 instead. */
   .reader-protected {
     display: none !important;
   }

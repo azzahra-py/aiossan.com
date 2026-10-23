@@ -36,6 +36,7 @@ You are operating as a coding agent on a finished, live codebase. To prevent con
    - Install **ONLY** the packages already in `package.json` plus amendments recorded in this file.
    - Do NOT install unrequested UI component libraries (no `@radix-ui/*`, no `shadcn`, no `framer-motion`, no `mui`, no `chakra-ui`). All UI primitives are self-contained Tailwind CSS + Lucide React components.
    - **Update (Harry, 23 Oct 2026):** `roughjs` and `puppeteer-core` are approved additions, required by the design-B merge (see Rule 7 update).
+   - **Update (Harry, 23 Oct 2026 - Spec Revamp & Remotion):** `remotion` and `@remotion/player` (`^4.0.0`) are officially approved additions for interactive editorial animations across the landing page and web reader.
 
 6. **Mayar Payment Integration Rule:**
    - In backend API routes (`src/app/api/checkout/route.ts`), ALWAYS use native `fetch()` to `https://api.mayar.id/hl/v2/invoice/create`.

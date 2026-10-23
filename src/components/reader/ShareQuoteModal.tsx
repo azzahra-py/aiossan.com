@@ -37,7 +37,7 @@ export function ShareQuoteModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-lg border-2 border-[#18181B] bg-white p-1.5 hover:bg-[#FEE2E2]"
+          className="absolute right-3 top-3 rounded-lg border border-zinc-200 bg-white p-1.5 shadow-2xs hover:bg-[#FEE2E2] transition-colors"
         >
           <X className="h-4 w-4 text-[#18181B]" />
         </button>
@@ -49,9 +49,9 @@ export function ShareQuoteModal({
           </span>
         </div>
 
-        <div className="rounded-2xl border-2 border-[#18181B] bg-gradient-to-br from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-6 shadow-md">
+        <div className="rounded-2xl border border-zinc-200/80 bg-gradient-to-br from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-6 shadow-md">
           <div className="mb-4 flex items-center justify-between">
-            <span className="rounded-md border border-[#18181B] bg-[#FFE66D] px-2.5 py-0.5 font-mono text-[10px] font-extrabold text-[#18181B]">
+            <span className="rounded-md border border-amber-300 bg-[#FFE66D] px-2.5 py-0.5 font-mono text-[10px] font-extrabold text-[#18181B] shadow-2xs">
               AIOSSAN LEADERSHIP PLAYBOOK
             </span>
             <span className="font-hand text-xs font-bold text-[#52525B]">
@@ -63,7 +63,7 @@ export function ShareQuoteModal({
             “{quote.length > 220 ? quote.slice(0, 220) + '...' : quote}”
           </blockquote>
 
-          <div className="mt-5 flex items-center justify-between border-t-2 border-dashed border-[#18181B]/20 pt-3">
+          <div className="mt-5 flex items-center justify-between border-t border-dashed border-zinc-300 pt-3">
             <div>
               <p className="text-xs font-extrabold text-[#18181B]">
                 {bookTitle}

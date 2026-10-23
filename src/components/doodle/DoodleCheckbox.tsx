@@ -45,10 +45,10 @@ export function DoodleCheckbox({
   return (
     <li
       onClick={handleToggle}
-      className={`my-2.5 flex cursor-pointer items-start gap-3 rounded-xl border-2 p-3.5 transition-all select-none ${
+      className={`my-2.5 flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-all select-none ${
         checked
-          ? 'border-[#0D9488] bg-[#ECFDF5] shadow-[2px_2px_0px_#0D9488]'
-          : 'border-[#18181B] bg-[#FFFDF9] hover:bg-[#FEFCE8] shadow-[3px_3px_0px_#18181B]'
+          ? 'border-teal-400 bg-[#ECFDF5] shadow-xs'
+          : 'border-zinc-200/90 bg-[#FFFDF9] hover:bg-[#FEFCE8] shadow-xs hover:shadow-sm'
       }`}
     >
       <button
@@ -59,8 +59,8 @@ export function DoodleCheckbox({
           e.stopPropagation();
           handleToggle();
         }}
-        className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 border-[#18181B] transition-colors ${
-          checked ? 'bg-[#FFE66D]' : 'bg-white'
+        className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors shadow-2xs ${
+          checked ? 'bg-[#FFE66D] border-amber-400' : 'bg-white border-zinc-300'
         }`}
       >
         {checked && (

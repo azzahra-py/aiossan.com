@@ -146,7 +146,7 @@ function CalloutBlockquote({
     const style = CALLOUT_STYLES[calloutType];
     return (
       <div
-        className={`callout-box my-6 rounded-2xl border-2 border-[#18181B] ${style.bg} p-5 shadow-[4px_4px_0px_#18181B]`}
+        className={`callout-box my-6 rounded-2xl border border-zinc-200/90 ${style.bg} p-5 shadow-sm`}
       >
         <div className="mb-2.5 flex items-center justify-between gap-2">
           <span
@@ -159,7 +159,7 @@ function CalloutBlockquote({
             <button
               type="button"
               onClick={() => onSelectQuote(extractText(cleanedBodyChildren).trim())}
-              className="no-print inline-flex items-center gap-1 rounded-md border border-[#18181B] bg-white px-2 py-0.5 font-mono text-[10px] font-bold text-[#18181B] hover:bg-[#FFE66D]"
+              className="no-print inline-flex items-center gap-1 rounded-md border border-zinc-200 bg-white px-2 py-0.5 font-mono text-[10px] font-bold text-[#18181B] shadow-2xs hover:bg-[#FFE66D]"
               title={lang === 'en' ? 'Make a Quote Card' : 'Jadikan Kartu Kutipan Story'}
             >
               <Sparkles className="w-3 h-3" />
@@ -176,7 +176,7 @@ function CalloutBlockquote({
 
   const quoteRaw = extractText(children).trim();
   return (
-    <blockquote className="quote-box group relative my-5 rounded-r-2xl border-l-4 border-y-2 border-r-2 border-l-[#2563EB] border-y-[#18181B] border-r-[#18181B] bg-gradient-to-r from-[#EFF6FF] to-[#FFFDF9] p-4 sm:p-5 shadow-[3px_3px_0px_#18181B]">
+    <blockquote className="quote-box group relative my-5 rounded-r-2xl border-l-4 border-y border-r border-l-[#2563EB] border-y-zinc-200/90 border-r-zinc-200/90 bg-gradient-to-r from-[#EFF6FF] to-[#FFFDF9] p-4 sm:p-5 shadow-xs">
       <div className="flex items-start gap-3">
         <MessageSquareQuote className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" />
         <div className="flex-1 text-sm sm:text-base italic text-[#18181B] leading-relaxed">
@@ -187,7 +187,7 @@ function CalloutBlockquote({
         <button
           type="button"
           onClick={() => onSelectQuote(quoteRaw)}
-          className="no-print mt-2 inline-flex items-center gap-1 rounded-md border border-[#18181B] bg-white px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#2563EB] hover:bg-[#FFE66D]"
+          className="no-print mt-2 inline-flex items-center gap-1 rounded-md border border-zinc-200 bg-white px-2.5 py-0.5 font-mono text-[10px] font-bold text-[#2563EB] shadow-2xs hover:bg-[#FFE66D]"
         >
           📸 {lang === 'en' ? 'Make Story Image' : 'Jadikan Gambar Story'}
         </button>
@@ -218,10 +218,10 @@ function CopyableScriptDetails({ children, lang = 'id-kasual' }: { children: Rea
   return (
     <details
       ref={detailsRef}
-      className="group my-6 rounded-2xl border-2 border-[#18181B] bg-[#FFFDF5] open:bg-white shadow-[4px_4px_0px_#18181B] transition-all overflow-hidden"
+      className="group my-6 rounded-2xl border border-zinc-200/90 bg-[#FFFDF5] open:bg-white shadow-xs open:shadow-sm transition-all overflow-hidden"
     >
       {children}
-      <div className="no-print flex items-center justify-between border-t-2 border-dashed border-[#E4E4E7] bg-[#FEFCE8] px-4 py-2.5">
+      <div className="no-print flex items-center justify-between border-t border-dashed border-[#E4E4E7] bg-[#FEFCE8] px-4 py-2.5">
         <span className="font-hand text-sm text-[#52525B]">
           {lang === 'en'
             ? '🐾 Ready-to-use script — copy straight to WhatsApp / Slack / 1-on-1 doc'
@@ -324,9 +324,9 @@ export function MarkdownRenderer({
   return (
     <div className="space-y-4">
       {hasScripts && (
-        <div className="no-print mb-6 rounded-2xl border-2 border-[#18181B] bg-gradient-to-r from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-3.5 sm:p-4 shadow-[3px_3px_0px_#18181B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="no-print mb-6 rounded-2xl border border-amber-200/90 bg-gradient-to-r from-[#FEF9C3] via-[#FFFDF9] to-[#DBEAFE] p-3.5 sm:p-4 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B]">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-300 bg-[#FFE66D] shadow-2xs">
               <UserPen className="h-4 w-4 text-[#18181B]" />
             </div>
             <div>
@@ -340,19 +340,19 @@ export function MarkdownRenderer({
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="flex items-center gap-2 w-full sm:auto">
             <input
               type="text"
               value={teammateName}
               onChange={(e) => handleNameChange(e.target.value)}
               placeholder={lang === 'en' ? 'e.g. Dani / Siska...' : 'Misal: Dani / Siska...'}
-              className="w-full sm:w-44 rounded-xl border-2 border-[#18181B] bg-white px-3 py-1.5 text-xs sm:text-sm font-bold text-[#18181B] placeholder:font-normal placeholder:text-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
+              className="w-full sm:w-44 rounded-xl border border-zinc-200 bg-white px-3 py-1.5 text-xs sm:text-sm font-bold text-[#18181B] placeholder:font-normal placeholder:text-[#A1A1AA] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 shadow-2xs"
             />
             {teammateName && (
               <button
                 type="button"
                 onClick={() => handleNameChange('')}
-                className="rounded-lg border border-[#18181B] bg-white px-2 py-1 font-mono text-[10px] font-bold text-[#52525B] hover:bg-[#FEE2E2]"
+                className="rounded-lg border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] font-bold text-[#52525B] shadow-2xs hover:bg-[#FEE2E2]"
               >
                 Reset
               </button>
@@ -461,7 +461,7 @@ export function MarkdownRenderer({
               return (
                 <div className="mt-10 mb-5">
                   <h2
-                    className="inline-block text-xl sm:text-2xl font-extrabold tracking-tight text-[#18181B] bg-gradient-to-r from-[#FFE66D]/60 via-[#DBEAFE]/50 to-transparent px-3 py-1.5 rounded-xl border-l-4 border-[#18181B]"
+                    className="inline-block text-xl sm:text-2xl font-extrabold tracking-tight text-[#18181B] bg-gradient-to-r from-[#FFE66D]/60 via-[#DBEAFE]/50 to-transparent px-3 py-1.5 rounded-xl border-l-4 border-[#2563EB]"
                     {...props}
                   >
                     {children}
@@ -518,14 +518,14 @@ export function MarkdownRenderer({
               <CopyableScriptDetails lang={lang}>{children}</CopyableScriptDetails>
             ),
             summary: ({ children }) => (
-              <summary className="cursor-pointer select-none list-none bg-[#FFE66D]/75 hover:bg-[#FFE66D] px-4 py-3 font-extrabold text-sm sm:text-base text-[#18181B] flex items-center justify-between border-b-2 border-[#18181B]">
+              <summary className="cursor-pointer select-none list-none bg-[#FFE66D]/75 hover:bg-[#FFE66D] px-4 py-3 font-extrabold text-sm sm:text-base text-[#18181B] flex items-center justify-between border-b border-amber-300">
                 <span className="flex items-center gap-2">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-[#18181B] bg-white font-mono text-xs font-black">
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-amber-300/80 bg-white font-mono text-xs font-black shadow-2xs">
                     💬
                   </span>
                   <span>{children}</span>
                 </span>
-                <span className="font-mono text-xs font-bold text-[#1E3A8A] bg-white px-2.5 py-0.5 rounded-md border border-[#18181B]">
+                <span className="font-mono text-xs font-bold text-[#1E3A8A] bg-white px-2.5 py-0.5 rounded-md border border-blue-200 shadow-2xs">
                   {lang === 'en' ? 'Click to Open / Close ▾' : 'Klik Buka / Tutup ▾'}
                 </span>
               </summary>
@@ -538,7 +538,7 @@ export function MarkdownRenderer({
               }
               if (className && className.includes('language-')) {
                 return (
-                  <pre className="my-5 overflow-x-auto rounded-2xl border-2 border-[#18181B] bg-[#18181B] p-4 font-mono text-xs sm:text-sm text-[#FAF7F2] shadow-[4px_4px_0px_#2563EB]">
+                  <pre className="my-5 overflow-x-auto rounded-2xl border border-zinc-800 bg-[#18181B] p-4 font-mono text-xs sm:text-sm text-[#FAF7F2] shadow-md">
                     <code>{rawCode}</code>
                   </pre>
                 );
@@ -553,14 +553,14 @@ export function MarkdownRenderer({
               );
             },
             table: ({ children }) => (
-              <div className="my-6 overflow-x-auto rounded-2xl border-2 border-[#18181B] bg-white shadow-[4px_4px_0px_#18181B]">
+              <div className="my-6 overflow-x-auto rounded-2xl border border-zinc-200/90 bg-white shadow-sm">
                 <table className="w-full border-collapse text-left text-sm">
                   {children}
                 </table>
               </div>
             ),
             thead: ({ children }) => (
-              <thead className="bg-[#1E3A8A] text-white border-b-2 border-[#18181B]">
+              <thead className="bg-[#1E3A8A] text-white border-b border-blue-900">
                 {children}
               </thead>
             ),
@@ -650,9 +650,9 @@ export function MarkdownRenderer({
       </div>
 
       {checklistStats.total > 0 && (
-        <div className="no-print mt-8 rounded-2xl border-2 border-[#18181B] bg-[#ECFDF5] p-4 shadow-[4px_4px_0px_#18181B] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="no-print mt-8 rounded-2xl border border-teal-200/90 bg-[#ECFDF5] p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#FFE66D]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-amber-300 bg-[#FFE66D] shadow-2xs">
               <CheckCircle2 className="h-5 w-5 text-[#18181B]" />
             </div>
             <div>
@@ -672,7 +672,7 @@ export function MarkdownRenderer({
               </p>
             </div>
           </div>
-          <div className="w-full sm:w-44 h-3 rounded-full border-2 border-[#18181B] bg-white overflow-hidden">
+          <div className="w-full sm:w-44 h-3 rounded-full border border-teal-300/80 bg-white overflow-hidden">
             <div
               className="h-full bg-[#0D9488] transition-all duration-300"
               style={{

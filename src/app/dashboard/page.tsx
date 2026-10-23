@@ -39,7 +39,7 @@ export default async function DashboardPage() {
 
         <main className="flex-1 flex items-center justify-center p-4 py-16">
           <SketchCard variant="yellow" badgeText="Akses Pembaca" className="w-full max-w-md text-center">
-            <div className="w-14 h-14 bg-[#FFE66D] border-2 border-[#1E1E1E] rounded-full mx-auto flex items-center justify-center shadow-[3px_3px_0px_#1E1E1E] mb-4">
+            <div className="w-14 h-14 bg-[#FFE66D] border border-amber-300 rounded-full mx-auto flex items-center justify-center shadow-xs mb-4">
               <User className="w-7 h-7 text-[#1E1E1E]" />
             </div>
 
@@ -84,13 +84,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
-      <NavbarDoodle />
+      <NavbarDoodle userEmail={user.email} />
 
       <main className="flex-1 max-w-[1440px] mx-auto w-full px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         {/* User Profile Bar */}
         <div className="doodle-box bg-white p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#2A9D8F] text-white border-2 border-[#1E1E1E] rounded-full flex items-center justify-center font-hand font-bold text-xl shadow-[2px_2px_0px_#1E1E1E]">
+            <div className="w-12 h-12 bg-[#2A9D8F] text-white border border-teal-600 rounded-full flex items-center justify-center font-hand font-bold text-xl shadow-xs">
               {user.email ? user.email.slice(0, 2).toUpperCase() : 'ME'}
             </div>
             <div>
@@ -98,7 +98,7 @@ export default async function DashboardPage() {
                 <h1 className="font-hand font-bold text-2xl text-[#1E1E1E]">
                   Halo, {user.email?.split('@')[0]}!
                 </h1>
-                <span className="font-mono text-[10px] px-2 py-0.5 bg-[#FAF7F2] border border-[#1E1E1E] rounded text-[#2A9D8F] font-bold">
+                <span className="font-mono text-[10px] px-2 py-0.5 bg-[#FAF7F2] border border-zinc-200 rounded text-[#2A9D8F] font-bold shadow-2xs">
                   Akun Terverifikasi
                 </span>
               </div>
@@ -119,7 +119,7 @@ export default async function DashboardPage() {
 
         {/* Book Collection */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6 pb-2 border-b-2 border-[#1E1E1E]">
+          <div className="flex items-center justify-between mb-6 pb-2 border-b border-zinc-200">
             <h2 className="font-hand font-bold text-2xl sm:text-3xl text-[#1E1E1E] flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-[#2B59C3]" />
               Koleksi Trilogi Buku ({activeBookIds.length}/3 Terbuka)
@@ -139,12 +139,12 @@ export default async function DashboardPage() {
                   variant={hasAccess ? 'yellow' : 'white'}
                   badgeText={hasAccess ? 'Akses Aktif' : 'Terkunci'}
                   className={`flex flex-col justify-between ${
-                    hasAccess ? 'border-2 border-[#1E1E1E]' : 'opacity-85'
+                    hasAccess ? 'border border-amber-300 shadow-sm' : 'border border-zinc-200 opacity-85'
                   }`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-xs uppercase px-2 py-0.5 bg-white border border-[#1E1E1E] rounded">
+                      <span className="font-mono text-xs uppercase px-2 py-0.5 bg-white border border-zinc-200 rounded shadow-2xs">
                         {book.id.toUpperCase()} • 15 BAB
                       </span>
                       {hasAccess ? (
@@ -180,7 +180,7 @@ export default async function DashboardPage() {
 
                   <div>
                     {hasAccess ? (
-                      <div className="space-y-3 pt-3 border-t border-[#1E1E1E]/20">
+                      <div className="space-y-3 pt-3 border-t border-zinc-200">
                         <Link href={`/read/${book.id}/id-kasual/ch-0`} className="w-full block">
                           <SketchButton variant="primary" size="md" className="w-full justify-center">
                             <BookOpen className="w-4 h-4" />
@@ -189,28 +189,28 @@ export default async function DashboardPage() {
                           </SketchButton>
                         </Link>
 
-                        <div className="bg-white p-3 rounded border border-[#1E1E1E] space-y-1.5">
+                        <div className="bg-white p-3 rounded border border-zinc-200 shadow-2xs space-y-1.5">
                           <span className="font-mono text-[11px] font-bold text-[#1E1E1E] block">
                             Unduh Master PDF Resmi (A5):
                           </span>
                           <div className="grid grid-cols-3 gap-1">
                             <a
                               href={`/api/download?book=${book.id}&lang=id-kasual`}
-                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-zinc-200 rounded transition-all flex items-center justify-center gap-1 shadow-2xs"
                             >
                               <Download className="w-3 h-3" />
                               <span>Kasual</span>
                             </a>
                             <a
                               href={`/api/download?book=${book.id}&lang=id-standar`}
-                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-zinc-200 rounded transition-all flex items-center justify-center gap-1 shadow-2xs"
                             >
                               <Download className="w-3 h-3" />
                               <span>Standar</span>
                             </a>
                             <a
                               href={`/api/download?book=${book.id}&lang=en`}
-                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-[#1E1E1E] rounded transition-all flex items-center justify-center gap-1"
+                              className="text-[10px] font-mono px-1.5 py-1 text-center bg-[#FAF7F2] hover:bg-[#FFE66D] border border-zinc-200 rounded transition-all flex items-center justify-center gap-1 shadow-2xs"
                             >
                               <Download className="w-3 h-3" />
                               <span>English</span>
@@ -219,7 +219,7 @@ export default async function DashboardPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="space-y-2 pt-3 border-t border-[#1E1E1E]/20">
+                      <div className="space-y-2 pt-3 border-t border-zinc-200">
                         <Link href={`/read/${book.id}/id-kasual/ch-0`} className="w-full block">
                           <SketchButton variant="secondary" size="sm" className="w-full justify-center">
                             <BookOpen className="w-3.5 h-3.5" />
@@ -253,7 +253,7 @@ export default async function DashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs font-mono">
                 <thead>
-                  <tr className="border-b-2 border-[#1E1E1E] text-[#5C5A54]">
+                  <tr className="border-b border-zinc-200 text-[#5C5A54]">
                     <th className="py-2 px-3">Nomor Pesanan</th>
                     <th className="py-2 px-3">Paket</th>
                     <th className="py-2 px-3">Total (IDR)</th>
@@ -275,11 +275,11 @@ export default async function DashboardPage() {
                       </td>
                       <td className="py-2.5 px-3">
                         {o.payment_status === 'PAID' ? (
-                          <span className="px-2 py-0.5 bg-[#F0FAF8] text-[#2A9D8F] border border-[#1E1E1E] rounded font-bold">
+                          <span className="px-2 py-0.5 bg-[#F0FAF8] text-[#2A9D8F] border border-teal-300 rounded font-bold shadow-2xs">
                             LUNAS
                           </span>
                         ) : (
-                          <span className="px-2 py-0.5 bg-[#FFF5F5] text-[#E63946] border border-[#1E1E1E] rounded">
+                          <span className="px-2 py-0.5 bg-[#FFF5F5] text-[#E63946] border border-rose-200 rounded shadow-2xs">
                             {o.payment_status}
                           </span>
                         )}

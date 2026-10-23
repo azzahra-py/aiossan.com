@@ -14,7 +14,7 @@ function CheckoutSuccessContent() {
 
   return (
     <SketchCard variant="yellow" badgeText="Pembayaran Diterima" className="w-full max-w-lg text-center">
-      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2A9D8F] text-white border-2 border-[#1E1E1E] rounded-full shadow-[3px_3px_0px_#1E1E1E] mb-4">
+      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#2A9D8F] text-white border border-teal-600 rounded-full shadow-xs mb-4">
         <CheckCircle2 className="w-9 h-9" />
       </div>
 

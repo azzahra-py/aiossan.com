@@ -4,8 +4,7 @@
 **Tone & Register:** Conversational-Professional Global English</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **How to Use This Playbook**
+> [!NOTE] How to Use This Playbook
 > This third book in our practical leadership series is built for leaders who have just been promoted above the frontline team-lead level-whether your new title is Department Manager, Head of Function, Group Lead, or Director managing multiple team leads (*Manager of Managers*). Read it straight through from the Introduction to Chapter 13, expand the collapsible blocks (`<details>`) to copy ready-to-use coaching scripts and test yourself on the 4-week simulation, or jump straight to the **Appendix** when you need a quick desk reference before running a cross-team alignment session.
 
 ## Table of Contents
@@ -52,8 +51,7 @@ We focus on three practical pillars you will use every week in this role:
 2. **4 Leader-Coaching Skills:** The four communication habits required at the mid-management level-coaching team leads to solve their own people issues (*Coaching the Coach*), protecting your team leads' authority (*Anti-Skip-Level*), translating executive strategy into team goals, and managing up and across departments.
 3. **Leader Maturity Calibration (Levels L1 to L4 -> Modes G1 to G4):** How to diagnose the maturity of each team lead reporting to you-from a nervous first-time lead to a seasoned veteran older than you-so you give each one the exact right mix of coaching and autonomy.
 
-> [!IMPORTANT]
-> **Evidence-Based Foundations**
+> [!IMPORTANT] Evidence-Based Foundations
 > Every practice in this guide draws on established research in organizational design and multi-team leadership: Ram Charan, Stephen Drotter, and James Noel's *Leadership Pipeline* framework[^1], mid-level leadership research from the *Center for Creative Leadership* (CCL)[^2], Harvard Business School professors John Gabarro and John Kotter's classic work on *Managing Your Boss and Horizontal Relations*[^3], and Harvard professor Amy Edmondson and Jean-François Harvey's field research on *Cross-Boundary Teaming*[^4]. Everything is distilled into plain, copy-ready workplace language.
 
 Let's start with the core identity shift required when you step into this role in **Chapter 1**.
@@ -156,8 +154,7 @@ The logic is simple: **you use the 4 Leader-Coaching Skills every day to run the
 - **3. Ethical Skip-Level Check-Ins & Departmental Calibration (The 30/70 Review)**
   Transparent quarterly pulse chats with frontline specialists (conducted with your team leads' full buy-in) paired with an end-of-cycle calibration meeting with your team leads to align standards and plan the next cycle.
 
-> [!TIP]
-> **How Your 1-on-1 Questions Must Upgrade**
+> [!TIP] How Your 1-on-1 Questions Must Upgrade
 > When you led individual contributors, you asked: *"Where does Deliverable X stand?"* When you lead a team lead, upgrade your question to: *"How is your team's delivery rhythm holding up this month, which specialist on your team needs coaching right now, and how are you planning to approach that conversation?"*
 
 ### The Four Leader-Coaching Skills
@@ -244,8 +241,7 @@ On Tuesday afternoon, Liam walks up to your desk (or sends you a direct message)
 
 Or picture yourself in a department-wide review: a specialist on Alex's team is presenting a slide deck, you spot a formatting choice you dislike, and you blurt out in front of fifteen people: *"Hey, change slide 5 to a bar chart before sending that to the client-don't use the line graph Alex approved."*
 
-> [!WARNING]
-> **The Destructive Cost of the "Backdoor Override"**
+> [!WARNING] The Destructive Cost of the "Backdoor Override"
 > Every time you allow a specialist to go around their team lead to get a different answer from you-or every time you publicly overrule a team lead in front of their direct reports-you cut the legs out from under the very leader you appointed. Within weeks, specialists will bypass your team lead on everything, and your calendar will be flooded with frontline decisions again.
 
 ### Three Habits That Quietly Undermine Your Team Leads
@@ -883,8 +879,7 @@ Here is how to spot each leader maturity level across your direct reports:
 - **L4: Autonomous Multiplier Lead (*Self-Running Team & Department Mindset*)**
   A complete leader. Their sub-team hits high standards autonomously, they have already trained a Second-in-Command inside their group, they proactively help peer team leads solve cross-team seams, and they think like a Department Head.
 
-> [!WARNING]
-> **Never Confuse High Sub-Team Output with L4 Leader Maturity**
+> [!WARNING] Never Confuse High Sub-Team Output with L4 Leader Maturity
 > A sub-team can hit its short-term numbers because the team lead is working 70 hours a week doing the work themselves (L2) or bullying their specialists and hoarding resources from peer teams (L3). Always evaluate *how* a team lead achieves results and *how* they develop their people.
 
 ### 2. Matching Your Coaching Mode: G1 to G4
@@ -1027,6 +1022,5 @@ Keep these three summary tables handy as a quick refresher before stepping into 
 [^3]: **Gabarro, J. J., & Kotter, J. P. (2005).** *Managing Your Boss*. Harvard Business Review, 83(1), 92-99 (alongside the *HBR Guide to Managing Up and Across*). Classic empirical research demonstrating how effective mid-level leaders proactively manage executive expectations and build horizontal cross-departmental alliances. Available at: https://hbr.org/2005/01/managing-your-boss
 [^4]: **Edmondson, A. C., & Harvey, J. F. (2018).** *Cross-Boundary Teaming: Leading Collaboration Across Silos*. Harvard Business Publishing / Administrative Science. Establishes how shared outcomes and explicit handoff interfaces enable multi-team collaboration across functional boundaries. Available at: https://www.hbs.edu/faculty/Pages/item.aspx?num=52473
 
-> [!NOTE]
-> **Copyright & Trademark Notice**
+> [!NOTE] Copyright & Trademark Notice
 > All leadership frameworks, conversation scripts, and case simulations in this playbook are original educational material created for practical organizational and mid-level management application. References to third-party software products or platforms (such as Slack, Zoom, Google Meet, Microsoft Teams, Notion, Jira, Asana, Linear, Google Docs, and Microsoft Excel) appear solely as illustrative examples of modern workplace workflows and do not imply affiliation, sponsorship, or endorsement by their respective trademark owners.

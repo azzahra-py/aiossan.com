@@ -53,7 +53,7 @@ export function LanguageMenu({ bookId, currentLang, chapterSlug }: LanguageMenuP
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex items-center gap-1.5 rounded-xl border-2 border-[#18181B] bg-white px-2.5 py-1.5 text-xs font-bold text-[#18181B] hover:bg-[#EFF6FF] sm:px-3"
+        className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-bold text-[#18181B] shadow-xs hover:border-zinc-300 hover:shadow-sm transition-all sm:px-3"
       >
         <Languages className="hidden sm:block w-3.5 h-3.5 text-[#2563EB]" />
         <span className="text-base leading-none">{current.flag}</span>

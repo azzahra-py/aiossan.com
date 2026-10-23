@@ -4,8 +4,7 @@
 **Tone & Register:** Conversational-Professional Global English</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **How to Use This Playbook**
+> [!NOTE] How to Use This Playbook
 > This second book is built for working managers, team leads, and supervisors who have already mastered the basics of managing a team, yet now find themselves running on fumes, bored by repetitive operational cycles, or trapped playing daily firefighter. Read it straight through from the Introduction to Chapter 13, expand the collapsible blocks (`<details>`) to copy ready-to-use workload negotiation scripts and test yourself on the 4-week simulation, or jump straight to the **Appendix** when you need a quick desk reference to reset your boundaries this week.
 
 ## Table of Contents
@@ -52,8 +51,7 @@ This playbook gives you a concrete system you can put to work immediately. We fo
 2. **4 Energy Management Skills:** Four daily habits that protect your bandwidth-separating team problems from personal emotional load, refusing to reclaim delegated tasks, negotiating capacity upward with trade-off data, and practicing psychological detachment after hours.
 3. **Fatigue Calibration (Levels L1 to L4 -> Recovery Modes G1 to G4):** How to diagnose your own (or a senior teammate's) fatigue level early so you know when a quiet weekend is enough and when a structural workload reset is required.
 
-> [!IMPORTANT]
-> **Evidence-Based Foundations**
+> [!IMPORTANT] Evidence-Based Foundations
 > Every strategy in this guide is anchored in peer-reviewed organizational behavior and occupational health research: Professor Christina Maslach's pioneering research on *Burnout and the Six Areas of Worklife*[^1], Amy Wrzesniewski and Jane Dutton's *Job Crafting Theory*[^2], Professor Sabine Sonnentag's empirical studies on *Psychological Detachment and Recovery from Work Stress*[^3], and research on middle-manager sustainability and succession bench strength from the *Center for Creative Leadership* (CCL)[^4]. All of it has been translated into plain, actionable workplace mechanics.
 
 Let's start by looking at why the most conscientious leaders are often the ones who burn out fastest in **Chapter 1**.
@@ -158,8 +156,7 @@ The system locks together naturally: **you practice the 4 Energy Management Skil
 - **3. Redesigning Your Role to Reignite Meaning (The 30/70 Job Craft)**
   A quarterly role reset that caps routine maintenance at 70% of your bandwidth and carves out 30% for high-leverage strategic initiatives, process innovation, and personal skill growth.
 
-> [!TIP]
-> **Follow the Sequence in Order**
+> [!TIP] Follow the Sequence in Order
 > When leaders feel bored or stagnant, they often try to jump straight to Reset 3 (*taking on an exciting new project*) while their calendar is still 110% full and they have zero backup on the team. That only accelerates burnout. Clear your calendar first (Reset 1), build your bench and boundaries (Resets 2A & 2B), and then invest your reclaimed hours into meaningful growth (Reset 3).
 
 ### The Four Energy Management Skills
@@ -250,8 +247,7 @@ Look closely at what just happened in those thirty seconds:
 
 If you manage six people and allow each of them to hand two problems back to you every day like that, by Friday afternoon you are drowning in 60 reclaimed tasks while your team logs off right at 5:00 PM.
 
-> [!WARNING]
-> **The Hidden Cost of the "Quick Rescue"**
+> [!WARNING] The Hidden Cost of the "Quick Rescue"
 > Every time you take back a delegated task because *"it's faster if I just fix it myself,"* you train your team in two destructive habits: (1) whenever a task gets tricky, bringing it to the manager makes the work disappear, and (2) your own strategic time is always up for grabs.
 
 ### Three Phrases That Quietly Turn You into the Team's Assistant
@@ -534,8 +530,7 @@ Use this five-step sequence to elevate 1 or 2 capable teammates into true operat
 4. **Announce Their Mandate Publicly to the Team:** Make their authority unmistakable so peers do not bypass them. Announce in your team meeting that for Domain X, this person now holds first-line decision authority on your behalf.
 5. **Back Them with a Weekly 15-Minute Leadership Coaching Sync:** Do not drop them in the deep end alone. Hold a focused 15-minute check-in each week to talk through how they are handling peer dynamics, coach them through tricky calls, and publicly credit their leadership in front of your own boss.
 
-> [!TIP]
-> **Split the Bench Across Two People If Needed**
+> [!TIP] Split the Bench Across Two People If Needed
 > You do not have to crown a single heir apparent for everything. For instance, Priya can own **Technical Quality & Architecture Reviews**, while Alex owns **Cross-Functional Campaign Coordination**. You spread the load evenly and give two people meaningful growth paths at once.
 
 <details>
@@ -614,8 +609,7 @@ Suppose a peer department head or director keeps dropping unscheduled requests d
 - **Part 2 (Direct to the Intake Channel & Offer a Trade-Off):**
   *"So we can protect our committed launch dates while still supporting your team, we're routing all mid-sprint requests through our Monday priority queue. For this landing page, would you like us to slot it into next Monday's sprint kickoff, or should we get together with the VP to swap it with the promo banner we're building for your team right now?"*
 
-> [!CAUTION]
-> **Protect Your Second-in-Command's Authority**
+> [!CAUTION] Protect Your Second-in-Command's Authority
 > The fastest way to destroy your newly built bench strength is letting teammates play "Mom and Dad" by coming to you whenever they want to skip your Second-in-Command's review. Unless it is an ethical or HR issue, always route operational escalations back through the system you established.
 
 <details>
@@ -677,8 +671,7 @@ To keep your role both operationally reliable and intellectually energizing, aim
   - Developing the next-level skills required for your future role (such as cross-functional resource allocation, executive business cases, or AI workflow automation).
   - Building strategic relationships across the broader organization.
 
-> [!IMPORTANT]
-> **Nature Abhors an Empty Calendar**
+> [!IMPORTANT] Nature Abhors an Empty Calendar
 > If you free up 6 hours a week through calendar audits and delegation, but fail to intentionally claim that 30% bandwidth for a meaningful strategic initiative, Parkinson's Law guarantees that trivial operational noise will expand to fill those 6 hours again within two weeks.
 
 ### Four Steps to Running a Quarterly 30/70 Job Craft
@@ -871,8 +864,7 @@ Here is how to recognize each level in yourself or your team:
 - **L4: Severe Role Exhaustion (Depleted Energy, Cynicism & Physical Strain)**
   This is the red-alert zone. When L3 overload goes unaddressed for months, your system hits chronic burnout. You feel numb, cynical, and detached from both your teammates and the company; your concentration fractures; physical symptoms appear (tension headaches, insomnia, stomach issues); and even small tasks feel insurmountable.
 
-> [!WARNING]
-> **Never Treat an L3 or L4 Structural Problem with an L1 Rest Cure Alone**
+> [!WARNING] Never Treat an L3 or L4 Structural Problem with an L1 Rest Cure Alone
 > The most common mistake managers make is trying to cure **L3 (Structural Overload)** solely by taking a Friday off (an L1 tool) without changing their calendar, delegation bench, or stakeholder boundaries. When you return on Monday to 300 unread messages and the exact same broken calendar, the relief vanishes in thirty minutes.
 
 ### 2. Matching Your Recovery & Redesign Mode: G1 to G4
@@ -1019,6 +1011,5 @@ Keep these three summary tables handy as a quick refresher whenever your calenda
 [^3]: **Sonnentag, S., & Fritz, C. (2015).** *Recovery from job stress: The stressor-detachment model as an integrative framework*. Journal of Organizational Behavior, 36, 72-103. Comprehensive empirical review demonstrating that psychological detachment from work during off-job time is essential for physiological and cognitive recovery. Available at: https://onlinelibrary.wiley.com/doi/10.1002/job.1924
 [^4]: **Center for Creative Leadership (CCL).** *Beat Burnout: 5 Ways to Sustain Your Energy & Build Bench Strength in Middle Management*. Documents the structural sandwich pressure on frontline and mid-level leaders and how succession bench-building prevents role exhaustion. Available at: https://www.ccl.org/articles/leading-effectively-articles/burnout-in-leadership/
 
-> [!NOTE]
-> **Copyright & Trademark Notice**
+> [!NOTE] Copyright & Trademark Notice
 > All leadership frameworks, conversation scripts, and case simulations in this playbook are original educational material created for practical workplace application. References to third-party software products or platforms (such as Slack, Zoom, Google Meet, Microsoft Teams, Notion, Jira, Asana, Linear, Google Docs, and Microsoft Excel) appear solely as illustrative examples of modern workplace workflows and do not imply affiliation, sponsorship, or endorsement by their respective trademark owners.

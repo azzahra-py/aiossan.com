@@ -158,7 +158,7 @@ export default function LoginPage() {
                       placeholder="nama@perusahaan.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-white border-2 border-[#1E1E1E] rounded-md px-3 py-2 text-sm text-[#1E1E1E] placeholder:text-[#AAA] focus:outline-none focus:ring-2 focus:ring-[#FFE66D]"
+                      className="w-full bg-white border border-zinc-200 rounded-md px-3 py-2 text-sm text-[#18181B] placeholder:text-[#AAA] focus:outline-none focus:ring-2 focus:ring-[#FFE66D] shadow-2xs"
                     />
                     <Mail className="w-4 h-4 text-[#AAA] absolute right-3 top-2.5" />
                   </div>

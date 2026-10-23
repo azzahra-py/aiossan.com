@@ -4,8 +4,7 @@
 **Ragam Bahasa:** Kasual / Akrab (`Gue/Lo`)</br>
 **Format:** GitHub Flavored Markdown (GFM)
 
-> [!NOTE]
-> **Cara Pakai Panduan Ini**
+> [!NOTE] Cara Pakai Panduan Ini
 > Buku ketiga dari seri kepemimpinan praktis ini ditulis khusus buat lo yang baru aja dipromosikan naik ke posisi di atas *team leader*-entah sebagai Manajer Divisi, *Head of Department*, * Group Leader*, atau posisi apa pun yang membawahi beberapa *team leader* sekaligus (*Manager of Managers*). Lo bisa baca berurutan dari Pendahuluan sampai Bab 13, buka bagian lipat (*collapsible sections*) buat nyalin skrip pembimbingan *leader* dan simulasi kasus, atau langsung lompat ke **Lampiran** pas butuh contekan cepat sebelum mimpin rapat antar-tim.
 
 ## Daftar Isi
@@ -52,8 +51,7 @@ Kita bakal langsung fokus ke tiga pilar praktis yang lo butuhin setiap minggu di
 2. **4 *Skill* Penggerak *Leader* (*Leader-Coaching Skills*):** Empat keterampilan komunikasi tingkat menengah, yaitu melatih *team leader* memecahkan masalah timnya (*coaching the coach*), menjaga wibawa *leader* di bawah lo, menerjemahkan strategi direksi jadi sasaran operasional, dan bernegosiasi lintas departemen (*managing up & across*).
 3. **Kalibrasi Pendampingan *Team Leader* (Level L1 sampai L4 ke Gaya G1 sampai G4):** Cara memetakan kematangan para *team leader* di bawah lo-mulai dari *leader* yang baru kemarin dipromosikan sampai *leader* senior yang usianya lebih tua dari lo-biar pendampingan lo pas sasaran.
 
-> [!IMPORTANT]
-> **Dasar Riset Panduan Ini**
+> [!IMPORTANT] Dasar Riset Panduan Ini
 > Seluruh langkah taktis di buku ini disarikan dari riset manajemen tingkat menengah dan organisasi multi-tim: kerangka *The Leadership Pipeline* dari Ram Charan, Stephen Drotter, dan James Noel[^1], riset kepemimpinan tingkat menengah (*Leading Middle Managers*) dari *Center for Creative Leadership* (CCL)[^2], studi klasik *Managing Your Boss & Managing Across* dari Profesor John Gabarro dan John Kotter di Harvard Business School[^3], serta riset kolaborasi lintas batas (*Cross-Boundary Teaming*) dari Profesor Amy Edmondson dan Jean-François Harvey[^4]. Semuanya dikemas ke dalam bahasa praktis sehari-hari di kantor.
 
 Yuk, kita mulai dari perubahan cara pikir terbesar yang wajib lo kuasai saat naik ke kursi ini di **Bab 1**.
@@ -156,8 +154,7 @@ Cara kerjanya terintegrasi penuh: **lo menggunakan 4 *Skill* Penggerak *Leader* 
 - **3. Dialog Lintas Jenjang (*Skip-Level Check-In*) & Kalibrasi Kinerja Divisi (30/70)**
   Kombinasi obrolan berkala dengan staf lini depan (secara transparan dan tanpa melangkahi *team leader*-nya) untuk mendengar aspirasi lapangan, diikuti rapat kalibrasi akhir periode bersama para *team leader* untuk merancang strategi kuartal berikutnya.
 
-> [!TIP]
-> **Beda *1-on-1* sama Staf vs *1-on-1* sama *Team Leader***
+> [!TIP] Beda *1-on-1* sama Staf vs *1-on-1* sama *Team Leader*
 > Waktu lo *1-on-1* sama staf pelaksana dulu, lo nanya: *"Tugas X udah sampai mana?"* Waktu lo *1-on-1* sama seorang *team leader* sekarang, lo harus naik kelas dan nanya: *"Gimana perkembangan performa anggota tim lo bulan ini, siapa staf yang lagi butuh perhatian khusus, dan gimana rencana lo membimbing dia?"*
 
 ### Empat *Skill* Penggerak *Leader*
@@ -244,8 +241,7 @@ Di hari Selasa siang, Dani langsung nyamperin meja lo (atau nge-chat lo secara p
 
 Atau di tengah rapat besar, lo ngelihat draf presentasi yang ditampilkan anak buah Budi ada bagian yang kurang pas, terus lo langsung nyamber di depan semua orang: *"Dani, itu slide nomor 4 tolong nanti langsung lo ganti pakai tabel bulan lalu ya, jangan pakai tabel yang itu!"*-tanpa nengok ke Budi sedikit pun.
 
-> [!WARNING]
-> **Bahaya Memotong Komando (*Skip-Level Bypass*)**
+> [!WARNING] Bahaya Memotong Komando (*Skip-Level Bypass*)
 > Setiap kali lo mengizinkan staf melompati *team leader*-nya buat minta keputusan langsung ke lo, atau setiap kali lo membatalkan keputusan *team leader* lo di depan anak buahnya, lo lagi menggergaji kaki kursi *team leader* lo sendiri. Dalam waktu singkat, *team leader* lo bakal kehilangan respek dari timnya dan berubah jadi sekadar "tukang pos" tanpa wibawa.
 
 ### Tiga Kebiasaan yang Tanpa Sadar Melumpuhkan *Team Leader* di Bawah Lo
@@ -884,8 +880,7 @@ Berikut ciri-ciri nyata tiap level *team leader* di bawah lo:
 - **L4: *Leader* Strategis & Pencetak Kader (*Autonomous Multiplier Leader*)**
   Pemimpin tim yang matang seutuhnya. Timnya berkinerja tinggi secara mandiri, dia udah punya tangan kanan di dalam timnya, dia aktif membantu *team leader* lain menyelesaikan masalah lintas tim, dan dia udah mampu berpikir pakai kacamata Manajer Divisi.
 
-> [!WARNING]
-> **Jangan Menilai *Team Leader* Hanya dari Angka Teknis Sub-Timnya**
+> [!WARNING] Jangan Menilai *Team Leader* Hanya dari Angka Teknis Sub-Timnya
 > Hati-hati: seorang *team leader* yang angka output mingguan timnya tinggi belum tentu berada di level **L4**! Kalau angka itu dicapai dengan cara dia memeras timnya lewat gaya mandor (sampai stafnya mau *resign*), atau dengan cara dia ngerjain semuanya sendirian (L2), atau dengan mengorbankan tim sebelah (L3), maka lo tetap wajib membimbing cara kepemimpinannya.
 
 ### 2. Empat Gaya Pendampingan Manajer Divisi (G1 sampai G4)
@@ -1028,6 +1023,5 @@ Simpan halaman ringkasan ini sebagai pengingat cepat sebelum lo memimpin rapat p
 [^3]: **Gabarro, J. J., & Kotter, J. P. (2005).** *Managing Your Boss*. Harvard Business Review, 83(1), 92-99 (beserta panduan *HBR Guide to Managing Up and Across*). Riset lapangan yang membuktikan bahwa keberhasilan manajer tingkat menengah bergantung pada pengelolaan ekspektasi proaktif ke atas dan pembangunan aliansi kerja sama lintas departemen. Tersedia di: https://hbr.org/2005/01/managing-your-boss
 [^4]: **Edmondson, A. C., & Harvey, J. F. (2018).** *Cross-Boundary Teaming: Leading Collaboration Across Silos*. Harvard Business Publishing / Administrative Science. Membahas cara menyatukan sasaran bersama (*shared outcomes*) dan merapikan titik serah-terima antar-kelompok kerja yang memiliki keahlian berbeda. Tersedia di: https://www.hbs.edu/faculty/Pages/item.aspx?num=52473
 
-> [!NOTE]
-> **Catatan Hak Cipta & Penafian Merek Dagang**
+> [!NOTE] Catatan Hak Cipta & Penafian Merek Dagang
 > Seluruh kerangka kerja, skrip dialog, dan ilustrasi kasus di dalam buku ini disusun secara orisinal untuk tujuan edukasi praktis kepemimpinan organisasi dan manajemen tingkat menengah. Penyebutan nama perangkat lunak atau layanan pihak ketiga (seperti WhatsApp, Slack, Zoom, Google Meet, Trello, Notion, Google Docs, dan Microsoft Excel) di dalam contoh skenario semata-mata bersifat ilustratif sebagai bagian dari keseharian kerja dan bukan merupakan bentuk afiliasi, lisensi, maupun dukungan resmi dari masing-masing pemilik merek dagang tersebut.
