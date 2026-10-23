@@ -21,7 +21,11 @@ import {
   ShieldCheck,
   MessageSquareText,
   HelpCircle,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
+
+const CAROUSEL_BOOKS: BookId[] = ['book-1', 'book-2', 'book-3'];
 
 const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
   'book-1': {
@@ -123,6 +127,20 @@ export default function LandingPage() {
   const [lang, setLang] = useState<BookLang>('id-kasual');
   const [demoName, setDemoName] = useState<string>('Budi');
   const [copiedDemo, setCopiedDemo] = useState(false);
+  const [coverIndex, setCoverIndex] = useState(0);
+  const [coverPaused, setCoverPaused] = useState(false);
+
+  useEffect(() => {
+    if (coverPaused) return;
+    const timer = setTimeout(() => {
+      setCoverIndex((i) => (i + 1) % CAROUSEL_BOOKS.length);
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [coverIndex, coverPaused]);
+
+  const goToCover = (idx: number) => {
+    setCoverIndex(((idx % CAROUSEL_BOOKS.length) + CAROUSEL_BOOKS.length) % CAROUSEL_BOOKS.length);
+  };
 
   useEffect(() => {
     try {
@@ -318,15 +336,85 @@ export default function LandingPage() {
                 </span>
               </div>
 
-              <div className="flex items-center justify-center gap-3 py-3 overflow-x-auto">
-                <div className="-rotate-6 scale-90 hidden sm:block">
-                  <BookCoverMockup bookId="book-2" lang={lang} size="sm" />
+              <div
+                className="relative py-3"
+                role="region"
+                aria-roledescription="carousel"
+                aria-label={
+                  lang === 'en' ? 'Playbook trilogy covers' : 'Cover trilogi playbook'
+                }
+                onMouseEnter={() => setCoverPaused(true)}
+                onMouseLeave={() => setCoverPaused(false)}
+                onFocus={() => setCoverPaused(true)}
+                onBlur={() => setCoverPaused(false)}
+              >
+                <div className="overflow-hidden">
+                  <div
+                    className="flex transition-transform duration-500 ease-out"
+                    style={{ transform: `translateX(-${coverIndex * 100}%)` }}
+                  >
+                    {CAROUSEL_BOOKS.map((bookId, idx) => {
+                      const book =
+                        BOOK_CATALOG.find((b) => b.id === bookId) || BOOK_CATALOG[0];
+                      return (
+                        <div
+                          key={bookId}
+                          className="min-w-full flex flex-col items-center justify-center gap-3 px-10"
+                          role="group"
+                          aria-roledescription="slide"
+                          aria-label={`${idx + 1} / ${CAROUSEL_BOOKS.length}: ${book.titles[lang]}`}
+                          aria-hidden={idx !== coverIndex}
+                        >
+                          <BookCoverMockup bookId={bookId} lang={lang} size="sm" />
+                          <div className="flex flex-wrap items-center justify-center gap-2">
+                            <span className="font-mono text-[11px] font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
+                              {LEVEL_TAGS[bookId][lang]}
+                            </span>
+                            <span className="font-extrabold text-sm text-[#2563EB]">
+                              {formatIDR(book.priceIdr)}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="z-10">
-                  <BookCoverMockup bookId="book-1" lang={lang} size="sm" />
-                </div>
-                <div className="rotate-6 scale-90 hidden sm:block">
-                  <BookCoverMockup bookId="book-3" lang={lang} size="sm" />
+
+                <button
+                  type="button"
+                  onClick={() => goToCover(coverIndex - 1)}
+                  aria-label={lang === 'en' ? 'Previous cover' : 'Cover sebelumnya'}
+                  className="doodle-button absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goToCover(coverIndex + 1)}
+                  aria-label={lang === 'en' ? 'Next cover' : 'Cover berikutnya'}
+                  className="doodle-button absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                <div className="mt-3 flex items-center justify-center gap-2">
+                  {CAROUSEL_BOOKS.map((bookId, idx) => (
+                    <button
+                      key={bookId}
+                      type="button"
+                      onClick={() => goToCover(idx)}
+                      aria-label={`${lang === 'en' ? 'Show cover' : 'Tampilkan cover'} ${idx + 1}`}
+                      aria-current={idx === coverIndex}
+                      className={`h-3 rounded-full border-2 border-[#18181B] transition-all ${
+                        idx === coverIndex
+                          ? 'w-8 bg-[#FFE66D]'
+                          : 'w-3 bg-white hover:bg-[#DBEAFE]'
+                      }`}
+                    />
+                  ))}
+                  <span className="ml-1 font-mono text-[11px] font-bold text-[#52525B]">
+                    {coverIndex + 1} / {CAROUSEL_BOOKS.length}
+                  </span>
                 </div>
               </div>
 
@@ -340,6 +428,87 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-8">
+        <LeadershipQuizDoodle lang={lang} />
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-12">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#DBEAFE] px-3.5 py-1 font-mono text-xs font-extrabold text-[#1E3A8A] mb-3">
+            <Layers className="w-3.5 h-3.5" />
+            KURIKULUM TANGGA KARIER LEADER
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B]">
+            {lang === 'en'
+              ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
+              : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {BOOK_CATALOG.map((book) => {
+            const highlights = BOOK_HIGHLIGHTS[book.id][lang];
+            const levelTag = LEVEL_TAGS[book.id][lang];
+            return (
+              <div
+                key={book.id}
+                className="doodle-box flex flex-col justify-between bg-white p-6"
+              >
+                <div>
+                  <div className="mb-5 flex justify-center">
+                    <BookCoverMockup bookId={book.id} lang={lang} size="md" />
+                  </div>
+
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="font-mono text-xs font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
+                      {levelTag}
+                    </span>
+                    <span className="font-extrabold text-base text-[#2563EB]">
+                      {formatIDR(book.priceIdr)}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-extrabold text-[#18181B] mb-2">
+                    {book.titles[lang]}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed">
+                    {book.subtitles[lang]}
+                  </p>
+
+                  <ul className="space-y-2 mb-6 border-t border-dashed border-[#E4E4E7] pt-4 text-xs sm:text-sm text-[#18181B]">
+                    {highlights.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="flex items-center gap-2 pt-2">
+                  <Link
+                    href={`/read/${book.id}/${lang}/ch-0`}
+                    className="doodle-button flex-1 bg-[#FAF7F2] hover:bg-[#FFE66D] py-2.5 px-3 text-xs font-extrabold text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>
+                      {lang === 'en' ? 'Read Free Ch 0 & 1' : 'Baca Gratis Bab 1'}
+                    </span>
+                  </Link>
+                  <a
+                    href="#pricing"
+                    className="doodle-button bg-[#18181B] text-[#FFE66D] py-2.5 px-3 text-xs font-extrabold inline-flex items-center gap-1"
+                  >
+                    <span>Beli</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -423,87 +592,6 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#DBEAFE] px-3.5 py-1 font-mono text-xs font-extrabold text-[#1E3A8A] mb-3">
-            <Layers className="w-3.5 h-3.5" />
-            KURIKULUM TANGGA KARIER LEADER
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B]">
-            {lang === 'en'
-              ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
-              : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'}
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {BOOK_CATALOG.map((book) => {
-            const highlights = BOOK_HIGHLIGHTS[book.id][lang];
-            const levelTag = LEVEL_TAGS[book.id][lang];
-            return (
-              <div
-                key={book.id}
-                className="doodle-box flex flex-col justify-between bg-white p-6"
-              >
-                <div>
-                  <div className="mb-5 flex justify-center">
-                    <BookCoverMockup bookId={book.id} lang={lang} size="md" />
-                  </div>
-
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="font-mono text-xs font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
-                      {levelTag}
-                    </span>
-                    <span className="font-extrabold text-base text-[#2563EB]">
-                      {formatIDR(book.priceIdr)}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-extrabold text-[#18181B] mb-2">
-                    {book.titles[lang]}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed">
-                    {book.subtitles[lang]}
-                  </p>
-
-                  <ul className="space-y-2 mb-6 border-t border-dashed border-[#E4E4E7] pt-4 text-xs sm:text-sm text-[#18181B]">
-                    {highlights.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex items-center gap-2 pt-2">
-                  <Link
-                    href={`/read/${book.id}/${lang}/ch-0`}
-                    className="doodle-button flex-1 bg-[#FAF7F2] hover:bg-[#FFE66D] py-2.5 px-3 text-xs font-extrabold text-center inline-flex items-center justify-center gap-1.5"
-                  >
-                    <BookOpen className="w-3.5 h-3.5" />
-                    <span>
-                      {lang === 'en' ? 'Read Free Ch 0 & 1' : 'Baca Gratis Bab 1'}
-                    </span>
-                  </Link>
-                  <a
-                    href="#pricing"
-                    className="doodle-button bg-[#18181B] text-[#FFE66D] py-2.5 px-3 text-xs font-extrabold inline-flex items-center gap-1"
-                  >
-                    <span>Beli</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-8">
-        <LeadershipQuizDoodle lang={lang} />
       </section>
 
       <section id="pricing" className="mx-auto max-w-6xl px-4 py-14">
