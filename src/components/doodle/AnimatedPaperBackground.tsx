@@ -40,27 +40,6 @@ export function AnimatedPaperBackground() {
       </svg>
 
       <svg
-        className="doodle-float-reverse absolute top-44 right-[5%] hidden lg:block h-16 w-16 text-[#EA580C]/20"
-        viewBox="0 0 64 64"
-        fill="none"
-      >
-        <circle
-          cx="32"
-          cy="32"
-          r="22"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeDasharray="6 4"
-        />
-        <path
-          d="M32 14L37 27L50 32L37 37L32 50L27 37L14 32L27 27L32 14Z"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinejoin="round"
-        />
-      </svg>
-
-      <svg
         className="doodle-float-slow absolute bottom-24 left-[6%] hidden lg:block h-12 w-12 text-[#0D9488]/20"
         viewBox="0 0 64 64"
         fill="none"

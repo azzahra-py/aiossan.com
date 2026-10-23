@@ -92,6 +92,11 @@ export function LanguageMenu({ bookId, currentLang, chapterSlug }: LanguageMenuP
                 </Link>
               );
             })}
+            <p className="mt-1 border-t border-dashed border-[#E4E4E7] px-3 pb-1.5 pt-2 text-[11px] leading-snug text-[#52525B]">
+              {currentLang === 'en'
+                ? 'Indonesian comes in two styles, Casual and Standard. English is a separate language.'
+                : 'Bahasa Indonesia punya dua gaya: Kasual dan Standar. English adalah bahasa terpisah.'}
+            </p>
           </div>
         </>
       )}

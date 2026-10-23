@@ -66,7 +66,7 @@ export function EditorialDiagram({ chart }: { chart: string }) {
 
   if (!svg) {
     return (
-      <div className="my-6 rounded-xl border border-[#E4E2DD] bg-[#FBF9F5] p-6 text-center font-mono text-xs text-[#71717A]">
+      <div className="my-6 rounded-xl border border-[#E4E2DD] bg-[#FBF9F5] p-6 text-center font-mono text-xs text-[#52525B]">
         Rendering architectural diagram...
       </div>
     );

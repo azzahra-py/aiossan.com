@@ -28,6 +28,7 @@ const config: Config = {
         body: ['var(--font-body)', 'sans-serif'],
         hand: ['var(--font-hand)', 'cursive'],
         mono: ['var(--font-mono)', 'monospace'],
+        serif: ['var(--font-serif-display)', 'Georgia', 'serif'],
       },
     },
   },

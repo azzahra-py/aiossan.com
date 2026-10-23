@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Patrick_Hand, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, Patrick_Hand, JetBrains_Mono, Newsreader } from 'next/font/google';
 import './globals.css';
 import { AnimatedPaperBackground } from '@/components/doodle/AnimatedPaperBackground';
 import { CopyGuard } from '@/components/CopyGuard';
@@ -27,6 +27,15 @@ const fontMono = JetBrains_Mono({
   display: 'swap',
 });
 
+// Serif for the reader's Professional Mode (editorial reading surface).
+const fontSerif = Newsreader({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif-display',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'aiossan.com — Interactive Leadership Field Playbook (Web & PDF)',
   description:
@@ -42,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="id"
       style={{ colorScheme: 'light' }}
-      className={`${fontBody.variable} ${fontHand.variable} ${fontMono.variable}`}
+      className={`${fontBody.variable} ${fontHand.variable} ${fontMono.variable} ${fontSerif.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light only" />

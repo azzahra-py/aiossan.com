@@ -11,6 +11,8 @@ import { WoodlandMascotSvg } from '@/components/doodle/WoodlandMascotSvg';
 import { RoughHighlight } from '@/components/doodle/RoughHighlight';
 import { LeadershipQuizDoodle } from '@/components/doodle/LeadershipQuizDoodle';
 import { PricingGridDoodle } from '@/components/doodle/PricingGridDoodle';
+import { FrameworkDiagram3K } from '@/components/doodle/FrameworkDiagram3K';
+import { PRICING_TIERS } from '@/lib/pricing';
 import {
   BookOpen,
   Sparkles,
@@ -45,6 +47,129 @@ const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
     en: 'VOL. 03 • DIVISION LEAD',
   },
 };
+
+const CREW: {
+  character: 'capybara' | 'tortoise' | 'owl';
+  name: string;
+  lines: Record<BookLang, string>;
+}[] = [
+  {
+    character: 'capybara',
+    name: 'Kapi si Kapibara',
+    lines: {
+      'id-kasual': 'Nemenin lo dari hari pertama jadi leader: target, obrolan, koreksi.',
+      'id-standar': 'Pendamping sejak hari pertama memimpin: target, dialog, koreksi.',
+      en: 'With you from day one as a lead: targets, talks, corrections.',
+    },
+  },
+  {
+    character: 'tortoise',
+    name: 'Toti si Kura-Kura',
+    lines: {
+      'id-kasual': 'Ngajakin napas panjang: jaga ritme, tolak burnout, bangun sistem.',
+      'id-standar': 'Mengajarkan ritme berkelanjutan: cegah burnout, bangun sistem.',
+      en: 'Teaches the long game: guard your pace, beat burnout, build systems.',
+    },
+  },
+  {
+    character: 'owl',
+    name: 'Bubu si Burung Hantu',
+    lines: {
+      'id-kasual': 'Ngintip dari atas: melatih para leader dan nyambungin silo.',
+      'id-standar': 'Melihat gambaran besar: melatih para leader, menyelaraskan silo.',
+      en: 'Sees the big picture: coaching leaders, connecting silos.',
+    },
+  },
+];
+
+function PricingCompareTable({ lang }: { lang: BookLang }) {
+  const en = lang === 'en';
+  const shortNames = en
+    ? ['Book 1', 'Book 2', 'Book 3', 'Bundle 1+2', 'Bundle 2+3', 'Trilogy']
+    : ['Buku 1', 'Buku 2', 'Buku 3', 'Bundel 1+2', 'Bundel 2+3', 'Trilogi'];
+  const rows: { label: string; values: string[] }[] = [
+    {
+      label: en ? 'Price' : 'Harga',
+      values: PRICING_TIERS.map((t) => formatIDR(t.priceIdr)),
+    },
+    {
+      label: en ? 'Books included' : 'Buku yang didapat',
+      values: PRICING_TIERS.map((t) =>
+        t.includedBooks.map((b) => `Vol. ${b.split('-')[1]}`).join(' + ')
+      ),
+    },
+    {
+      label: en ? 'Total chapters' : 'Total bab',
+      values: PRICING_TIERS.map((t) => `${t.includedBooks.length * 15}`),
+    },
+    {
+      label: en ? 'Interactive web reader' : 'Web reader interaktif',
+      values: PRICING_TIERS.map(() => '✓'),
+    },
+    {
+      label: en ? 'A5 PDF + copy-paste scripts' : 'PDF A5 + skrip siap salin',
+      values: PRICING_TIERS.map(() => '✓'),
+    },
+    {
+      label: en ? 'Languages' : 'Bahasa',
+      values: PRICING_TIERS.map(() => 'ID + EN'),
+    },
+  ];
+
+  return (
+    <div className="doodle-panel-flat mx-auto mt-12 max-w-4xl p-4 sm:p-6">
+      <h3 className="mb-4 text-center font-hand text-xl text-[#18181B]">
+        {en
+          ? 'Quick comparison'
+          : lang === 'id-standar'
+          ? 'Perbandingan cepat antar paket'
+          : 'Bandingkan cepat antar paket'}
+      </h3>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[620px] border-collapse text-center text-xs sm:text-sm">
+          <thead>
+            <tr className="border-b-2 border-[#18181B]">
+              <th className="px-3 py-2.5 text-left font-extrabold text-[#18181B]" />
+              {PRICING_TIERS.map((t, i) => (
+                <th
+                  key={t.id}
+                  className={`px-3 py-2.5 font-extrabold text-[#18181B] ${
+                    t.isBestValue ? 'bg-[#FEF9C3]' : ''
+                  }`}
+                >
+                  {shortNames[i]}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.label} className="border-b border-[#E4E4E7] last:border-0">
+                <td className="px-3 py-2.5 text-left font-bold text-[#18181B]">
+                  {row.label}
+                </td>
+                {row.values.map((v, i) => (
+                  <td
+                    key={i}
+                    className={`px-3 py-2.5 text-[#52525B] ${
+                      PRICING_TIERS[i].isBestValue ? 'bg-[#FEF9C3]/60' : ''
+                    }`}
+                  >
+                    {v === '✓' ? (
+                      <Check className="mx-auto h-4 w-4 text-[#0D9488]" />
+                    ) : (
+                      v
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
 const SAMPLE_SCRIPTS: Record<
   BookLang,
@@ -381,7 +506,7 @@ export default function LandingPage() {
                   <ChevronRight className="w-5 h-5" />
                 </button>
 
-                <div className="mt-4 flex items-center justify-center gap-2">
+                <div className="mt-4 flex items-center justify-center gap-1">
                   {CAROUSEL_BOOKS.map((bookId, idx) => (
                     <button
                       key={bookId}
@@ -389,12 +514,16 @@ export default function LandingPage() {
                       onClick={() => goToCover(idx)}
                       aria-label={`${lang === 'en' ? 'Show cover' : 'Tampilkan cover'} ${idx + 1}`}
                       aria-current={idx === coverIndex}
-                      className={`h-3 rounded-full border-2 border-[#18181B] transition-all ${
-                        idx === coverIndex
-                          ? 'w-8 bg-[#FFE66D]'
-                          : 'w-3 bg-white hover:bg-[#DBEAFE]'
-                      }`}
-                    />
+                      className="flex h-10 w-10 items-center justify-center"
+                    >
+                      <span
+                        className={`h-3 rounded-full border-2 border-[#18181B] transition-all ${
+                          idx === coverIndex
+                            ? 'w-8 bg-[#FFE66D]'
+                            : 'w-3 bg-white hover:bg-[#DBEAFE]'
+                        }`}
+                      />
+                    </button>
                   ))}
                   <span className="ml-1 font-mono text-[11px] font-bold text-[#52525B]">
                     {coverIndex + 1} / {CAROUSEL_BOOKS.length}
@@ -421,10 +550,10 @@ export default function LandingPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-12">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#18181B] bg-[#DBEAFE] px-3.5 py-1 font-mono text-xs font-extrabold text-[#1E3A8A] mb-3">
+          <p className="flex items-center justify-center gap-1.5 font-mono text-xs font-extrabold uppercase tracking-widest text-[#2563EB] mb-3">
             <Layers className="w-3.5 h-3.5" />
             KURIKULUM TANGGA KARIER LEADER
-          </span>
+          </p>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B]">
             {lang === 'en'
               ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
@@ -494,16 +623,35 @@ export default function LandingPage() {
             );
           })}
         </div>
+
+        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+          {CREW.map((member) => (
+            <div key={member.name} className="flex items-center gap-3 px-2">
+              <WoodlandMascotSvg
+                character={member.character}
+                className="h-14 w-14 shrink-0"
+              />
+              <div>
+                <p className="font-hand text-base leading-tight text-[#18181B]">
+                  {member.name}
+                </p>
+                <p className="text-xs leading-relaxed text-[#52525B]">
+                  {member.lines[lang]}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-10">
         <div className="doodle-box bg-gradient-to-r from-[#EFF6FF] via-white to-[#FEF9C3] p-6 sm:p-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-md border border-[#18181B] bg-[#FFE66D] px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#18181B] mb-2">
+              <p className="flex items-center gap-1.5 font-mono text-xs font-extrabold uppercase tracking-widest text-[#2563EB] mb-2">
                 <MessageSquareText className="w-3.5 h-3.5" />
                 DEMO FITUR UNGGULAN WEB READER
-              </span>
+              </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#18181B]">
                 {lang === 'en'
                   ? 'Try the Live Script Personalizer & Language Switcher'
@@ -575,6 +723,17 @@ export default function LandingPage() {
               </button>
             </div>
           </div>
+
+          <div className="mt-6 border-t border-dashed border-[#D4D4D8] pt-5">
+            <p className="mb-3 font-mono text-xs font-bold text-[#52525B]">
+              {lang === 'en'
+                ? 'Why does that script sound like that? Because the target was agreed first with the 3C Formula:'
+                : lang === 'id-standar'
+                ? 'Mengapa skripnya berbunyi seperti itu? Karena targetnya disepakati dulu melalui Rumus 3K:'
+                : 'Kenapa skripnya bunyi begitu? Karena targetnya disepakati dulu pakai Rumus 3K:'}
+            </p>
+            <FrameworkDiagram3K lang={lang} />
+          </div>
         </div>
       </section>
 
@@ -596,11 +755,34 @@ export default function LandingPage() {
           </p>
         </div>
 
+        <div className="mx-auto mb-10 flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-bold text-[#18181B] sm:text-sm">
+          <span className="flex items-center gap-1.5">
+            <Check className="h-4 w-4 shrink-0 text-[#0D9488]" />
+            {lang === 'en'
+              ? 'Indonesian (Casual / Standard styles) + English'
+              : 'Bahasa Indonesia (gaya Kasual / Standar) + English'}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Check className="h-4 w-4 shrink-0 text-[#0D9488]" />
+            {lang === 'en'
+              ? 'A5 mobile PDF + copy-paste scripts for every book in the package'
+              : 'PDF A5 ramah HP + skrip siap salin untuk setiap buku di paket'}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Check className="h-4 w-4 shrink-0 text-[#0D9488]" />
+            {lang === 'en'
+              ? 'One-time payment, lifetime access'
+              : 'Sekali bayar, akses selamanya'}
+          </span>
+        </div>
+
         <PricingGridDoodle lang={lang} />
+
+        <PricingCompareTable lang={lang} />
       </section>
 
       <section className="mx-auto max-w-4xl px-4 py-10">
-        <div className="doodle-box bg-white p-6 sm:p-8">
+        <div className="doodle-panel-flat p-6 sm:p-8">
           <div className="flex items-center gap-2 mb-6">
             <HelpCircle className="w-5 h-5 text-[#2563EB]" />
             <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B]">
@@ -609,8 +791,8 @@ export default function LandingPage() {
                 : 'Pertanyaan yang Sering Ditanyakan (FAQ)'}
             </h3>
           </div>
-          <div className="space-y-4 text-sm">
-            <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">
+          <div className="divide-y divide-[#E4E4E7] text-sm">
+            <div className="py-4 first:pt-0">
               <p className="font-extrabold text-[#18181B] mb-1">
                 {lang === 'en'
                   ? '1. Do I get both languages with a single purchase?'
@@ -622,7 +804,7 @@ export default function LandingPage() {
                   : 'Betul banget! Sekali beli, lo dapet Bahasa Indonesia dan Bahasa Inggris. Khusus Bahasa Indonesia, lo bebas pilih gaya Kasual (Gue/Lo) atau Standar (Saya/Kamu) dan ganti kapan aja di Web Reader maupun download PDF-nya.'}
               </p>
             </div>
-            <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">
+            <div className="py-4 last:pb-0">
               <p className="font-extrabold text-[#18181B] mb-1">
                 {lang === 'en'
                   ? '2. Is this a monthly subscription or a one-time payment?'

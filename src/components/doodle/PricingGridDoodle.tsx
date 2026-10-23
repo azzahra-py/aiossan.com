@@ -49,6 +49,39 @@ const TIER_DESCRIPTIONS: Record<
   },
 };
 
+const TIER_FEATURES: Record<PricingTier['id'], Record<BookLang, string>> = {
+  'book-1': {
+    'id-kasual': 'Rumus Target 3K + Kalibrasi Gaya L1-L4 ke G1-G4',
+    'id-standar': 'Rumus Target 3K + Kalibrasi Tingkat Kesiapan L1-L4 ke G1-G4',
+    en: '3C Target Formula + L1-L4 to G1-G4 Guidance Calibration',
+  },
+  'book-2': {
+    'id-kasual': 'Teknik Glass Shield + Audit Kalender Rumus 3P',
+    'id-standar': 'Teknik Perisai Kaca + Audit Kalender Rumus 3P',
+    en: 'Glass Shield Technique + 3P Calendar Audit',
+  },
+  'book-3': {
+    'id-kasual': 'Coaching the Coach + Rumus 3S Anti-Silo',
+    'id-standar': 'Coaching the Coach + Rumus 3S Penyelarasan Lintas Tim',
+    en: 'Coaching the Coach + 3S Cross-Silo Formula',
+  },
+  'bundle-1-2': {
+    'id-kasual': 'Fondasi memimpin tim + perisai anti-burnout',
+    'id-standar': 'Fondasi kepemimpinan tim + perlindungan ketahanan diri',
+    en: 'Team leadership foundations + burnout shield',
+  },
+  'bundle-2-3': {
+    'id-kasual': 'Ketahanan leader + naik kelas ke level divisi',
+    'id-standar': 'Ketahanan kepemimpinan + pengelolaan level divisi',
+    en: 'Leader resilience + division-level management',
+  },
+  'bundle-trilogy': {
+    'id-kasual': 'Semua framework: 3K, Glass Shield, 3S, dan 45 bab penuh',
+    'id-standar': 'Seluruh kerangka: 3K, Perisai Kaca, 3S, dan 45 bab penuh',
+    en: 'Every framework: 3C, Glass Shield, 3S, all 45 chapters',
+  },
+};
+
 export function PricingGridDoodle({
   lang = 'id-kasual',
   userEmail,
@@ -203,19 +236,7 @@ export function PricingGridDoodle({
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
-                    <span>
-                      {lang === 'en'
-                        ? 'Both Languages Included: Indonesian (Casual / Standard) & English'
-                        : 'Dua Bahasa Termasuk: Indonesia (Kasual / Standar) & English'}
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
-                    <span>
-                      {lang === 'en'
-                        ? 'Download Mobile-Friendly PDF + Copy-Paste Scripts'
-                        : 'Unduh PDF Mobile-Friendly + Skrip 1-on-1 Siap Salin'}
-                    </span>
+                    <span>{TIER_FEATURES[tier.id][lang]}</span>
                   </li>
                 </ul>
               </div>

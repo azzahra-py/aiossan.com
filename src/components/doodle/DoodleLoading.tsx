@@ -39,7 +39,7 @@ export function DoodleLoading({
         </div>
 
         {/* Fun footer note */}
-        <div className="mt-4 flex items-center justify-center gap-1.5 font-mono text-[10px] font-semibold text-[#A1A1AA]">
+        <div className="mt-4 flex items-center justify-center gap-1.5 font-mono text-[10px] font-semibold text-[#52525B]">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#10B981] animate-ping" />
           <span>aiossan.com • naskah kepemimpinan praktis</span>
         </div>

@@ -17,6 +17,8 @@ import {
   Menu,
   X,
   PartyPopper,
+  Briefcase,
+  PencilLine,
 } from 'lucide-react';
 
 interface InteractiveReaderClientProps {
@@ -31,6 +33,7 @@ interface InteractiveReaderClientProps {
 
 type PaperTheme = 'cream' | 'sepia' | 'midnight';
 type FontScale = 'normal' | 'lg' | 'xl';
+type DisplayMode = 'santai' | 'pro';
 
 export function InteractiveReaderClient({
   bookId,
@@ -43,6 +46,7 @@ export function InteractiveReaderClient({
 }: InteractiveReaderClientProps) {
   const [paperTheme, setPaperTheme] = useState<PaperTheme>('cream');
   const [fontScale, setFontScale] = useState<FontScale>('normal');
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('santai');
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
   const [sosQuery, setSosQuery] = useState('');
@@ -56,6 +60,8 @@ export function InteractiveReaderClient({
       if (savedTheme) setPaperTheme(savedTheme);
       const savedScale = localStorage.getItem('aiossan:font-scale') as FontScale;
       if (savedScale) setFontScale(savedScale);
+      const savedMode = localStorage.getItem('aiossan:display-mode') as DisplayMode;
+      if (savedMode) setDisplayMode(savedMode);
     } catch {
       // Ignore
     }
@@ -108,6 +114,17 @@ export function InteractiveReaderClient({
     }
   };
 
+  const handleModeChange = (next: DisplayMode) => {
+    setDisplayMode(next);
+    try {
+      localStorage.setItem('aiossan:display-mode', next);
+    } catch {
+      // Ignore
+    }
+  };
+
+  const isPro = displayMode === 'pro';
+
   const toggleSpeech = () => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     if (isSpeaking) {
@@ -156,15 +173,27 @@ export function InteractiveReaderClient({
   return (
     <>
       {showCelebration && (
-        <div className="fixed top-20 right-4 z-50 flex items-center gap-3 rounded-2xl border-2 border-[#18181B] bg-[#FFE66D] px-4 py-3 shadow-[4px_4px_0px_#18181B] animate-bounce">
-          <PartyPopper className="h-6 w-6 text-[#18181B]" />
+        <div
+          className={`fixed top-20 right-4 z-50 flex items-center gap-3 px-4 py-3 ${
+            isPro
+              ? 'rounded-xl border border-[#D4D4D8] bg-white shadow-lg'
+              : 'rounded-2xl border-2 border-[#18181B] bg-[#FFE66D] shadow-[4px_4px_0px_#18181B] animate-bounce'
+          }`}
+        >
+          {isPro ? (
+            <CheckCircle2 className="h-6 w-6 text-[#0D9488]" />
+          ) : (
+            <PartyPopper className="h-6 w-6 text-[#18181B]" />
+          )}
           <div>
             <p className="text-xs font-extrabold text-[#18181B]">
               {lang === 'en' ? '🎉 All Chapter Exercises Complete!' : '🎉 Semua Latihan Bab Ini Tuntas!'}
             </p>
-            <p className="font-hand text-xs text-[#18181B]">
-              {lang === 'en' ? 'Kapi the Capybara stamps a star for you!' : 'Kapi si Kapibara memberikan stempel bintang untuk lo!'}
-            </p>
+            {!isPro && (
+              <p className="font-hand text-xs text-[#18181B]">
+                {lang === 'en' ? 'Kapi the Capybara stamps a star for you!' : 'Kapi si Kapibara memberikan stempel bintang untuk lo!'}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -172,7 +201,7 @@ export function InteractiveReaderClient({
       <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border-2 border-[#18181B] bg-white p-2.5 sm:px-4 shadow-[3px_3px_0px_#18181B]">
         <div className="flex items-center gap-1.5">
           <span className="hidden sm:inline font-mono text-[11px] font-bold text-[#52525B] mr-1">
-            {lang === 'en' ? 'Paper:' : 'Kertas:'}
+            {lang === 'en' ? 'Display:' : 'Tampilan:'}
           </span>
           <button
             type="button"
@@ -208,6 +237,33 @@ export function InteractiveReaderClient({
           >
             <Moon className="w-3.5 h-3.5" />
             <span>{lang === 'en' ? 'Night' : 'Malam'}</span>
+          </button>
+
+          <span className="mx-1 hidden h-5 w-px bg-[#E4E4E7] sm:inline-block" aria-hidden="true" />
+
+          <button
+            type="button"
+            onClick={() => handleModeChange('santai')}
+            className={`rounded-lg border px-2.5 py-1 text-xs font-bold flex items-center gap-1 ${
+              !isPro
+                ? 'border-[#18181B] bg-[#FFE66D] shadow-[2px_2px_0px_#18181B]'
+                : 'border-transparent text-[#52525B]'
+            }`}
+          >
+            <PencilLine className="w-3.5 h-3.5" />
+            <span>{lang === 'en' ? 'Relaxed' : 'Santai'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleModeChange('pro')}
+            className={`rounded-lg border px-2.5 py-1 text-xs font-bold flex items-center gap-1 ${
+              isPro
+                ? 'border-[#18181B] bg-[#EFF6FF] text-[#1E3A8A] shadow-[2px_2px_0px_#18181B]'
+                : 'border-transparent text-[#52525B]'
+            }`}
+          >
+            <Briefcase className="w-3.5 h-3.5" />
+            <span>{lang === 'en' ? 'Professional' : 'Profesional'}</span>
           </button>
         </div>
 
@@ -277,7 +333,11 @@ export function InteractiveReaderClient({
       </div>
 
       <div
-        className={`reader-protected doodle-box p-6 sm:p-10 transition-colors duration-200 ${paperClasses} ${fontScaleClasses}`}
+        className={`reader-protected mx-auto w-full max-w-[46rem] p-6 sm:p-10 transition-colors duration-200 ${paperClasses} ${fontScaleClasses} ${
+          isPro
+            ? 'reader-pro rounded-2xl border border-[#D4D4D8] shadow-none'
+            : 'doodle-box'
+        }`}
       >
         <MarkdownRenderer
           content={displayContent}

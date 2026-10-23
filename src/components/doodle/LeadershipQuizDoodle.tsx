@@ -18,7 +18,7 @@ const QUESTIONS: QuizQuestion[] = [
   {
     q: {
       'id-kasual': '1. Apa kejadian yang paling sering bikin kepala lo cenat-cenut minggu ini?',
-      'id-standar': '1. Situasi apa yang paling sering menguras pikiran Anda minggu ini?',
+      'id-standar': '1. Situasi apa yang paling sering menguras pikiran kamu minggu ini?',
       en: '1. Which workplace situation drained your energy the most this week?',
     },
     options: [
@@ -51,7 +51,7 @@ const QUESTIONS: QuizQuestion[] = [
   {
     q: {
       'id-kasual': '2. Saat anggota tim nanya "Kak, ini bagusnya gimana ya?", apa respons otomatis lo?',
-      'id-standar': '2. Saat anggota tim bertanya "Sebaiknya ini bagaimana ya?", apa respons Anda?',
+      'id-standar': '2. Saat anggota tim bertanya "Sebaiknya ini bagaimana ya?", apa respons kamu?',
       en: '2. When a teammate asks "How should I do this?", what is your default move?',
     },
     options: [
@@ -84,7 +84,7 @@ const QUESTIONS: QuizQuestion[] = [
   {
     q: {
       'id-kasual': '3. Apa target terbesar yang pengen lo capai dalam 30 hari ke depan?',
-      'id-standar': '3. Apa sasaran utama yang ingin Anda capai dalam 30 hari ke depan?',
+      'id-standar': '3. Apa sasaran utama yang ingin kamu capai dalam 30 hari ke depan?',
       en: '3. What is your #1 leadership goal for the next 30 days?',
     },
     options: [
@@ -130,12 +130,12 @@ const DIAGNOSIS_MAP: Record<
     mascot: 'capybara',
     badge: {
       'id-kasual': 'Profil Lo: Kapi si First-Time Captain',
-      'id-standar': 'Profil Anda: Kapi si Kapten Tim Baru',
+      'id-standar': 'Profil Kamu: Kapi si Kapten Tim Baru',
       en: 'Your Profile: Kapi the First-Time Captain',
     },
     title: {
       'id-kasual': 'Lo Butuh Fondasi Obrolan 1-on-1 & Delegasi Tanpa Rasa Sungkan!',
-      'id-standar': 'Anda Membutuhkan Kerangka Komunikasi 1-on-1 & Delegasi Terukur!',
+      'id-standar': 'Kamu Membutuhkan Kerangka Komunikasi 1-on-1 & Delegasi Terukur!',
       en: 'You Need Tactical 1-on-1 Scripts & Delegation Without Awkwardness!',
     },
     desc: {
@@ -151,7 +151,7 @@ const DIAGNOSIS_MAP: Record<
     mascot: 'tortoise',
     badge: {
       'id-kasual': 'Profil Lo: Toti & Kapi Mode Pemadam Kebakaran',
-      'id-standar': 'Profil Anda: Penjaga Ketahanan & Arsitek Sistem',
+      'id-standar': 'Profil Kamu: Penjaga Ketahanan & Arsitek Sistem',
       en: 'Your Profile: The Overloaded Firefighter Ready to Architect Systems',
     },
     title: {
@@ -163,7 +163,7 @@ const DIAGNOSIS_MAP: Record<
       'id-kasual':
         'Buku 2 (Napas Panjang Memimpin Tim) dirancang khusus buat lo: cara menolak lemparan "monyet" tugas anak buah, negosiasi beban kerja pakai data ke bos, dan matikan pikiran kerja jam 6 sore.',
       'id-standar':
-        'Buku 2 (Napas Panjang Memimpin Tim) akan membantu Anda membangun perisai emosi, mendelegasikan wewenang ke kader tangan kanan, dan mencegah burnout.',
+        'Buku 2 (Napas Panjang Memimpin Tim) akan membantu kamu membangun perisai emosi, mendelegasikan wewenang ke kader tangan kanan, dan mencegah burnout.',
       en: 'Book 2 (Sustaining Your Leadership Stamina) gives you the Glass Shield framework, capacity negotiation scripts, and 6 PM detachment rituals.',
     },
     color: 'from-[#CCFBF1] via-[#FFFDF9] to-[#FFEDD5]',
@@ -172,19 +172,19 @@ const DIAGNOSIS_MAP: Record<
     mascot: 'owl',
     badge: {
       'id-kasual': 'Profil Lo: Bubu & Kapi Sang Nakhoda Divisi',
-      'id-standar': 'Profil Anda: Pemimpin Lintas Tim (Leader of Leaders)',
+      'id-standar': 'Profil Kamu: Pemimpin Lintas Tim (Leader of Leaders)',
       en: 'Your Profile: Bubu & Kapi the Division Navigator',
     },
     title: {
       'id-kasual': 'Level Lo Udah Di Atas Team Lead: Saatnya Melatih Para Kapten!',
-      'id-standar': 'Anda Berada di Level Manajer Divisi: Saatnya Melatih Para Leader!',
+      'id-standar': 'Kamu Berada di Level Manajer Divisi: Saatnya Melatih Para Leader!',
       en: 'You Are Leading Other Leaders: Master Coaching the Coach & Anti-Silo!',
     },
     desc: {
       'id-kasual':
         'Buku 3 (Memimpin Para Leader) + Paket Bundel 3 Buku sangat cocok dipakai sebagai standar kurikulum seluruh Team Leader di bawah divisi lo.',
       'id-standar':
-        'Buku 3 (Memimpin Para Leader) beserta Bundel Trilogi sangat ideal untuk menyelaraskan seluruh Team Leader di departemen Anda.',
+        'Buku 3 (Memimpin Para Leader) beserta Bundel Trilogi sangat ideal untuk menyelaraskan seluruh Team Leader di departemen kamu.',
       en: 'Book 3 (Leading Other Leaders) plus the Full 3-Book Trilogy Bundle gives you and your team leads a shared operating system.',
     },
     color: 'from-[#EDE9FE] via-[#FFFDF9] to-[#FEF9C3]',

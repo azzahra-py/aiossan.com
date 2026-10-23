@@ -496,6 +496,39 @@ section[data-footnotes] a:not([data-footnote-backref]):not([data-footnote-ref]) 
 }
 
 /* Mobile-First Print / PDF Export Optimization */
+/* Reader Professional Mode: editorial serif reading surface.
+   Applied on the article container when the reader picks Pro mode. */
+.reader-pro {
+  font-family: var(--font-serif-display), Georgia, 'Times New Roman', serif;
+}
+.reader-pro h1,
+.reader-pro h2,
+.reader-pro h3,
+.reader-pro h4 {
+  font-family: var(--font-serif-display), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+.reader-pro button,
+.reader-pro input,
+.reader-pro summary,
+.reader-pro select {
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Flat panel for static content sections: thin border, no offset shadow.
+   Doodle boxes stay reserved for interactive and product surfaces. */
+.doodle-panel-flat {
+  background-color: #FFFFFF;
+  border: 1px solid #E4E4E7;
+  border-radius: 1.25rem;
+}
+
+/* Keyboard focus must stay visible on every interactive element. */
+:focus-visible {
+  outline: 3px solid #2563EB;
+  outline-offset: 2px;
+}
+
 @media print {
   body {
     background: #FFFFFF !important;
