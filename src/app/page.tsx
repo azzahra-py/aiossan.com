@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { BOOK_CATALOG, BookId, BookLang } from '@/types/books';
 import { formatIDR } from '@/lib/utils';
 import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
+import { LandingLanguageMenu } from '@/components/doodle/LandingLanguageMenu';
 import { BookCoverMockup } from '@/components/doodle/BookCoverMockup';
 import { WoodlandMascotSvg } from '@/components/doodle/WoodlandMascotSvg';
 import { RoughHighlight } from '@/components/doodle/RoughHighlight';
@@ -129,6 +130,7 @@ export default function LandingPage() {
   const [copiedDemo, setCopiedDemo] = useState(false);
   const [coverIndex, setCoverIndex] = useState(0);
   const [coverPaused, setCoverPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     if (coverPaused) return;
@@ -143,14 +145,32 @@ export default function LandingPage() {
   };
 
   useEffect(() => {
+    let cancelled = false;
     try {
       const saved = localStorage.getItem('aiossan:lang') as BookLang;
       if (saved && ['id-kasual', 'id-standar', 'en'].includes(saved)) {
         setLang(saved);
+        return;
       }
     } catch {
       // Ignore
     }
+    // No saved preference: detect country from the visitor IP (Vercel geo
+    // header via /api/geo). Indonesia keeps the Indonesian default, any
+    // other detected country starts in English. Undetected stays Indonesian.
+    fetch('/api/geo')
+      .then((r) => r.json())
+      .then((data) => {
+        if (!cancelled && data && data.country && data.country !== 'ID') {
+          setLang('en');
+        }
+      })
+      .catch(() => {
+        // Ignore, keep Indonesian default
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleSelectLang = (next: BookLang) => {
@@ -171,55 +191,10 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <NavbarDoodle lang={lang} />
-
-      <div className="bg-[#FFFDF5]/90 border-b-2 border-[#18181B] py-2 px-4 sticky top-[65px] z-30 backdrop-blur-xs">
-        <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-2">
-          <span className="font-hand text-sm sm:text-base font-bold text-[#18181B] flex items-center gap-1.5">
-            <span>🎨</span>
-            <span>
-              {lang === 'en'
-                ? 'Choose Your Reading Style (All 3 Included in Every Purchase!):'
-                : 'Pilih Gaya Bahasa Bacaan Lo (Beli 1 Otomatis Dapat Ketiganya!):'}
-            </span>
-          </span>
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => handleSelectLang('id-kasual')}
-              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
-                lang === 'id-kasual'
-                  ? 'bg-[#FFE66D] border-[#18181B] text-[#18181B] shadow-[2px_2px_0px_#18181B]'
-                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
-              }`}
-            >
-              🇮🇩 Kasual (Gue / Lo)
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSelectLang('id-standar')}
-              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
-                lang === 'id-standar'
-                  ? 'bg-[#DBEAFE] border-[#18181B] text-[#1E3A8A] shadow-[2px_2px_0px_#18181B]'
-                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
-              }`}
-            >
-              🇮🇩 Standar (Saya / Kamu)
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSelectLang('en')}
-              className={`px-3 py-1 rounded-lg text-xs font-extrabold border-2 transition-all ${
-                lang === 'en'
-                  ? 'bg-[#CCFBF1] border-[#18181B] text-[#065F46] shadow-[2px_2px_0px_#18181B]'
-                  : 'bg-white border-transparent text-[#52525B] hover:border-[#18181B]'
-              }`}
-            >
-              🌐 Global English
-            </button>
-          </div>
-        </div>
-      </div>
+      <NavbarDoodle
+        lang={lang}
+        langMenu={<LandingLanguageMenu lang={lang} onSelect={handleSelectLang} />}
+      />
 
       <section className="mx-auto max-w-6xl px-4 pt-10 pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -228,8 +203,8 @@ export default function LandingPage() {
               <span className="h-2.5 w-2.5 rounded-full bg-[#0D9488]" />
               <span className="font-mono text-xs font-extrabold uppercase tracking-wider text-[#18181B]">
                 {lang === 'en'
-                  ? 'Interactive Web Playbook + Mobile PDF • 3 Editions'
-                  : 'Playbook Web Interaktif + PDF Ramah HP • 3 Edisi Bahasa'}
+                  ? 'Interactive Web Playbook + Mobile PDF • Indonesian & English'
+                  : 'Playbook Web Interaktif + PDF Ramah HP • Bahasa Indonesia & English'}
               </span>
             </div>
 
@@ -312,7 +287,7 @@ export default function LandingPage() {
             <div className="grid grid-cols-3 gap-3 pt-3 border-t-2 border-dashed border-[#D4D4D8] text-xs font-bold text-[#18181B]">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
-                <span>3 Register Bahasa</span>
+                <span>Bahasa Indonesia & English</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
@@ -337,7 +312,7 @@ export default function LandingPage() {
               </div>
 
               <div
-                className="relative py-3"
+                className="relative mx-auto max-w-[20rem]"
                 role="region"
                 aria-roledescription="carousel"
                 aria-label={
@@ -347,6 +322,15 @@ export default function LandingPage() {
                 onMouseLeave={() => setCoverPaused(false)}
                 onFocus={() => setCoverPaused(true)}
                 onBlur={() => setCoverPaused(false)}
+                onTouchStart={(e) => {
+                  touchStartX.current = e.touches[0].clientX;
+                }}
+                onTouchEnd={(e) => {
+                  if (touchStartX.current === null) return;
+                  const dx = e.changedTouches[0].clientX - touchStartX.current;
+                  touchStartX.current = null;
+                  if (Math.abs(dx) > 40) goToCover(coverIndex + (dx < 0 ? 1 : -1));
+                }}
               >
                 <div className="overflow-hidden">
                   <div
@@ -359,14 +343,14 @@ export default function LandingPage() {
                       return (
                         <div
                           key={bookId}
-                          className="min-w-full flex flex-col items-center justify-center gap-3 px-10"
+                          className="min-w-full flex flex-col items-center gap-3"
                           role="group"
                           aria-roledescription="slide"
                           aria-label={`${idx + 1} / ${CAROUSEL_BOOKS.length}: ${book.titles[lang]}`}
                           aria-hidden={idx !== coverIndex}
                         >
                           <BookCoverMockup bookId={bookId} lang={lang} size="sm" />
-                          <div className="flex flex-wrap items-center justify-center gap-2">
+                          <div className="flex h-7 items-center justify-center gap-2 whitespace-nowrap">
                             <span className="font-mono text-[11px] font-extrabold px-2.5 py-0.5 rounded border border-[#18181B] bg-[#FFE66D]">
                               {LEVEL_TAGS[bookId][lang]}
                             </span>
@@ -384,7 +368,7 @@ export default function LandingPage() {
                   type="button"
                   onClick={() => goToCover(coverIndex - 1)}
                   aria-label={lang === 'en' ? 'Previous cover' : 'Cover sebelumnya'}
-                  className="doodle-button absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2"
+                  className="doodle-button absolute left-0 top-32 -translate-y-1/2 rounded-full bg-white p-2"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -392,12 +376,12 @@ export default function LandingPage() {
                   type="button"
                   onClick={() => goToCover(coverIndex + 1)}
                   aria-label={lang === 'en' ? 'Next cover' : 'Cover berikutnya'}
-                  className="doodle-button absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-2"
+                  className="doodle-button absolute right-0 top-32 -translate-y-1/2 rounded-full bg-white p-2"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
 
-                <div className="mt-3 flex items-center justify-center gap-2">
+                <div className="mt-4 flex items-center justify-center gap-2">
                   {CAROUSEL_BOOKS.map((bookId, idx) => (
                     <button
                       key={bookId}
@@ -455,7 +439,7 @@ export default function LandingPage() {
             return (
               <div
                 key={book.id}
-                className="doodle-box flex flex-col justify-between bg-white p-6"
+                className="doodle-box flex h-full flex-col justify-between bg-white p-6"
               >
                 <div>
                   <div className="mb-5 flex justify-center">
@@ -471,10 +455,10 @@ export default function LandingPage() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-extrabold text-[#18181B] mb-2">
+                  <h3 className="text-xl font-extrabold text-[#18181B] mb-2 min-h-[3.5rem]">
                     {book.titles[lang]}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed min-h-[2.5rem] line-clamp-2">
                     {book.subtitles[lang]}
                   </p>
 
@@ -607,8 +591,8 @@ export default function LandingPage() {
           </h2>
           <p className="text-sm sm:text-base text-[#52525B]">
             {lang === 'en'
-              ? 'Every purchase unlocks all 3 language editions (Casual ID, Standard ID, and Global English) plus mobile-friendly PDF downloads.'
-              : 'Setiap pembelian langsung membuka ke-3 edisi bahasa sekaligus (Kasual Gue/Lo, Standar Saya/Kamu, dan English) beserta unduhan PDF ramah HP.'}
+              ? 'Every purchase unlocks both languages at once: Indonesian (choose the Casual Gue/Lo or Standard Saya/Kamu style) and Global English, plus mobile-friendly PDF downloads.'
+              : 'Setiap pembelian langsung membuka kedua bahasa sekaligus: Bahasa Indonesia (pilih gaya Kasual Gue/Lo atau Standar Saya/Kamu) dan Bahasa Inggris, beserta unduhan PDF ramah HP.'}
           </p>
         </div>
 
@@ -629,13 +613,13 @@ export default function LandingPage() {
             <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">
               <p className="font-extrabold text-[#18181B] mb-1">
                 {lang === 'en'
-                  ? '1. Do I get all 3 language registers with a single purchase?'
-                  : '1. Kalau gw beli 1 buku atau bundel, apakah dapet ke-3 gaya bahasa sekaligus?'}
+                  ? '1. Do I get both languages with a single purchase?'
+                  : '1. Kalau gw beli 1 buku atau bundel, apakah dapet kedua bahasa sekaligus?'}
               </p>
               <p className="text-[#52525B]">
                 {lang === 'en'
-                  ? 'Yes! You can switch live between Casual Indonesian (Gue/Lo), Standard Indonesian (Saya/Kamu), and Global English anytime in the Web Reader and download all PDF versions.'
-                  : 'Betul banget! Sekali beli, lo bebas gonta-ganti antara Bahasa Indonesia Kasual (Gue/Lo), Bahasa Indonesia Standar (Saya/Kamu), dan Bahasa Inggris kapan aja di Web Reader maupun download PDF-nya.'}
+                  ? 'Yes! One purchase unlocks Indonesian and Global English. For Indonesian, pick the Casual (Gue/Lo) or Standard (Saya/Kamu) style and switch anytime in the Web Reader and PDF downloads.'
+                  : 'Betul banget! Sekali beli, lo dapet Bahasa Indonesia dan Bahasa Inggris. Khusus Bahasa Indonesia, lo bebas pilih gaya Kasual (Gue/Lo) atau Standar (Saya/Kamu) dan ganti kapan aja di Web Reader maupun download PDF-nya.'}
               </p>
             </div>
             <div className="rounded-xl border border-[#18181B] bg-[#FAF7F2] p-4">

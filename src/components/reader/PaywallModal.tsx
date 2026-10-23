@@ -44,8 +44,8 @@ export function PaywallModal({
         </h3>
         <p className="mt-2 text-sm sm:text-base text-[#52525B]">
           {lang === 'en'
-            ? 'You just read a preview of this chapter. Unlock full access to all 15 chapters, copy-paste 1-on-1 dialogue scripts, the interactive Chapter 12 simulation, and PDF downloads in all 3 language editions at once!'
-            : 'Kamu baru saja membaca cuplikan awal bab ini. Buka akses penuh ke seluruh 15 bab, skrip dialog 1-on-1 siap salin, simulasi interaktif Bab 12, dan unduhan PDF dalam 3 edisi bahasa sekaligus!'}
+            ? 'You just read a preview of this chapter. Unlock full access to all 15 chapters, copy-paste 1-on-1 dialogue scripts, the interactive Chapter 12 simulation, and PDF downloads in Indonesian (Casual or Standard style) and English!'
+            : 'Kamu baru saja membaca cuplikan awal bab ini. Buka akses penuh ke seluruh 15 bab, skrip dialog 1-on-1 siap salin, simulasi interaktif Bab 12, dan unduhan PDF dalam Bahasa Indonesia (gaya Kasual atau Standar) dan English!'}
         </p>
 
         {!userEmail && (

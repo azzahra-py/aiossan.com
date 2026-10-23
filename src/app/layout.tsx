@@ -29,7 +29,7 @@ const fontMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'aiossan.com — Interactive Leadership Field Playbook (Web & PDF)',
   description:
-    'Trilogi panduan taktis memimpin tim dengan gaya catatan sketsa meja kerja, simulasi interaktif, dan skrip 1-on-1 siap pakai dalam 3 register bahasa (Gue/Lo, Saya/Kamu, English).',
+    'Trilogi panduan taktis memimpin tim dengan gaya catatan sketsa meja kerja, simulasi interaktif, dan skrip 1-on-1 siap pakai dalam Bahasa Indonesia (gaya Kasual Gue/Lo atau Standar Saya/Kamu) dan Global English.',
   other: {
     'color-scheme': 'light only',
     'darkreader-lock': 'true',

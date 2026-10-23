@@ -43,9 +43,9 @@ const TIER_DESCRIPTIONS: Record<
     en: 'Advanced bundle for scaling departmental operations and mentoring frontline team leads.',
   },
   'bundle-trilogy': {
-    'id-kasual': 'Akses penuh seluruh 3 buku interaktif (45 bab), 3 versi bahasa, dan file PDF lengkap.',
-    'id-standar': 'Akses menyeluruh seluruh trilogi (45 bab), 3 register bahasa, dan seluruh berkas PDF.',
-    en: 'Complete access to all 3 interactive playbooks (45 chapters), 3 language registers, and PDFs.',
+    'id-kasual': 'Akses penuh seluruh 3 buku interaktif (45 bab), Bahasa Indonesia dan English, dan file PDF lengkap.',
+    'id-standar': 'Akses menyeluruh seluruh trilogi (45 bab), Bahasa Indonesia dan English, dan seluruh berkas PDF.',
+    en: 'Complete access to all 3 interactive playbooks (45 chapters), Indonesian and English editions, and PDFs.',
   },
 };
 
@@ -205,8 +205,8 @@ export function PricingGridDoodle({
                     <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
                     <span>
                       {lang === 'en'
-                        ? 'All 3 Editions Included (Gue/Lo, Saya/Kamu, English)'
-                        : 'Bebas Ganti 3 Edisi Bahasa (Gue/Lo, Saya/Kamu, English)'}
+                        ? 'Both Languages Included: Indonesian (Casual / Standard) & English'
+                        : 'Dua Bahasa Termasuk: Indonesia (Kasual / Standar) & English'}
                     </span>
                   </li>
                   <li className="flex items-center gap-2">

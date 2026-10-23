@@ -31,7 +31,7 @@ export function NavbarDoodle({ userEmail, langMenu, lang = 'id-kasual' }: Navbar
 
         <nav className="flex items-center gap-2 sm:gap-3">
           <Link
-            href="/read/book-1/id-kasual/ch-0"
+            href={`/read/book-1/${lang}/ch-0`}
             className="hidden md:inline-flex items-center gap-1.5 rounded-xl border-2 border-[#18181B] bg-white px-3.5 py-1.5 text-xs font-extrabold text-[#18181B] hover:bg-[#FEF9C3]"
           >
             <BookOpen className="w-3.5 h-3.5 text-[#2563EB]" />

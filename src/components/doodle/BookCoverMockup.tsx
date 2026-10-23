@@ -71,8 +71,8 @@ export function BookCoverMockup({
     size === 'sm'
       ? 'w-44 h-64'
       : size === 'lg'
-      ? 'w-64 h-88'
-      : 'w-56 h-76';
+      ? 'w-64 h-[22rem]'
+      : 'w-56 h-[19rem]';
 
   return (
     <div
@@ -107,7 +107,7 @@ export function BookCoverMockup({
           </div>
 
           <div
-            className={`my-2 rounded-xl border-2 border-[#18181B] ${theme.accentBg} p-2.5 flex flex-col items-center justify-center shadow-[2px_2px_0px_#18181B]`}
+            className={`my-2 min-h-[7.25rem] rounded-xl border-2 border-[#18181B] ${theme.accentBg} p-2.5 flex flex-col items-center justify-center shadow-[2px_2px_0px_#18181B]`}
           >
             <WoodlandMascotSvg character={theme.mascot} className="w-16 h-16 mb-1" />
             <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider text-[#18181B] bg-white/90 px-2 py-0.5 rounded border border-[#18181B]">
@@ -116,7 +116,7 @@ export function BookCoverMockup({
           </div>
 
           <div>
-            <h4 className="font-extrabold text-sm sm:text-base text-[#18181B] leading-tight mb-1">
+            <h4 className="font-extrabold text-sm sm:text-base text-[#18181B] leading-tight mb-1 min-h-[2.5rem]">
               {book.titles[lang]}
             </h4>
             <p className="text-[11px] text-[#52525B] line-clamp-2 leading-snug">
@@ -126,7 +126,7 @@ export function BookCoverMockup({
 
           <div className="pt-2 border-t border-dashed border-[#D4D4D8] flex items-center justify-between text-[10px] font-mono text-[#52525B]">
             <span>aiossan.com</span>
-            <span className="font-bold text-[#2563EB]">3 Edisi Bahasa</span>
+            <span className="font-bold text-[#2563EB]">ID + EN</span>
           </div>
         </div>
       </div>

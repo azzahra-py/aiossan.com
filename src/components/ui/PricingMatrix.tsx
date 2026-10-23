@@ -107,8 +107,8 @@ export function PricingMatrix({ lang = 'id-kasual' }: PricingMatrixProps) {
         </h2>
         <p className="font-sans text-base text-[#52525B] leading-relaxed">
           {isEn
-            ? 'Every edition includes lifetime access to the interactive web reader, all 3 language registers (Casual, Formal, & English), and official A5 Master PDFs.'
-            : 'Setiap pembelian langsung membuka akses pembaca web interaktif selamanya, 3 edisi gaya bahasa sekaligus (Kasual, Standar, & English), serta Master PDF A5 resmi.'}
+            ? 'Every purchase includes lifetime access to the interactive web reader in both languages, Indonesian (Casual or Standard style) and English, plus official A5 Master PDFs.'
+            : 'Setiap pembelian langsung membuka akses pembaca web interaktif selamanya dalam dua bahasa, Indonesia (gaya Kasual atau Standar) dan English, serta Master PDF A5 resmi.'}
         </p>
 
         {errorMsg && (
@@ -175,8 +175,8 @@ export function PricingMatrix({ lang = 'id-kasual' }: PricingMatrixProps) {
                       <Check className="w-4 h-4 text-[#0F766E] shrink-0 mt-0.5 stroke-[2.5]" />
                       <span>
                         {isEn
-                          ? 'Includes all 3 registers: Casual (Gue/Lo), Standard, & English'
-                          : 'Termasuk 3 gaya bahasa: Kasual (Gue/Lo), Standar, & English'}
+                          ? 'Includes both languages: Indonesian (Casual Gue/Lo or Standard) & English'
+                          : 'Termasuk dua bahasa: Indonesia (Kasual Gue/Lo atau Standar) & English'}
                       </span>
                     </li>
                     <li className="flex items-start gap-2.5">
