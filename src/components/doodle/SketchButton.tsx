@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 export interface SketchButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'blue';
+  variant?: 'primary' | 'secondary' | 'blue' | 'amber';
   size?: 'sm' | 'md' | 'lg';
 }
 
@@ -14,18 +14,18 @@ export function SketchButton({
   ...props
 }: SketchButtonProps) {
   const vClass =
-    variant === 'primary'
-      ? 'bg-[#FFE66D] text-[#1E1E1E]'
-      : variant === 'blue'
-      ? 'bg-[#2B59C3] text-white'
-      : 'bg-white text-[#1E1E1E]';
+    variant === 'primary' || variant === 'blue'
+      ? 'bg-[#1E40AF] text-white hover:bg-[#1D4ED8]'
+      : variant === 'amber'
+      ? 'bg-[#F59E0B] text-[#18181B] hover:bg-[#D97706]'
+      : 'bg-white text-[#18181B] hover:bg-zinc-100';
 
   const sClass =
     size === 'sm'
-      ? 'px-3 py-1.5 text-base min-h-[38px]'
+      ? 'px-3 py-1.5 text-sm min-h-[36px]'
       : size === 'lg'
-      ? 'px-6 py-3 text-xl min-h-[52px]'
-      : 'px-4 py-2 text-lg min-h-[44px]';
+      ? 'px-6 py-3 text-lg min-h-[50px]'
+      : 'px-4.5 py-2.5 text-base min-h-[44px]';
 
   return (
     <button

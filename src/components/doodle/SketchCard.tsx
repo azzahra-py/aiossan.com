@@ -24,7 +24,7 @@ export function SketchCard({
   return (
     <div className={cn('doodle-box relative p-5 md:p-6', variantMap[variant], className)} {...props}>
       {badgeText && (
-        <span className="font-hand absolute -top-3.5 right-4 inline-block -rotate-2 border border-amber-300 bg-[#FFE66D] px-3 py-0.5 text-sm font-bold text-[#18181B] shadow-2xs">
+        <span className="font-hand absolute -top-3.5 right-4 inline-block -rotate-2 border border-[#18181B] bg-[#F59E0B] px-3 py-0.5 text-sm font-bold text-[#18181B] shadow-[2px_2px_0px_#18181B]">
           {badgeText}
         </span>
       )}
