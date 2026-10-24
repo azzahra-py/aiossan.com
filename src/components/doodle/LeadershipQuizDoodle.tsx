@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { BookLang } from '@/types/books';
-import { WoodlandMascotSvg, MascotCharacter } from './WoodlandMascotSvg';
+import { WhiteboardSceneSvg, WhiteboardScene } from './WhiteboardSceneSvg';
 import { Sparkles, RotateCcw, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface QuizQuestion {
@@ -142,7 +142,7 @@ const QUESTIONS: QuizQuestion[] = [
 const DIAGNOSIS_MAP: Record<
   'book-1' | 'book-2' | 'book-3',
   {
-    mascot: MascotCharacter;
+    scene: WhiteboardScene;
     badge: Record<BookLang, string>;
     title: Record<BookLang, string>;
     desc: Record<BookLang, string>;
@@ -150,11 +150,11 @@ const DIAGNOSIS_MAP: Record<
   }
 > = {
   'book-1': {
-    mascot: 'capybara',
+    scene: 'one-on-one',
     badge: {
-      'id-kasual': 'Profil Lo: Kapi si First-Time Captain',
-      'id-standar': 'Profil Kamu: Kapi si Kapten Tim Baru',
-      en: 'Your Profile: Kapi the First-Time Captain',
+      'id-kasual': 'Profil Lo: The Frontline Lead (Level 1)',
+      'id-standar': 'Profil Kamu: The Frontline Lead (Tingkat 1)',
+      en: 'Your Profile: The Frontline Lead (Level 1)',
     },
     title: {
       'id-kasual':
@@ -170,14 +170,14 @@ const DIAGNOSIS_MAP: Record<
         'Mulailah dari Buku 1 (Mahir Memimpin Tim) untuk menguasai Rumus Target 3K dan koreksi empat mata, lalu kombinasikan dengan Buku 2.',
       en: 'Start with Book 1 (Practical Team Leadership) for the 3C Goal Formula and private course-correction scripts.',
     },
-    color: 'from-[#DBEAFE] via-[#FFFDF9] to-[#FEF9C3]',
+    color: 'from-[#EFF6FF] via-[#FFFFFF] to-[#EFF6FF]',
   },
   'book-2': {
-    mascot: 'tortoise',
+    scene: 'sprint-board',
     badge: {
-      'id-kasual': 'Profil Lo: Toti & Kapi Mode Pemadam Kebakaran',
-      'id-standar': 'Profil Kamu: Penjaga Ketahanan & Arsitek Sistem',
-      en: 'Your Profile: The Overloaded Firefighter Ready to Architect Systems',
+      'id-kasual': 'Profil Lo: The Crisis Stabilizer (Level 2)',
+      'id-standar': 'Profil Kamu: The Crisis Stabilizer (Tingkat 2)',
+      en: 'Your Profile: The Crisis Stabilizer (Level 2)',
     },
     title: {
       'id-kasual':
@@ -193,14 +193,14 @@ const DIAGNOSIS_MAP: Record<
         'Buku 2 (Napas Panjang Memimpin Tim) akan membantu kamu membangun perisai emosi, mendelegasikan wewenang ke kader tangan kanan, dan mencegah burnout.',
       en: 'Book 2 (Sustaining Your Leadership) gives you the Glass Shield framework, capacity negotiation scripts, and 6 PM detachment rituals.',
     },
-    color: 'from-[#CCFBF1] via-[#FFFDF9] to-[#FFEDD5]',
+    color: 'from-[#FFFBEB] via-[#FFFFFF] to-[#FFFBEB]',
   },
   'book-3': {
-    mascot: 'owl',
+    scene: 'strategy-meeting',
     badge: {
-      'id-kasual': 'Profil Lo: Bubu & Kapi Sang Nakhoda Divisi',
-      'id-standar': 'Profil Kamu: Pemimpin Lintas Tim (Leader of Leaders)',
-      en: 'Your Profile: Bubu & Kapi the Division Navigator',
+      'id-kasual': 'Profil Lo: The Strategic Navigator (Level 3)',
+      'id-standar': 'Profil Kamu: The Strategic Navigator (Tingkat 3)',
+      en: 'Your Profile: The Strategic Navigator (Level 3)',
     },
     title: {
       'id-kasual':
@@ -216,7 +216,7 @@ const DIAGNOSIS_MAP: Record<
         'Buku 3 (Memimpin Para Leader) beserta Bundel Trilogi sangat ideal untuk menyelaraskan seluruh Team Leader di departemen kamu.',
       en: 'Book 3 (Leading Other Leaders) plus the Full 3-Book Trilogy Bundle gives you and your team leads a shared operating system.',
     },
-    color: 'from-[#EDE9FE] via-[#FFFDF9] to-[#FEF9C3]',
+    color: 'from-[#F0FDF4] via-[#FFFFFF] to-[#F0FDF4]',
   },
 };
 
@@ -310,17 +310,17 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
         </div>
       ) : (
         <div
-          className={`rounded-2xl border border-zinc-200/80 bg-gradient-to-br ${result.color} p-5 sm:p-6 shadow-md`}
+          className="rounded-2xl border-2 border-[#18181B] bg-white p-5 sm:p-6 shadow-[5px_5px_0px_#18181B]"
         >
           <div className="flex flex-col sm:flex-row items-center gap-5">
-            <div className="rounded-2xl border border-zinc-200 bg-white p-2 shadow-xs">
-              <WoodlandMascotSvg
-                character={result.mascot}
+            <div className="rounded-2xl border-2 border-[#18181B] bg-[#EFF6FF] p-2 shadow-[2px_2px_0px_#18181B] shrink-0">
+              <WhiteboardSceneSvg
+                scene={result.scene}
                 className="w-24 h-24 sm:w-28 sm:h-28 shrink-0"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
-              <span className="inline-block rounded-md border border-zinc-200 bg-white px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#2563EB] shadow-2xs mb-2">
+              <span className="inline-block rounded-md border border-[#18181B] bg-[#F59E0B] px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#18181B] shadow-[1px_1px_0px_#18181B] mb-2">
                 {result.badge[lang]}
               </span>
               <h4 className="text-xl sm:text-2xl font-extrabold text-[#18181B] mb-2">
@@ -332,13 +332,13 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                 <Link
                   href={`/read/${winner}/${lang}/ch-0`}
-                  className="doodle-button bg-[#FFE66D] px-4 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
+                  className="doodle-button bg-[#1E40AF] text-white hover:bg-[#1D4ED8] px-4.5 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
                 >
-                  <CheckCircle2 className="w-4 h-4" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
                   <span>
                     {lang === 'en'
                       ? `Read Free Sample (${winner.toUpperCase()})`
-                      : `Baca Gratis Bab 1 (${winner.toUpperCase()})`}
+                      : `Baca Sample Gratis (${winner.toUpperCase()})`}
                   </span>
                 </Link>
                 <a
