@@ -492,9 +492,9 @@ export default function LandingPage() {
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
               <Link
                 href={`/read/${activeHeroBook}/${lang}/ch-0`}
-                className="doodle-button bg-[#FFE66D] px-6 py-3.5 text-sm sm:text-base font-extrabold text-[#18181B] inline-flex items-center gap-2"
+                className="rounded-xl bg-zinc-900 px-6 py-3.5 text-sm sm:text-base font-bold text-white hover:bg-zinc-800 transition-colors shadow-sm inline-flex items-center gap-2"
               >
-                <BookOpen className="w-5 h-5" />
+                <BookOpen className="w-5 h-5 text-amber-300" />
                 <span>
                   {lang === 'en'
                     ? 'Read Free Sample (Ch 0 & 1)'
@@ -503,9 +503,9 @@ export default function LandingPage() {
               </Link>
               <a
                 href="#pricing"
-                className="doodle-button bg-[#2563EB] text-white px-6 py-3.5 text-sm sm:text-base font-extrabold inline-flex items-center gap-2"
+                className="rounded-xl border border-zinc-300 bg-white px-6 py-3.5 text-sm sm:text-base font-bold text-zinc-900 hover:bg-zinc-50 hover:border-zinc-400 transition-colors shadow-2xs inline-flex items-center gap-2"
               >
-                <Sparkles className="w-5 h-5 text-[#FFE66D]" />
+                <Sparkles className="w-5 h-5 text-blue-600" />
                 <span>
                   {lang === 'en'
                     ? 'See Packages (From Rp 49k)'
@@ -514,17 +514,17 @@ export default function LandingPage() {
               </a>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t-[1.5px] border-dashed border-[#D6D0C4] text-xs font-bold text-[#18181B]">
-              <div className="flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 border border-[#DFD9CE]">
-                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t border-zinc-200 text-xs font-semibold text-zinc-700">
+              <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>ID (Kasual & Standar) + EN</span>
               </div>
-              <div className="flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 border border-[#DFD9CE]">
-                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+              <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>40+ Skrip 1-on-1 Siap Salin</span>
               </div>
-              <div className="flex items-center gap-2 rounded-xl bg-white/80 px-3 py-2 border border-[#DFD9CE]">
-                <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0" />
+              <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Sekali Bayar Selamanya</span>
               </div>
             </div>
@@ -532,7 +532,7 @@ export default function LandingPage() {
 
           {/* Right Hero Interactive Remotion Studio */}
           <div className="lg:col-span-5">
-            <div className="doodle-box bg-white p-3.5 sm:p-4">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-3.5 sm:p-4 shadow-sm">
               <RemotionPlayerWrapper
                 component={HeroTrilogyShowcaseComp}
                 inputProps={{ activeBookId: activeHeroBook, lang }}
@@ -547,6 +547,23 @@ export default function LandingPage() {
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {BOOK_CATALOG.map((b) => {
                   const isActive = b.id === activeHeroBook;
+                  const shortTitles: Record<BookId, Record<BookLang, string>> = {
+                    'book-1': {
+                      'id-kasual': 'Mahir Memimpin',
+                      'id-standar': 'Mahir Memimpin',
+                      en: 'Team Lead',
+                    },
+                    'book-2': {
+                      'id-kasual': 'Napas Panjang',
+                      'id-standar': 'Napas Panjang',
+                      en: 'Beat Burnout',
+                    },
+                    'book-3': {
+                      'id-kasual': 'Pimpin Leader',
+                      'id-standar': 'Pimpin Leader',
+                      en: 'Lead Leaders',
+                    },
+                  };
                   return (
                     <button
                       key={b.id}
@@ -554,15 +571,15 @@ export default function LandingPage() {
                       onClick={() => setActiveHeroBook(b.id)}
                       className={`rounded-xl border px-2.5 py-2 text-left transition-all ${
                         isActive
-                          ? 'border-amber-300 bg-[#FFE66D] shadow-xs text-[#18181B]'
-                          : 'border-[#DFD9CE] bg-[#FAF7F2] hover:bg-white text-[#52525B]'
+                          ? 'border-zinc-900 bg-zinc-900 text-white shadow-xs'
+                          : 'border-zinc-200 bg-zinc-50 hover:bg-white text-zinc-600'
                       }`}
                     >
-                      <div className="font-mono text-[10px] font-extrabold text-[#18181B]">
+                      <div className={`font-mono text-[10px] font-extrabold ${isActive ? 'text-zinc-300' : 'text-zinc-400'}`}>
                         {b.volumeCode}
                       </div>
-                      <div className="truncate text-xs font-extrabold text-[#18181B]">
-                        {b.titles[lang]}
+                      <div className={`text-xs font-bold leading-tight ${isActive ? 'text-white' : 'text-zinc-800'}`}>
+                        {shortTitles[b.id][lang]}
                       </div>
                     </button>
                   );

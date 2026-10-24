@@ -583,7 +583,9 @@ export const HeroTrilogyShowcaseComp: React.FC<HeroTrilogyShowcaseProps> = ({
           >
             {lang === 'en'
               ? `${stage.sceneLabel.en}: “Click Vol. 01, 02, or 03 below to inspect each playbook!”`
-              : `${stage.sceneLabel[lang]}: “Klik tab Vol. 01, 02, atau 03 di bawah buat ngintip isi tiap buku!”`}
+              : lang === 'id-kasual'
+              ? `${stage.sceneLabel['id-kasual']}: “Klik tab Vol. 01, 02, atau 03 di bawah buat ngintip isi tiap buku!”`
+              : `${stage.sceneLabel['id-standar']}: “Pilih tab Vol. 01, 02, atau 03 di bawah untuk melihat fokus tiap buku.”`}
           </span>
         </div>
         <span
