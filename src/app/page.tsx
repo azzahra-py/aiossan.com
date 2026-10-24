@@ -324,6 +324,54 @@ const FAQ_ITEMS: {
       en: 'Checkout is powered by Mayar.id supporting QRIS, E-Wallets, and Virtual Accounts. Your books and PDF downloads unlock automatically the second payment completes.',
     },
   },
+  {
+    q: {
+      'id-kasual':
+        '6. Apakah pembelian ini bisa diklaim ke kantor (reimbursement)?',
+      'id-standar':
+        '6. Apakah pembelian ini dapat diajukan untuk klaim reimbursement kantor?',
+      en: '6. Can I expense this purchase or claim corporate reimbursement?',
+    },
+    a: {
+      'id-kasual':
+        'Bisa banget! Setelah pembayaran berhasil via Mayar, lo otomatis menerima tanda terima dan invoice resmi berstempel digital ke email lo. Invoice ini mencantumkan rincian transaksi yang valid untuk klaim anggaran tunjangan belajar atau pengembangan profesional di kantor.',
+      'id-standar':
+        'Ya, tentu bisa. Segera setelah pembayaran berhasil diproses melalui Mayar, Anda akan menerima tanda terima dan invoice resmi berstempel digital via email. Dokumen ini valid dan siap dilampirkan untuk pengajuan klaim tunjangan belajar atau biaya pengembangan profesional di perusahaan Anda.',
+      en: 'Yes. Upon checkout via Mayar, an official receipt and digital-stamped tax invoice are emailed to you instantly, valid for corporate professional development reimbursement.',
+    },
+  },
+  {
+    q: {
+      'id-kasual':
+        '7. Bisa dibaca offline di iPad, Kindle, atau dicetak?',
+      'id-standar':
+        '7. Apakah buku ini bisa dibaca offline di iPad, Kindle, atau dicetak?',
+      en: '7. Can I read offline on iPad, Kindle, or print it out?',
+    },
+    a: {
+      'id-kasual':
+        'Bisa! Selain Web Reader interaktif, lo dapet file Master PDF A5 resolusi tinggi yang bisa lo simpan di iPad, Kindle, tablet, atau dicetak jadi buku saku meja kerja.',
+      'id-standar':
+        'Tentu saja. Anda mendapatkan berkas Master PDF A5 resolusi tinggi yang dapat disimpan di iPad, Kindle, tablet Android, maupun dicetak sebagai buku saku fisik.',
+      en: 'Absolutely. Alongside the Web Reader, you receive high-resolution official A5 PDFs optimized for iPad, Kindle, tablets, and physical desk-side printing.',
+    },
+  },
+  {
+    q: {
+      'id-kasual':
+        '8. Tim gw bukan tim teknis (marketing, ops, agensi), apakah tetap relevan?',
+      'id-standar':
+        '8. Apakah materi ini relevan untuk tim non-teknis (operasional, marketing, agensi)?',
+      en: '8. Is this framework relevant for non-technical teams (marketing, operations, agency)?',
+    },
+    a: {
+      'id-kasual':
+        '100% relevan. Masalah komunikasi tim, delegasi meleset, dan rasa sungkan menegur itu dialami semua leader di berbagai bidang. Rumus 3K dan 40+ skrip dialog di buku ini fokus pada dinamika manusia dan koordinasi kerja nyata.',
+      'id-standar':
+        'Sangat relevan. Tantangan keselarasan target, delegasi, dan komunikasi empat mata berlaku universal di semua fungsi kerja. Framework 3K dan puluhan skrip percakapan dirancang berbasis riset perilaku manajerial yang berlaku lintas industri.',
+      en: '100% relevant. Target alignment, delegation, and private redirection are universal leadership challenges that apply to any cross-functional team.',
+    },
+  },
 ];
 
 export default function LandingPage() {
@@ -817,22 +865,24 @@ export default function LandingPage() {
       </section>
 
       {/* INTERACTIVE FAQ ACCORDION SECTION */}
-      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="doodle-panel-flat p-6 sm:p-8">
-          <div className="flex items-center gap-2.5 mb-6">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-200 bg-[#DBEAFE] shadow-2xs">
-              <HelpCircle className="w-5 h-5 text-[#1E3A8A]" />
+      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 shadow-2xs">
+              <HelpCircle className="w-5 h-5 text-blue-700" />
             </div>
             <div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#18181B]">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900">
                 {lang === 'en'
                   ? 'Frequently Asked Questions (FAQ)'
                   : 'Pertanyaan yang Sering Ditanyakan (FAQ)'}
               </h3>
-              <p className="text-xs text-[#52525B]">
+              <p className="text-xs sm:text-sm text-zinc-500">
                 {lang === 'en'
-                  ? 'Everything you need to know about access, languages, and one-time licensing.'
-                  : 'Semua yang perlu lo ketahui tentang akses Web Reader, PDF, dan lisensi sekali bayar.'}
+                  ? 'Everything you need to know about access, languages, corporate reimbursement, and one-time licensing.'
+                  : lang === 'id-kasual'
+                  ? 'Semua yang perlu lo ketahui tentang akses Web Reader, PDF, reimbursement kantor, dan lisensi sekali bayar.'
+                  : 'Semua informasi penting terkait akses Web Reader, berkas PDF, reimbursement kantor, dan lisensi sekali bayar.'}
               </p>
             </div>
           </div>
@@ -842,13 +892,13 @@ export default function LandingPage() {
               <details
                 key={idx}
                 open={idx === 0}
-                className="group rounded-2xl border border-[#DFD9CE] bg-[#FAF7F2]/60 open:border-zinc-300 open:bg-white open:shadow-xs transition-colors"
+                className="group rounded-xl border border-zinc-200 bg-white open:border-zinc-300 open:shadow-xs transition-colors overflow-hidden"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-extrabold text-sm sm:text-base text-[#18181B]">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-bold text-sm sm:text-base text-zinc-900 hover:bg-zinc-50/60 transition-colors">
                   <span>{item.q[lang]}</span>
-                  <ChevronDown className="h-4 w-4 shrink-0 text-[#52525B] transition-transform group-open:rotate-180" />
+                  <ChevronDown className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-open:rotate-180 group-open:text-zinc-900" />
                 </summary>
-                <div className="border-t border-dashed border-[#DFD9CE] px-5 py-4 text-xs sm:text-sm leading-relaxed text-[#52525B]">
+                <div className="border-t border-zinc-100 bg-zinc-50/40 px-5 py-4 text-xs sm:text-sm leading-relaxed text-zinc-600">
                   {item.a[lang]}
                 </div>
               </details>
@@ -857,22 +907,84 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="mt-auto border-t-[1.5px] border-[#DFD9CE] bg-white py-8 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto w-full max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-zinc-200 bg-white shadow-2xs shrink-0">
-              <span className="font-mono text-[10px] font-black text-[#18181B]">ai</span>
+      {/* COMPLETE PROFESSIONAL FOOTER */}
+      <footer className="mt-auto border-t border-zinc-200 bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-zinc-100">
+            <div className="md:col-span-2 space-y-3">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-zinc-900 bg-zinc-900 text-white shadow-2xs shrink-0">
+                  <span className="font-mono text-[10px] font-black">ai</span>
+                </div>
+                <span className="font-extrabold text-base text-zinc-900">
+                  aiossan.com
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-500 max-w-sm leading-relaxed">
+                {lang === 'en'
+                  ? 'Interactive Leadership Field Playbook Trilogy. Research-backed operating systems for modern team leads and managers.'
+                  : 'Trilogi Tactical Playbook Kepemimpinan Lapangan. Kerangka kerja teruji untuk pemimpin tim dan manajer modern.'}
+              </p>
+              <div className="flex items-center gap-2 pt-1 text-xs text-zinc-500">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Instant Checkout Powered by Mayar.id • QRIS & Virtual Account</span>
+              </div>
             </div>
-            <span className="font-extrabold text-[#18181B]">
-              aiossan.com — Interactive Leadership Field Playbook Trilogy
-            </span>
+
+            <div>
+              <p className="font-mono text-xs font-bold text-zinc-900 uppercase tracking-wider mb-3">
+                {lang === 'en' ? 'Quick Navigation' : 'Navigasi Cepat'}
+              </p>
+              <ul className="space-y-2 text-xs font-medium text-zinc-600">
+                <li>
+                  <a href="#books" className="hover:text-zinc-900 transition-colors">
+                    {lang === 'en' ? '3-Book Curriculum' : 'Katalog 3 Buku'}
+                  </a>
+                </li>
+                <li>
+                  <a href="#quiz" className="hover:text-zinc-900 transition-colors">
+                    {lang === 'en' ? '45-Second Assessment' : 'Diagnosis Kuis 45 Detik'}
+                  </a>
+                </li>
+                <li>
+                  <a href="#scripts" className="hover:text-zinc-900 transition-colors">
+                    {lang === 'en' ? 'Live Script Tool' : 'Demo Skrip & Rumus 3K'}
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="hover:text-zinc-900 transition-colors">
+                    {lang === 'en' ? 'Trilogy Pricing' : 'Paket Harga & Trilogi'}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-mono text-xs font-bold text-zinc-900 uppercase tracking-wider mb-3">
+                {lang === 'en' ? 'Help & Support' : 'Bantuan & Jaminan'}
+              </p>
+              <ul className="space-y-2 text-xs font-medium text-zinc-600">
+                <li>
+                  <a
+                    href="mailto:support@aiossan.com"
+                    className="hover:text-zinc-900 transition-colors inline-block"
+                  >
+                    Email: support@aiossan.com
+                  </a>
+                </li>
+                <li>
+                  <span className="text-zinc-400">Lisensi Sekali Bayar Selamanya</span>
+                </li>
+                <li>
+                  <span className="text-zinc-400">Garansi Akses Web + PDF A5</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#0D9488]" />
-            <span>
-              Instant Checkout Powered by Mayar.id • Research-Backed Frameworks
-            </span>
+
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
+            <p>© {new Date().getFullYear()} aiossan.com. All rights reserved.</p>
+            <p>Designed for pragmatic leaders. Zero academic fluff.</p>
           </div>
         </div>
       </footer>
