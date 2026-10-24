@@ -43,7 +43,7 @@ export default async function DashboardPage() {
               <User className="w-7 h-7 text-[#1E1E1E]" />
             </div>
 
-            <h1 className="font-hand text-3xl font-bold text-[#1E1E1E] mb-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#18181B] mb-2 tracking-tight">
               Dashboard <mark>Pembaca</mark>
             </h1>
 
@@ -90,12 +90,12 @@ export default async function DashboardPage() {
         {/* User Profile Bar */}
         <div className="doodle-box bg-white p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#2A9D8F] text-white border border-teal-600 rounded-full flex items-center justify-center font-hand font-bold text-xl shadow-xs">
+            <div className="w-12 h-12 bg-[#1E40AF] text-white border-2 border-[#18181B] rounded-xl flex items-center justify-center font-mono font-bold text-lg shadow-[2px_2px_0px_#18181B]">
               {user.email ? user.email.slice(0, 2).toUpperCase() : 'ME'}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-hand font-bold text-2xl text-[#1E1E1E]">
+                <h1 className="font-extrabold text-2xl text-[#18181B]">
                   Halo, {user.email?.split('@')[0]}!
                 </h1>
                 <span className="font-mono text-[10px] px-2 py-0.5 bg-[#FAF7F2] border border-zinc-200 rounded text-[#2A9D8F] font-bold shadow-2xs">
@@ -109,7 +109,7 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-2 self-end sm:self-auto">
             <Link href="/#pricing">
               <SketchButton variant="primary" size="sm">
-                <Sparkles className="w-3.5 h-3.5 text-[#1E1E1E]" />
+                <Sparkles className="w-3.5 h-3.5 text-white" />
                 <span>Beli Bundel Tambahan</span>
               </SketchButton>
             </Link>
@@ -120,8 +120,8 @@ export default async function DashboardPage() {
         {/* Book Collection */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6 pb-2 border-b border-zinc-200">
-            <h2 className="font-hand font-bold text-2xl sm:text-3xl text-[#1E1E1E] flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-[#2B59C3]" />
+            <h2 className="font-extrabold text-xl sm:text-2xl text-[#18181B] flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-[#1E40AF]" />
               Koleksi Trilogi Buku ({activeBookIds.length}/3 Terbuka)
             </h2>
             <span className="text-xs font-mono text-[#5C5A54] hidden sm:inline">
@@ -160,7 +160,7 @@ export default async function DashboardPage() {
                       )}
                     </div>
 
-                    <h3 className="font-hand text-2xl font-bold text-[#1E1E1E] mb-2 leading-snug">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-[#18181B] mb-2 leading-snug">
                       {book.titles['id-kasual']}
                     </h3>
 
@@ -245,8 +245,8 @@ export default async function DashboardPage() {
         {/* Transaction History Section */}
         {orders && orders.length > 0 && (
           <div className="doodle-box bg-white p-6">
-            <h2 className="font-hand font-bold text-xl sm:text-2xl text-[#1E1E1E] mb-4 flex items-center gap-2">
-              <Receipt className="w-5 h-5 text-[#2B59C3]" />
+            <h2 className="font-extrabold text-lg sm:text-xl text-[#18181B] mb-4 flex items-center gap-2">
+              <Receipt className="w-5 h-5 text-[#1E40AF]" />
               Riwayat Pembelian Mayar
             </h2>
 

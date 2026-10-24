@@ -18,7 +18,7 @@ function CheckoutSuccessContent() {
         <CheckCircle2 className="w-9 h-9" />
       </div>
 
-      <h1 className="font-hand text-3xl sm:text-4xl font-bold text-[#1E1E1E] mb-2">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-[#18181B] mb-2 tracking-tight">
         Selamat Datang di <mark>Klub Pembaca!</mark>
       </h1>
 

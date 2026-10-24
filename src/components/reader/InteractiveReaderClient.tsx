@@ -175,8 +175,8 @@ export function InteractiveReaderClient({
             {!isPro && (
               <p className="font-hand text-xs text-[#18181B]">
                 {lang === 'en'
-                  ? 'Kapi the Capybara stamps a star for you!'
-                  : 'Kapi si Kapibara memberikan stempel bintang untuk lo!'}
+                  ? 'Milestone verified: Ready for field practice!'
+                  : 'Stempel verifikasi: Siap lo praktikkan di meja kerja!'}
               </p>
             )}
           </div>

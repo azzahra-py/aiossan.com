@@ -664,8 +664,8 @@ export function MarkdownRenderer({
               <p className="font-hand text-sm text-[#065F46]">
                 {checklistStats.done === checklistStats.total
                   ? lang === 'en'
-                    ? '🎉 Amazing! Kapi the Capybara is proud of your practice commitment in this chapter!'
-                    : '🎉 Luar biasa! Kapi si Kapibara bangga sama komitmen praktik lo di bab ini!'
+                    ? '🎉 Amazing! All tactical practice exercises in this chapter completed!'
+                    : '🎉 Luar biasa! Seluruh checklist latihan taktis bab ini tuntas lo selesaikan!'
                   : lang === 'en'
                   ? 'Check the exercise boxes above each time you finish practicing at work.'
                   : 'Klik kotak latihan di atas setiap kali lo selesai mempraktikkannya di kantor.'}

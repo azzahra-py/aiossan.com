@@ -67,16 +67,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2]">
+    <div className="min-h-screen flex flex-col bg-[#FAFAFA]">
       <NavbarDoodle />
 
       <main className="flex-1 flex items-center justify-center p-4 py-12">
-        <SketchCard variant="yellow" badgeText="Akses Pembaca" className="w-full max-w-md">
+        <SketchCard variant="white" badgeText="Akses Pembaca" className="w-full max-w-md">
           <div className="text-center mb-6">
-            <h1 className="font-hand text-3xl font-bold text-[#1E1E1E] mb-2">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#18181B] mb-2 tracking-tight">
               Masuk ke <mark>aiossan.com</mark>
             </h1>
-            <p className="text-sm text-[#5C5A54] font-body">
+            <p className="text-sm text-[#52525B]">
               Akses buku digital, unduh PDF resmi, dan simpan progres checklist latihan kamu.
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
           {sentMessage ? (
             <div className="doodle-box bg-[#F0FAF8] border-[#2A9D8F] p-4 text-center my-4">
               <CheckCircle2 className="w-8 h-8 text-[#2A9D8F] mx-auto mb-2" />
-              <h2 className="font-hand text-xl font-bold text-[#1E1E1E] mb-1">
+              <h2 className="text-xl font-bold text-[#18181B] mb-1">
                 Tautan Masuk Terkirim!
               </h2>
               <p className="text-xs text-[#5C5A54] leading-relaxed mb-4">

@@ -47,8 +47,8 @@ export const CHAPTER_ILLUSTRATIONS: Record<string, ChapterIllustrationMeta> = {
     chapterIndex: 0,
     slug: 'ch-0',
     imagePath: '/illustrations/book-1/ch-0.webp',
-    captionId: 'Kapi si Kapibara baru saja menerima lencana bintang pertama—masih sedikit canggung, tapi siap belajar memimpin dengan empati.',
-    captionEn: 'Kapi the Capybara receiving their first team lead star badge—a little awkward at first, but ready to lead with empathy.',
+    captionId: 'Lencana kapten tim pertama: Masih sedikit canggung di hari perdana, tapi siap belajar memimpin dengan empati dan ketegasan taktis.',
+    captionEn: 'First-time team lead milestone: Stepping up to leadership, ready to align with empathy and tactical clarity.',
     iconType: 'compass',
   },
   'book-1:ch-1': {
@@ -292,8 +292,8 @@ export const CHAPTER_ILLUSTRATIONS: Record<string, ChapterIllustrationMeta> = {
     chapterIndex: 12,
     slug: 'ch-12',
     imagePath: '/illustrations/book-2/ch-12.webp',
-    captionId: 'Termometer energi 4 tingkat dan stasiun pemulihan bersama kura-kura bijak.',
-    captionEn: 'Four-stage energy gauge and recovery stations alongside the steady tortoise.',
+    captionId: 'Termometer energi 4 tingkat dan stasiun pemulihan kapasitas kerja tim secara berkala.',
+    captionEn: 'Four-stage energy gauge and tactical recovery stations to maintain steady team velocity.',
     iconType: 'thermometer',
   },
   'book-2:ch-13': {
