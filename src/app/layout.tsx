@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Caveat, JetBrains_Mono, Newsreader } from 'next/font/google';
 import './globals.css';
-import { AnimatedPaperBackground } from '@/components/doodle/AnimatedPaperBackground';
+import { WarRoomCanvas } from '@/components/doodle/WarRoomCanvas';
 import { CopyGuard } from '@/components/CopyGuard';
 
 // Typefaces loaded via Google Fonts:
@@ -60,8 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="light only" />
         <meta name="darkreader-lock" />
       </head>
-      <body className="relative min-h-screen bg-[#FAF7F2] text-[#18181B] antialiased selection:bg-[#FFE66D]">
-        <AnimatedPaperBackground />
+      <body className="relative min-h-screen bg-[#FAFAFA] text-[#18181B] antialiased selection:bg-[#F59E0B]/25 selection:text-[#18181B]">
+        <WarRoomCanvas />
         <CopyGuard />
         {children}
       </body>
