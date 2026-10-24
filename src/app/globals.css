@@ -4,18 +4,18 @@
 
 :root {
   color-scheme: light only;
-  --bg-paper: #FAF7F2;
-  --bg-paper-warm: #F3EFE6;
+  --bg-paper: #FAFAFA;
+  --bg-paper-warm: #F4F4F5;
   --bg-paper-card: #FFFFFF;
   --ink-primary: #18181B;
   --ink-muted: #52525B;
-  --border-warm: #DFD9CE;
-  --accent-highlighter: #FFE66D;
-  --accent-pen-blue: #2563EB;
-  --accent-marker-green: #0D9488;
+  --border-warm: #E4E4E7;
+  --accent-highlighter: #F59E0B;
+  --accent-pen-blue: #1E40AF;
+  --accent-marker-green: #059669;
   --accent-coral: #EA580C;
-  --accent-red-pen: #E11D48;
-  --accent-violet: #7C3AED;
+  --accent-red-pen: #DC2626;
+  --accent-violet: #6D28D9;
 }
 
 html {
@@ -47,9 +47,9 @@ img {
   -webkit-user-drag: none;
 }
 
-/* Subtle Living Dot-Grid Texture */
+/* Subtle Living Technical Dot-Grid Texture */
 .ambient-grid {
-  background-image: radial-gradient(#D4CDBE 1.1px, transparent 1.1px);
+  background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
   background-size: 24px 24px;
   animation: gridPan 75s linear infinite;
 }

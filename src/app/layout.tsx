@@ -1,21 +1,24 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, Patrick_Hand, JetBrains_Mono, Newsreader } from 'next/font/google';
+import { Plus_Jakarta_Sans, Caveat, JetBrains_Mono, Newsreader } from 'next/font/google';
 import './globals.css';
 import { AnimatedPaperBackground } from '@/components/doodle/AnimatedPaperBackground';
 import { CopyGuard } from '@/components/CopyGuard';
 
-// Same three families and CSS variables as design B's local woff2 setup,
-// loaded via Google Fonts so the repo snapshot stays text-only.
+// Typefaces loaded via Google Fonts:
+// - Body: Plus Jakarta Sans for crisp, modern legibility across headings and UI
+// - Hand/Script: Caveat for whiteboard margin annotations, sticky notes, and diagram markers
+// - Mono: JetBrains Mono for code and technical frameworks
+// - Serif: Newsreader for reader's editorial mode
 const fontBody = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 });
 
-const fontHand = Patrick_Hand({
+const fontHand = Caveat({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['500', '700'],
   variable: '--font-hand',
   display: 'swap',
 });

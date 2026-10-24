@@ -10,18 +10,30 @@ const config: Config = {
     extend: {
       colors: {
         paper: {
-          DEFAULT: '#FAF7F2',
+          DEFAULT: '#FAFAFA',
           card: '#FFFFFF',
         },
+        canvas: {
+          DEFAULT: '#FAFAFA',
+          card: '#FFFFFF',
+          grid: '#CBD5E1',
+        },
         ink: {
-          DEFAULT: '#1E1E1E',
-          muted: '#5C5A54',
+          DEFAULT: '#18181B',
+          muted: '#52525B',
+          dark: '#09090B',
+        },
+        whiteboard: {
+          navy: '#1E40AF',
+          red: '#DC2626',
+          green: '#059669',
+          amber: '#F59E0B',
         },
         accent: {
-          highlighter: '#FFE66D',
-          'pen-blue': '#2B59C3',
-          'marker-green': '#2A9D8F',
-          'red-pen': '#E63946',
+          highlighter: '#F59E0B',
+          'pen-blue': '#1E40AF',
+          'marker-green': '#059669',
+          'red-pen': '#DC2626',
         },
       },
       fontFamily: {
