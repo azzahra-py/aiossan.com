@@ -10,10 +10,6 @@ import {
 } from 'remotion';
 import { BookId, BookLang } from '@/types/books';
 import { DoodleIconType } from '@/lib/illustrations';
-import {
-  WoodlandMascotSvg,
-  MascotCharacter,
-} from '@/components/doodle/WoodlandMascotSvg';
 
 export interface ChapterSceneBannerProps extends Record<string, unknown> {
   bookId: BookId;
@@ -21,14 +17,6 @@ export interface ChapterSceneBannerProps extends Record<string, unknown> {
   iconType: DoodleIconType;
   lang: BookLang;
 }
-
-const MASCOT_CYCLE: MascotCharacter[] = [
-  'capybara',
-  'otter',
-  'owl',
-  'redpanda',
-  'tortoise',
-];
 
 const PALETTES: Record<
   BookId,
@@ -274,8 +262,6 @@ export const ChapterSceneBannerComp: React.FC<ChapterSceneBannerProps> = ({
   const { fps } = useVideoConfig();
 
   const palette = PALETTES[bookId] || PALETTES['book-1'];
-  const primaryMascot = MASCOT_CYCLE[chapterIndex % MASCOT_CYCLE.length];
-  const secondaryMascot = MASCOT_CYCLE[(chapterIndex + 2) % MASCOT_CYCLE.length];
 
   const enter = spring({
     frame,
@@ -283,8 +269,6 @@ export const ChapterSceneBannerComp: React.FC<ChapterSceneBannerProps> = ({
     config: { damping: 14, stiffness: 110 },
   });
 
-  const leftBob = Math.sin(frame / 14) * 4;
-  const rightBob = Math.sin((frame + 15) / 14) * 4;
   const dashOffset = interpolate(frame, [0, 180], [60, 0]);
 
   const stageLabel =
@@ -358,107 +342,79 @@ export const ChapterSceneBannerComp: React.FC<ChapterSceneBannerProps> = ({
         </span>
       </div>
 
-      {/* Center Animated Trio: Primary Mascot + Metaphor Instrument + Secondary Mascot */}
+      {/* Center Whiteboard Tactical Schematic Banner */}
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '24px',
-          transform: `scale(${0.92 + 0.08 * enter})`,
+          gap: '20px',
+          transform: `scale(${0.94 + 0.06 * enter})`,
           margin: 'auto 0',
+          backgroundColor: '#FFFFFF',
+          border: '2px solid #18181B',
+          borderRadius: '16px',
+          padding: '12px 28px',
+          boxShadow: '4px 4px 0px #18181B',
         }}
       >
-        <div
-          style={{
-            transform: `translateY(${leftBob}px)`,
-            backgroundColor: '#FFFFFF',
-            border: '1px solid rgba(24, 24, 27, 0.12)',
-            borderRadius: '20px',
-            padding: '6px',
-            boxShadow: '0 4px 14px -2px rgba(24, 24, 27, 0.08)',
-          }}
-        >
-          <WoodlandMascotSvg character={primaryMascot} className="w-20 h-20" />
-        </div>
+        <svg width="60" height="24" viewBox="0 0 60 24">
+          <line
+            x1="2"
+            y1="12"
+            x2="56"
+            y2="12"
+            stroke="#18181B"
+            strokeWidth="2.5"
+            strokeDasharray="6 4"
+            strokeDashoffset={dashOffset}
+          />
+          <path d="M52 7 L58 12 L52 17" stroke="#18181B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
 
-        {/* Animated Connection & Central Metaphor */}
         <div
           style={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            gap: '10px',
+            gap: '6px',
           }}
         >
-          <svg width="46" height="20" viewBox="0 0 46 20">
-            <line
-              x1="2"
-              y1="10"
-              x2="44"
-              y2="10"
-              stroke="#18181B"
-              strokeWidth="2.5"
-              strokeDasharray="6 4"
-              strokeDashoffset={dashOffset}
-            />
-          </svg>
-
-          <div
+          <AnimatedMetaphorIcon
+            iconType={iconType}
+            frame={frame}
+            accentHex={palette.accentHex}
+          />
+          <span
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px',
+              backgroundColor: '#F59E0B',
+              border: '1.5px solid #18181B',
+              borderRadius: '6px',
+              padding: '2px 12px',
+              fontFamily: 'var(--font-hand), cursive',
+              fontSize: '15px',
+              fontWeight: 700,
+              color: '#18181B',
+              boxShadow: '1px 1px 0px #18181B',
             }}
           >
-            <AnimatedMetaphorIcon
-              iconType={iconType}
-              frame={frame}
-              accentHex={palette.accentHex}
-            />
-            <span
-              style={{
-                backgroundColor: '#FFE66D',
-                border: '1px solid rgba(24, 24, 27, 0.12)',
-                borderRadius: '8px',
-                padding: '2px 10px',
-                fontFamily: 'var(--font-hand), cursive',
-                fontSize: '14px',
-                fontWeight: 700,
-                color: '#18181B',
-                boxShadow: '0 2px 6px -1px rgba(24, 24, 27, 0.08)',
-              }}
-            >
-              {stageLabel}
-            </span>
-          </div>
-
-          <svg width="46" height="20" viewBox="0 0 46 20">
-            <line
-              x1="2"
-              y1="10"
-              x2="44"
-              y2="10"
-              stroke="#A1A1AA"
-              strokeWidth="2"
-              strokeDasharray="6 4"
-              strokeDashoffset={dashOffset}
-            />
-          </svg>
+            {stageLabel}
+          </span>
         </div>
 
-        <div
-          style={{
-            transform: `translateY(${rightBob}px)`,
-            backgroundColor: '#FFFFFF',
-            border: '1px solid rgba(24, 24, 27, 0.12)',
-            borderRadius: '20px',
-            padding: '6px',
-            boxShadow: '0 4px 14px -2px rgba(24, 24, 27, 0.08)',
-          }}
-        >
-          <WoodlandMascotSvg character={secondaryMascot} className="w-20 h-20" />
-        </div>
+        <svg width="60" height="24" viewBox="0 0 60 24">
+          <line
+            x1="4"
+            y1="12"
+            x2="58"
+            y2="12"
+            stroke="#A1A1AA"
+            strokeWidth="2"
+            strokeDasharray="6 4"
+            strokeDashoffset={dashOffset}
+          />
+          <path d="M54 7 L58 12 L54 17" stroke="#A1A1AA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
     </AbsoluteFill>
   );

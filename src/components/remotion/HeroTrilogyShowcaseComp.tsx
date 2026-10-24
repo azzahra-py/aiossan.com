@@ -10,9 +10,9 @@ import {
 } from 'remotion';
 import { BookId, BookLang, BOOK_CATALOG } from '@/types/books';
 import {
-  WoodlandMascotSvg,
-  MascotCharacter,
-} from '@/components/doodle/WoodlandMascotSvg';
+  WhiteboardSceneSvg,
+  WhiteboardScene,
+} from '@/components/doodle/WhiteboardSceneSvg';
 
 export interface HeroTrilogyShowcaseProps extends Record<string, unknown> {
   activeBookId: BookId;
@@ -26,19 +26,23 @@ const BOOK_STAGE_META: Record<
     spineHex: string;
     cardTintHex: string;
     badgeBgHex: string;
-    mascot: MascotCharacter;
-    mascotName: string;
+    scene: WhiteboardScene;
+    sceneLabel: Record<BookLang, string>;
     scriptPreview: Record<BookLang, string>;
     pills: Record<BookLang, string[]>;
   }
 > = {
   'book-1': {
     vol: 'VOL. 01',
-    spineHex: '#2563EB',
+    spineHex: '#1E40AF',
     cardTintHex: '#EFF6FF',
-    badgeBgHex: '#FFE66D',
-    mascot: 'capybara',
-    mascotName: 'Kapi si Kapibara',
+    badgeBgHex: '#DBEAFE',
+    scene: 'one-on-one',
+    sceneLabel: {
+      'id-kasual': 'Sesi 1-on-1 Empat Mata',
+      'id-standar': 'Sesi 1-on-1 Terarah',
+      en: '1-on-1 Feedback Session',
+    },
     scriptPreview: {
       'id-kasual':
         '“Di Rumus 3K kemarin kita sepakat masukin data 3 bulan. Bagian mana yang kita rapiin dulu sore ini?”',
@@ -54,11 +58,15 @@ const BOOK_STAGE_META: Record<
   },
   'book-2': {
     vol: 'VOL. 02',
-    spineHex: '#EA580C',
-    cardTintHex: '#FFF7ED',
-    badgeBgHex: '#99F6E4',
-    mascot: 'tortoise',
-    mascotName: 'Toti si Kura-Kura',
+    spineHex: '#D97706',
+    cardTintHex: '#FFFBEB',
+    badgeBgHex: '#FEF3C7',
+    scene: 'sprint-board',
+    sceneLabel: {
+      'id-kasual': 'Papan Kapasitas Sprint',
+      'id-standar': 'Papan Kapasitas Sprint',
+      en: 'Sprint Capacity Board',
+    },
     scriptPreview: {
       'id-kasual':
         '“Kapasitas tim minggu ini 100% di Proyek A. Kalau Proyek B masuk, opsi mana yang kita geser ke minggu depan?”',
@@ -74,11 +82,15 @@ const BOOK_STAGE_META: Record<
   },
   'book-3': {
     vol: 'VOL. 03',
-    spineHex: '#0D9488',
-    cardTintHex: '#F0FDFA',
-    badgeBgHex: '#DDD6FE',
-    mascot: 'owl',
-    mascotName: 'Bubu si Burung Hantu',
+    spineHex: '#059669',
+    cardTintHex: '#F0FDF4',
+    badgeBgHex: '#DCFCE7',
+    scene: 'strategy-meeting',
+    sceneLabel: {
+      'id-kasual': 'Presentasi Ruang Strategi',
+      'id-standar': 'Presentasi Ruang Strategi',
+      en: 'Strategy Alignment Room',
+    },
     scriptPreview: {
       'id-kasual':
         '“Sebelum gw jawab, menurut lo sebagai Team Lead-nya, apa akar masalah di titik serah-terima tim lo?”',
@@ -350,9 +362,9 @@ export const HeroTrilogyShowcaseComp: React.FC<HeroTrilogyShowcaseProps> = ({
                     transform: `translateY(${mascotBob * 0.6}px) rotate(${mascotRotate}deg)`,
                   }}
                 >
-                  <WoodlandMascotSvg
-                    character={stage.mascot}
-                    className="w-14 h-14"
+                  <WhiteboardSceneSvg
+                    scene={stage.scene}
+                    className="w-16 h-16"
                   />
                 </div>
                 <span
@@ -367,7 +379,7 @@ export const HeroTrilogyShowcaseComp: React.FC<HeroTrilogyShowcaseProps> = ({
                     fontWeight: 800,
                   }}
                 >
-                  {stage.mascotName}
+                  {stage.sceneLabel[lang]}
                 </span>
               </div>
 
@@ -559,7 +571,7 @@ export const HeroTrilogyShowcaseComp: React.FC<HeroTrilogyShowcaseProps> = ({
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ transform: `translateY(${mascotBob * 0.4}px)` }}>
-            <WoodlandMascotSvg character={stage.mascot} className="w-8 h-8" />
+            <WhiteboardSceneSvg scene={stage.scene} className="w-8 h-8" />
           </div>
           <span
             style={{
@@ -570,8 +582,8 @@ export const HeroTrilogyShowcaseComp: React.FC<HeroTrilogyShowcaseProps> = ({
             }}
           >
             {lang === 'en'
-              ? `${stage.mascotName}: “Click Vol. 01, 02, or 03 below to inspect each playbook!”`
-              : `${stage.mascotName}: “Klik tab Vol. 01, 02, atau 03 di bawah buat ngintip isi tiap buku!”`}
+              ? `${stage.sceneLabel.en}: “Click Vol. 01, 02, or 03 below to inspect each playbook!”`
+              : `${stage.sceneLabel[lang]}: “Klik tab Vol. 01, 02, atau 03 di bawah buat ngintip isi tiap buku!”`}
           </span>
         </div>
         <span

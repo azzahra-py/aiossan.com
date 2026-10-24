@@ -9,7 +9,6 @@ import {
   useVideoConfig,
 } from 'remotion';
 import { BookLang } from '@/types/books';
-import { WoodlandMascotSvg } from '@/components/doodle/WoodlandMascotSvg';
 
 export interface Framework3KLoopProps extends Record<string, unknown> {
   lang: BookLang;
@@ -312,16 +311,40 @@ export const Framework3KLoopComp: React.FC<Framework3KLoopProps> = ({
       <div
         style={{
           backgroundColor: NODE_COLORS[activeStepIdx].bg,
-          border: '1px solid rgba(24, 24, 27, 0.12)',
+          border: '2px solid #18181B',
           borderRadius: '12px',
           padding: '10px 14px',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          boxShadow: '0 4px 14px -2px rgba(24, 24, 27, 0.06)',
+          boxShadow: '3px 3px 0px #18181B',
         }}
       >
-        <WoodlandMascotSvg character="capybara" className="w-10 h-10 shrink-0" />
+        <div
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '8px',
+            border: '2px solid #18181B',
+            backgroundColor: '#EFF6FF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '1px 1px 0px #18181B',
+            flexShrink: 0,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-mono), monospace',
+              fontSize: '11px',
+              fontWeight: 900,
+              color: '#1E40AF',
+            }}
+          >
+            3K
+          </span>
+        </div>
         <div style={{ flex: 1 }}>
           <div
             style={{
