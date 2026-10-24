@@ -1,6 +1,6 @@
 import React from 'react';
 import { BookId, BookLang, BOOK_CATALOG } from '@/types/books';
-import { WoodlandMascotSvg, MascotCharacter } from './WoodlandMascotSvg';
+import { WhiteboardSceneSvg, WhiteboardScene } from './WhiteboardSceneSvg';
 
 interface BookCoverMockupProps {
   bookId: BookId;
@@ -16,44 +16,44 @@ const THEME_MAP: Record<
     accentBg: string;
     spineBg: string;
     badgeBg: string;
-    mascot: MascotCharacter;
+    scene: WhiteboardScene;
     tagText: Record<BookLang, string>;
   }
 > = {
   'book-1': {
     vol: 'VOL. 01',
-    accentBg: 'bg-[#DBEAFE]',
-    spineBg: 'bg-[#2563EB]',
-    badgeBg: 'bg-[#FFE66D]',
-    mascot: 'capybara',
+    accentBg: 'bg-[#EFF6FF]',
+    spineBg: 'bg-[#1E40AF]',
+    badgeBg: 'bg-[#DBEAFE]',
+    scene: 'one-on-one',
     tagText: {
-      'id-kasual': 'Kapi • First-Time Leader',
-      'id-standar': 'Kapi • Pemimpin Tim Baru',
-      en: 'Kapi • First-Time Lead',
+      'id-kasual': 'Vol 1 • Memimpin Tim Mandiri',
+      'id-standar': 'Vol 1 • Memimpin Tim Mandiri',
+      en: 'Vol 1 • First-Time Lead',
     },
   },
   'book-2': {
     vol: 'VOL. 02',
-    accentBg: 'bg-[#FFEDD5]',
-    spineBg: 'bg-[#EA580C]',
-    badgeBg: 'bg-[#99F6E4]',
-    mascot: 'tortoise',
+    accentBg: 'bg-[#FFFBEB]',
+    spineBg: 'bg-[#D97706]',
+    badgeBg: 'bg-[#FEF3C7]',
+    scene: 'sprint-board',
     tagText: {
-      'id-kasual': 'Kapi & Toti • Anti-Burnout',
-      'id-standar': 'Kapi & Toti • Ketahanan Diri',
-      en: 'Kapi & Toti • Anti-Burnout',
+      'id-kasual': 'Vol 2 • Anti-Burnout & Ritme',
+      'id-standar': 'Vol 2 • Ketahanan & Kapasitas',
+      en: 'Vol 2 • Anti-Burnout Systems',
     },
   },
   'book-3': {
     vol: 'VOL. 03',
-    accentBg: 'bg-[#CCFBF1]',
-    spineBg: 'bg-[#0D9488]',
-    badgeBg: 'bg-[#DDD6FE]',
-    mascot: 'owl',
+    accentBg: 'bg-[#F0FDF4]',
+    spineBg: 'bg-[#059669]',
+    badgeBg: 'bg-[#DCFCE7]',
+    scene: 'strategy-meeting',
     tagText: {
-      'id-kasual': 'Kapi & Bubu • Level Manajer',
-      'id-standar': 'Kapi & Bubu • Manajer Divisi',
-      en: 'Kapi & Bubu • Lead of Leads',
+      'id-kasual': 'Vol 3 • Skalabilitas Manajer',
+      'id-standar': 'Vol 3 • Penyelarasan Divisi',
+      en: 'Vol 3 • Lead of Leads',
     },
   },
 };
@@ -107,10 +107,10 @@ export function BookCoverMockup({
           </div>
 
           <div
-            className={`my-2 min-h-[7.25rem] rounded-xl border border-black/10 ${theme.accentBg} p-2.5 flex flex-col items-center justify-center shadow-xs`}
+            className={`my-2 min-h-[7.25rem] rounded-xl border border-black/10 ${theme.accentBg} p-2 flex flex-col items-center justify-center shadow-xs`}
           >
-            <WoodlandMascotSvg character={theme.mascot} className="w-16 h-16 mb-1" />
-            <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider text-[#18181B] bg-white/90 px-2 py-0.5 rounded border border-black/10 shadow-2xs">
+            <WhiteboardSceneSvg scene={theme.scene} className="w-20 h-20 mb-1" />
+            <span className="font-mono text-[9px] font-extrabold uppercase tracking-wider text-[#18181B] bg-white/95 px-2 py-0.5 rounded border border-black/10 shadow-2xs">
               {theme.tagText[lang]}
             </span>
           </div>
