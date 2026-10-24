@@ -171,10 +171,10 @@ export function PricingGridDoodle({
     : singleBookTiers;
 
   const gridCols =
-    columns === 2 || (compactForBookId && !showAllInCompact)
-      ? 'grid-cols-1 md:grid-cols-2'
-      : columns === 1
+    columns === 1
       ? 'grid-cols-1'
+      : columns === 2 || (compactForBookId && !showAllInCompact)
+      ? 'grid-cols-1 md:grid-cols-2'
       : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 
   return (
@@ -301,8 +301,6 @@ export function PricingGridDoodle({
       {/* Individual Volumes Grid */}
       <div className={`grid ${gridCols} gap-6 items-stretch`}>
         {visibleOtherTiers.map((tier) => {
-          const isTwoBookBundle =
-            tier.id === 'bundle-1-2' || tier.id === 'bundle-2-3';
           const title = lang === 'en' ? tier.nameEn : tier.nameId;
           const desc = TIER_DESCRIPTIONS[tier.id][lang];
           const badgeText = lang === 'en' ? tier.badgeEn : tier.badgeId;
@@ -413,7 +411,7 @@ export function PricingGridDoodle({
 
       {emailModalTier && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-          <div className="doodle-box relative w-full max-w-md bg-white p-6 shadow-2xl">
+          <div className="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl">
             <div className="flex items-center gap-3 mb-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-100 bg-[#EFF6FF] text-[#1E40AF] shadow-xs shrink-0">
                 <ShieldCheck className="h-6 w-6" />
@@ -495,7 +493,7 @@ export function PricingGridDoodle({
                 </button>
                 <button
                   type="submit"
-                  className="doodle-button bg-[#FFE66D] px-5 py-2 text-xs sm:text-sm font-extrabold text-[#18181B]"
+                  className="rounded-xl bg-zinc-900 px-5 py-2 text-xs sm:text-sm font-bold text-white hover:bg-zinc-800 transition-colors shadow-xs"
                 >
                   {lang === 'en'
                     ? 'Continue to Mayar Payment →'

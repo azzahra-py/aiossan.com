@@ -14,7 +14,7 @@ import { PricingGridDoodle } from '@/components/doodle/PricingGridDoodle';
 import { RemotionPlayerWrapper } from '@/components/remotion/RemotionPlayerWrapper';
 import { HeroTrilogyShowcaseComp } from '@/components/remotion/HeroTrilogyShowcaseComp';
 import { Framework3KLoopComp } from '@/components/remotion/Framework3KLoopComp';
-import { PRICING_TIERS } from '@/lib/pricing';
+import { PRICING_TIERS, getTier } from '@/lib/pricing';
 import {
   BookOpen,
   Sparkles,
@@ -51,6 +51,23 @@ const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
 
 function PricingCompareTable({ lang }: { lang: BookLang }) {
   const en = lang === 'en';
+  const tierB1 = getTier('book-1');
+  const tierB2 = getTier('book-2');
+  const tierB3 = getTier('book-3');
+  const tierTrilogy = getTier('bundle-trilogy');
+
+  const b1Price = formatIDR(tierB1?.priceIdr ?? 49000);
+  const b2Price = formatIDR(tierB2?.priceIdr ?? 49000);
+  const b3Price = formatIDR(tierB3?.priceIdr ?? 99000);
+  const trilogyPrice = formatIDR(tierTrilogy?.priceIdr ?? 149000);
+  const trilogySave = tierTrilogy?.strikePriceIdr
+    ? Math.round(
+        ((tierTrilogy.strikePriceIdr - tierTrilogy.priceIdr) /
+          tierTrilogy.strikePriceIdr) *
+          100
+      )
+    : 25;
+
   const columns = [
     { id: 'buku-1', name: en ? 'Book 1' : 'Buku 1', isHighlight: false },
     { id: 'buku-2', name: en ? 'Book 2' : 'Buku 2', isHighlight: false },
@@ -89,10 +106,10 @@ function PricingCompareTable({ lang }: { lang: BookLang }) {
     {
       label: en ? 'Investment (Lifetime Access)' : 'Investasi (Sekali Bayar)',
       values: [
-        'Rp 49.000',
-        'Rp 49.000',
-        'Rp 99.000',
-        en ? 'Rp 149.000 (Save 25%)' : 'Rp 149.000 (Hemat 25%)',
+        b1Price,
+        b2Price,
+        b3Price,
+        en ? `${trilogyPrice} (Save ${trilogySave}%)` : `${trilogyPrice} (Hemat ${trilogySave}%)`,
       ],
     },
   ];
@@ -124,28 +141,33 @@ function PricingCompareTable({ lang }: { lang: BookLang }) {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr
-                key={row.label}
-                className="border-b border-zinc-100 last:border-0"
-              >
-                <td className="px-4 py-3.5 text-left font-bold text-zinc-900 text-xs sm:text-sm">
-                  {row.label}
-                </td>
-                {row.values.map((v, i) => (
-                  <td
-                    key={i}
-                    className={`px-4 py-3.5 font-medium text-zinc-700 text-xs sm:text-sm ${
-                      columns[i].isHighlight
-                        ? 'bg-amber-50/60 font-bold text-zinc-900 border-x border-amber-200/80'
-                        : ''
-                    }`}
-                  >
-                    {v}
+            {rows.map((row, rowIdx) => {
+              const isLastRow = rowIdx === rows.length - 1;
+              return (
+                <tr
+                  key={row.label}
+                  className="border-b border-zinc-100 last:border-0"
+                >
+                  <td className="px-4 py-3.5 text-left font-bold text-zinc-900 text-xs sm:text-sm">
+                    {row.label}
                   </td>
-                ))}
-              </tr>
-            ))}
+                  {row.values.map((v, i) => (
+                    <td
+                      key={i}
+                      className={`px-4 py-3.5 font-medium text-zinc-700 text-xs sm:text-sm ${
+                        columns[i].isHighlight
+                          ? `bg-amber-50/60 font-bold text-zinc-900 border-x border-amber-200/80 ${
+                              isLastRow ? 'border-b border-amber-200 rounded-b-xl' : ''
+                            }`
+                          : ''
+                      }`}
+                    >
+                      {v}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -437,8 +459,9 @@ export default function LandingPage() {
           {/* Left Hero Copy */}
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white px-3.5 py-1 shadow-xs">
+              <BookOpen className="w-3.5 h-3.5 text-blue-600" />
               <span className="font-mono text-xs font-extrabold uppercase tracking-wider text-[#18181B]">
-                🐾 Leadership Field Playbook
+                Leadership Field Playbook
               </span>
             </div>
 
@@ -521,15 +544,27 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4 border-t border-zinc-200 text-xs font-semibold text-zinc-700">
               <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>ID (Kasual & Standar) + EN</span>
+                <span>
+                  {lang === 'en'
+                    ? 'ID (Casual & Standard) + EN'
+                    : 'ID (Kasual & Standar) + EN'}
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>40+ Skrip 1-on-1 Siap Salin</span>
+                <span>
+                  {lang === 'en'
+                    ? '40+ Plug-and-Play 1-on-1 Scripts'
+                    : '40+ Skrip 1-on-1 Siap Salin'}
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 border border-zinc-200/80">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Sekali Bayar Selamanya</span>
+                <span>
+                  {lang === 'en'
+                    ? 'Lifetime Access • No Subscription'
+                    : 'Sekali Bayar Selamanya'}
+                </span>
               </div>
             </div>
           </div>
@@ -629,7 +664,9 @@ export default function LandingPage() {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <p className="inline-flex items-center justify-center gap-1.5 rounded-full border border-blue-200 bg-[#EFF6FF] px-3.5 py-1 font-mono text-xs font-extrabold uppercase tracking-widest text-[#1E3A8A] mb-3 shadow-2xs">
             <Layers className="w-3.5 h-3.5" />
-            KURIKULUM TANGGA KARIER LEADER
+            {lang === 'en'
+              ? 'LEADERSHIP CAREER LADDER CURRICULUM'
+              : 'KURIKULUM TANGGA KARIER LEADER'}
           </p>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 leading-tight">
             {lang === 'en'
@@ -726,7 +763,9 @@ export default function LandingPage() {
           <div className="mb-6 pb-4 border-b border-zinc-100">
             <p className="flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-widest text-blue-700 mb-1.5">
               <MessageSquareText className="w-3.5 h-3.5" />
-              DEMO FITUR UNGGULAN WEB READER
+              {lang === 'en'
+                ? 'WEB READER INTERACTIVE FEATURE DEMO'
+                : 'DEMO FITUR UNGGULAN WEB READER'}
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
               {lang === 'en'
@@ -794,7 +833,15 @@ export default function LandingPage() {
 
               <div className="mt-4 pt-3 border-t border-zinc-200/80 flex flex-wrap items-center justify-between gap-3">
                 <span className="text-xs font-medium text-zinc-600">
-                  ✨ Di dalam buku ada <strong>40+ skrip</strong> siap salin untuk berbagai situasi sulit!
+                  {lang === 'en' ? (
+                    <>
+                      ✨ Inside the playbooks: <strong>40+ plug-and-play scripts</strong> for tough team scenarios!
+                    </>
+                  ) : (
+                    <>
+                      ✨ Di dalam buku ada <strong>40+ skrip</strong> siap salin untuk berbagai situasi sulit!
+                    </>
+                  )}
                 </span>
                 <button
                   type="button"
@@ -804,12 +851,12 @@ export default function LandingPage() {
                   {copiedDemo ? (
                     <>
                       <Check className="w-4 h-4 text-emerald-400" />
-                      <span>Tersalin ke Clipboard!</span>
+                      <span>{lang === 'en' ? 'Copied to Clipboard!' : 'Tersalin ke Clipboard!'}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4" />
-                      <span>Salin Contoh Skrip Ini</span>
+                      <span>{lang === 'en' ? 'Copy Sample Script' : 'Salin Contoh Skrip Ini'}</span>
                     </>
                   )}
                 </button>
@@ -843,7 +890,9 @@ export default function LandingPage() {
         <div className="text-center max-w-3xl mx-auto mb-10">
           <p className="inline-flex items-center justify-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-widest text-amber-900 mb-3 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            INVESTASI SEKALI BAYAR • AKSES SEUMUR HIDUP
+            {lang === 'en'
+              ? 'ONE-TIME INVESTMENT • LIFETIME ACCESS'
+              : 'INVESTASI SEKALI BAYAR • AKSES SEUMUR HIDUP'}
           </p>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 leading-tight mb-3">
             {lang === 'en'
@@ -973,10 +1022,18 @@ export default function LandingPage() {
                   </a>
                 </li>
                 <li>
-                  <span className="text-zinc-400">Lisensi Sekali Bayar Selamanya</span>
+                  <span className="text-zinc-400">
+                    {lang === 'en'
+                      ? 'One-Time Lifetime License'
+                      : 'Lisensi Sekali Bayar Selamanya'}
+                  </span>
                 </li>
                 <li>
-                  <span className="text-zinc-400">Garansi Akses Web + PDF A5</span>
+                  <span className="text-zinc-400">
+                    {lang === 'en'
+                      ? 'Web Reader + Master A5 PDF Included'
+                      : 'Garansi Akses Web + PDF A5'}
+                  </span>
                 </li>
               </ul>
             </div>
