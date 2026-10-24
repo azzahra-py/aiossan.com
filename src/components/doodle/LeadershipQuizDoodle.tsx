@@ -253,18 +253,18 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
   return (
     <div
       id="quiz"
-      className="doodle-box relative overflow-hidden bg-gradient-to-br from-[#FFFBEB] via-[#FFFFFF] to-[#EFF6FF]/60 p-6 sm:p-8"
+      className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden"
     >
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300 bg-[#FFE66D] px-3.5 py-1 font-mono text-xs font-extrabold text-[#18181B] shadow-2xs">
-          <Sparkles className="h-3.5 w-3.5" />
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 font-mono text-xs font-bold text-blue-800">
+          <Sparkles className="h-3.5 w-3.5 text-blue-600" />
           {lang === 'en'
-            ? '45-Second Interactive Leadership Diagnostic'
-            : 'Kuis Interaktif 45 Detik • Diagnosis Gaya & Beban Kerja Leader'}
+            ? 'Leadership Diagnostic'
+            : 'Diagnosis Tantangan Leader'}
         </span>
 
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs font-extrabold text-[#2563EB]">
+          <span className="font-mono text-xs font-bold text-zinc-600">
             {finished
               ? lang === 'en'
                 ? '✓ Diagnosis Complete!'
@@ -273,9 +273,9 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
                   QUESTIONS.length
                 }`}
           </span>
-          <div className="h-2.5 w-24 overflow-hidden rounded-full border border-zinc-200 bg-white">
+          <div className="h-2 w-20 overflow-hidden rounded-full border border-zinc-200 bg-zinc-100">
             <div
-              className="h-full bg-[#2563EB] transition-all duration-300"
+              className="h-full bg-zinc-900 transition-all duration-300"
               style={{ width: `${progressPct}%` }}
             />
           </div>
@@ -284,26 +284,26 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
 
       {!finished ? (
         <div>
-          <h3 className="text-lg sm:text-2xl font-extrabold text-[#18181B] mb-5">
+          <h3 className="text-base sm:text-xl font-bold text-zinc-900 mb-4 leading-snug">
             {QUESTIONS[step].q[lang]}
           </h3>
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 gap-2.5">
             {QUESTIONS[step].options.map((opt, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => handleSelect(opt.targetBook)}
-                className="doodle-button group flex items-center justify-between gap-3 bg-white hover:bg-[#FEF9C3] p-4 text-left"
+                className="group flex items-center justify-between gap-3.5 rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 sm:p-4 text-left transition-all hover:border-zinc-900 hover:bg-white hover:shadow-xs"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-blue-200 bg-[#DBEAFE] font-mono text-xs font-black text-[#1E3A8A] group-hover:bg-[#FFE66D] shadow-2xs">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white font-mono text-xs font-bold text-zinc-700 group-hover:bg-zinc-900 group-hover:text-white transition-colors">
                     {String.fromCharCode(65 + idx)}
                   </span>
-                  <span className="text-sm sm:text-base font-bold text-[#18181B]">
+                  <span className="text-sm font-semibold text-zinc-800 group-hover:text-zinc-900">
                     {opt.label[lang]}
                   </span>
                 </div>
-                <ArrowRight className="h-4 w-4 shrink-0 text-[#18181B] transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 shrink-0 text-zinc-400 transition-transform group-hover:translate-x-1 group-hover:text-zinc-900" />
               </button>
             ))}
           </div>
@@ -332,9 +332,9 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                 <Link
                   href={`/read/${winner}/${lang}/ch-0`}
-                  className="doodle-button bg-[#1E40AF] text-white hover:bg-[#1D4ED8] px-4.5 py-2.5 text-xs sm:text-sm inline-flex items-center gap-1.5"
+                  className="rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 px-4.5 py-2.5 text-xs sm:text-sm font-bold shadow-xs inline-flex items-center gap-1.5 transition-colors"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>
                     {lang === 'en'
                       ? `Read Free Sample (${winner.toUpperCase()})`
@@ -343,7 +343,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
                 </Link>
                 <a
                   href="#pricing"
-                  className="doodle-button bg-white text-[#18181B] border border-zinc-200 hover:bg-zinc-50 px-4 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
+                  className="rounded-xl bg-white text-zinc-900 border border-zinc-300 hover:bg-zinc-50 px-4 py-2.5 text-xs sm:text-sm font-bold shadow-2xs inline-flex items-center gap-1.5 transition-colors"
                 >
                   <span>
                     {lang === 'en'
@@ -354,7 +354,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
                 <button
                   type="button"
                   onClick={resetQuiz}
-                  className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#52525B] hover:text-[#18181B] px-2 py-1"
+                  className="inline-flex items-center gap-1 font-mono text-xs font-bold text-zinc-500 hover:text-zinc-900 px-2 py-1 transition-colors"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>{lang === 'en' ? 'Retake' : 'Ulangi Kuis'}</span>
