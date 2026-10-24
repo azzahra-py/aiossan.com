@@ -51,60 +51,74 @@ const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
 
 function PricingCompareTable({ lang }: { lang: BookLang }) {
   const en = lang === 'en';
-  const shortNames = en
-    ? ['Book 1', 'Book 2', 'Book 3', 'Bundle 1+2', 'Bundle 2+3', 'Trilogy']
-    : ['Buku 1', 'Buku 2', 'Buku 3', 'Bundel 1+2', 'Bundel 2+3', 'Trilogi'];
-  const rows: { label: string; values: string[] }[] = [
+  const columns = [
+    { id: 'buku-1', name: en ? 'Book 1' : 'Buku 1', isHighlight: false },
+    { id: 'buku-2', name: en ? 'Book 2' : 'Buku 2', isHighlight: false },
+    { id: 'buku-3', name: en ? 'Book 3' : 'Buku 3', isHighlight: false },
+    { id: 'trilogy', name: en ? 'Complete Trilogy' : 'Trilogi Lengkap', isHighlight: true },
+  ];
+
+  const rows = [
     {
-      label: en ? 'Price' : 'Harga',
-      values: PRICING_TIERS.map((t) => formatIDR(t.priceIdr)),
+      label: en ? 'Target Level / Role' : 'Fokus Level / Peran',
+      values: [
+        en ? 'First-Time Lead & Supervisor' : 'Leader Baru & Supervisor',
+        en ? 'Team Stamina & Anti-Burnout' : 'Ketahanan & Anti-Burnout',
+        en ? 'Manager of Managers & Silos' : 'Manajer Divisi & Lintas Tim',
+        en ? 'All Leadership Levels (End-to-End)' : 'Seluruh Level Kepemimpinan',
+      ],
     },
     {
-      label: en ? 'Books included' : 'Buku yang didapat',
-      values: PRICING_TIERS.map((t) =>
-        t.includedBooks.map((b) => `Vol. ${b.split('-')[1]}`).join(' + ')
-      ),
+      label: en ? 'Chapters & Official PDFs' : 'Total Bab & File Master PDF',
+      values: [
+        en ? '15 Chapters + 3 Master PDFs' : '15 Bab + 3 File Master PDF',
+        en ? '15 Chapters + 3 Master PDFs' : '15 Bab + 3 File Master PDF',
+        en ? '15 Chapters + 3 Master PDFs' : '15 Bab + 3 File Master PDF',
+        en ? '45 Full Chapters + 9 Master PDFs' : '45 Bab Penuh + 9 File Master PDF',
+      ],
     },
     {
-      label: en ? 'Total chapters' : 'Total bab',
-      values: PRICING_TIERS.map((t) => `${t.includedBooks.length * 15}`),
+      label: en ? 'Core Frameworks Included' : 'Framework & Tool Inti',
+      values: [
+        en ? '3C Goal Formula & 1-on-1 Scripting' : 'Rumus Target 3K & Koreksi 4 Mata',
+        en ? 'Glass Shield & 6 PM Detachment' : 'Perisai Kaca & Detachment 18:00',
+        en ? 'Coaching the Coach & 3S Silo Formula' : 'Coaching the Coach & Rumus 3S',
+        en ? 'All Frameworks (CCL, Harvard, Gallup)' : 'Seluruh Framework (CCL, Harvard, Gallup)',
+      ],
     },
     {
-      label: en ? 'Interactive web reader' : 'Web reader interaktif',
-      values: PRICING_TIERS.map(() => '✓'),
-    },
-    {
-      label: en ? 'A5 PDF + copy-paste scripts' : 'PDF A5 + skrip siap salin',
-      values: PRICING_TIERS.map(() => '✓'),
-    },
-    {
-      label: en ? 'Languages' : 'Bahasa',
-      values: PRICING_TIERS.map(() => 'ID + EN'),
+      label: en ? 'Investment (Lifetime Access)' : 'Investasi (Sekali Bayar)',
+      values: [
+        'Rp 49.000',
+        'Rp 49.000',
+        'Rp 99.000',
+        en ? 'Rp 149.000 (Save 25%)' : 'Rp 149.000 (Hemat 25%)',
+      ],
     },
   ];
 
   return (
-    <div className="doodle-panel-flat mx-auto mt-10 p-5 sm:p-7">
-      <h3 className="mb-4 text-center font-extrabold text-lg sm:text-xl text-[#18181B]">
+    <div className="rounded-2xl border border-zinc-200 bg-white shadow-sm mx-auto mt-10 p-5 sm:p-7">
+      <h3 className="mb-4 text-center font-extrabold text-lg sm:text-xl text-zinc-900">
         {en
-          ? 'Complete Package Comparison Matrix'
+          ? 'Curriculum & Value Comparison Matrix'
           : lang === 'id-standar'
-          ? 'Tabel Perbandingan Lengkap Antar Paket'
+          ? 'Tabel Perbandingan Materi & Nilai Antar Paket'
           : 'Tabel Perbandingan Cepat Antar Paket'}
       </h3>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px] border-collapse text-center text-xs sm:text-sm">
+        <table className="w-full min-w-[600px] border-collapse text-center text-xs sm:text-sm">
           <thead>
             <tr className="border-b-2 border-zinc-200">
-              <th className="px-3 py-3 text-left font-extrabold text-[#18181B]" />
-              {PRICING_TIERS.map((t, i) => (
+              <th className="px-4 py-3 text-left font-bold text-zinc-500 uppercase font-mono text-xs" />
+              {columns.map((col) => (
                 <th
-                  key={t.id}
-                  className={`px-3 py-3 font-extrabold text-[#18181B] ${
-                    t.isBestValue ? 'bg-[#FEF9C3] rounded-t-lg' : ''
+                  key={col.id}
+                  className={`px-4 py-3 font-bold text-zinc-900 ${
+                    col.isHighlight ? 'bg-amber-50 rounded-t-xl text-zinc-900 border-x border-t border-amber-200' : ''
                   }`}
                 >
-                  {shortNames[i]}
+                  {col.name}
                 </th>
               ))}
             </tr>
@@ -113,25 +127,21 @@ function PricingCompareTable({ lang }: { lang: BookLang }) {
             {rows.map((row) => (
               <tr
                 key={row.label}
-                className="border-b border-[#E4E4E7] last:border-0"
+                className="border-b border-zinc-100 last:border-0"
               >
-                <td className="px-3 py-3 text-left font-bold text-[#18181B]">
+                <td className="px-4 py-3.5 text-left font-bold text-zinc-900 text-xs sm:text-sm">
                   {row.label}
                 </td>
                 {row.values.map((v, i) => (
                   <td
                     key={i}
-                    className={`px-3 py-3 font-medium text-[#52525B] ${
-                      PRICING_TIERS[i].isBestValue
-                        ? 'bg-[#FEF9C3]/55 font-bold text-[#18181B]'
+                    className={`px-4 py-3.5 font-medium text-zinc-700 text-xs sm:text-sm ${
+                      columns[i].isHighlight
+                        ? 'bg-amber-50/60 font-bold text-zinc-900 border-x border-amber-200/80'
                         : ''
                     }`}
                   >
-                    {v === '✓' ? (
-                      <Check className="mx-auto h-4 w-4 text-[#0D9488]" />
-                    ) : (
-                      v
-                    )}
+                    {v}
                   </td>
                 ))}
               </tr>
@@ -783,16 +793,18 @@ export default function LandingPage() {
         className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18"
       >
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <p className="inline-flex items-center justify-center gap-1.5 rounded-full border border-amber-200 bg-[#FEF9C3] px-3.5 py-1 font-mono text-xs font-extrabold uppercase tracking-widest text-[#18181B] mb-3 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#D97706]" />
+          <p className="inline-flex items-center justify-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-widest text-amber-900 mb-3 shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             INVESTASI SEKALI BAYAR • AKSES SEUMUR HIDUP
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B] leading-tight mb-3">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 leading-tight mb-3">
             {lang === 'en'
               ? 'Choose Your Playbook Package (Instant Web + PDF Access)'
-              : 'Pilih Paket Playbook Sesuai Kebutuhan Lo'}
+              : lang === 'id-kasual'
+              ? 'Pilih Paket Playbook Sesuai Kebutuhan Lo'
+              : 'Pilih Paket Playbook Sesuai Kebutuhan Anda'}
           </h2>
-          <p className="text-sm sm:text-base text-[#52525B]">
+          <p className="text-sm sm:text-base text-zinc-600">
             {lang === 'en'
               ? 'Every purchase unlocks both languages at once: Indonesian (Casual Gue/Lo and Standard Saya/Kamu styles) and Global English, plus mobile-friendly A5 PDF downloads.'
               : 'Setiap pembelian langsung membuka kedua bahasa sekaligus: Bahasa Indonesia (pilih gaya Kasual Gue/Lo atau Standar Saya/Kamu) dan Bahasa Inggris, beserta unduhan PDF A5 ramah HP.'}

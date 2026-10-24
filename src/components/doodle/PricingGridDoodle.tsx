@@ -159,10 +159,16 @@ export function PricingGridDoodle({
   const trilogyTier = PRICING_TIERS.find((t) => t.id === 'bundle-trilogy')!;
   const otherTiers = PRICING_TIERS.filter((t) => t.id !== 'bundle-trilogy');
 
-  const visibleOtherTiers =
-    compactForBookId && !showAllInCompact
+  // On homepage (no compactForBookId), feature single books (book-1, book-2, book-3)
+  const singleBookTiers = PRICING_TIERS.filter((t) =>
+    ['book-1', 'book-2', 'book-3'].includes(t.id)
+  );
+
+  const visibleOtherTiers = compactForBookId
+    ? !showAllInCompact
       ? otherTiers.filter((t) => t.id === compactForBookId)
-      : otherTiers;
+      : otherTiers
+    : singleBookTiers;
 
   const gridCols =
     columns === 2 || (compactForBookId && !showAllInCompact)
@@ -180,54 +186,54 @@ export function PricingGridDoodle({
       )}
 
       {/* Spotlight Flagship Card: Complete Trilogy Box Set */}
-      <div className="doodle-box relative overflow-hidden bg-gradient-to-br from-[#FFFBEB] via-[#FFFFFF] to-[#DBEAFE]/55 p-6 sm:p-8 ring-1 ring-blue-500/30 shadow-md">
+      <div className="rounded-2xl border-2 border-zinc-900 bg-white p-6 sm:p-8 shadow-md relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-8 space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-600 bg-[#2563EB] px-3.5 py-1 font-mono text-xs font-extrabold text-white shadow-xs">
-                <Crown className="w-3.5 h-3.5 text-[#FFE66D]" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-600 bg-blue-600 px-3 py-0.5 font-mono text-xs font-bold text-white shadow-xs">
+                <Crown className="w-3.5 h-3.5 text-amber-300" />
                 <span>
                   {lang === 'en'
                     ? trilogyTier.badgeEn
                     : trilogyTier.badgeId}
                 </span>
               </span>
-              <span className="rounded-lg border border-amber-300 bg-[#FFE66D] px-2.5 py-0.5 font-mono text-[11px] font-extrabold text-[#18181B] shadow-2xs">
+              <span className="rounded-lg border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 font-mono text-[11px] font-bold text-zinc-800">
                 ★ {lang === 'en' ? 'MOST POPULAR CHOICE' : 'PILIHAN PALING HEMAT'}
               </span>
             </div>
 
-            <h3 className="text-xl sm:text-3xl font-extrabold text-[#18181B] leading-tight">
+            <h3 className="text-xl sm:text-3xl font-extrabold text-zinc-900 leading-tight">
               {lang === 'en' ? trilogyTier.nameEn : trilogyTier.nameId}
             </h3>
 
-            <p className="text-sm sm:text-base text-[#52525B] leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
               {TIER_DESCRIPTIONS['bundle-trilogy'][lang]}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-xs sm:text-sm text-[#18181B]">
-              <div className="flex items-center gap-2 font-bold">
-                <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 text-xs sm:text-sm text-zinc-800">
+              <div className="flex items-center gap-2 font-semibold">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>
                   {lang === 'en'
                     ? 'Unlock All 3 Playbooks (45 Chapters)'
                     : 'Akses Penuh 3 Buku (45 Bab Interaktif)'}
                 </span>
               </div>
-              <div className="flex items-center gap-2 font-bold">
-                <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+              <div className="flex items-center gap-2 font-semibold">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>{TIER_FEATURES['bundle-trilogy'][lang]}</span>
               </div>
-              <div className="flex items-center gap-2 font-bold">
-                <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+              <div className="flex items-center gap-2 font-semibold">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>
                   {lang === 'en'
                     ? 'All 9 Official A5 PDFs (ID Casual, ID Standard & EN)'
                     : '9 File Master PDF A5 (ID Kasual, ID Standar & EN)'}
                 </span>
               </div>
-              <div className="flex items-center gap-2 font-bold">
-                <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+              <div className="flex items-center gap-2 font-semibold">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>
                   {lang === 'en'
                     ? 'One-Time Payment • Lifetime Access'
@@ -237,15 +243,15 @@ export function PricingGridDoodle({
             </div>
           </div>
 
-          <div className="lg:col-span-4 flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+          <div className="lg:col-span-4 flex flex-col justify-between rounded-xl border border-zinc-200 bg-zinc-50/70 p-5">
             <div className="flex items-center justify-between mb-3">
               <div>
                 {trilogyTier.strikePriceIdr && (
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className="font-mono text-xs text-[#E11D48] line-through font-bold">
+                    <span className="font-mono text-xs text-rose-600 line-through font-bold">
                       {formatIDR(trilogyTier.strikePriceIdr)}
                     </span>
-                    <span className="rounded bg-[#CCFBF1] border border-[#065F46] px-1.5 py-0.5 font-mono text-[10px] font-extrabold text-[#065F46]">
+                    <span className="rounded bg-emerald-50 border border-emerald-600 px-1.5 py-0.5 font-mono text-[10px] font-bold text-emerald-800">
                       {lang === 'en' ? 'Save' : 'Hemat'}{' '}
                       {formatIDR(
                         trilogyTier.strikePriceIdr - trilogyTier.priceIdr
@@ -253,17 +259,17 @@ export function PricingGridDoodle({
                     </span>
                   </div>
                 )}
-                <div className="font-extrabold text-3xl sm:text-4xl text-[#18181B]">
+                <div className="font-extrabold text-3xl sm:text-4xl text-zinc-900">
                   {formatIDR(trilogyTier.priceIdr)}
                 </div>
-                <span className="font-hand text-sm text-[#52525B]">
+                <span className="text-xs text-zinc-500 font-medium">
                   {lang === 'en'
                     ? 'one-time payment for all 3 books'
                     : 'sekali bayar untuk 3 buku lengkap'}
                 </span>
               </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-100 bg-[#EFF6FF] text-[#1E40AF] shadow-xs shrink-0">
-                <Sparkles className="h-7 w-7" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 text-blue-700 shadow-2xs shrink-0">
+                <Sparkles className="h-6 w-6" />
               </div>
             </div>
 
@@ -271,7 +277,7 @@ export function PricingGridDoodle({
               type="button"
               disabled={loadingTier === trilogyTier.id}
               onClick={() => handleCheckout(trilogyTier)}
-              className="doodle-button w-full bg-[#FFE66D] py-3.5 px-4 text-sm sm:text-base font-extrabold text-[#18181B] flex items-center justify-center gap-2"
+              className="rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white py-3.5 px-4 text-sm sm:text-base font-bold shadow-sm transition-colors flex items-center justify-center gap-2"
             >
               {loadingTier === trilogyTier.id ? (
                 <>
@@ -292,7 +298,7 @@ export function PricingGridDoodle({
         </div>
       </div>
 
-      {/* Individual Volumes & 2-Book Bundles Grid */}
+      {/* Individual Volumes Grid */}
       <div className={`grid ${gridCols} gap-6 items-stretch`}>
         {visibleOtherTiers.map((tier) => {
           const isTwoBookBundle =
@@ -304,67 +310,59 @@ export function PricingGridDoodle({
           return (
             <div
               key={tier.id}
-              className={`doodle-box relative flex flex-col justify-between p-6 transition-transform duration-200 hover:-translate-y-1 ${
-                isTwoBookBundle ? 'bg-[#FFFDF5]' : 'bg-white'
-              }`}
+              className="rounded-2xl border border-zinc-200 bg-white flex flex-col justify-between p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div>
                 {badgeText && (
                   <div className="mb-3">
-                    <span
-                      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-0.5 font-mono text-[11px] font-extrabold shadow-2xs ${
-                        isTwoBookBundle
-                          ? 'border-blue-200 bg-[#DBEAFE] text-[#1E3A8A]'
-                          : 'border-amber-300 bg-[#FFE66D] text-[#18181B]'
-                      }`}
-                    >
-                      <Sparkles className="w-3 h-3" />
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-0.5 font-mono text-[11px] font-bold text-zinc-700">
+                      <Sparkles className="w-3 h-3 text-zinc-500" />
                       <span>{badgeText}</span>
                     </span>
                   </div>
                 )}
 
-                <h3 className="font-extrabold text-lg sm:text-xl text-[#18181B] leading-snug mb-2">
+                <h3 className="font-extrabold text-lg text-zinc-900 leading-snug mb-2">
                   {title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-[#52525B] mb-4 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-600 mb-4 leading-relaxed">
                   {desc}
                 </p>
 
-                <div className="my-4 rounded-xl border border-[#DFD9CE] bg-[#FAF7F2] p-3.5">
+                <div className="my-4 rounded-xl border border-zinc-200 bg-zinc-50/70 p-3.5">
                   {tier.strikePriceIdr && (
                     <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                      <span className="font-mono text-xs text-[#E11D48] line-through font-bold">
+                      <span className="font-mono text-xs text-rose-600 line-through font-bold">
                         {formatIDR(tier.strikePriceIdr)}
                       </span>
-                      <span className="rounded bg-[#CCFBF1] border border-[#065F46] px-1.5 py-0.5 font-mono text-[10px] font-extrabold text-[#065F46]">
+                      <span className="rounded bg-emerald-50 border border-emerald-600 px-1.5 py-0.5 font-mono text-[10px] font-bold text-emerald-800">
                         {lang === 'en' ? 'Save' : 'Hemat'}{' '}
                         {formatIDR(tier.strikePriceIdr - tier.priceIdr)}
                       </span>
                     </div>
                   )}
                   <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
-                    <span className="font-extrabold text-2xl sm:text-3xl text-[#18181B]">
+                    <span className="font-extrabold text-2xl text-zinc-900">
                       {formatIDR(tier.priceIdr)}
                     </span>
-                    <span className="font-hand text-sm text-[#52525B]">
+                    <span className="text-xs text-zinc-500 font-medium">
                       / {lang === 'en' ? 'lifetime access' : 'sekali bayar'}
                     </span>
                   </div>
                 </div>
 
-                <ul className="space-y-2 mb-6 text-xs sm:text-sm text-[#18181B]">
-                  <li className="flex items-center gap-2 font-bold">
-                    <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+                <ul className="space-y-2 mb-6 text-xs text-zinc-700">
+                  <li className="flex items-center gap-2 font-medium">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>
                       {lang === 'en'
                         ? `Unlock ${tier.includedBooks.length} Interactive Web Playbook(s)`
                         : `Akses Penuh ${tier.includedBooks.length} Buku di Web Interaktif`}
                     </span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#0D9488] shrink-0" />
+                  <li className="flex items-center gap-2 font-medium">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>{TIER_FEATURES[tier.id][lang]}</span>
                   </li>
                 </ul>
@@ -374,25 +372,19 @@ export function PricingGridDoodle({
                 type="button"
                 disabled={loadingTier === tier.id}
                 onClick={() => handleCheckout(tier)}
-                className={`doodle-button w-full py-3 px-4 text-sm flex items-center justify-center gap-2 ${
-                  isTwoBookBundle
-                    ? 'bg-[#DBEAFE] text-[#1E3A8A]'
-                    : 'bg-white text-[#18181B] hover:bg-[#FEF9C3]'
-                }`}
+                className="w-full rounded-xl border border-zinc-300 bg-zinc-50 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 text-zinc-900 py-2.5 px-4 text-xs sm:text-sm font-bold shadow-2xs transition-colors flex items-center justify-center gap-2"
               >
                 {loadingTier === tier.id ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span>
-                      {lang === 'en'
-                        ? 'Processing Mayar...'
-                        : 'Memproses Mayar...'}
+                      {lang === 'en' ? 'Processing...' : 'Memproses...'}
                     </span>
                   </>
                 ) : (
                   <span>
                     {lang === 'en'
-                      ? `Get Instant Access (${formatIDR(tier.priceIdr)})`
+                      ? `Buy Now (${formatIDR(tier.priceIdr)})`
                       : `Beli Sekarang (${formatIDR(tier.priceIdr)})`}
                   </span>
                 )}
