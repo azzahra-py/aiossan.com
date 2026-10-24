@@ -47,61 +47,7 @@ const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
   },
 };
 
-const ARCHETYPES: {
-  scene: WhiteboardScene;
-  title: Record<BookLang, string>;
-  roleBadge: string;
-  lines: Record<BookLang, string>;
-}[] = [
-  {
-    scene: 'one-on-one',
-    title: {
-      'id-kasual': 'The Frontline Lead',
-      'id-standar': 'Pemimpin Tim Baru (Frontline)',
-      en: 'The Frontline Lead',
-    },
-    roleBadge: 'VOL. 01 • MANDIRI',
-    lines: {
-      'id-kasual':
-        'Fondasi hari pertama jadi leader: target 3K, obrolan 1-on-1 terstruktur, dan koreksi empat mata tanpa baper.',
-      'id-standar':
-        'Pendamping hari pertama memimpin: perumusan target 3K, dialog 1-on-1, dan koreksi terukur.',
-      en: 'Mastering the first-time transition: 3C goal alignment, 1-on-1 talks, and drama-free course corrections.',
-    },
-  },
-  {
-    scene: 'sprint-board',
-    title: {
-      'id-kasual': 'The Crisis Stabilizer',
-      'id-standar': 'Penjaga Ketahanan (Stabilizer)',
-      en: 'The Crisis Stabilizer',
-    },
-    roleBadge: 'VOL. 02 • ANTI-BURNOUT',
-    lines: {
-      'id-kasual':
-        'Ritme kerja napas panjang: perisai Glass Shield, tolak lemparan tugas monyet, dan matikan laptop jam 6 sore.',
-      'id-standar':
-        'Mengajarkan ritme berkelanjutan: teknik perisai kaca, cegah burnout, dan kaderisasi tangan kanan.',
-      en: 'Building sustainable leadership rhythm: Glass Shield emotional filter, anti-monkey delegation, and 6 PM detachment.',
-    },
-  },
-  {
-    scene: 'strategy-meeting',
-    title: {
-      'id-kasual': 'The Strategic Navigator',
-      'id-standar': 'Pemimpin Lintas Tim (Manager)',
-      en: 'The Strategic Navigator',
-    },
-    roleBadge: 'VOL. 03 • SKALABILITAS',
-    lines: {
-      'id-kasual':
-        'Perspektif mercusuar divisi: melatih para Team Leader di bawah lo dan runtuhkan silo ego antar-tim.',
-      'id-standar':
-        'Melihat gambaran besar divisi: membina para leader dan menyelaraskan silo lintas tim.',
-      en: 'Divisional architecture: coaching team leads to autonomy and eliminating cross-team friction.',
-    },
-  },
-];
+
 
 function PricingCompareTable({ lang }: { lang: BookLang }) {
   const en = lang === 'en';
@@ -627,10 +573,12 @@ export default function LandingPage() {
             <Layers className="w-3.5 h-3.5" />
             KURIKULUM TANGGA KARIER LEADER
           </p>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#18181B] leading-tight">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 leading-tight">
             {lang === 'en'
               ? '3 Tactical Playbooks for Every Stage of Your Leadership Journey'
-              : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'}
+              : lang === 'id-kasual'
+              ? '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Lo'
+              : '3 Buku Playbook Sesuai Fase Tantangan Kepemimpinan Anda'}
           </h2>
         </div>
 
@@ -641,11 +589,11 @@ export default function LandingPage() {
             return (
               <div
                 key={book.id}
-                className="doodle-box flex h-full flex-col overflow-hidden bg-white"
+                className="rounded-2xl border border-zinc-200 bg-white flex h-full flex-col overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
                 {/* Top Studio Book Stage */}
                 <div
-                  className={`flex justify-center border-b border-[#E5E1D8] px-6 py-7 ${BOOK_TINTS[book.id]}`}
+                  className={`flex justify-center border-b border-zinc-100 px-6 py-7 ${BOOK_TINTS[book.id]}`}
                 >
                   <BookCoverMockup bookId={book.id} lang={lang} size="md" />
                 </div>
@@ -653,34 +601,34 @@ export default function LandingPage() {
                 {/* Card Content Body */}
                 <div className="flex flex-1 flex-col p-6">
                   <div className="mb-2.5 flex items-center justify-between gap-2">
-                    <span className="font-mono text-xs font-extrabold px-2.5 py-0.5 rounded-md border border-amber-300 bg-[#FFE66D] shadow-2xs">
+                    <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-md border border-zinc-200 bg-zinc-50 text-zinc-800">
                       {levelTag}
                     </span>
-                    <span className="font-mono font-extrabold text-base text-[#2563EB]">
+                    <span className="font-mono font-extrabold text-base text-zinc-900">
                       {formatIDR(book.priceIdr)}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-extrabold text-[#18181B] mb-1.5">
+                  <h3 className="text-xl font-extrabold text-zinc-900 mb-1.5">
                     {book.titles[lang]}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#52525B] mb-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-600 mb-3 leading-relaxed">
                     {book.subtitles[lang]}
                   </p>
 
-                  <div className="mb-4 rounded-xl border border-[#DFD9CE] bg-[#FAF7F2] px-3 py-2 text-xs">
-                    <span className="font-mono text-[10px] font-extrabold uppercase text-[#2563EB] block">
+                  <div className="mb-4 rounded-xl border border-zinc-200 bg-zinc-50/70 px-3 py-2 text-xs">
+                    <span className="font-mono text-[10px] font-bold uppercase text-zinc-500 block mb-0.5">
                       {lang === 'en' ? 'Ideal For:' : 'Cocok Untuk:'}
                     </span>
-                    <span className="font-bold text-[#18181B]">
+                    <span className="font-bold text-zinc-900">
                       {book.targetRole[lang]}
                     </span>
                   </div>
 
-                  <ul className="space-y-2.5 mb-6 border-t border-dashed border-[#DFD9CE] pt-4 text-xs sm:text-sm text-[#18181B]">
+                  <ul className="space-y-2.5 mb-6 border-t border-zinc-100 pt-4 text-xs sm:text-sm text-zinc-700">
                     {highlights.map((item, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -689,16 +637,16 @@ export default function LandingPage() {
                   <div className="mt-auto flex items-center gap-2.5 pt-2">
                     <Link
                       href={`/read/${book.id}/${lang}/ch-0`}
-                      className="doodle-button flex-1 bg-[#FAF7F2] hover:bg-[#FFE66D] py-2.5 px-3 text-xs font-extrabold text-center inline-flex items-center justify-center gap-1.5"
+                      className="flex-1 rounded-xl border border-zinc-300 bg-zinc-50 hover:bg-white text-zinc-800 py-2.5 px-3 text-xs font-bold text-center inline-flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
                     >
-                      <BookOpen className="w-3.5 h-3.5" />
+                      <BookOpen className="w-3.5 h-3.5 text-zinc-500" />
                       <span>
                         {lang === 'en' ? 'Read Free Ch 0 & 1' : 'Baca Gratis Bab 1'}
                       </span>
                     </Link>
                     <a
                       href="#pricing"
-                      className="doodle-button bg-[#18181B] text-[#FFE66D] py-2.5 px-4 text-xs font-extrabold inline-flex items-center gap-1"
+                      className="rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white py-2.5 px-4 text-xs font-bold inline-flex items-center gap-1 transition-colors shadow-xs"
                     >
                       <span>{lang === 'en' ? 'Buy' : 'Beli'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -708,40 +656,6 @@ export default function LandingPage() {
               </div>
             );
           })}
-        </div>
-
-        {/* Tactical 3 Leadership Archetypes Ribbon */}
-        <div className="doodle-panel-flat mt-10 p-5 sm:p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-zinc-200">
-            {ARCHETYPES.map((member, idx) => (
-              <div
-                key={member.roleBadge}
-                className={`flex items-start gap-3.5 ${
-                  idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
-                }`}
-              >
-                <div className="rounded-xl border border-blue-100 bg-[#EFF6FF] p-1 shrink-0 shadow-xs">
-                  <WhiteboardSceneSvg
-                    scene={member.scene}
-                    className="h-12 w-12"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-bold leading-tight text-[#18181B]">
-                      {member.title[lang]}
-                    </p>
-                    <span className="rounded border border-blue-200 bg-blue-50 px-1.5 py-0.5 font-mono text-[9px] font-bold text-[#1E40AF]">
-                      {member.roleBadge}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-xs leading-relaxed text-[#52525B]">
-                    {member.lines[lang]}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
