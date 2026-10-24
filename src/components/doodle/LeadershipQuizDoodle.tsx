@@ -253,7 +253,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
   return (
     <div
       id="quiz"
-      className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden"
+      className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-9 shadow-sm relative overflow-hidden"
     >
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-0.5 font-mono text-xs font-bold text-blue-800">
@@ -284,22 +284,22 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
 
       {!finished ? (
         <div>
-          <h3 className="text-base sm:text-xl font-bold text-zinc-900 mb-4 leading-snug">
+          <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 mb-5 leading-snug">
             {QUESTIONS[step].q[lang]}
           </h3>
-          <div className="grid grid-cols-1 gap-2.5">
+          <div className="grid grid-cols-1 gap-3">
             {QUESTIONS[step].options.map((opt, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => handleSelect(opt.targetBook)}
-                className="group flex items-center justify-between gap-3.5 rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 sm:p-4 text-left transition-all hover:border-zinc-900 hover:bg-white hover:shadow-xs"
+                className="group flex items-center justify-between gap-4 rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 sm:p-4.5 text-left transition-all hover:border-zinc-900 hover:bg-white hover:shadow-xs"
               >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white font-mono text-xs font-bold text-zinc-700 group-hover:bg-zinc-900 group-hover:text-white transition-colors">
+                <div className="flex items-center gap-3.5">
+                  <span className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg border border-zinc-200 bg-white font-mono text-xs font-bold text-zinc-700 group-hover:bg-zinc-900 group-hover:text-white transition-colors">
                     {String.fromCharCode(65 + idx)}
                   </span>
-                  <span className="text-sm font-semibold text-zinc-800 group-hover:text-zinc-900">
+                  <span className="text-sm sm:text-base font-semibold text-zinc-800 group-hover:text-zinc-900 leading-relaxed">
                     {opt.label[lang]}
                   </span>
                 </div>
@@ -310,13 +310,13 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
         </div>
       ) : (
         <div
-          className="rounded-2xl border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-md"
+          className="rounded-2xl border border-zinc-200/90 bg-white p-6 sm:p-8 shadow-md"
         >
-          <div className="flex flex-col sm:flex-row items-center gap-5">
-            <div className="rounded-2xl border border-blue-100 bg-[#EFF6FF] p-2 shadow-xs shrink-0">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-7">
+            <div className="rounded-2xl border border-blue-100 bg-[#EFF6FF] p-3 shadow-xs shrink-0">
               <WhiteboardSceneSvg
                 scene={result.scene}
-                className="w-24 h-24 sm:w-28 sm:h-28 shrink-0"
+                className="w-28 h-28 sm:w-32 sm:h-32 shrink-0"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
@@ -326,7 +326,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
               <h4 className="text-xl sm:text-2xl font-extrabold text-[#18181B] mb-2">
                 {result.title[lang]}
               </h4>
-              <p className="text-sm sm:text-base text-[#52525B] leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-[#52525B] leading-relaxed mb-5">
                 {result.desc[lang]}
               </p>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">

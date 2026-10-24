@@ -631,7 +631,7 @@ export default function LandingPage() {
 
       {/* INTERACTIVE 45-SECOND QUIZ SECTION */}
       <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <div className="text-center max-w-2xl mx-auto mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <p className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 font-mono text-xs font-bold uppercase tracking-widest text-blue-800 mb-2.5">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             {lang === 'en' ? '45-SECOND ASSESSMENT' : 'DIAGNOSIS 45 DETIK'}
@@ -651,7 +651,7 @@ export default function LandingPage() {
               : 'Jawab 3 pertanyaan singkat untuk menemukan playbook yang paling sesuai dengan fase kepemimpinan Anda.'}
           </p>
         </div>
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl lg:max-w-5xl mx-auto">
           <LeadershipQuizDoodle lang={lang} />
         </div>
       </section>
