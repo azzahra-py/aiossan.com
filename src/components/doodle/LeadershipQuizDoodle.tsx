@@ -310,29 +310,29 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
         </div>
       ) : (
         <div
-          className="rounded-2xl border-2 border-[#18181B] bg-white p-5 sm:p-6 shadow-[5px_5px_0px_#18181B]"
+          className="rounded-2xl border border-zinc-200/90 bg-white p-5 sm:p-6 shadow-md"
         >
           <div className="flex flex-col sm:flex-row items-center gap-5">
-            <div className="rounded-2xl border-2 border-[#18181B] bg-[#EFF6FF] p-2 shadow-[2px_2px_0px_#18181B] shrink-0">
+            <div className="rounded-2xl border border-blue-100 bg-[#EFF6FF] p-2 shadow-xs shrink-0">
               <WhiteboardSceneSvg
                 scene={result.scene}
                 className="w-24 h-24 sm:w-28 sm:h-28 shrink-0"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
-              <span className="inline-block rounded-md border border-[#18181B] bg-[#F59E0B] px-2.5 py-0.5 font-mono text-xs font-extrabold text-[#18181B] shadow-[1px_1px_0px_#18181B] mb-2">
+              <span className="inline-block rounded-md border border-amber-300/80 bg-[#FEF3C7] text-[#92400E] px-2.5 py-0.5 font-mono text-xs font-bold shadow-2xs mb-2">
                 {result.badge[lang]}
               </span>
               <h4 className="text-xl sm:text-2xl font-extrabold text-[#18181B] mb-2">
                 {result.title[lang]}
               </h4>
-              <p className="text-sm sm:text-base text-[#18181B] leading-relaxed mb-4">
+              <p className="text-sm sm:text-base text-[#52525B] leading-relaxed mb-4">
                 {result.desc[lang]}
               </p>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3">
                 <Link
                   href={`/read/${winner}/${lang}/ch-0`}
-                  className="doodle-button bg-[#1E40AF] text-white hover:bg-[#1D4ED8] px-4.5 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
+                  className="doodle-button bg-[#1E40AF] text-white hover:bg-[#1D4ED8] px-4.5 py-2.5 text-xs sm:text-sm inline-flex items-center gap-1.5"
                 >
                   <CheckCircle2 className="w-4 h-4 text-emerald-300" />
                   <span>
@@ -343,7 +343,7 @@ export function LeadershipQuizDoodle({ lang }: { lang: BookLang }) {
                 </Link>
                 <a
                   href="#pricing"
-                  className="doodle-button bg-[#2563EB] text-white px-4 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
+                  className="doodle-button bg-white text-[#18181B] border border-zinc-200 hover:bg-zinc-50 px-4 py-2 text-xs sm:text-sm inline-flex items-center gap-1.5"
                 >
                   <span>
                     {lang === 'en'

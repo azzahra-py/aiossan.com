@@ -311,13 +311,13 @@ export const Framework3KLoopComp: React.FC<Framework3KLoopProps> = ({
       <div
         style={{
           backgroundColor: NODE_COLORS[activeStepIdx].bg,
-          border: '2px solid #18181B',
+          border: '1px solid #E5E1D8',
           borderRadius: '12px',
           padding: '10px 14px',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          boxShadow: '3px 3px 0px #18181B',
+          boxShadow: '0 4px 14px -2px rgba(24, 24, 27, 0.08)',
         }}
       >
         <div
@@ -325,12 +325,12 @@ export const Framework3KLoopComp: React.FC<Framework3KLoopProps> = ({
             width: '36px',
             height: '36px',
             borderRadius: '8px',
-            border: '2px solid #18181B',
+            border: '1px solid #BFDBFE',
             backgroundColor: '#EFF6FF',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '1px 1px 0px #18181B',
+            boxShadow: '0 1px 2px rgba(30, 58, 138, 0.05)',
             flexShrink: 0,
           }}
         >

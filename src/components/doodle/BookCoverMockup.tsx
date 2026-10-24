@@ -91,7 +91,7 @@ export function BookCoverMockup({
           >
             AIOSSAN PLAYBOOK
           </span>
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FFE66D] border border-black/10" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] border border-black/10" />
         </div>
 
         <div className="flex-1 p-4 flex flex-col justify-between bg-[#FFFDF9] relative">
@@ -126,7 +126,7 @@ export function BookCoverMockup({
 
           <div className="pt-2 border-t border-dashed border-[#D4D4D8] flex items-center justify-between text-[10px] font-mono text-[#52525B]">
             <span>aiossan.com</span>
-            <span className="font-bold text-[#2563EB]">ID + EN</span>
+            <span className="font-bold text-[#1E40AF]">ID + EN</span>
           </div>
         </div>
       </div>

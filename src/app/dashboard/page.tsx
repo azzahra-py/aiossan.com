@@ -90,7 +90,7 @@ export default async function DashboardPage() {
         {/* User Profile Bar */}
         <div className="doodle-box bg-white p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#1E40AF] text-white border-2 border-[#18181B] rounded-xl flex items-center justify-center font-mono font-bold text-lg shadow-[2px_2px_0px_#18181B]">
+            <div className="w-12 h-12 bg-[#1E40AF] text-white border border-blue-200 rounded-xl flex items-center justify-center font-mono font-bold text-lg shadow-xs">
               {user.email ? user.email.slice(0, 2).toUpperCase() : 'ME'}
             </div>
             <div>

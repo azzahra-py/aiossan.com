@@ -13,14 +13,14 @@ export function DoodleLoading({
 }: DoodleLoadingProps) {
   return (
     <div className="min-h-[60vh] w-full flex items-center justify-center p-4">
-      <div className="relative w-full max-w-sm rounded-2xl border-2 border-[#18181B] bg-white p-7 text-center shadow-[4px_4px_0px_#18181B]">
+      <div className="relative w-full max-w-sm rounded-2xl border border-[#E5E1D8] bg-white p-7 text-center shadow-xl">
         {/* Decorative corner tag */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-[#18181B] bg-[#F59E0B] px-3.5 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#18181B] shadow-[2px_2px_0px_#18181B]">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-0.5 font-mono text-[11px] font-bold tracking-wider text-[#1E40AF] shadow-xs">
           MEMUAT...
         </div>
 
         {/* Tactical Whiteboard Icon Spinner */}
-        <div className="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-[#18181B] bg-[#EFF6FF] shadow-[2px_2px_0px_#18181B]">
+        <div className="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-100 bg-[#EFF6FF] shadow-xs">
           <Loader2 className="h-10 w-10 text-[#1E40AF] animate-spin" />
         </div>
 
@@ -33,7 +33,7 @@ export function DoodleLoading({
         </p>
 
         {/* Tactical progress bar */}
-        <div className="mt-5 overflow-hidden rounded-full border-2 border-[#18181B] bg-zinc-100 p-0.5">
+        <div className="mt-5 overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5">
           <div className="h-2 w-full rounded-full bg-gradient-to-r from-[#1E40AF] via-[#F59E0B] to-[#059669] bg-[length:200%_100%] animate-[shimmer_1.5s_infinite_linear]" />
         </div>
 

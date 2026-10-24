@@ -31,13 +31,13 @@ export function PaywallModal({
   const redirectPath = `/read/${bookId}/${lang}/${chapterSlug}`;
 
   return (
-    <section className="my-8 doodle-box bg-white p-6 sm:p-8 border-2 border-[#18181B] shadow-[4px_4px_0px_#18181B]">
+    <section className="my-8 doodle-box bg-white p-6 sm:p-8">
       <div className="mx-auto max-w-2xl text-center mb-7">
-        <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border-2 border-[#18181B] bg-[#EFF6FF] text-[#1E40AF] shadow-[2px_2px_0px_#18181B]">
+        <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl border border-blue-100 bg-[#EFF6FF] text-[#1E40AF] shadow-xs">
           <Lock className="h-8 w-8" />
         </div>
 
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#18181B] bg-[#F59E0B] px-3.5 py-1 font-mono text-xs font-extrabold text-[#18181B] shadow-[1px_1px_0px_#18181B]">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-100 bg-blue-50 px-3.5 py-1 font-mono text-xs font-bold text-[#1E40AF]">
           <Lock className="w-3.5 h-3.5" />
           {lang === 'en'
             ? 'Locked Chapter • Unlock Full Playbook Access'

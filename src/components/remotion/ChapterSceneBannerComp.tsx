@@ -352,10 +352,10 @@ export const ChapterSceneBannerComp: React.FC<ChapterSceneBannerProps> = ({
           transform: `scale(${0.94 + 0.06 * enter})`,
           margin: 'auto 0',
           backgroundColor: '#FFFFFF',
-          border: '2px solid #18181B',
+          border: '1px solid #E5E1D8',
           borderRadius: '16px',
           padding: '12px 28px',
-          boxShadow: '4px 4px 0px #18181B',
+          boxShadow: '0 8px 24px -4px rgba(24, 24, 27, 0.08)',
         }}
       >
         <svg width="60" height="24" viewBox="0 0 60 24">
@@ -387,15 +387,15 @@ export const ChapterSceneBannerComp: React.FC<ChapterSceneBannerProps> = ({
           />
           <span
             style={{
-              backgroundColor: '#F59E0B',
-              border: '1.5px solid #18181B',
+              backgroundColor: '#EFF6FF',
+              border: '1px solid #BFDBFE',
               borderRadius: '6px',
               padding: '2px 12px',
               fontFamily: 'var(--font-hand), cursive',
               fontSize: '15px',
               fontWeight: 700,
-              color: '#18181B',
-              boxShadow: '1px 1px 0px #18181B',
+              color: '#1E40AF',
+              boxShadow: '0 1px 2px rgba(30, 58, 138, 0.06)',
             }}
           >
             {stageLabel}

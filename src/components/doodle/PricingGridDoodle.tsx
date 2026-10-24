@@ -262,7 +262,7 @@ export function PricingGridDoodle({
                     : 'sekali bayar untuk 3 buku lengkap'}
                 </span>
               </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-[#18181B] bg-[#EFF6FF] text-[#1E40AF] shadow-[2px_2px_0px_#18181B] shrink-0">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-100 bg-[#EFF6FF] text-[#1E40AF] shadow-xs shrink-0">
                 <Sparkles className="h-7 w-7" />
               </div>
             </div>
@@ -421,13 +421,13 @@ export function PricingGridDoodle({
 
       {emailModalTier && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-          <div className="doodle-box relative w-full max-w-md bg-white p-6 shadow-[4px_4px_0px_#18181B] border-2 border-[#18181B]">
+          <div className="doodle-box relative w-full max-w-md bg-white p-6 shadow-2xl">
             <div className="flex items-center gap-3 mb-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[#18181B] bg-[#EFF6FF] text-[#1E40AF] shadow-[2px_2px_0px_#18181B] shrink-0">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-blue-100 bg-[#EFF6FF] text-[#1E40AF] shadow-xs shrink-0">
                 <ShieldCheck className="h-6 w-6" />
               </div>
               <div>
-                <span className="font-mono text-[10px] font-extrabold uppercase bg-[#F59E0B] text-[#18181B] px-2 py-0.5 rounded border border-[#18181B] shadow-[1px_1px_0px_#18181B]">
+                <span className="font-mono text-[10px] font-bold uppercase bg-blue-50 text-[#1E40AF] px-2 py-0.5 rounded-md border border-blue-100">
                   {lang === 'en'
                     ? 'Final Step Before Payment'
                     : 'Langkah Terakhir Sebelum Bayar'}

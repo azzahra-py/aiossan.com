@@ -22,7 +22,7 @@ export function EditorialCard({
     subtle: 'bg-[#F3F0E8]/70 border border-[#E4E2DD]',
     dark: 'bg-[#111113] text-white border border-[#27272A]',
     featured:
-      'bg-white border-2 border-[#111113] shadow-[0_12px_32px_-8px_rgba(17,17,19,0.12)]',
+      'bg-white border border-[#1E40AF] shadow-[0_12px_32px_-8px_rgba(17,17,19,0.08)]',
   }[variant];
 
   const badgeColors = {

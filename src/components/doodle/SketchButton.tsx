@@ -17,8 +17,8 @@ export function SketchButton({
     variant === 'primary' || variant === 'blue'
       ? 'bg-[#1E40AF] text-white hover:bg-[#1D4ED8]'
       : variant === 'amber'
-      ? 'bg-[#F59E0B] text-[#18181B] hover:bg-[#D97706]'
-      : 'bg-white text-[#18181B] hover:bg-zinc-100';
+      ? 'bg-[#F59E0B] text-white hover:bg-[#D97706]'
+      : 'bg-white text-[#18181B] border border-[#E5E1D8] hover:bg-zinc-50';
 
   const sClass =
     size === 'sm'

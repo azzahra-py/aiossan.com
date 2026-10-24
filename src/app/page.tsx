@@ -672,8 +672,8 @@ export default function LandingPage() {
         </div>
 
         {/* Tactical 3 Leadership Archetypes Ribbon */}
-        <div className="doodle-panel-flat mt-10 p-5 sm:p-6 border-2 border-[#18181B] shadow-[4px_4px_0px_#18181B]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-[#18181B]/20">
+        <div className="doodle-panel-flat mt-10 p-5 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-zinc-200">
             {ARCHETYPES.map((member, idx) => (
               <div
                 key={member.roleBadge}
@@ -681,7 +681,7 @@ export default function LandingPage() {
                   idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
                 }`}
               >
-                <div className="rounded-xl border-2 border-[#18181B] bg-[#EFF6FF] p-1 shrink-0 shadow-[2px_2px_0px_#18181B]">
+                <div className="rounded-xl border border-blue-100 bg-[#EFF6FF] p-1 shrink-0 shadow-xs">
                   <WhiteboardSceneSvg
                     scene={member.scene}
                     className="h-12 w-12"
@@ -692,7 +692,7 @@ export default function LandingPage() {
                     <p className="text-sm font-bold leading-tight text-[#18181B]">
                       {member.title[lang]}
                     </p>
-                    <span className="rounded border border-[#18181B] bg-[#F59E0B] px-1.5 py-0.2 font-mono text-[9px] font-extrabold text-[#18181B] shadow-[1px_1px_0px_#18181B]">
+                    <span className="rounded border border-blue-200 bg-blue-50 px-1.5 py-0.5 font-mono text-[9px] font-bold text-[#1E40AF]">
                       {member.roleBadge}
                     </span>
                   </div>
@@ -891,7 +891,7 @@ export default function LandingPage() {
       <footer className="mt-auto border-t-[1.5px] border-[#DFD9CE] bg-white py-8 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg border-2 border-[#18181B] bg-white shadow-[1px_1px_0px_#18181B] shrink-0">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-zinc-200 bg-white shadow-2xs shrink-0">
               <span className="font-mono text-[10px] font-black text-[#18181B]">ai</span>
             </div>
             <span className="font-extrabold text-[#18181B]">

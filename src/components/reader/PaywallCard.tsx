@@ -55,9 +55,9 @@ export function PaywallCard({ bookId, lang, chapterTitle }: PaywallCardProps) {
   };
 
   return (
-    <div className="my-10 rounded-2xl border-2 border-[#111113] bg-[#FBF9F5] p-6 sm:p-8 text-[#111113] shadow-lg">
+    <div className="my-10 rounded-2xl border border-[#E5E1D8] bg-[#FBF9F5] p-6 sm:p-8 text-[#111113] shadow-md">
       <div className="max-w-xl mx-auto text-center mb-8">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#111113] text-white mb-3">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#1E40AF] text-white mb-3 shadow-xs">
           <Lock className="w-5 h-5" />
         </div>
         <h2 className="font-serif text-2xl sm:text-3xl font-bold mb-2">
@@ -118,7 +118,7 @@ export function PaywallCard({ bookId, lang, chapterTitle }: PaywallCardProps) {
               onClick={() => setSelectedTierId(tier.id)}
               className={`rounded-xl border p-4 cursor-pointer transition-all flex flex-col justify-between ${
                 active
-                  ? 'border-2 border-[#111113] bg-white shadow-sm'
+                  ? 'border-2 border-[#1E40AF] bg-white shadow-xs'
                   : 'border-[#E4E2DD] bg-white/60 hover:bg-white'
               }`}
             >
