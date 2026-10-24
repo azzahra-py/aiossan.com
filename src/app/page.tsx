@@ -7,7 +7,7 @@ import { formatIDR } from '@/lib/utils';
 import { NavbarDoodle } from '@/components/doodle/NavbarDoodle';
 import { LandingLanguageMenu } from '@/components/doodle/LandingLanguageMenu';
 import { BookCoverMockup } from '@/components/doodle/BookCoverMockup';
-import { WoodlandMascotSvg } from '@/components/doodle/WoodlandMascotSvg';
+import { WhiteboardSceneSvg, WhiteboardScene } from '@/components/doodle/WhiteboardSceneSvg';
 import { RoughHighlight } from '@/components/doodle/RoughHighlight';
 import { LeadershipQuizDoodle } from '@/components/doodle/LeadershipQuizDoodle';
 import { PricingGridDoodle } from '@/components/doodle/PricingGridDoodle';
@@ -47,46 +47,58 @@ const LEVEL_TAGS: Record<BookId, Record<BookLang, string>> = {
   },
 };
 
-const CREW: {
-  character: 'capybara' | 'tortoise' | 'owl';
-  name: string;
+const ARCHETYPES: {
+  scene: WhiteboardScene;
+  title: Record<BookLang, string>;
   roleBadge: string;
   lines: Record<BookLang, string>;
 }[] = [
   {
-    character: 'capybara',
-    name: 'Kapi si Kapibara',
-    roleBadge: 'VOL. 01 GUIDE',
+    scene: 'one-on-one',
+    title: {
+      'id-kasual': 'The Frontline Lead',
+      'id-standar': 'Pemimpin Tim Baru (Frontline)',
+      en: 'The Frontline Lead',
+    },
+    roleBadge: 'VOL. 01 • MANDIRI',
     lines: {
       'id-kasual':
-        'Nemenin lo dari hari pertama jadi leader: target 3K, obrolan 1-on-1, koreksi tanpa baper.',
+        'Fondasi hari pertama jadi leader: target 3K, obrolan 1-on-1 terstruktur, dan koreksi empat mata tanpa baper.',
       'id-standar':
-        'Pendamping sejak hari pertama memimpin: perumusan target 3K, dialog 1-on-1, dan koreksi terukur.',
-      en: 'With you from day one as a lead: 3C targets, 1-on-1 talks, and drama-free course corrections.',
+        'Pendamping hari pertama memimpin: perumusan target 3K, dialog 1-on-1, dan koreksi terukur.',
+      en: 'Mastering the first-time transition: 3C goal alignment, 1-on-1 talks, and drama-free course corrections.',
     },
   },
   {
-    character: 'tortoise',
-    name: 'Toti si Kura-Kura',
-    roleBadge: 'VOL. 02 GUIDE',
+    scene: 'sprint-board',
+    title: {
+      'id-kasual': 'The Crisis Stabilizer',
+      'id-standar': 'Penjaga Ketahanan (Stabilizer)',
+      en: 'The Crisis Stabilizer',
+    },
+    roleBadge: 'VOL. 02 • ANTI-BURNOUT',
     lines: {
       'id-kasual':
-        'Ngajakin napas panjang: perisai Glass Shield, tolak tugas monyet, dan bangun sistem otomatis.',
+        'Ritme kerja napas panjang: perisai Glass Shield, tolak lemparan tugas monyet, dan matikan laptop jam 6 sore.',
       'id-standar':
         'Mengajarkan ritme berkelanjutan: teknik perisai kaca, cegah burnout, dan kaderisasi tangan kanan.',
-      en: 'Teaches the long game: Glass Shield emotional filter, anti-monkey delegation, and 6 PM detachment.',
+      en: 'Building sustainable leadership rhythm: Glass Shield emotional filter, anti-monkey delegation, and 6 PM detachment.',
     },
   },
   {
-    character: 'owl',
-    name: 'Bubu si Burung Hantu',
-    roleBadge: 'VOL. 03 GUIDE',
+    scene: 'strategy-meeting',
+    title: {
+      'id-kasual': 'The Strategic Navigator',
+      'id-standar': 'Pemimpin Lintas Tim (Manager)',
+      en: 'The Strategic Navigator',
+    },
+    roleBadge: 'VOL. 03 • SKALABILITAS',
     lines: {
       'id-kasual':
-        'Ngintip dari mercusuar divisi: melatih para Team Leader dan nyambungin silo lintas tim.',
+        'Perspektif mercusuar divisi: melatih para Team Leader di bawah lo dan runtuhkan silo ego antar-tim.',
       'id-standar':
         'Melihat gambaran besar divisi: membina para leader dan menyelaraskan silo lintas tim.',
-      en: 'Sees the divisional big picture: coaching team leads and eliminating cross-team silos.',
+      en: 'Divisional architecture: coaching team leads to autonomy and eliminating cross-team friction.',
     },
   },
 ];
@@ -470,11 +482,11 @@ export default function LandingPage() {
 
             <p className="text-base sm:text-lg text-[#52525B] leading-relaxed">
               {lang === 'id-kasual' &&
-                'Nggak usah nunggu baper atau lembur sendirian tiap malam. Dapatkan 3 buku playbook bergaya buku sketsa bersama Kapi si Kapibara, lengkap dengan skrip 1-on-1 siap copy-paste ke WA/Slack, diagram alur hidup, dan simulasi kepemimpinan.'}
+                'Nggak usah nunggu baper atau lembur sendirian tiap malam. Dapatkan 3 buku tactical playbook bergaya catatan whiteboard, lengkap dengan skrip 1-on-1 siap copy-paste ke WA/Slack, diagram alur sistem, dan simulasi kepemimpinan.'}
               {lang === 'id-standar' &&
                 'Dirancang untuk pemimpin tim baru hingga manajer divisi. Berisi kerangka kerja teruji (CCL, Harvard, Gallup), puluhan skrip percakapan empat mata siap salin, bagan alur interaktif, serta latihan 30 hari yang langsung bisa dipraktikkan.'}
               {lang === 'en' &&
-                'Skip the 300-page academic fluff. Get 3 illustrated field playbooks featuring Kapi the Capybara, packed with copy-paste 1-on-1 scripts, animated framework diagrams, and interactive leadership simulators.'}
+                'Skip the 300-page academic fluff. Get 3 tactical field playbooks with clean whiteboard schematics, packed with copy-paste 1-on-1 scripts, animated framework diagrams, and interactive leadership simulators.'}
             </p>
 
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
@@ -659,28 +671,28 @@ export default function LandingPage() {
           })}
         </div>
 
-        {/* Framed Woodland Crew Ribbon Card */}
-        <div className="doodle-panel-flat mt-10 p-5 sm:p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-[#DFD9CE]">
-            {CREW.map((member, idx) => (
+        {/* Tactical 3 Leadership Archetypes Ribbon */}
+        <div className="doodle-panel-flat mt-10 p-5 sm:p-6 border-2 border-[#18181B] shadow-[4px_4px_0px_#18181B]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 divide-y md:divide-y-0 md:divide-x divide-dashed divide-[#18181B]/20">
+            {ARCHETYPES.map((member, idx) => (
               <div
-                key={member.name}
-                className={`flex items-center gap-3.5 ${
+                key={member.roleBadge}
+                className={`flex items-start gap-3.5 ${
                   idx > 0 ? 'pt-4 md:pt-0 md:pl-6' : ''
                 }`}
               >
-                <div className="rounded-2xl border border-zinc-200/90 bg-[#FAF7F2] p-1.5 shrink-0 shadow-xs">
-                  <WoodlandMascotSvg
-                    character={member.character}
+                <div className="rounded-xl border-2 border-[#18181B] bg-[#EFF6FF] p-1 shrink-0 shadow-[2px_2px_0px_#18181B]">
+                  <WhiteboardSceneSvg
+                    scene={member.scene}
                     className="h-12 w-12"
                   />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-hand text-lg font-bold leading-tight text-[#18181B]">
-                      {member.name}
+                    <p className="text-sm font-bold leading-tight text-[#18181B]">
+                      {member.title[lang]}
                     </p>
-                    <span className="rounded border border-amber-300 bg-[#FFE66D] px-1.5 py-0.2 font-mono text-[9px] font-extrabold text-[#18181B]">
+                    <span className="rounded border border-[#18181B] bg-[#F59E0B] px-1.5 py-0.2 font-mono text-[9px] font-extrabold text-[#18181B] shadow-[1px_1px_0px_#18181B]">
                       {member.roleBadge}
                     </span>
                   </div>
@@ -879,7 +891,9 @@ export default function LandingPage() {
       <footer className="mt-auto border-t-[1.5px] border-[#DFD9CE] bg-white py-8 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
           <div className="flex items-center gap-2.5">
-            <WoodlandMascotSvg character="capybara" className="w-8 h-8" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg border-2 border-[#18181B] bg-white shadow-[1px_1px_0px_#18181B] shrink-0">
+              <span className="font-mono text-[10px] font-black text-[#18181B]">ai</span>
+            </div>
             <span className="font-extrabold text-[#18181B]">
               aiossan.com — Interactive Leadership Field Playbook Trilogy
             </span>
